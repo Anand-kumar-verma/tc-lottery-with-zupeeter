@@ -34,7 +34,7 @@ function lottery() {
                     Lottery
                 </Typography>
             </Stack>
-            <NavLink>
+            <NavLink to="/wingo">
                 <Box sx={style.winbox}>
                     <Box component='img' src={win} sx={{ width: '100%', height: '70%' }}></Box>
                     <Box sx={style.positiongame}>

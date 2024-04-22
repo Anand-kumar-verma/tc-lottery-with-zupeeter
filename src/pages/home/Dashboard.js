@@ -1,46 +1,55 @@
-import Layout from "../../component/layout/Layout"
-import React, { useRef, useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { Box, Button, Stack, Typography, Grid } from "@mui/material";
-import banner1 from '../../assets/images/banner1.jpg'
-import banner2 from '../../assets/images/banner2.jpg'
-import banner3 from '../../assets/images/banner3.jpg'
-import banner4 from '../../assets/images/banner4.jpg'
-import banner5 from '../../assets/images/banner5.jpg'
-import banner6 from '../../assets/images/banner6.jpg'
-import banner7 from '../../assets/images/banner7.jpg'
 import VolumeUpIcon from '@mui/icons-material/VolumeUpOutlined';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
-import theme from "../../utils/theme";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import React, { useRef, useState } from 'react';
 import { NavLink } from "react-router-dom";
-import game1 from '../../assets/images/game1.png'
-import game2 from '../../assets/images/game2.png'
-import game3 from '../../assets/images/game3.png'
-import game4 from '../../assets/images/game4.png'
-import game5 from '../../assets/images/game5.png'
-import game6 from '../../assets/images/game6.png'
-import game7 from '../../assets/images/game7.png'
-import game8 from '../../assets/images/game8.png'
-import Lottery from './component/Lottery'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import banner1 from '../../assets/images/banner1.jpg';
+import banner2 from '../../assets/images/banner2.jpg';
+import banner3 from '../../assets/images/banner3.jpg';
+import banner4 from '../../assets/images/banner4.jpg';
+import banner5 from '../../assets/images/banner5.jpg';
+import banner6 from '../../assets/images/banner6.jpg';
+import banner7 from '../../assets/images/banner7.jpg';
+import game1 from '../../assets/images/game1.png';
+import game2 from '../../assets/images/game2.png';
+import game3 from '../../assets/images/game3.png';
+import game4 from '../../assets/images/game4.png';
+import game5 from '../../assets/images/game5.png';
+import game6 from '../../assets/images/game6.png';
+import game7 from '../../assets/images/game7.png';
+import game8 from '../../assets/images/game8.png';
+import profile1 from '../../assets/images/profile1.png';
+import profile2 from '../../assets/images/profile2.png';
+import profile3 from '../../assets/images/profile3.png';
+import profile4 from '../../assets/images/profile4.png';
+import profile5 from '../../assets/images/profile5.png';
+import winerbanner1 from '../../assets/images/winerbanner1.png';
+import winerbanner2 from '../../assets/images/winerbanner2.png';
+import Layout from "../../component/layout/Layout";
+import theme from "../../utils/theme";
+import Casino from "./component/Casino";
+import Fishing from "./component/Fishing";
+import Lottery from './component/Lottery';
+import MiniGames from "./component/MiniGames";
+import PVC from "./component/PVC";
+import Populer from "./component/Populer";
 import Slots from "./component/Slots";
 import Sports from "./component/Sports";
-import Casino from "./component/Casino";
-import PVC from "./component/PVC";
-import Fishing from "./component/Fishing";
-import MiniGames from "./component/MiniGames";
-import Populer from "./component/Populer";
-import profile1 from '../../assets/images/profile1.png'
-import profile2 from '../../assets/images/profile2.png'
-import profile3 from '../../assets/images/profile3.png'
-import profile4 from '../../assets/images/profile4.png'
-import profile5 from '../../assets/images/profile5.png'
-import profile6 from '../../assets/images/profile6.png'
+import podium from '../../assets/images/podium.png';
+import place1 from '../../assets/images/place1.png';
+import crown1 from '../../assets/images/crown1.png';
+import place2 from '../../assets/images/place2.png';
+import crown2 from '../../assets/images/crown2.png';
+import place3 from '../../assets/images/place3.png';
+import crown3 from '../../assets/images/crown3.png';
+
+
+
 
 
 
@@ -68,6 +77,21 @@ function Dashboard() {
         winbox: { background: '#F4F5F8', borderRadius: '20px', height: '160px', marginBottom: '20px', position: 'relative' },
         positiongame: { position: 'absolute', top: '10px', left: '20px' },
         gameheading: { fontSize: '20px', fontWeight: 700, color: 'white' },
+        winnerslider: { justifyContent: 'space-around', alignItems: 'center', padding: '10px 0px 10px 5px', background: '#fff', borderRadius: '10px', my: 1.5, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px', },
+        winnerprofile: { borderRadius: '50%', objectPosition: 'center', objectFit: 'cover' },
+        winnername: { fontSize: '12px', fontWeight: 400, mx: 1, },
+        winnerbannerouter: { background: theme.palette.primary.main, width: '23%', borderRadius: '10px', objectPosition: 'center' },
+        winnerbannerinner: { width: '100%', borderRadius: '10px', objectPosition: 'center', objectFit: 'cover' },
+        winneramout: { fontSize: '12px', fontWeight: 600, marginLeft: 1, },
+        winnertitle: { fontSize: '11px', fontWeight: 400, marginLeft: 1, },
+        podiumbox: { backgroundImage: `url(${podium})`, width: '100%', height: '140px', marginTop: '65px', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', position: 'relative', zIndex: 10 },
+        podiumtextouterbox: { width: '100%', height: '100%', position: 'relative' },
+        winner2box: { width: '30%', position: 'absolute', zIndex: 30, top: 0, left: 0, height: '100%', },
+        winnerposition: { width: '70px', height: '50px', objectFit: 'contain', position: 'absolute', left: '21%', top: '14%' },
+        winnerprofilepod: { width: '60px', height: '60px', borderRadius: '50%', objectFit: 'cover', position: 'absolute', left: '25%', top: '-11%' },
+        winnercroun: { width: '50px', height: '50px', objectFit: 'contain', position: 'absolute', left: '11%', top: '-25%', zIndex: 1000 },
+        winner2amt: { width: '100%', position: 'absolute', left: 0, bottom: '22%', textAlign: 'center', '&>p': { color: 'white', fontWeight: 400, fontSize: '11px' } },
+        winningamount: { marginTop: '5px', padding: '5px', borderRadius: '10px', background: 'linear-gradient(90deg, #F79400 0%, #E67401 100%)' },
     }
 
 
@@ -217,18 +241,127 @@ function Dashboard() {
                 <Populer />
             }
             <Box sx={{ px: 2 }}>
-                <Stack direction={'row'} sx={{ alignItems: 'center' }}>
+                <Stack direction={'row'} sx={{ alignItems: 'center', }}>
                     <Box sx={{ background: theme.palette.primary.main, width: '4px', height: '16px' }}></Box>
                     <Typography variant="body1" color="initial" sx={{ fontSize: '18px', fontWeight: 700, ml: 1 }}>Winning information</Typography>
                 </Stack>
                 <Box>
-                    <Stack direction='row' sx={{ alignItems: 'center', py: 1, px: 1, background: '#fff', borderRadius: '10px', my: 2, boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px', }}>
-                        <Box width={45} height={45} component={'img'} src={profile1} sx={{ borderRadius: '50%', objectPosition: 'center' }}></Box>
-                        <Typography variant="body1" color="initial" sx={{ fontSize: '12px', fontWeight: 600, mx: 1, }}>mrm***iop</Typography>
-                        <Box width={70} height={45} component={'img'} src={profile1} sx={{ borderRadius: '10px', objectPosition: 'center' }}></Box>
-                        <Box sx={{ mx: 1 }}>
-                            <Typography variant="body1" color="initial" sx={{ fontSize: '13px', fontWeight: 700, mx: 1, }}>Receive ₹338.88</Typography>
-                            <Typography variant="body1" color="initial" sx={{ fontSize: '12px', fontWeight: 600, mx: 1, }}>Winning amount</Typography>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile1} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner1} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile2} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner2} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile3} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner1} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile4} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner2} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile5} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner1} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                </Box>
+            </Box>
+            <Box sx={{ px: 2, py: 3 }}>
+                <Stack direction={'row'} sx={{ alignItems: 'center', }}>
+                    <Box sx={{ background: theme.palette.primary.main, width: '4px', height: '16px' }}></Box>
+                    <Typography variant="body1" color="initial" sx={{ fontSize: '18px', fontWeight: 700, ml: 1 }}>Today's earnings chart</Typography>
+                </Stack>
+                <Box sx={{ mt: 5 }}>
+                    <Box sx={style.podiumbox}>
+                        <Stack direction='row' sx={style.podiumtextouterbox}>
+                            <Box sx={style.winner2box}>
+                                <Box component={'img'} src={crown2} sx={style.winnercroun}></Box>
+                                <Box component={'img'} src={profile1} sx={style.winnerprofilepod}></Box>
+                                <Box component={'img'} src={place2} sx={style.winnerposition}></Box>
+                                <Box sx={style.winner2amt}>
+                                    <Typography variant="body1" color="initial">Mem***SMJ</Typography>
+                                    <Typography variant="body1" color="initial" sx={style.winningamount}>₹97,974,520.00</Typography>
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: '30%', position: 'absolute', zIndex: 30, top: '-18%', left: '33.33%', height: '100%' }}>
+                                <Box component={'img'} src={crown1} sx={style.winnercroun}></Box>
+                                <Box component={'img'} src={profile2} sx={style.winnerprofilepod}></Box>
+                                <Box component={'img'} src={place1} sx={style.winnerposition}></Box>
+                                <Box sx={style.winner2amt}>
+                                    <Typography variant="body1" color="initial">Mem***SMJ</Typography>
+                                    <Typography variant="body1" color="initial" sx={style.winningamount}>₹97,974,520.00</Typography>
+                                </Box>
+                            </Box>
+
+                            <Box sx={{ width: '30%', position: 'absolute', zIndex: 30, top: 0, right: 0, height: '100%' }}>
+                                <Box component={'img'} src={crown3} sx={style.winnercroun}></Box>
+                                <Box component={'img'} src={profile3} sx={style.winnerprofilepod}></Box>
+                                <Box component={'img'} src={place3} sx={style.winnerposition}></Box>
+                                <Box sx={style.winner2amt}>
+                                    <Typography variant="body1" color="initial">Mem***SMJ</Typography>
+                                    <Typography variant="body1" color="initial" sx={style.winningamount}>₹97,974,520.00</Typography>
+                                </Box>
+                            </Box>
+
+                        </Stack>
+                    </Box>
+                    <Stack direction='row' sx={{ ...style.winnerslider, marginTop: '-15px', position: 'relative', zIndex: 20 }}>
+                        <Box width={45} height={45} component={'img'} src={profile4} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner2} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
+                        </Box>
+                    </Stack>
+                    <Stack direction='row' sx={style.winnerslider}>
+                        <Box width={45} height={45} component={'img'} src={profile5} sx={style.winnerprofile}></Box>
+                        <Typography variant="body1" color="initial" sx={style.winnername}>mrm***iop</Typography>
+                        <Box sx={style.winnerbannerouter}>
+                            <Box height={45} component={'img'} src={winerbanner1} sx={style.winnerbannerinner}></Box>
+                        </Box>
+                        <Box >
+                            <Typography variant="body1" color="initial" sx={style.winneramout}>Receive ₹338.88</Typography>
+                            <Typography variant="body1" color="initial" sx={style.winnertitle}>Winning amount</Typography>
                         </Box>
                     </Stack>
                 </Box>
