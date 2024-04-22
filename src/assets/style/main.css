@@ -1,17 +1,23 @@
 * {
-    font-family: "Montserrat", sans-serif !important;
+    /* font-family: "Montserrat", sans-serif !important; */
     margin: 0;
-    padding: 0;
+
     box-sizing: border-box !important;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
     background-color: #9195A3;
     box-sizing: border-box !important;
+    padding: 0 !important;
 }
 
 a {
     text-decoration: none;
+}
+
+button {
+    text-transform: capitalize !important;
 }
 
 .redDot {
@@ -156,4 +162,201 @@ a {
     object-fit: cover !important;
     object-position: center !important;
     width: 100% !important;
+}
+
+.footerBox {
+    position: fixed;
+    bottom: 0;
+    left: auto;
+    z-index: 50000;
+    max-width: 400px;
+    padding: 26px 10px;
+    height: 70px;
+    width: 100%;
+}
+
+.wingonav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.wingonav>img {
+    filter: grayscale(1)
+}
+
+.wingonav>p:nth-child(2) {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.wingonav>p:nth-child(3) {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.wingonavactive {
+    background: linear-gradient(180deg, #FFD058 0%, #FFF 100%);
+    border-radius: 10px;
+    border: .01333rem solid #FFA43F;
+}
+
+.wingonavactive>img {
+    filter: grayscale(0)
+}
+
+.wingonavactive>p:nth-child(2) {
+    color: #FF9801;
+}
+
+.wingonavactive>p:nth-child(3) {
+    color: #FF9801;
+}
+
+.htpbutton {
+    color: white !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    padding: 1px 15px !important;
+    border: 1px solid white !important;
+    border-radius: 20px !important;
+    width: 100% !important;
+}
+
+.htpbutton>svg {
+    margin-right: 5%;
+    font-size: 20px !important;
+}
+
+.psize {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: white !important;
+}
+
+.timer {
+    background-color: #fff;
+    color: red;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%, 0 30%);
+    padding: 5px 5px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.timer1 {
+    background-color: #fff;
+    color: red;
+    padding: 5px 5px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.timer2 {
+    background-color: #fff;
+    color: red;
+    clip-path: polygon(100% 0, 100% 70%, 70% 100%, 0 100%, 0 0);
+    padding: 5px 5px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.idnumber {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: white !important;
+    margin-top: 9px !important;
+}
+
+.timername {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    margin-bottom: 5px !important;
+}
+
+.greenbtn {
+    background: #40AD72 !important;
+    color: white !important;
+    border-radius: 0px 10px !important;
+    width: 31% !important;
+    font-size: 15px;
+}
+
+.violetbtn {
+    background: #B659FE !important;
+    color: white !important;
+    border-radius: 10px !important;
+    width: 31% !important;
+    font-weight: 500;
+}
+
+.redbtn {
+    background: #FD565C !important;
+    color: white !important;
+    border-radius: 10px 0px !important;
+    width: 31% !important;
+}
+
+
+.css-9emuhu-MuiPaper-root-MuiDrawer-paper {
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    -webkit-transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2), 0px 16px 24px 2px rgba(0, 0, 0, 0.14), 0px 6px 30px 5px rgba(0, 0, 0, 0.12);
+    overflow-y: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: auto;
+    -ms-flex: 1 0 auto;
+    flex: none;
+    z-index: 1200;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: auto;
+    outline: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    max-height: 100%;
+    max-width: 400px !important;
+    margin: auto !important;
+    border-radius: 10px 10px 0px 0px;
+    padding: 10px 0px 0px 0px;
+    overflow: hidden !important;
+}
+
+.inputamt>div>input {
+    text-align: center !important;
+}
+
+.inputamt>div {
+    border-radius: 0;
+}
+
+
+.gametable {
+    background: #E8E7E8 !important;
+    border-radius: 10px;
+    color: black !important;
+    font-size: 15px;
+    font-weight: 700;
+    width: 32%;
+}
+
+.gametableactive {
+    background: linear-gradient(180deg, #FF9901 0%, #E57201 100%) !important;
+    border-radius: 10px;
+    color: white !important;
+    font-size: 15px;
+    font-weight: 700;
 }

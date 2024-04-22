@@ -7,7 +7,7 @@ function Layout(props) {
     return (
         <Container sx={{ background: '#F5F6FE' }}>
             <Box>
-                <Header />
+                {header && <Header />}
                 <Box>
                     {children}
                 </Box>
