@@ -17,7 +17,7 @@ import Wingo5Min from "./component/Wingo5Min";
 
 function Wingo() {
   const [value, setValue] = useState(1);
- const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -40,7 +40,7 @@ function Wingo() {
             <Box component="img" src={backbtn} width={25}></Box>
           </NavLink>
           <Stack direction="row">
-            <NavLink>
+            <NavLink to={"/CustomerService"}>
               <Box
                 component="img"
                 src={asistant}
