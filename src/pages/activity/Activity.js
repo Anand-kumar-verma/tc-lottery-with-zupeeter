@@ -80,7 +80,7 @@ function Activity() {
                     <Typography variant="body1" color="initial">TC SUPPORT FUNDS</Typography>
                 </Box>
             </Stack>
-        </Layout >
+        </Layout>
     )
 }
 
