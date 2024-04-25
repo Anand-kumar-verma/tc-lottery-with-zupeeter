@@ -40,7 +40,7 @@ function App() {
       <Route path='/comingsoon' element={<ComingSoon />}></Route>
       <Route path='/withdraw' element={<Withdraval />}></Route>
       <Route path='/deposit' element={<Deposite />}></Route>
-    </Routes >
+    </Routes>
   );
 }
 

@@ -37,7 +37,7 @@ const GameHistory = ({ gid }) => {
         gameid: gid,
         limit: 100,
       };
-      const response = await axios.post(`${endpoint.color_result}`, reqBody);
+      const response = await axios.post(`${endpoint.game_history}`,reqBody);
       return response;
     } catch (e) {
       // toast(e?.message);
