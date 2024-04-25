@@ -1,29 +1,34 @@
+import VolumeUpIcon from '@mui/icons-material/VolumeUpOutlined'
+import WhatshotIcon from '@mui/icons-material/Whatshot'
 import { Box, Button, Container, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import backbtn from '../../assets/images/backBtn.png'
+import { NavLink, Navigate } from 'react-router-dom'
 import asistant from '../../assets/images/asistant.png'
-import music from '../../assets/images/music.png'
-import refresh from '../../assets/images/refresh.png'
+import backbtn from '../../assets/images/backBtn.png'
 import balance from '../../assets/images/balance.png'
+import refresh from '../../assets/images/refresh.png'
 import time from '../../assets/images/time.png'
-import { NavLink } from 'react-router-dom'
 import theme from '../../utils/theme'
-import VolumeUpIcon from '@mui/icons-material/VolumeUpOutlined';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Wingo10Min from './component/Wingo10Min'
 import Wingo1Min from './component/Wingo1Min'
 import Wingo3Min from './component/Wingo3Min'
 import Wingo5Min from './component/Wingo5Min'
-import Wingo10Min from './component/Wingo10Min'
+import music from '../../assets/images/music.png'
+import { useNavigate } from 'react-router-dom'
+import musicoff from '../../assets/images/voice-off.png'
+
+
 
 
 function Wingo() {
+    const navigate = useNavigate()
     const [value, setValue] = useState(1);
 
     const handleChange = (newValue) => {
         setValue(newValue);
     };
+
+    const [musicbtn, setMusicbtn] = useState(true);
 
     return (
         <Container>
@@ -33,11 +38,19 @@ function Wingo() {
                         <Box component='img' src={backbtn} width={25}></Box>
                     </NavLink>
                     <Stack direction='row'>
-                        <NavLink>
+                        <NavLink to='/CustomerService'>
                             <Box component='img' src={asistant} width={25} sx={{ mr: 2 }}></Box>
                         </NavLink>
                         <NavLink>
-                            <Box component='img' src={music} width={25}></Box>
+                            {musicbtn === true ?
+                                <NavLink onClick={() => setMusicbtn(false)}>
+                                    <Box component='img' src={music} width={25}></Box>
+                                </NavLink>
+                                :
+                                <NavLink onClick={() => setMusicbtn(true)}>
+                                    <Box component='img' src={musicoff} width={25}></Box>
+                                </NavLink>
+                            }
                         </NavLink>
                     </Stack>
                 </Stack>
@@ -53,8 +66,8 @@ function Wingo() {
                         <Typography variant="body1" color="initial" fontSize="13px" fontWeight={400}>Wallet balance </Typography>
                     </Stack>
                     <Stack direction='row' alignItems='center' justifyContent='space-between' mt={2}>
-                        <Button sx={style.withdrawalbtn}>Withdraw</Button>
-                        <Button sx={style.depositebtn}>Deposit</Button>
+                        <Button onClick={() => navigate('/withdraw')} sx={style.withdrawalbtn}>Withdraw</Button>
+                        <Button onClick={() => navigate('/deposit')} sx={style.depositebtn}>Deposit</Button>
                     </Stack>
                 </Box>
                 <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between', px: 1, py: 1, background: '#FFFBE8', borderRadius: '10PX', mt: 2, mb: 2 }}>

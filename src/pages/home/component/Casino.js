@@ -31,21 +31,21 @@ function Casino() {
             </Stack>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo12} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo13} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo14} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>

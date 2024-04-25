@@ -35,49 +35,49 @@ function Slots() {
             </Stack>
             <Grid container spacing={2}>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo1} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo2} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo3} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo4} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo5} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo6} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={6}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo7} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>

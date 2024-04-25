@@ -53,49 +53,49 @@ function MiniGames() {
             </Stack>
             <Grid container spacing={2}>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo30} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo31} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo32} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo33} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo34} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo35} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo36} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -103,28 +103,28 @@ function MiniGames() {
                 </Grid>
 
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo37} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo38} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo39} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo40} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -132,91 +132,91 @@ function MiniGames() {
                 </Grid>
 
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo41} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo42} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo53} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo43} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo44} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo45} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo46} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo47} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo48} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo49} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo50} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo51} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
                     </NavLink>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo52} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>

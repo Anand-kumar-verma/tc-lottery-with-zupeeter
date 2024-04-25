@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+.coming-soon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff3366, #ff9933);
+  max-width: 400px;
+  margin: auto;
+}
+
+.content {
+  text-align: center;
+  color: #fff;
+}
+
+.heading {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subheading {
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+}
+
+.countdown {
+  display: inline-block;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.countdown-text {
+  font-size: 1.2rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.timers {
+  font-size: 29px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 20px 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  width: 95%;
+  margin: auto;
+  font-weight: 700;
+  margin-top: 45px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

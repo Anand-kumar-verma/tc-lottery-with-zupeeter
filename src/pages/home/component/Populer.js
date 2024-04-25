@@ -49,7 +49,7 @@ function Populer() {
             </Stack>
             <Grid container spacing={2}>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo54} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -67,7 +67,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo55} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -85,7 +85,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo56} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -103,7 +103,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo57} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -121,7 +121,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo58} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -139,7 +139,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo59} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -157,7 +157,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo60} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -175,7 +175,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo61} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -193,7 +193,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo62} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -211,7 +211,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo63} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -229,7 +229,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo64} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -247,7 +247,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo65} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -265,7 +265,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo66} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -283,7 +283,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo67} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -301,7 +301,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo68} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -319,7 +319,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo69} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -337,7 +337,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo70} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
@@ -355,7 +355,7 @@ function Populer() {
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    <NavLink>
+                    <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={vendorlogo71} sx={{ width: '100%', height: '100%', borderRadius: '20px', }}></Box>
                         </Box>
