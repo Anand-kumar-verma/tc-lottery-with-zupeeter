@@ -1,19 +1,24 @@
+import { ThemeProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "@mui/material";
-import theme from "./utils/theme";
+import App from "./App";
 import "./index.css";
-import SplashScreen from "./SplashScreen";
-import Layout from "./component/layout/Layout";
+import reportWebVitals from "./reportWebVitals";
+import theme from "./utils/theme";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { SocketProvider } from "./shared/socket/SocketContext";
+const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ThemeProvider>
+  <QueryClientProvider client={queryClient}>
+    <SocketProvider>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </SocketProvider>
+  </QueryClientProvider>
 );
 reportWebVitals();

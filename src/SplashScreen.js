@@ -1,6 +1,5 @@
 import React from "react";
 import splash_screen from "./assets/images/splash_screen.PNG";
-import Loder from "./shared/Loder";
 const SplashScreen = () => {
   return (
     <div>
