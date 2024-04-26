@@ -1,216 +1,490 @@
-import {
-  Box,
-  Pagination,
-  Paper,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import React from "react";
-import theme from "../../../utils/theme";
+import { Box, Stack, TablePagination, Typography } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { endpoint } from "../../../services/urls";
 
-const Chart = () => {
+const Chart = ({ gid }) => {
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = React.useState(0);
+  const [cor, setcor] = React.useState([]);
+  const [preData, setPreData] = useState([]);
+  const { isLoading, data: game_history } = useQuery(
+    ["gamehistory", gid],
+    () => GameHistoryFn(gid),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+
+  const GameHistoryFn = async (gid) => {
+    try {
+      const reqBody = {
+        gameid: gid,
+        limit: 200,
+      };
+      const response = await axios.post(`${endpoint.game_history}`, reqBody);
+      return response;
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+  };
+
+  const game_history_data = game_history?.data?.data;
+
+  // console.log(game_history_data);
+
+  useEffect(() => {
+    setPreData([]);
+    const array = [];
+    let get0 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 0
+      );
+    let get1 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 1
+      );
+    let get2 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 2
+      );
+    let get3 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 3
+      );
+    let get4 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 4
+      );
+    let get5 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 5
+      );
+    let get6 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 6
+      );
+    let get7 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 7
+      );
+    let get8 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 8
+      );
+    let get9 =
+      game_history_data.findIndex(
+        (element) => element.tr41_slot_id - 1 === 9
+      );
+      console.log(game_history_data,get3)
+    array.push(
+      get0 < 0 ? 100 : get0,
+      get1 < 0 ? 100 : get1,
+      get2 < 0 ? 100 : get2,
+      get3 < 0 ? 100 : get3,
+      get4 < 0 ? 100 : get4,
+      get5 < 0 ? 100 : get5,
+      get6 < 0 ? 100 : get6,
+      get7 < 0 ? 100 : get7,
+      get8 < 0 ? 100 : get8,
+      get9 < 0 ? 100 : get9
+    );
+    setPreData(array);
+  }, [game_history?.data?.data]);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const visibleRows = React.useMemo(
+    () =>
+      game_history_data?.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [page, rowsPerPage, game_history_data]
+  );
+  React.useEffect(() => {
+    if (visibleRows) {
+      const parent = document.getElementById("parent");
+      const parentRect = parent.getBoundingClientRect();
+      const newCor = visibleRows?.map((element, index) => {
+        const childId =
+          (element.tr41_slot_id - 1)?.toString() === "0"
+            ? `zero${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "1"
+            ? `one${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "2"
+            ? `two${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "3"
+            ? `three${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "4"
+            ? `four${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "5"
+            ? `five${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "6"
+            ? `six${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "7"
+            ? `seven${index}`
+            : (element.tr41_slot_id - 1)?.toString() === "8"
+            ? `eight${index}`
+            : `nine${index}`;
+        const childRect = document
+          .getElementById(childId)
+          .getBoundingClientRect();
+        const centerX = childRect.left + childRect.width / 2 - parentRect.left;
+        const centerY = childRect.top + childRect.height / 2 - parentRect.top;
+
+        return { x: centerX, y: centerY };
+      });
+      setcor(newCor);
+    }
+  }, [visibleRows]);
+
   return (
-    <Box mt={2}>
-      <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 400 }} aria-label="simple table">
-          <TableHead
-            sx={{
-              background: theme.palette.primary.main,
-              "&>tr>th": {
-                padding: 1,
-                fontSize: "13px",
-                fontWeight: 700,
-                color: "white",
-              },
-            }}
-          >
-            <TableRow>
-              <TableCell align="start">Period</TableCell>
-              <TableCell align="start">Number</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody
-            sx={{
-              "&>tr>td:nth-child(1)": {
-                padding: "10px 5px !important",
-                border: "none",
-                width: "25%",
-              },
-              "&>tr>td:nth-child(2)": {
-                padding: "10px 5px !important",
-                border: "none",
-              },
-              "&>tr": { borderBottom: "1px solid #ced4d7" },
-            }}
-          >
-            <TableRow colSpan={2}>
-              <Box sx={{ width: "100%", padding: 1 }}>
-                <Typography variant="body1" color="initial">
-                  Statistic (last 100 Periods)
-                </Typography>
-              </Box>
-            </TableRow>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
+    <Box className="chartTable">
+      <Stack direction="row" className="onegotextbox">
+        <Typography variant="body1" color="initial" className="!text-[#F48901]">
+          {/* <Box
+            component="img"
+            src={history}
+            width={25}
+            sx={{ marginRight: "10px" }}
+          ></Box>{" "} */}
+          Statistic(last 100 Periods)
+        </Typography>
+      </Stack>
+      <Box
+        sx={{
+          borderBottom: "1px solid white",
+        }}
+      >
+        <div className="flex justify-between">
+          <span className="!text-sm">Winning Number</span>
+          <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
               return (
-                <TableRow>
-                  <TableCell align="start"> 20240420010994</TableCell>
-                  <TableCell>
-                    <Stack direction="row" sx={style.linetable}>
-                      <Typography variant="body1" color="initial">
-                        0
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        1
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        2
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        3
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        4
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        5
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        6
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        7
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        8
-                      </Typography>
-                      <Typography variant="body1" color="initial">
-                        9
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        color="initial"
-                        sx={{
-                          marginLeft: "5px",
-                          background: "#F3BD14",
-                          fontSize: "15px !important",
-                          fontWeight: "500",
-                          border: "none !important",
-                        }}
-                      >
-                        s
-                      </Typography>
-                    </Stack>
-                  </TableCell>
-                </TableRow>
+                <div
+                  className={`circleNumberbody !bg-white !text-black !border-[1px] !border-black `}
+                >
+                  {i}
+                </div>
               );
             })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Box padding={2} sx={{ background: "white", mt: 3 }}>
+          </Box>
+        </div>
+      </Box>
+      <Box
+        sx={{
+          borderBottom: "1px solid white",
+          paddingTop: "5px",
+        }}
+      >
+        <div className="flex justify-between">
+          <span className="!text-sm">Missing Number</span>
+          <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+            {preData?.map((i) => {
+              return (
+                <div
+                  className={`circleNumberbody-number !bg-white !text-red-600 !border-[1px] !border-red-600 !text-[5px] `}
+                >
+                  {i+1}
+                </div>
+              );
+            })}
+          </Box>
+        </div>
+      </Box>
+      <div className="relative !h-[65vh] overflow-auto !w-[100%] no-scrollbar !overflow-x-hidden">
+        <div className="absolute !w-[100%]">
+          {visibleRows?.map((i, indexi) => {
+            return (
+              <Box
+                sx={{
+                  padding: "10px",
+                  borderBottom: "1px solid white",
+                }}
+              >
+                <div className="flex justify-between">
+                  <span
+                    className={`
+                 !bg-gradient-to-t from-[#FE63FF] to-[#007AFF]
+                  transparentColor font-bold  pr-5
+                 `}
+                  >
+                    {i?.tr_transaction_id}
+                  </span>
+                  {/* // main box of chart form 0 to 9 */}
+                  <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+                    {/* /// 0   //// */}
+                    <div
+                      id={`zero${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "0"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody   ${
+                          (i?.tr41_slot_id - 1)?.toString() === "0"
+                            ? "!bg-gradient-to-b from-[#e85053] to-[#8c06f2] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        0
+                      </Typography>
+                    </div>
+                    {/* /// 1   //// */}
+                    <div
+                      id={`one${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "1"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody  ${
+                          (i?.tr41_slot_id - 1)?.toString() === "1"
+                            ? "!bg-[#4bef98] !text-white  !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        1
+                      </Typography>
+                    </div>
+                    {/* /// 2   //// */}
+                    <div
+                      id={`two${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "2"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody   ${
+                          (i?.tr41_slot_id - 1)?.toString() === "2"
+                            ? "!bg-[#f1494c] !text-white !font-bold "
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        2
+                      </Typography>
+                    </div>
+                    {/* /// 3   //// */}
+                    <div
+                      id={`three${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "3"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody  ${
+                          (i?.tr41_slot_id - 1)?.toString() === "3"
+                            ? "!bg-[#46eb93] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        3
+                      </Typography>
+                    </div>
+                    {/* /// 4   //// */}
+                    <div
+                      id={`four${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "4"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody ${
+                          (i?.tr41_slot_id - 1)?.toString() === "4"
+                            ? "!bg-[#ed4b4e] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        4
+                      </Typography>
+                    </div>
+                    {/* /// 5   //// */}
+                    <div
+                      id={`five${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "5"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody ${
+                          (i?.tr41_slot_id - 1)?.toString() === "5"
+                            ? "!bg-gradient-to-b from-[#55f8a1] to-[#8c06f2] !text-white  !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        5
+                      </Typography>
+                    </div>
+                    {/* /// 6   //// */}
+                    <div
+                      id={`six${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "6"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody ${
+                          (i?.tr41_slot_id - 1)?.toString() === "6"
+                            ? "!bg-[#f54b4e] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        6
+                      </Typography>
+                    </div>
+                    {/* /// 7   //// */}
+                    <div
+                      id={`seven${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "7"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody ${
+                          (i?.tr41_slot_id - 1)?.toString() === "7"
+                            ? "!bg-[#4af499] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        7
+                      </Typography>
+                    </div>
+                    {/* /// 8   //// */}
+                    <div
+                      id={`eight${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "8"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody  ${
+                          (i?.tr41_slot_id - 1)?.toString() === "8"
+                            ? "!bg-[#eb494c] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        8
+                      </Typography>
+                    </div>
+                    {/* /// 9   //// */}
+                    <div
+                      id={`nine${indexi}`}
+                      className={`${
+                        (i?.tr41_slot_id - 1)?.toString() === "9"
+                          ? "!z-20"
+                          : "!z-[-10px]"
+                      }`}
+                    >
+                      <Typography
+                        className={`circleNumberbody  ${
+                          (i?.tr41_slot_id - 1)?.toString() === "9"
+                            ? "!bg-[#4cf199] !text-white !font-bold"
+                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        }`}
+                      >
+                        {" "}
+                        9
+                      </Typography>
+                    </div>
+                    <Typography
+                      className={`circleNumberbody ${
+                        (i?.tr41_slot_id - 1)?.toString() <= 4
+                          ? "!bg-[#468ce8] "
+                          : "!bg-[#df4be1]"
+                      }  !h-[20px] !w-[20px] !rounded-full !text-center !text-white `}
+                    >
+                      {(i?.tr41_slot_id - 1)?.toString() <= 4 ? "S" : "B"}
+                    </Typography>
+                  </Box>
+                </div>
+              </Box>
+            );
+          })}
+        </div>
+        <div className=" h-[100%] w-[100%] absolute flex justify-end">
+          <div className="!w-[80%] lg:!w-[70%]" id="parent">
+            <svg
+              width="100%"
+              height="100%"
+              xmlns="http://www.w3.org/2000/svg"
+              className="z-10 absolute"
+            >
+              {cor?.map((i, index) => {
+                return (
+                  index > 0 && (
+                    <line
+                      x1={cor?.[index]?.x}
+                      y1={cor?.[index]?.y}
+                      x2={cor?.[index - 1]?.x}
+                      y2={cor?.[index - 1]?.y}
+                      stroke="#FBAC3D"
+                      stroke-width="2"
+                      fill="none"
+                    />
+                  )
+                );
+              })}
+            </svg>
+          </div>
+        </div>
+      </div>
+      <Box sx={{ background: "white", mt: 3 }}>
         <Stack spacing={2}>
-          <Pagination count={6} variant="outlined" shape="rounded" />
+          <TablePagination
+            sx={{ background: "#FBA343", color: "white" }}
+            rowsPerPageOptions={[10]}
+            component="div"
+            count={game_history_data?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage="Rows"
+          />
         </Stack>
       </Box>
+      {/* <CustomCircularProgress isLoading={isLoading} /> */}
     </Box>
   );
 };
 
 export default Chart;
-const style = {
-  bacancebtn: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    borderRadius: "20px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    marginLeft: "5px",
-  },
-  bacancebtn2: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    borderRadius: "1px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    marginLeft: "5px",
-  },
-  bacancebtn3: {
-    backgroundColor: "#40AD72",
-    padding: "1px 5px",
-    borderRadius: "6px",
-    color: "white",
-    fontSize: "14px",
-    fontWeight: "500",
-    marginLeft: "5px",
-    display: "flex",
-    alignItems: "center",
-    height: "30px",
-    ["@media (max-width:340px)"]: { fontSize: "13px" },
-  },
-  addsumbtn: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    margin: "0px 5px",
-  },
-  cancelbtn: {
-    width: "100%",
-    borderRadius: "0px",
-    color: "white",
-    backgroundColor: "#25253C",
-    padding: 1,
-  },
-  submitbtn: {
-    width: "100%",
-    borderRadius: "0px",
-    color: "white",
-    backgroundColor: "#40AD72",
-    padding: 1,
-  },
-  bigbtn: {
-    width: "50%",
-    borderRadius: "20px 0px 0px 20px",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "500",
-  },
-  smlbtn: {
-    width: "50%",
-    borderRadius: "0px 20px 20px 0px",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "500",
-    background: "#6DA7F4",
-  },
-  linetable: {
-    "&>p": {
-      fontSize: "12px",
-      color: "gray",
-      border: "1px solid gray",
-      borderRadius: "50%",
-      width: "15px",
-      height: "15px",
-      textAlign: "center",
-      padding: "2px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    alignItems: "center",
-    justifyContent: "space-between",
-    "&>p:nth-last-child(1)": {
-      width: "20px !important",
-      height: "20px !important",
-    },
-  },
-};

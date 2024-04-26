@@ -9,7 +9,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
+import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useQueryClient } from "react-query";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
 import two from "../../assets/images/n2-c2913607.png";
@@ -20,12 +24,81 @@ import six from "../../assets/images/n6-a56e0b9a.png";
 import seven from "../../assets/images/n7-5961a17f.png";
 import eight from "../../assets/images/n8-d4d951a4.png";
 import nine from "../../assets/images/n9-a20f6f42 (1).png";
+import { getBalanceFunction } from "../../services/apiCallings";
+import { endpoint } from "../../services/urls";
+import SuccessCheck from "../../shared/check/SuccessCheck";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-
-const BetNumber = () => {
+const BetNumber = ({ gid }) => {
+  const user_id = "1";
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
+  const [getBalance, setBalance] = useState(0);
+  const [loding, setLoding] = useState(false);
+  const client = useQueryClient();
+  const initialValue = {
+    balance: "1",
+    qnt: "1",
+  };
 
+  useEffect(() => {
+    getBalanceFunction(setBalance);
+  }, []);
+
+  const fk = useFormik({
+    initialValues: initialValue,
+    isSuccessPlaceBet: true,
+    onSubmit: () => {
+      if (
+        Number(getBalance || 0) <
+        Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)
+      )
+        return toast("Your bid amount is more than wallet amount");
+      betFunctionStart();
+    },
+  });
+
+  async function betFunctionStart() {
+    setLoding(true);
+    const reqBody = {
+      userid: user_id,
+      amount: Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0,
+      number:
+        (selectNumber === "green" && 11) ||
+        (selectNumber === "voilet" && 12) ||
+        (selectNumber === "red" && 13) ||
+        (selectNumber === "two" && 15) || // this is big
+        (selectNumber === "one" && 14) || // this is small
+        Number(selectNumber + 1),
+      gameid: Number(gid),
+    };
+
+    try {
+      const response = await axios.post(`${endpoint.bet_placed}`, reqBody);
+      if (response?.data?.error === "200") {
+        toast(
+          <SuccessCheck
+            message={
+              <span className="!text-sm">Bid Placed Successfully !</span>
+            }
+          />
+        );
+        fk.setFieldValue("isSuccessPlaceBet", true);
+        setOpen(false);
+        localStorage.setItem("betApplied", `${gid}_true`);
+      } else {
+        toast(response?.data?.msg);
+      }
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+    // client.refetchQueries("walletamount");
+    client.refetchQueries("wallet_amount");
+    client.refetchQueries("myAllhistory");
+    setLoding(false);
+  }
+  if (loding) return <CustomCircularProgress isLoading={loding} />;
   return (
     <Box
       sx={{
@@ -36,174 +109,189 @@ const BetNumber = () => {
         boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
       }}
     >
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Button
-          onClick={() => {
-            console.log("THi is function hit now");
-            setOpen(true);
-            setSelectNumber("green");
-          }}
-          className="greenbtn"
+      <div>
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
         >
-          Green
-        </Button>
-        <Button
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("voilet");
-          }}
-          className="violetbtn"
-        >
-          Violet
-        </Button>
-        <Button
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("red");
-          }}
-          className="redbtn"
-        >
-          Red
-        </Button>
-      </Stack>
-      <Box
-        sx={{
-          background: "#EEEEEE",
-          padding: "8px 8px 0px 8px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          borderRadius: "10px",
-          mt: 2,
-        }}
-      >
+          <Button
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("green");
+            }}
+            className="greenbtn"
+          >
+            Green
+          </Button>
+          <Button
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("voilet");
+            }}
+            className="violetbtn"
+          >
+            Violet
+          </Button>
+          <Button
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("red");
+            }}
+            className="redbtn"
+          >
+            Red
+          </Button>
+        </Stack>
         <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={zero}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("0");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={one}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("1");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={two}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("2");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={three}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("3");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={four}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("4");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={five}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("5");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={six}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("6");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={seven}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("7");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={eight}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("8");
-          }}
-        ></Box>
-        <Box
-          sx={{ width: "17%", mb: 1 }}
-          component="img"
-          src={nine}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("9");
-          }}
-        ></Box>
-      </Box>
-      <Stack
-        direction="row"
-        my={1}
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Button variant="outlined">Random</Button>
-        {[1, 5, 10, 20, 50, 100]?.map((i) => {
-          return <Box sx={style.bacancebtn3}>X{i}</Box>;
-        })}
-      </Stack>
-      <ButtonGroup disableElevation variant="contained" sx={{ width: "100%" }}>
-        <Button
-          sx={style.bigbtn}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("one");
+          sx={{
+            background: "#EEEEEE",
+            padding: "8px 8px 0px 8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            borderRadius: "10px",
+            mt: 2,
           }}
         >
-          One
-        </Button>
-        <Button
-          sx={style.smlbtn}
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("two");
-          }}
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={zero}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("0");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={one}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("1");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={two}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("2");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={three}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("3");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={four}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("4");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={five}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("5");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={six}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("6");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={seven}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("7");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={eight}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("8");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "17%", mb: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+        </Box>
+        <Stack
+          direction="row"
+          my={1}
+          alignItems="center"
+          justifyContent="space-between"
         >
-          Two
-        </Button>
-      </ButtonGroup>
+          <Button variant="outlined">Random</Button>
+          {[1, 5, 10, 20, 50, 100]?.map((i) => {
+            return <Box sx={style.bacancebtn3}>X{i}</Box>;
+          })}
+        </Stack>
+        <ButtonGroup
+          disableElevation
+          variant="contained"
+          sx={{ width: "100%" }}
+        >
+          <Button
+            sx={style.bigbtn}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("one");
+            }}
+          >
+            One
+          </Button>
+          <Button
+            sx={style.smlbtn}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("two");
+            }}
+          >
+            Two
+          </Button>
+        </ButtonGroup>
+      </div>
 
       <Drawer
         open={open}
@@ -235,12 +323,19 @@ const BetNumber = () => {
                 ? "!bg-[#40AD72]"
                 : selectNumber === "voilet"
                 ? "!bg-[#B659FE]"
-                : (selectNumber === "red" ||
-                    selectNumber === "2" ||
-                    selectNumber === "4" ||
-                    selectNumber === "6" ||
-                    selectNumber === "8") &&
-                  "!bg-[#FD565C]"
+                : selectNumber === "red" ||
+                  selectNumber === "2" ||
+                  selectNumber === "4" ||
+                  selectNumber === "6" ||
+                  selectNumber === "8"
+                ? "!bg-[#FD565C]"
+                : selectNumber === "one"
+                ? "!bg-[#F48901]"
+                : selectNumber === "two"
+                ? "!bg-[#6DA7F4]"
+                : selectNumber === "0"
+                ? "!bg-[#BF6DFE]"
+                : selectNumber === "5" && "!bg-[#BF6DFE]"
             }
           >
             {" "}
@@ -284,23 +379,33 @@ const BetNumber = () => {
                   {[1, 10, 100, 1000]?.map((i) => {
                     return (
                       <Box
+                        onClick={() => fk.setFieldValue("balance", i)}
                         sx={style.bacancebtn}
-                        className={
-                          selectNumber === "green" ||
-                          selectNumber === "1" ||
-                          selectNumber === "3" ||
-                          selectNumber === "7" ||
-                          selectNumber === "9"
-                            ? "!bg-[#40AD72]"
-                            : selectNumber === "voilet"
-                            ? "!bg-[#B659FE]"
-                            : (selectNumber === "red" ||
+                        className={` !cursor-pointer
+                          ${
+                            selectNumber === "green" ||
+                            selectNumber === "1" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "9"
+                              ? "!bg-[#40AD72]"
+                              : selectNumber === "voilet"
+                              ? "!bg-[#B659FE]"
+                              : selectNumber === "red" ||
                                 selectNumber === "2" ||
                                 selectNumber === "4" ||
                                 selectNumber === "6" ||
-                                selectNumber === "8") &&
-                              "!bg-[#FD565C]"
-                        }
+                                selectNumber === "8"
+                              ? "!bg-[#FD565C]"
+                              : selectNumber === "one"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "two"
+                              ? "!bg-[#6DA7F4]"
+                              : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                          }
+                       `}
                       >
                         {i}
                       </Box>
@@ -322,45 +427,74 @@ const BetNumber = () => {
                   justifyContent={"space-between"}
                 >
                   <Box
-                    className={
-                      selectNumber === "green" ||
-                      selectNumber === "1" ||
-                      selectNumber === "3" ||
-                      selectNumber === "7" ||
-                      selectNumber === "9"
-                        ? "!bg-[#40AD72]"
-                        : selectNumber === "voilet"
-                        ? "!bg-[#B659FE]"
-                        : (selectNumber === "red" ||
+                    className={` !cursor-pointer
+                      ${
+                        selectNumber === "green" ||
+                        selectNumber === "1" ||
+                        selectNumber === "3" ||
+                        selectNumber === "7" ||
+                        selectNumber === "9"
+                          ? "!bg-[#40AD72]"
+                          : selectNumber === "voilet"
+                          ? "!bg-[#B659FE]"
+                          : selectNumber === "red" ||
                             selectNumber === "2" ||
                             selectNumber === "4" ||
                             selectNumber === "6" ||
-                            selectNumber === "8") &&
-                          "!bg-[#FD565C]"
-                    }
+                            selectNumber === "8"
+                          ? "!bg-[#FD565C]"
+                          : selectNumber === "one"
+                          ? "!bg-[#F48901]"
+                          : selectNumber === "two"
+                          ? "!bg-[#6DA7F4]"
+                          : selectNumber === "0"
+                          ? "!bg-[#BF6DFE]"
+                          : selectNumber === "5" && "!bg-[#BF6DFE]"
+                      }
+                    `}
                     sx={style.addsumbtn}
+                    onClick={() =>
+                      fk.setFieldValue(
+                        "qnt",
+                        Number(fk.values.qnt) - 1 < 1
+                          ? 1
+                          : Number(fk.values.qnt) - 1
+                      )
+                    }
                   >
                     -
                   </Box>
-                  <TextField value={10} className="inputamt" />
+                  <TextField value={fk.values.qnt} className="inputamt" />
                   <Box
-                    className={
-                      selectNumber === "green" ||
-                      selectNumber === "1" ||
-                      selectNumber === "3" ||
-                      selectNumber === "7" ||
-                      selectNumber === "9"
-                        ? "!bg-[#40AD72]"
-                        : selectNumber === "voilet"
-                        ? "!bg-[#B659FE]"
-                        : (selectNumber === "red" ||
-                            selectNumber === "2" ||
-                            selectNumber === "4" ||
-                            selectNumber === "6" ||
-                            selectNumber === "8") &&
-                          "!bg-[#FD565C]"
-                    }
+                    className={` !cursor-pointer
+                     ${
+                       selectNumber === "green" ||
+                       selectNumber === "1" ||
+                       selectNumber === "3" ||
+                       selectNumber === "7" ||
+                       selectNumber === "9"
+                         ? "!bg-[#40AD72]"
+                         : selectNumber === "voilet"
+                         ? "!bg-[#B659FE]"
+                         : selectNumber === "red" ||
+                           selectNumber === "2" ||
+                           selectNumber === "4" ||
+                           selectNumber === "6" ||
+                           selectNumber === "8"
+                         ? "!bg-[#FD565C]"
+                         : selectNumber === "one"
+                         ? "!bg-[#F48901]"
+                         : selectNumber === "two"
+                         ? "!bg-[#6DA7F4]"
+                         : selectNumber === "0"
+                         ? "!bg-[#BF6DFE]"
+                         : selectNumber === "5" && "!bg-[#BF6DFE]"
+                     }
+                    `}
                     sx={style.addsumbtn}
+                    onClick={() =>
+                      fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
+                    }
                   >
                     +
                   </Box>
@@ -378,23 +512,32 @@ const BetNumber = () => {
                   {[1, 5, 10, 20, 50, 100]?.map((i) => {
                     return (
                       <Box
+                        onClick={() => fk.setFieldValue("qnt", i)}
                         sx={style.bacancebtn2}
-                        className={
-                          selectNumber === "green" ||
-                          selectNumber === "1" ||
-                          selectNumber === "3" ||
-                          selectNumber === "7" ||
-                          selectNumber === "9"
-                            ? "!bg-[#40AD72]"
-                            : selectNumber === "voilet"
-                            ? "!bg-[#B659FE]"
-                            : (selectNumber === "red" ||
+                        className={` !cursor-pointer
+                          ${
+                            selectNumber === "green" ||
+                            selectNumber === "1" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "9"
+                              ? "!bg-[#40AD72]"
+                              : selectNumber === "voilet"
+                              ? "!bg-[#B659FE]"
+                              : selectNumber === "red" ||
                                 selectNumber === "2" ||
                                 selectNumber === "4" ||
                                 selectNumber === "6" ||
-                                selectNumber === "8") &&
-                              "!bg-[#FD565C]"
-                        }
+                                selectNumber === "8"
+                              ? "!bg-[#FD565C]"
+                              : selectNumber === "one"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "two"
+                              ? "!bg-[#6DA7F4]"
+                              : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                          }`}
                       >
                         X{i}
                       </Box>
@@ -440,27 +583,38 @@ const BetNumber = () => {
             </Grid>
             <Grid item xs={8}>
               <Button
-                className={
-                  selectNumber === "green" ||
-                  selectNumber === "1" ||
-                  selectNumber === "3" ||
-                  selectNumber === "7" ||
-                  selectNumber === "9"
-                    ? "!bg-[#40AD72]"
-                    : selectNumber === "voilet"
-                    ? "!bg-[#B659FE]"
-                    : (selectNumber === "red" ||
+                className={`
+                  ${
+                    selectNumber === "green" ||
+                    selectNumber === "1" ||
+                    selectNumber === "3" ||
+                    selectNumber === "7" ||
+                    selectNumber === "9"
+                      ? "!bg-[#40AD72]"
+                      : selectNumber === "voilet"
+                      ? "!bg-[#B659FE]"
+                      : selectNumber === "red" ||
                         selectNumber === "2" ||
                         selectNumber === "4" ||
                         selectNumber === "6" ||
-                        selectNumber === "8") &&
-                      "!bg-[#FD565C]"
-                }
+                        selectNumber === "8"
+                      ? "!bg-[#FD565C]"
+                      : selectNumber === "one"
+                      ? "!bg-[#F48901]"
+                      : selectNumber === "two"
+                      ? "!bg-[#6DA7F4]"
+                      : selectNumber === "0"
+                      ? "!bg-[#BF6DFE]"
+                      : selectNumber === "5" && "!bg-[#BF6DFE]"
+                  } !cursor-pointer`}
                 variant="contained"
                 sx={style.submitbtn}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  fk.handleSubmit();
+                }}
               >
-                Total amount ₹ 1.00
+                Total amount ₹{" "}
+                {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
               </Button>
             </Grid>
           </Grid>

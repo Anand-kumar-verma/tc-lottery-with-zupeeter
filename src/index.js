@@ -8,17 +8,36 @@ import reportWebVitals from "./reportWebVitals";
 import theme from "./utils/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { SocketProvider } from "./shared/socket/SocketContext";
+import store from "./redux/store/store";
+import { Provider } from "react-redux";
+import { Toaster } from "react-hot-toast";
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <Provider store={store}>
   <QueryClientProvider client={queryClient}>
     <SocketProvider>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <App />
+          <Toaster
+              toastOptions={{
+                className: "",
+                style: {
+                  border: `1px solid red`,
+                  color: "#F48901",
+                  fontSize: "15px",
+                  marginTop: "100px",
+                  borderRadius: "50px",
+                  // background: "#F48901",
+                },
+              }}
+              limit={1}
+            />
         </BrowserRouter>
       </ThemeProvider>
     </SocketProvider>
   </QueryClientProvider>
+  </Provider>
 );
 reportWebVitals();

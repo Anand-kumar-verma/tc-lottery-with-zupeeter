@@ -1,11 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -26,9 +20,14 @@ import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
+import { useDispatch, useSelector } from "react-redux";
+import MyHistory from "../history/MyHistory";
+import { dummycounterFun } from "../../../redux/slices/counterSlice";
+import { useFormik } from "formik";
 
 function Wingo1Min() {
   const socket = useSocket();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
   const [one_min_time, setOne_min_time] = useState(0);
@@ -42,31 +41,52 @@ function Wingo1Min() {
   const img3 = Number(isImageChange?.split("_")[2]);
   const img4 = Number(isImageChange?.split("_")[3]);
   const img5 = Number(isImageChange?.split("_")[4]);
-  const image_array = [zero,one,two,three,four,five,six,seven,eight,nine];
+  const image_array = [
+    zero,
+    one,
+    two,
+    three,
+    four,
+    five,
+    six,
+    seven,
+    eight,
+    nine,
+  ];
+  const next_step = useSelector((state) => state.aviator.next_step);
+
   React.useEffect(() => {
     setIsImageChange(changeImages());
   }, []);
+
+  const initialValue = {
+    openTimerDialog: false,
+  };
+  const fk = useFormik({
+    initialValues: initialValue,
+    onSubmit: () => {},
+  });
 
   React.useEffect(() => {
     const handleOneMin = (onemin) => {
       setOne_min_time(onemin);
       // fk.setFieldValue("show_this_one_min_time", onemin);
-      if (onemin === 5 || onemin === 4 || onemin === 3 || onemin === 2) {
+      if (onemin === 1) handlePlaySoundLast();
+      if ([5,4,3,2].includes(onemin)) {
         handlePlaySound();
       }
-      if (onemin === 1) handlePlaySoundLast();
 
-      if (onemin <= 10) {
-        // fk.setFieldValue("openTimerDialogBoxOneMin", true);
+      if (onemin <= 5) {
+        fk.setFieldValue("openTimerDialog", true);
       }
       if (onemin === 0) {
         // client.refetchQueries("myhistory");
-        // client.refetchQueries("walletamount");
-        // client.refetchQueries("gamehistory");
+        client.refetchQueries("wallet_amount");
+        client.refetchQueries("gamehistory");
         // client.refetchQueries("gamehistory_chart");
-        // client.refetchQueries("myAllhistory");
-        // dispatch(dummycounterFun());
-        // fk.setFieldValue("openTimerDialogBoxOneMin", false);
+        client.refetchQueries("myAllhistory");
+        dispatch(dummycounterFun());
+        fk.setFieldValue("openTimerDialog", false);
       }
     };
     socket.on("onemin", handleOneMin);
@@ -207,13 +227,57 @@ function Wingo1Min() {
                   color="initial"
                   className="idnumber"
                 >
-                  20240420010668{" "}
+                  {next_step}{" "}
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </Box>
-        <BetNumber />
+        <div className="relative">
+          <BetNumber gid={"1"} />
+          {fk.values.openTimerDialog && (
+            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+              <div
+                className="flex gap-2 justify-cente !bg-opacity-5"
+                sx={{ width: "100%" }}
+              >
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                  {show_this_one_min_time?.substring(0, 1)}
+                </div>
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                  {show_this_one_min_time?.substring(1, 2)}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
         <Stack direction="row" justifyContent="space-between" mt={2}>
           <Button
             className={
@@ -240,13 +304,12 @@ function Wingo1Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory gid="1"/>}
-        {value === 2 && <Chart gid="1"/>}
+        {value === 1 && <GameHistory gid="1" />}
+        {value === 2 && <Chart gid="1" />}
+        {value === 3 && <MyHistory gid="1" />}
       </Box>
     </Box>
   );
 }
 
 export default Wingo1Min;
-
-

@@ -46,7 +46,7 @@ function PVC() {
                 </Grid>
             </Grid>
 
-        </Box >
+        </Box>
     )
 }
 

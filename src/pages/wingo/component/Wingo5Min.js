@@ -1,11 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import {
-  Box,
-  Button,
-  Grid,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -26,15 +20,21 @@ import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
+import { useDispatch, useSelector } from "react-redux";
+import MyHistory from "../history/MyHistory";
+import { useFormik } from "formik";
+import { dummycounterFun } from "../../../redux/slices/counterSlice";
 
 function Wingo5Min() {
   const socket = useSocket();
   const client = useQueryClient();
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
   const [one_min_time, setOne_min_time] = useState("0_0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
+  const next_step = useSelector((state) => state.aviator.next_step);
   const [isImageChange, setIsImageChange] = useState("1_2_3_4_5");
   const img1 = Number(isImageChange?.split("_")[0]);
   const img2 = Number(isImageChange?.split("_")[1]);
@@ -66,29 +66,37 @@ function Wingo5Min() {
     [one_min_time]
   );
 
+  const initialValue = {
+    openTimerDialog: false,
+  };
+  const fk = useFormik({
+    initialValues: initialValue,
+    onSubmit: () => {},
+  });
+
   React.useEffect(() => {
     const handleFiveMin = (fivemin) => {
       setOne_min_time(fivemin);
-      //   fk.setFieldValue("show_this_one_min_time",fivemin)
-      if (
-        (fivemin?.split("_")?.[1] === "5" ||
-          fivemin?.split("_")?.[1] === "4" ||
-          fivemin?.split("_")?.[1] === "3" ||
-          fivemin?.split("_")?.[1] === "2") &&
-        fivemin?.split("_")?.[0] === "0"
-      )
-        handlePlaySound();
+
       if (fivemin?.split("_")?.[1] === "1" && fivemin?.split("_")?.[0] === "0")
         handlePlaySoundLast();
 
       if (
-        Number(fivemin?.split("_")?.[1]) <= 10 && // this is for sec
+        Number(fivemin?.split("_")?.[1]) <= 30 &&
+        Number(fivemin?.split("_")?.[1]) > 1 && // this is for sec
         fivemin?.split("_")?.[0] === "0" // this is for minut
       ) {
-        // fk.setFieldValue("openTimerDialogBoxOneMin", true);
+        handlePlaySound();
+      }
+
+      if (
+        Number(fivemin?.split("_")?.[1]) <= 30 && // this is for sec
+        fivemin?.split("_")?.[0] === "0" // this is for minut
+      ) {
+        fk.setFieldValue("openTimerDialog", true);
       }
       if (fivemin?.split("_")?.[1] === "59") {
-        // fk.setFieldValue("openTimerDialogBoxOneMin", false);
+        fk.setFieldValue("openTimerDialog", false);
       }
       if (
         fivemin?.split("_")?.[1] === "40" && // this is for sec
@@ -101,12 +109,12 @@ function Wingo5Min() {
         fivemin?.split("_")?.[1] === "0" &&
         fivemin?.split("_")?.[0] === "0"
       ) {
-        // client.refetchQueries("gamehistory");
-        // client.refetchQueries("walletamount");
+        client.refetchQueries("gamehistory");
+        client.refetchQueries("wallet_amount");
         // client.refetchQueries("gamehistory_chart");
-        // client.refetchQueries("myhistory");
-        // client.refetchQueries("myAllhistory");
-        // dispatch(dummycounterFun());
+        client.refetchQueries("myAllhistory");
+        dispatch(dummycounterFun());
+        fk.setFieldValue("openTimerDialog", false);
       }
     };
 
@@ -255,13 +263,56 @@ function Wingo5Min() {
                   color="initial"
                   className="idnumber"
                 >
-                  20240420010668{" "}
+                  {next_step}{" "}
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </Box>
-        <BetNumber />
+        <div className="relative">
+          <BetNumber gid={"3"} />
+          {fk.values.openTimerDialog && (
+            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+              <div
+                className="flex gap-2 justify-cente !bg-opacity-5"
+                sx={{ width: "100%" }}
+              >
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                  {show_this_three_min_time_sec?.substring(0, 1)}
+                </div>
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                  {show_this_three_min_time_sec?.substring(1, 2)}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <Stack direction="row" justifyContent="space-between" mt={2}>
           <Button
             className={
@@ -288,8 +339,9 @@ function Wingo5Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory />}
-        {value === 2 && <Chart />}
+        {value === 1 && <GameHistory gid="3" />}
+        {value === 2 && <Chart gid="3" />}
+        {value === 3 && <MyHistory gid="3" />}
       </Box>
     </Box>
   );
