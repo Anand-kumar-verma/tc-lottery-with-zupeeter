@@ -150,10 +150,6 @@ function Wingo5Min() {
     }
   };
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
   const handleChange = (newValue) => {
     setValue(newValue);
   };
