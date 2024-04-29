@@ -1,126 +1,102 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography
+} from "@mui/material";
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
-import zero from "../../../assets/images/n0-30bd92d1.png";
-import one from "../../../assets/images/n1-dfccbff5.png";
-import two from "../../../assets/images/n2-c2913607.png";
-import three from "../../../assets/images/n3-f92c313f.png";
-import four from "../../../assets/images/n4-cb84933b.png";
-import five from "../../../assets/images/n5-49d0e9c5.png";
-import six from "../../../assets/images/n6-a56e0b9a.png";
-import seven from "../../../assets/images/n7-5961a17f.png";
-import eight from "../../../assets/images/n8-d4d951a4.png";
-import nine from "../../../assets/images/n9-a20f6f42 (1).png";
-import backbanner from "../../../assets/images/winbackbanner.png";
-import { changeImages } from "../../../shared/nodeSchedular";
+import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
-import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
-import { useDispatch, useSelector } from "react-redux";
 import MyHistory from "../history/MyHistory";
-import { useFormik } from "formik";
-import { dummycounterFun } from "../../../redux/slices/counterSlice";
-
-function Wingo5Min() {
+import ShowImages from "./ShowImages";
+import BetNumber from "../BetNumber";
+function Wingo3Min() {
   const socket = useSocket();
   const client = useQueryClient();
-  const dispatch = useDispatch();
+  const [three_min_time, setThree_min_time] = useState("0_0");
+  const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
-  const [one_min_time, setOne_min_time] = useState("0_0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
-  const next_step = useSelector((state) => state.aviator.next_step);
-  const [isImageChange, setIsImageChange] = useState("1_2_3_4_5");
-  const img1 = Number(isImageChange?.split("_")[0]);
-  const img2 = Number(isImageChange?.split("_")[1]);
-  const img3 = Number(isImageChange?.split("_")[2]);
-  const img4 = Number(isImageChange?.split("_")[3]);
-  const img5 = Number(isImageChange?.split("_")[4]);
-  const image_array = [
-    zero,
-    one,
-    two,
-    three,
-    four,
-    five,
-    six,
-    seven,
-    eight,
-    nine,
-  ];
-  React.useEffect(() => {
-    setIsImageChange(changeImages());
-  }, []);
+  const next_step = useSelector((state) => state.aviator.next_step)
+  const dispatch = useDispatch()
+
 
   const show_this_three_min_time_sec = React.useMemo(
-    () => String(one_min_time?.split("_")?.[1]).padStart(2, "0"),
-    [one_min_time]
-  );
-  const show_this_three_min_time_min = React.useMemo(
-    () => String(one_min_time?.split("_")?.[0]).padStart(2, "0"),
-    [one_min_time]
+    () => String(three_min_time?.split("_")?.[1]).padStart(2, "0"),
+    [three_min_time]
   );
 
-  const initialValue = {
-    openTimerDialog: false,
-  };
+  const show_this_three_min_time_min = React.useMemo(
+    () => String(three_min_time?.split("_")?.[0]).padStart(2, "0"),
+    [three_min_time]
+  );
+
+  const initialValue ={
+    openTimerDialog:false
+  }
   const fk = useFormik({
-    initialValues: initialValue,
-    onSubmit: () => {},
-  });
+    initialValues:initialValue,
+    onSubmit:()=>{
+
+    }
+  })
 
   React.useEffect(() => {
-    const handleFiveMin = (fivemin) => {
-      setOne_min_time(fivemin);
-
-      if (fivemin?.split("_")?.[1] === "1" && fivemin?.split("_")?.[0] === "0")
+    const handleThreeMin = (threemin) => {
+      setThree_min_time(threemin);
+      if (
+        threemin?.split("_")?.[1] === "1" &&
+        threemin?.split("_")?.[0] === "0"
+      )
         handlePlaySoundLast();
-
+        if (
+          Number(threemin?.split("_")?.[1]) <= 10 &&
+          Number(threemin?.split("_")?.[1]) > 1 && // 1 index means second
+          threemin?.split("_")?.[0] === "0" // 0 index means min
+        ) {
+          handlePlaySound();
+        }
+         
       if (
-        Number(fivemin?.split("_")?.[1]) <= 30 &&
-        Number(fivemin?.split("_")?.[1]) > 1 && // this is for sec
-        fivemin?.split("_")?.[0] === "0" // this is for minut
-      ) {
-        handlePlaySound();
-      }
-
-      if (
-        Number(fivemin?.split("_")?.[1]) <= 30 && // this is for sec
-        fivemin?.split("_")?.[0] === "0" // this is for minut
+        Number(threemin?.split("_")?.[1]) <= 10 && // 1 index means second
+        threemin?.split("_")?.[0] === "0" // 0 index means min
       ) {
         fk.setFieldValue("openTimerDialog", true);
       }
-      if (fivemin?.split("_")?.[1] === "59") {
+      if (threemin?.split("_")?.[1] === "59") {
         fk.setFieldValue("openTimerDialog", false);
       }
       if (
-        fivemin?.split("_")?.[1] === "40" && // this is for sec
-        fivemin?.split("_")?.[0] === "0" // this is for minut
+        threemin?.split("_")?.[1] === "25" &&
+        threemin?.split("_")?.[0] === "0"
       ) {
         // oneMinCheckResult();
         // oneMinColorWinning();
       }
       if (
-        fivemin?.split("_")?.[1] === "0" &&
-        fivemin?.split("_")?.[0] === "0"
+        threemin?.split("_")?.[1] === "56" &&
+        threemin?.split("_")?.[0] === "3"
       ) {
-        client.refetchQueries("gamehistory");
+        client.refetchQueries("trx_gamehistory");
         client.refetchQueries("wallet_amount");
-        // client.refetchQueries("gamehistory_chart");
-        client.refetchQueries("myAllhistory");
         dispatch(dummycounterFun());
         fk.setFieldValue("openTimerDialog", false);
       }
     };
 
-    socket.on("fivemin", handleFiveMin);
+    socket.on("threemin", handleThreeMin);
 
     return () => {
-      socket.off("fivemin", handleFiveMin);
+      socket.off("threemin", handleThreeMin);
     };
   }, []);
 
@@ -149,6 +125,10 @@ function Wingo5Min() {
     }
   };
 
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -169,103 +149,82 @@ function Wingo5Min() {
       }, [audioRefMusic, audioRefMusiclast])}
       <Box sx={{ px: 1, mt: 3 }}>
         <Box
+          className="countdownbgtrx"
           sx={{
-            backgroundImage: `url(${backbanner})`,
-            backgroundSize: "100% 100%",
-            padding: 1,
+            backgroundImage: `url(https://www.tcvvip11.com/assets/png/trxbg-21e5d811.png)`,
           }}
         >
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Button variant="text" color="primary" className="htpbutton">
-                <StickyNote2OutlinedIcon /> How To Play
-              </Button>
-              <Typography
-                variant="body1"
-                color="initial"
-                className="psize"
-                mt={1}
-              >
-                Win Go 1Min
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box
+              sx={{
+                width: "50%",
+                borderRight: "1px dashed white",
+                paddingRight: "2%",
+              }}
+              className="win-banner"
+            >
+              {React.useMemo(() => {
+                return (
+                  <>
+                    <Box
+                    // onClick={() => handleClickOpenpoicy()}
+                    >
+                      <Button
+                        variant="text"
+                        color="primary"
+                        className="htpbutton"
+                      >
+                        <StickyNote2OutlinedIcon /> How To Play
+                      </Button>
+                    </Box>
+                    <div className="flex gap-2">
+                      <div className="!text-white">Period:</div>
+                      <Typography
+                        variant="body1"
+                        color="initial"
+                        className="!text-white !font-bold"
+                      >
+                        {next_step}{" "}
+                      </Typography>
+                    </div>
+                    <div className="!text-white !text-sm">Draw Time</div>
+                  </>
+                );
+              }, [])}
+            </Box>
+            <Box>
+              <Typography variant="h3" color="initial" className="timername">
+                Time remaining
               </Typography>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{ width: "100%", padding: "8px 0px" }}
-              >
-                <Box
-                  component="img"
-                  src={image_array[Number(img1)]}
-                  width={25}
-                ></Box>
-                <Box
-                  component="img"
-                  src={image_array[Number(img2)]}
-                  width={25}
-                ></Box>
-                <Box
-                  component="img"
-                  src={image_array[Number(img3)]}
-                  width={25}
-                ></Box>
-                <Box
-                  component="img"
-                  src={image_array[Number(img4)]}
-                  width={25}
-                ></Box>
-                <Box
-                  component="img"
-                  src={image_array[Number(img5)]}
-                  width={25}
-                ></Box>
-              </Stack>
-            </Grid>
-            <Grid item xs={6}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "end",
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  className="timername"
-                >
-                  Time remaining{" "}
-                </Typography>
-                <Box sx={{ display: "flex" }}>
-                  <Box className="timer">
-                    {show_this_three_min_time_min?.substring(0, 1)}
-                  </Box>
-                  <Box className="timer1">
-                    {" "}
-                    {show_this_three_min_time_min?.substring(1, 2)}
-                  </Box>
-                  <Box className="timer1">:</Box>
-                  <Box className="timer1">
-                    {" "}
+              {React.useMemo(() => {
+                return (
+                  <Stack direction="row">
+                    <Box className="timer">{show_this_three_min_time_min?.substring(0, 1)}</Box>
+                    <Box className="timer1"> {show_this_three_min_time_min?.substring(1, 2)}</Box>
+                    <Box className={"timer1"}>:</Box>
+                    <Box className="timer1">
                     {show_this_three_min_time_sec?.substring(0, 1)}
-                  </Box>
-                  <Box className="timer2">
+                    </Box>
+                    <Box className="timer2">
                     {show_this_three_min_time_sec?.substring(1, 2)}
-                  </Box>
-                </Box>
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  className="idnumber"
-                >
-                  {next_step}{" "}
-                </Typography>
-              </Box>
-            </Grid>
-          </Grid>
+                    </Box>
+                  </Stack>
+                );
+              }, [show_this_three_min_time_sec])}
+            </Box>
+          </Box>
+          {React.useMemo(() => {
+            return <ShowImages />;
+          }, [])}
         </Box>
         <div className="relative">
-          <BetNumber gid={"3"} />
+          <BetNumber gid={"2"} />
           {fk.values.openTimerDialog && (
             <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
               <div
@@ -286,7 +245,7 @@ function Wingo5Min() {
                   }}
                   className="!bg-[#F48901]  !text-white"
                 >
-                  {show_this_three_min_time_sec?.substring(0, 1)}
+                {show_this_three_min_time_sec?.substring(0, 1)}
                 </div>
                 <div
                   style={{
@@ -334,15 +293,15 @@ function Wingo5Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory gid="3" />}
-        {value === 2 && <Chart gid="3" />}
-        {value === 3 && <MyHistory gid="3" />}
+        {value === 1 && <GameHistory gid="1" />}
+        {value === 2 && <Chart gid="1" />}
+        {value === 3 && <MyHistory gid="1" />}
       </Box>
     </Box>
   );
 }
 
-export default Wingo5Min;
+export default Wingo3Min;
 
 const style = {
   bacancebtn: {

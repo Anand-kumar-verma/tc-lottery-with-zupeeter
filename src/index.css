@@ -8,6 +8,21 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+.countdownbgtrx {
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 15px 10px;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10PX;
+}
+.winTextone {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  text-align: end !important;
+  margin-bottom: 20px !important;
+}
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {

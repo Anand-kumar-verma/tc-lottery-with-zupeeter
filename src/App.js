@@ -12,6 +12,7 @@ import SupportPage from './pages/Contact/component/SupportPage';
 import ComingSoon from './pages/comingsoon/ComingSoon';
 import Withdraval from './pages/wallet/Withdraval';
 import Deposite from './pages/wallet/Deposite';
+import TRX from "./pages/trx/TRX";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/" element={<Dashboard />}></Route>
       <Route path='/activity' element={<Activity />}></Route>
       <Route path='/wingo' element={<Wingo />}></Route>
+      <Route path='/trx' element={<TRX />}></Route>
       <Route path='/CustomerService' element={<Contactus />}></Route>
       <Route path='/ServiceCollections' element={<ServiceCollection />}></Route>
       <Route path='/supportPage' element={<SupportPage />}></Route>

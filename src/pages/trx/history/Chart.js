@@ -10,8 +10,10 @@ const Chart = ({ gid }) => {
   const [page, setPage] = React.useState(0);
   const [cor, setcor] = React.useState([]);
   const [preData, setPreData] = useState([]);
+  const [visibleRows, setVisibleRows] = React.useState([]);
+
   const { isLoading, data: game_history } = useQuery(
-    ["gamehistory", gid],
+    ["trx_gamehistory_chart", gid],
     () => GameHistoryFn(gid),
     {
       refetchOnMount: false,
@@ -23,9 +25,12 @@ const Chart = ({ gid }) => {
     try {
       const reqBody = {
         gameid: gid,
-        limit: 200,
+        limit: 100,
       };
-      const response = await axios.post(`${endpoint.game_history}`, reqBody);
+      const response = await axios.post(
+        `${endpoint.trx_game_history}`,
+        reqBody
+      );
       return response;
     } catch (e) {
       toast(e?.message);
@@ -33,54 +38,39 @@ const Chart = ({ gid }) => {
     }
   };
 
-  const game_history_data = game_history?.data?.data;
-
-  // console.log(game_history_data);
-
   useEffect(() => {
     setPreData([]);
     const array = [];
-    let get0 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 0
-      );
-    let get1 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 1
-      );
-    let get2 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 2
-      );
-    let get3 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 3
-      );
-    let get4 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 4
-      );
-    let get5 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 5
-      );
-    let get6 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 6
-      );
-    let get7 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 7
-      );
-    let get8 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 8
-      );
-    let get9 =
-      game_history_data?.findIndex(
-        (element) => element.tr41_slot_id - 1 === 9
-      );
-      console.log(game_history_data,get3)
+    let get0 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 0
+    );
+    let get1 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 1
+    );
+    let get2 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 2
+    );
+    let get3 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 3
+    );
+    let get4 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 4
+    );
+    let get5 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 5
+    );
+    let get6 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 6
+    );
+    let get7 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 7
+    );
+    let get8 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 8
+    );
+    let get9 = game_history_data?.findIndex(
+      (element) => element.tr41_slot_id - 1 === 9
+    );
     array.push(
       get0 < 0 ? 100 : get0,
       get1 < 0 ? 100 : get1,
@@ -105,48 +95,57 @@ const Chart = ({ gid }) => {
     setPage(0);
   };
 
-  const visibleRows = React.useMemo(
-    () =>
+  const game_history_data = React.useMemo(
+    () => game_history?.data?.data,
+    [game_history?.data?.data]
+  );
+
+  React.useEffect(() => {
+    setVisibleRows(
       game_history_data?.slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
-      ),
-    [page, rowsPerPage, game_history_data]
-  );
+      )
+    );
+  }, [page, rowsPerPage, game_history?.data?.data]);
+
   React.useEffect(() => {
-    if (visibleRows) {
+    if (visibleRows && !isLoading) {
       const parent = document.getElementById("parent");
       const parentRect = parent.getBoundingClientRect();
-      const newCor = visibleRows?.map((element, index) => {
-        const childId =
-          (element.tr41_slot_id - 1)?.toString() === "0"
-            ? `zero${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "1"
-            ? `one${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "2"
-            ? `two${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "3"
-            ? `three${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "4"
-            ? `four${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "5"
-            ? `five${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "6"
-            ? `six${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "7"
-            ? `seven${index}`
-            : (element.tr41_slot_id - 1)?.toString() === "8"
-            ? `eight${index}`
-            : `nine${index}`;
-        const childRect = document
-          .getElementById(childId)
-          .getBoundingClientRect();
-        const centerX = childRect.left + childRect.width / 2 - parentRect.left;
-        const centerY = childRect.top + childRect.height / 2 - parentRect.top;
+      const newCor =
+        visibleRows?.length > 0 &&
+        visibleRows?.map((element, index) => {
+          const childId =
+            String(Number(element?.tr41_slot_id - 1)) === "0"
+              ? `zero${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "1"
+              ? `one${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "2"
+              ? `two${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "3"
+              ? `three${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "4"
+              ? `four${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "5"
+              ? `five${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "6"
+              ? `six${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "7"
+              ? `seven${index}`
+              : String(Number(element?.tr41_slot_id - 1)) === "8"
+              ? `eight${index}`
+              : `nine${index}`;
+          const childRect = document
+            .getElementById(childId)
+            .getBoundingClientRect();
+          const centerX =
+            childRect.left + childRect.width / 2 - parentRect.left;
+          const centerY = childRect.top + childRect.height / 2 - parentRect.top;
 
-        return { x: centerX, y: centerY };
-      });
-      setcor(newCor);
+          return { x: centerX, y: centerY };
+        });
+      setcor(newCor || []);
     }
   }, [visibleRows]);
 
@@ -197,7 +196,7 @@ const Chart = ({ gid }) => {
                 <div
                   className={`circleNumberbody-number !bg-white !text-red-600 !border-[1px] !border-red-600 !text-[5px] `}
                 >
-                  {i+1}
+                  {i + 1}
                 </div>
               );
             })}

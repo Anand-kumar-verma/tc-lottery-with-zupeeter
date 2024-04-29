@@ -19,7 +19,7 @@ import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
 
-function Wingo() {
+function TRX() {
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
   const [opendialogbox, setOpenDialogBox] = useState(false);
@@ -182,7 +182,7 @@ function Wingo() {
           width: "95%",
           display: "flex",
           alignItems: "center",
-          justifyContent:"space-between",
+          justifyContent: "space-between",
           margin: "auto",
           background: "#ededed",
           borderRadius: "10PX",
@@ -196,7 +196,7 @@ function Wingo() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-              Win Go
+            TRX Win Go
             </Typography>
             <Typography variant="body1" color="initial">
               1 Min
@@ -210,7 +210,7 @@ function Wingo() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-              Win Go
+              TRX Win Go
             </Typography>
             <Typography variant="body1" color="initial">
               3 Min
@@ -224,7 +224,7 @@ function Wingo() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-              Win Go
+             TRX Win Go
             </Typography>
             <Typography variant="body1" color="initial">
               5 Min
@@ -254,7 +254,7 @@ function Wingo() {
   );
 }
 
-export default Wingo;
+export default TRX;
 
 const style = {
   withdrawalbtn: {
