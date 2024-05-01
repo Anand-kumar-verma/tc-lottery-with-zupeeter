@@ -17,7 +17,6 @@ import BetNumber from "../BetNumber";
 function Wingo1Min() {
   const socket = useSocket();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
   const [value, setValue] = useState(1);
   const [one_min_time, setOne_min_time] = useState(0);
   const show_this_one_min_time = String(one_min_time).padStart(2, "0");
@@ -47,17 +46,19 @@ function Wingo1Min() {
       if (onemin <= 5) {
         fk.setFieldValue("openTimerDialog", true);
       }
+      if (onemin === 59) {
+        fk.setFieldValue("openTimerDialog", false);
+      }
       if (onemin === 56) {
-        // client.refetchQueries("myhistory");
+        client.refetchQueries("myAll_trx_history");
         client.refetchQueries("wallet_amount");
         client.refetchQueries("trx_gamehistory");
         dispatch(dummycounterFun());
-        fk.setFieldValue("openTimerDialog", false);
       }
     };
-    socket.on("onemin", handleOneMin);
+    socket.on("onemintrx", handleOneMin);
     return () => {
-      socket.off("onemin", handleOneMin);
+      socket.off("onemintrx", handleOneMin);
     };
   }, []);
 
@@ -84,10 +85,6 @@ function Wingo1Min() {
       // Handle any errors during play
       console.error("Error during play:", error);
     }
-  };
-
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
   };
 
   const handleChange = (newValue) => {

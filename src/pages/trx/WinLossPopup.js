@@ -20,10 +20,10 @@ const WinLossPopup = ({ gid }) => {
     setloding(true);
     try {
       const reqBody = {
-        id: user_id,
+        userid: user_id,
         gameid: gid,
       };
-      const response = await axios.post(`${endpoint.my_history}`, reqBody);
+      const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
       const firstId = response?.data?.earning?.[0]?.tr_transid;
       const winAmnt =
         response?.data?.earning

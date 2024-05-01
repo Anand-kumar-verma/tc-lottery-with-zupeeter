@@ -10,7 +10,17 @@ export const endpoint = {
   bet_placed: `${baseUrl}/api/betnew_color`,
   my_history: `${baseUrl}/api/one_min_myhistory`,
   get_balance: `${baseUrl}/api/get_balance`,
-
+  my_team_level: `${baseUrl}/api/my_team`,
+  my_team_level_report_indevidual: `${baseUrl}/api/member_report`,
+  bank: `${baseUrl}/api/bank`,
+  update_bank_details:`${baseUrl}/api/update_bank_details_new`,
+  update_upi_details:`${baseUrl}/api/update_upi_details`,
   // trx apis
   trx_game_history: `${baseUrl}/api/trx_result`,
+  trx_bet_placed: `${baseUrl}/api/Trx_bet`,
+  trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`,
+  registration_bonus: `${baseUrl}/api/view_direct_referral_income`,
+  view_bank_details: `${baseUrl}/api/view_bank_details_new`,
+  view_upi_details: `${baseUrl}/api/view_upi_details`,
+  token_launch: `${baseUrl}/api/token_launch`,
 };

@@ -8,11 +8,11 @@ import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
+import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
 import ShowImages from "./ShowImages";
-import BetNumber from "../BetNumber";
 
 function Wingo5Min() {
   const socket = useSocket();
@@ -62,9 +62,7 @@ function Wingo5Min() {
       ) {
         fk.setFieldValue("openTimerDialog", true);
       }
-      if (fivemin?.split("_")?.[1] === "59") {
-        fk.setFieldValue("openTimerDialog", false);
-      }
+
       if (
         fivemin?.split("_")?.[1] === "40" && // this is for sec
         fivemin?.split("_")?.[0] === "0" // this is for minut
@@ -73,24 +71,26 @@ function Wingo5Min() {
         // oneMinColorWinning();
       }
       if (
-        fivemin?.split("_")?.[1] === "0" &&
-        fivemin?.split("_")?.[0] === "0"
+        fivemin?.split("_")?.[1] === "59" &&
+        fivemin?.split("_")?.[0] === "4"
       ) {
-       
-        client.refetchQueries("wallet_amount");
-        dispatch(dummycounterFun());
         fk.setFieldValue("openTimerDialog", false);
       }
-      if(fivemin?.split("_")?.[1] === "56" &&
-      fivemin?.split("_")?.[0] === "4"){
+      if (
+        fivemin?.split("_")?.[1] === "56" &&
+        fivemin?.split("_")?.[0] === "4"
+      ) {
+        dispatch(dummycounterFun());
+        client.refetchQueries("wallet_amount");
+        client.refetchQueries("myAll_trx_history");
         client.refetchQueries("trx_gamehistory");
       }
     };
 
-    socket.on("fivemin", handleFiveMin);
+    socket.on("fivemintrx", handleFiveMin);
 
     return () => {
-      socket.off("fivemin", handleFiveMin);
+      socket.off("fivemintrx", handleFiveMin);
     };
   }, []);
 
@@ -288,9 +288,9 @@ function Wingo5Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory gid="1" />}
-        {value === 2 && <Chart gid="1" />}
-        {value === 3 && <MyHistory gid="1" />}
+        {value === 1 && <GameHistory gid="3" />}
+        {value === 2 && <Chart gid="3" />}
+        {value === 3 && <MyHistory gid="3" />}
       </Box>
     </Box>
   );
@@ -298,94 +298,3 @@ function Wingo5Min() {
 
 export default Wingo5Min;
 
-const style = {
-  bacancebtn: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    borderRadius: "20px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    marginLeft: "5px",
-  },
-  bacancebtn2: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    borderRadius: "1px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    marginLeft: "5px",
-  },
-  bacancebtn3: {
-    backgroundColor: "#40AD72",
-    padding: "1px 5px",
-    borderRadius: "6px",
-    color: "white",
-    fontSize: "14px",
-    fontWeight: "500",
-    marginLeft: "5px",
-    display: "flex",
-    alignItems: "center",
-    height: "30px",
-    ["@media (max-width:340px)"]: { fontSize: "13px" },
-  },
-  addsumbtn: {
-    backgroundColor: "#40AD72",
-    padding: "4px 13px",
-    color: "white",
-    fontSize: "17px",
-    fontWeight: "500",
-    margin: "0px 5px",
-  },
-  cancelbtn: {
-    width: "100%",
-    borderRadius: "0px",
-    color: "white",
-    backgroundColor: "#25253C",
-    padding: 1,
-  },
-  submitbtn: {
-    width: "100%",
-    borderRadius: "0px",
-    color: "white",
-    backgroundColor: "#40AD72",
-    padding: 1,
-  },
-  bigbtn: {
-    width: "50%",
-    borderRadius: "20px 0px 0px 20px",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "500",
-  },
-  smlbtn: {
-    width: "50%",
-    borderRadius: "0px 20px 20px 0px",
-    color: "white",
-    fontSize: "16px",
-    fontWeight: "500",
-    background: "#6DA7F4",
-  },
-  linetable: {
-    "&>p": {
-      fontSize: "12px",
-      color: "gray",
-      border: "1px solid gray",
-      borderRadius: "50%",
-      width: "15px",
-      height: "15px",
-      textAlign: "center",
-      padding: "2px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    alignItems: "center",
-    justifyContent: "space-between",
-    "&>p:nth-last-child(1)": {
-      width: "20px !important",
-      height: "20px !important",
-    },
-  },
-};

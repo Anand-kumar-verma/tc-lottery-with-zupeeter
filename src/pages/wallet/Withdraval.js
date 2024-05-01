@@ -1,27 +1,23 @@
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { Box, Button, Container, IconButton, Stack, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom'; import cip from '../../assets/images/cip.png';
-import backbtn from '../../assets/images/backBtn.png';
-import wallet from '../../assets/images/atmw.png';
-import refresh from '../../assets/images/refwhite.png';
-import bankicon from '../../assets/images/bankicon.png';
-import theme from '../../utils/theme'; import React, { useState } from 'react';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import atm from '../../assets/images/atm.png';
+import atmchip from '../../assets/images/atmchip.png';
+import wallet from '../../assets/images/atmw.png';
+import backbtn from '../../assets/images/backBtn.png';
+import bankicon from '../../assets/images/bankicon.png';
+import cip from '../../assets/images/cip.png';
+import refresh from '../../assets/images/refwhite.png';
 import trx from '../../assets/images/trx.png';
 import withdravalhistory from '../../assets/images/withdrawalhistory.png';
-import atmchip from '../../assets/images/atmchip.png';
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import Divider from '@mui/material/Divider';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import theme from '../../utils/theme';
 
 function Withdraw() {
-  const [musicbtn, setMusicbtn] = useState(true);
   return (
     <Container sx={{ background: '#F7F8FF' }}>
       <Box sx={{ background: 'linear-gradient(90deg, rgb(255, 153, 1) 0%, rgb(230, 115, 1) 100%)', padding: 1 }}>

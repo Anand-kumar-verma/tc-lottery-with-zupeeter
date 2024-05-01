@@ -1,3 +1,4 @@
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import {
   Box,
   CircularProgress,
@@ -8,22 +9,20 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow,
-  Typography,
+  TableRow
 } from "@mui/material";
-import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
 import { endpoint } from "../../../services/urls";
 import theme from "../../../utils/theme";
-import { useNavigate } from "react-router-dom";
 
 const GameHistory = ({ gid }) => {
   const dispatch = useDispatch();

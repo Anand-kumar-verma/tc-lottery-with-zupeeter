@@ -69,7 +69,7 @@ const BetNumber = ({ gid }) => {
         (selectNumber === "red" && 13) ||
         (selectNumber === "two" && 15) || // this is big
         (selectNumber === "one" && 14) || // this is small
-        Number(selectNumber + 1),
+        (Number(selectNumber) + 1),
       gameid: Number(gid),
     };
 

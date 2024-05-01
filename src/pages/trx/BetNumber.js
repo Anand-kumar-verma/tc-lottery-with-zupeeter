@@ -61,20 +61,23 @@ const BetNumber = ({ gid }) => {
   async function betFunctionStart() {
     setLoding(true);
     const reqBody = {
-      userid: user_id,
-      amount: Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0,
-      number:
+      userid: user_id?.toString(),
+      amount: (
+        Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
+      )?.toString(),
+      number: `${
         (selectNumber === "green" && 11) ||
         (selectNumber === "voilet" && 12) ||
         (selectNumber === "red" && 13) ||
         (selectNumber === "two" && 15) || // this is big
         (selectNumber === "one" && 14) || // this is small
-        Number(selectNumber + 1),
-      gameid: Number(gid),
+        Number(selectNumber) + 1
+      }`,
+      gameid: `${Number(gid)}`,
     };
 
     try {
-      const response = await axios.post(`${endpoint.bet_placed}`, reqBody);
+      const response = await axios.post(`${endpoint.trx_bet_placed}`, reqBody);
       if (response?.data?.error === "200") {
         toast(
           <SuccessCheck
@@ -86,6 +89,7 @@ const BetNumber = ({ gid }) => {
         fk.setFieldValue("isSuccessPlaceBet", true);
         setOpen(false);
         localStorage.setItem("betApplied", `${gid}_true`);
+        console.log(response, "This is response");
       } else {
         toast(response?.data?.msg);
       }
@@ -95,7 +99,7 @@ const BetNumber = ({ gid }) => {
     }
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
-    client.refetchQueries("myAllhistory");
+    client.refetchQueries("myAll_trx_history");
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
@@ -346,7 +350,7 @@ const BetNumber = ({ gid }) => {
               color="initial"
               sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-            TRX Win Go {gid==3?5:gid==2?3:gid}Min
+              TRX Win Go {gid == 3 ? 5 : gid == 2 ? 3 : gid}Min
             </Typography>
             <Typography
               variant="body1"

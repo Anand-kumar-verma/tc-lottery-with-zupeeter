@@ -41,48 +41,12 @@ const Chart = ({ gid }) => {
   useEffect(() => {
     setPreData([]);
     const array = [];
-    let get0 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 0
-    );
-    let get1 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 1
-    );
-    let get2 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 2
-    );
-    let get3 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 3
-    );
-    let get4 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 4
-    );
-    let get5 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 5
-    );
-    let get6 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 6
-    );
-    let get7 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 7
-    );
-    let get8 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 8
-    );
-    let get9 = game_history_data?.findIndex(
-      (element) => element.tr41_slot_id - 1 === 9
-    );
-    array.push(
-      get0 < 0 ? 100 : get0,
-      get1 < 0 ? 100 : get1,
-      get2 < 0 ? 100 : get2,
-      get3 < 0 ? 100 : get3,
-      get4 < 0 ? 100 : get4,
-      get5 < 0 ? 100 : get5,
-      get6 < 0 ? 100 : get6,
-      get7 < 0 ? 100 : get7,
-      get8 < 0 ? 100 : get8,
-      get9 < 0 ? 100 : get9
-    );
+    for (let i = 0; i <= 9; i++) {
+      let res = game_history_data?.findIndex(
+        (element) => element.tr41_slot_id - 1 === i
+      );
+      array.push(res < 0 ? 100 : res);
+    }
     setPreData(array);
   }, [game_history?.data?.data]);
 

@@ -20,8 +20,8 @@ export const getBalanceFunction = async (setBalance) => {
       userid: user_id,
     };
     const response = await axios.post(`${endpoint.get_balance}`, reqBody);
-    setBalance(response?.data?.earning)
-    return response
+    setBalance(response?.data?.earning);
+    return response;
   } catch (e) {
     toast(e?.message);
     console.log(e);
@@ -35,6 +35,101 @@ export const My_All_HistoryFn = async (gid) => {
       gameid: gid,
     };
     const response = await axios.post(`${endpoint.my_history}`, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const My_All_TRX_HistoryFn = async (gid) => {
+  try {
+    const reqBody = {
+      userid: user_id,
+      gameid: gid,
+    };
+    const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+
+// /; INCOME
+export const MyTeamLevel = async () => {
+  try {
+    const reqBody = {
+      profile_id: user_id,
+    };
+    const response = await axios.post(endpoint.my_team_level, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+
+export const registrationBonusFn = async (type) => {
+  try {
+    const reqBody = {
+      profile_id: user_id,
+      type: type,
+    };
+    const response = await axios.post(endpoint.registration_bonus, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const BankDetailsFUnction = async () => {
+  try {
+    const reqBody = {
+      user_id: "2872",
+    };
+    const response = await axios.post(endpoint.view_bank_details, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const TokenLaunch = async () => {
+  try {
+    const reqBody = {
+      userid: "1",
+    };
+    const response = await axios.post(endpoint.token_launch, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const bankListFuncton = async () => {
+  try {
+    const response = await axios.get(endpoint.bank);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const UPIDetailsFUnction = async () => {
+  try {
+    const reqBody = {
+      user_id: "1",
+    };
+    const response = await axios.post(endpoint.view_upi_details, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const upiListFuncton = async () => {
+  try {
+    const response = await axios.get(endpoint.bank);
     return response;
   } catch (e) {
     toast(e?.message);

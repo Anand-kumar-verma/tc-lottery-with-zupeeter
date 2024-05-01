@@ -6,7 +6,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { My_All_HistoryFn } from "../../../services/apiCallings";
+import { My_All_TRX_HistoryFn } from "../../../services/apiCallings";
 import { rupees, zubgback } from "../../../services/urls";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 
@@ -22,14 +22,15 @@ const MyHistory = ({ gid }) => {
   };
 
   const { isLoading: myhistory_loding_all, data: my_history_all } = useQuery(
-    ["myAllhistory", gid],
-    () => My_All_HistoryFn(gid),
+    ["myAll_trx_history", gid],
+    () => My_All_TRX_HistoryFn(gid),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
   );
 
+  
   const my_history_data_all = my_history_all?.data?.earning || [];
 
   const visibleRows = React.useMemo(
