@@ -345,19 +345,21 @@ button {
 
 
 .gametable {
-    background: #E8E7E8 !important;
+    background: #ffffff !important;
     border-radius: 10px;
-    color: black !important;
-    font-size: 15px;
+    color: rgb(154 154 154) !important;
+    font-size: 12px !important;
     font-weight: 700;
     width: 32%;
+padding: 10px 0px !important;
+
 }
 
 .gametableactive {
     background: linear-gradient(180deg, #FF9901 0%, #E57201 100%) !important;
     border-radius: 10px;
     color: white !important;
-    font-size: 15px;
+    font-size: 12px !important;
     font-weight: 700;
 }
 .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
@@ -368,4 +370,27 @@ padding: 10px 0px;
 }
 .labelselect{
     padding: 10px 0px;
+}
+.rs-input-group.rs-input-group-inside {
+    width: 100%;
+    background-color: #fff;
+    background-color: var(--rs-input-bg);
+    padding: 10px !important;
+}
+.MuiSelect-select .MuiSelect-outlined .MuiInputBase-input{
+background: #ffffff !important;
+}
+
+.rs-picker-popup .rs-calendar {
+    max-width: 200px !important;
+    display: block;
+    margin: 0 auto;
+}
+.rs-picker-popup .rs-calendar {
+    max-width: 200px !important;
+    display: block;
+    margin: 0 auto;
+}
+.apexcharts-text .apexcharts-datalabel-label{
+    display: none !important;
 }

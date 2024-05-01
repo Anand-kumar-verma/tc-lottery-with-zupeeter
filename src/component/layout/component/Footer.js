@@ -43,7 +43,7 @@ function Footer() {
                     <Typography variant="body1" color="initial" sx={{ fontSize: '11px', fontWeight: 500, color: nav === 2 ? theme.palette.primary.main : 'black' }}>Activity</Typography>
                 </Box>
                 <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', flexDirection: 'column', }} component={NavLink} onClick={() => navigation(3)} to='/promotion'>
-                    <Box component='img' src={promotion} sx={{ position: 'absolute', width: '70px', top: '-50px', left: '-7px' }}></Box>
+                    <Box component='img' src={promotion} sx={{ position: 'absolute', width: '120px', top: '-40px', left: '2px' }}></Box>
                     <Typography variant="body1" color="initial" sx={{ mt: 3, fontSize: '11px', fontWeight: 500, color: nav === 3 ? theme.palette.primary.main : 'black' }}>Promotion</Typography>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', }} component={NavLink} onClick={() => navigation(4)} to='/wallet'>
