@@ -1,37 +1,19 @@
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
-import Diversity2Icon from "@mui/icons-material/Diversity2";
-import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
 import RedeemIcon from "@mui/icons-material/Redeem";
-import StoreIcon from "@mui/icons-material/Store";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
 const zubgback = "#F48901";
 const zubgmid = "#F48901";
 
-function MainPageOFIncome() {
+function FundMain() {
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
 
   const data_array = [
     {
-      to: "/account/income-main/registration-bonus",
-      name: "Registration Bonus",
-      logo: (
-        <CurrencyExchangeIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/referral-bonus",
-      name: "Referral Bonus",
+      to: "/fund-report",
+      name: "Fund Transfer History",
       logo: (
         <RedeemIcon
           className="!w-[40px] !h-[40px] !text-[#F48901]"
@@ -40,60 +22,10 @@ function MainPageOFIncome() {
       ),
     },
     {
-      to: "/account/income-main/team-betting-bonus",
-      name: "Team Betting Bonus",
+      to: "/fund-transfer",
+      name: "Fund Transfer",
       logo: (
-        <LocalConvenienceStoreIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/team-salary-bonus",
-      name: "Team Salary Bonus",
-      logo: (
-        <AccountBalanceIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/royality-bonus",
-      name: "Royality Bonus",
-      logo: (
-        <StoreIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/level-bonus",
-      name: "Level Bonus",
-      logo: (
-        <CardGiftcardIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/ico-level-bonus",
-      name: "ICO Level Bonus",
-      logo: (
-        <Diversity2Icon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/account/income-main/betting-bonus",
-      name: "Betting Bonus",
-      logo: (
-        <AccountBalanceIcon
+        <CurrencyExchangeIcon
           className="!w-[40px] !h-[40px] !text-[#F48901]"
           color="#8f5206"
         />
@@ -159,7 +91,7 @@ function MainPageOFIncome() {
   );
 }
 
-export default MainPageOFIncome;
+export default FundMain;
 
 const style = {
   header: {

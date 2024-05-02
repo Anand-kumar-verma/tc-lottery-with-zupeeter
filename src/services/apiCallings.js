@@ -94,6 +94,30 @@ export const BankDetailsFUnction = async () => {
     console.log(e);
   }
 };
+export const FundTransferHistoryFn = async () => {
+  try {
+    const reqBody = {
+      userid: "1",
+    };
+    const response = await axios.post(endpoint.fund_transfer_history, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const ViewSalaryIncomeFunction = async () => {
+  try {
+    const reqBody = {
+      userid: "2872",
+    };
+    const response = await axios.post(endpoint.view_salary_income, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const TokenLaunch = async () => {
   try {
     const reqBody = {

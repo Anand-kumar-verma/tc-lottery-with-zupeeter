@@ -1,66 +1,38 @@
-import CloseIcon from "@mui/icons-material/Close";
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  Divider,
-  MenuItem,
-  Stack,
-  TablePagination,
-  TextField,
-} from "@mui/material";
+import { Box, Button, Container, Stack, TablePagination } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useFormik } from "formik";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import moment from "moment";
 import * as React from "react";
 import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
-import {
-  BankDetailsFUnction,
-  bankListFuncton,
-} from "../../services/apiCallings";
+import { ViewSalaryIncomeFunction } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-import axios from "axios";
-import { endpoint } from "../../services/urls";
-import toast from "react-hot-toast";
-export default function Banks() {
-  const user_id = "1";
+export default function ViewSalaryIncome() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const tableRef = React.useRef(null);
-  const client = useQueryClient()
-  const [openDialogBox, setOpenDialogBox] = React.useState(false);
+  const client = useQueryClient();
   const { isLoading, data: game_history } = useQuery(
-    ["bank_details"],
-    () => BankDetailsFUnction(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-  const { isLoading: bank_list, data: bankList } = useQuery(
-    ["bank_list"],
-    () => bankListFuncton(),
+    ["view_salary_income_fn"],
+    () => ViewSalaryIncomeFunction(),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
   );
 
-  const banks = bankList?.data?.earning?.bank || [];
   // const game_history_data = game_history?.data?.data;
   const game_history_data = React.useMemo(
-    () => game_history?.data?.earning?.bank_details,
-    [game_history?.data?.earning?.bank_details]
+    () => game_history?.data?.earning?.rid,
+    [game_history?.data?.earning?.rid]
   );
 
   const handleChangePage = (event, newPage) => {
@@ -80,53 +52,6 @@ export default function Banks() {
       ),
     [page, rowsPerPage, game_history_data]
   );
-
-  const initialValue = {
-    bank_name: openDialogBox,
-    holder:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.Associate_Name ||
-      "",
-    ifsc:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.ifsc_code || "",
-    account:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.account_number ||
-      "",
-  };
-  const fk = useFormik({
-    initialValues: initialValue,
-    enableReinitialize: true,
-    onSubmit: () => {
-      const reqBody = {
-        user_id: user_id,
-        txtbank: fk.values.bank_name,
-        txtholdername: fk.values.holder,
-        txtifscnew: fk.values.ifsc,
-        txtacno: fk.values.account,
-      };
-      if (
-        !reqBody.user_id ||
-        !reqBody.textacno ||
-        !reqBody.txtholdername ||
-        !reqBody.textifscnew ||
-        !reqBody.txtbank
-      )
-        return toast("Plese enter all data");
-      updateBankDetails(reqBody);
-    },
-  });
-
-  async function updateBankDetails(reqBody) {
-    try {
-      const res = await axios.post(endpoint?.update_bank_details, reqBody);
-      toast(res?.data?.earning?.msg);
-      if (res?.data?.status) {
-        setOpenDialogBox(false);
-      }
-    } catch (e) {
-      console.log(e);
-    }
-    client.refetchQueries("bank_details")
-  }
 
   const downloadExcel = () => {
     const ws = XLSX.utils.json_to_sheet(visibleRows);
@@ -216,19 +141,22 @@ export default function Banks() {
                     S.No.
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    Action
+                    User Id
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    Bank
+                    Amount
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    Holder
+                    Bet Amount
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    IFSC
+                    Team
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    Acc Number
+                    Status
+                  </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Date
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -245,24 +173,22 @@ export default function Banks() {
                         {index + 1}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        <Button
-                          className="!bg-[#FD565C] !py-0 !text-white"
-                          onClick={() => setOpenDialogBox(i?.BANKID)}
-                        >
-                          Update
-                        </Button>
+                        {i?.tr40_uid}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.Bankname}
+                        {i?.t40_amt}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.Associate_Name}
+                        {i?.tr40_bet_amt}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.ifsc_code}
+                        {i?.tr40_team}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.account_number}
+                        {i?.tr40_status}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {moment(i?.tr40_date)?.format("DD-MM-YYYY")}
                       </TableCell>
                     </TableRow>
                   );
@@ -286,77 +212,6 @@ export default function Banks() {
             </Stack>
           </Box>
         </Box>
-        <Dialog open={openDialogBox}>
-          <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
-            <span className="col-span-2 justify-end">
-              <div className="flex justify-between">
-                <span className="font-bold">Update Bank Details</span>
-                <CloseIcon
-                  className="cursor-pointer"
-                  onClick={() => setOpenDialogBox(false)}
-                />
-              </div>
-              <Divider />
-            </span>
-            <span>Bank Name*</span>
-            <TextField
-              id="bank_name"
-              name="bank_name"
-              value={fk.values.bank_name}
-              onChange={fk.handleChange}
-              select
-              placeholder="Select Bank"
-              size="small"
-              className="!w-[100%] !py-0"
-            >
-              {banks?.map((i) => {
-                return (
-                  <MenuItem value={i?.m_bank_id}>
-                    {i?.m_bank_status && i?.m_bank_name}
-                  </MenuItem>
-                );
-              })}
-            </TextField>
-            <span>Holder Name*</span>
-            <TextField
-              id="holder"
-              name="holder"
-              value={fk.values.holder}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
-            <span>IFSC Code*</span>
-            <TextField
-              id="ifsc"
-              name="ifsc"
-              value={fk.values.ifsc}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
-            <span>Account No*</span>
-            <TextField
-              id="account"
-              name="account"
-              value={fk.values.account}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
-            <div className="col-span-2 flex gap-2 mt-4">
-              <Button
-                className="!bg-[#FD565C] !text-white"
-                onClick={() => setOpenDialogBox(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                className="!bg-[#BF6DFE] !text-white"
-                onClick={() => fk.handleSubmit()}
-              >
-                Submit
-              </Button>
-            </div>
-          </div>
-        </Dialog>
       </Container>
     </Layout>
   );

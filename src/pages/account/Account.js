@@ -31,6 +31,24 @@ const Account = () => {
         >
           TCO TOken
         </span>
+        <span
+          className="!text-blue-500 cursor-pointer"
+          onClick={() => navigate("/fund-main")}
+        >
+          Fund Main
+        </span>
+        <span
+          className="!text-blue-500 cursor-pointer"
+          onClick={() => navigate("/view-salary-income")}
+        >
+          View Salary Income
+        </span>
+        <span
+          className="!text-blue-500 cursor-pointer"
+          onClick={() => navigate("/upi-deposit-token")}
+        >
+          UPI Deposit Token
+        </span>
       </div>
     </Layout>
   );

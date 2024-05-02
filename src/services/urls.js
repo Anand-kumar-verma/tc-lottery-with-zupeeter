@@ -15,6 +15,11 @@ export const endpoint = {
   bank: `${baseUrl}/api/bank`,
   update_bank_details:`${baseUrl}/api/update_bank_details_new`,
   update_upi_details:`${baseUrl}/api/update_upi_details`,
+  fund_transfer_history:`${baseUrl}/api/view_fund_transfer`,
+  get_user_intro_name:`${baseUrl}/api/get_intro_name`,
+  insert_fund_transfer:`${baseUrl}/api/insert_fund_transfer`,
+  view_salary_income:`${baseUrl}/api/view_salary_income`,
+  get_token_price:`${baseUrl}/api/token_price`,
   // trx apis
   trx_game_history: `${baseUrl}/api/trx_result`,
   trx_bet_placed: `${baseUrl}/api/Trx_bet`,

@@ -30,6 +30,11 @@ import BankDetails from "./pages/bank/BankDetails";
 import Banks from "./pages/bank/Banks";
 import UPIDetails from "./pages/upi/UPIDetails";
 import ICOToken from "./pages/ioctoken/ICOToken";
+import FundMain from "./pages/fund/FundMain";
+import FundReport from "./pages/fund/FundReport";
+import FundTransfer from "./pages/fund/FundTransfer";
+import ViewSalaryIncome from "./pages/salaryIncome/ViewSalaryIncome";
+import UPIDepositToken from "./pages/upiDepositToken/UPIDepositToken";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -64,6 +69,11 @@ function App() {
       <Route path="/banks-details" element={<Banks />}></Route>
       <Route path="/banks-upi" element={<UPIDetails />}></Route>
       <Route path="/ico-token" element={<ICOToken />}></Route>
+      <Route path="/fund-main" element={<FundMain />}></Route>
+      <Route path="/fund-report" element={<FundReport />}></Route>
+      <Route path="/fund-transfer" element={<FundTransfer />}></Route>
+      <Route path="/view-salary-income" element={<ViewSalaryIncome />}></Route>
+      <Route path="/upi-deposit-token" element={<UPIDepositToken />}></Route>
       {/* // INCOME */}
       <Route
         path="/account/income-main/registration-bonus"
