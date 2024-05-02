@@ -1,6 +1,166 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.transparentColor {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.countdownbgtrx {
+  background-size: 100% 100%;
+  background-position: center;
+  padding: 15px 10px;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10PX;
+}
+.winTextone {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: white !important;
+  text-align: end !important;
+  margin-bottom: 20px !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* //////////////aviator css */
+.hide::-webkit-scrollbar {
+  display: none;
+}
+.circleNumberbody {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+}
+.circleNumberbody-number {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 10px !important;
+}
+.crlg {
+  padding-top: 123px !important;
+  font-size: 25px !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+.bonustext {
+  text-align: center !important;
+  font-size: 35px !important;
+  font-weight: 600 !important;
+  margin-top: 17px !important;
+}
+
+.bonusamt {
+  font-size: 35px !important;
+  font-weight: 600 !important;
+  /* margin-top: -12px !important; */
+  text-align: center !important;
+}
+
+.bonuspr {
+  text-align: center !important;
+  margin-top: 8px !important;
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+.bonuscl {
+  text-align: center !important;
+  margin-top: 10px !important;
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.svgclass {
+  width: 100px;
+  display: block;
+  margin: 40px auto 0;
+}
+
+.path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  &.circle {
+    -webkit-animation: dash .9s ease-in-out;
+    animation: dash .9s ease-in-out;
+  }
+  &.line {
+    stroke-dashoffset: 1000;
+    -webkit-animation: dash .9s .35s ease-in-out forwards;
+    animation: dash .9s .35s ease-in-out forwards;
+  }
+  &.check {
+    stroke-dashoffset: -100;
+    -webkit-animation: dash-check .9s .35s ease-in-out forwards;
+    animation: dash-check .9s .35s ease-in-out forwards;
+  }
+}
+
+.pio {
+  text-align: center;
+  margin: 20px 0 60px;
+  font-size: 1.25em;
+  &.success {
+    color: #73AF55;
+  }
+  &.error {
+    color: #D06079;
+  }
+}
+
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
 
 
 

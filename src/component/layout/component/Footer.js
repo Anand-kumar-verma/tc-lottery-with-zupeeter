@@ -62,8 +62,8 @@ function Footer() {
                     }
                     <Typography variant="body1" color="initial" sx={{ fontSize: '11px', fontWeight: 500, color: nav === 5 ? theme.palette.primary.main : 'black' }}>Account</Typography>
                 </Box>
-            </Stack >
-        </Box >
+            </Stack>
+        </Box>
     )
 }
 

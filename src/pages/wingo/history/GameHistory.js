@@ -1,8 +1,6 @@
 import {
   Box,
   CircularProgress,
-  Pagination,
-  Paper,
   Stack,
   Table,
   TableBody,
@@ -11,17 +9,23 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  Typography,
+  Typography
 } from "@mui/material";
-import React from "react";
-import theme from "../../../utils/theme";
-import { endpoint } from "../../../services/urls";
-import { useQuery } from "react-query";
 import axios from "axios";
+import React from "react";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
+import { updateNextCounter } from "../../../redux/slices/counterSlice";
+import { endpoint } from "../../../services/urls";
+import theme from "../../../utils/theme";
 
 const GameHistory = ({ gid }) => {
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+ 
+  const dispatch = useDispatch()
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
+
   const { isLoading, data: game_history } = useQuery(
     ["gamehistory", gid],
     () => GameHistoryFn(gid),
@@ -37,24 +41,25 @@ const GameHistory = ({ gid }) => {
         gameid: gid,
         limit: 100,
       };
-      const response = await axios.post(`${endpoint.color_result}`, reqBody);
+      const response = await axios.post(`${endpoint.game_history}`, reqBody);
       return response;
     } catch (e) {
-      // toast(e?.message);
+       toast(e?.message);
       console.log(e);
     }
   };
 
   const game_history_data = game_history?.data?.data;
-  // React.useEffect(() => {
-  //   dispatch(
-  //     updateNextCounter(
-  //       game_history?.data?.data
-  //         ? Number(game_history?.data?.data?.[0]?.gamesno) + 1
-  //         : 1
-  //     )
-  //   );
-  // }, [game_history?.data?.data]);
+
+  React.useEffect(() => {
+    dispatch(
+      updateNextCounter(
+        game_history?.data?.data
+          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+          : 1
+      )
+    );
+  }, [game_history?.data?.data]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -82,7 +87,7 @@ const GameHistory = ({ gid }) => {
     );
   return (
     <Box mt={2}>
-      <TableContainer component={Paper}>
+      <TableContainer >
         <Table sx={{ maxWidth: 400 }} aria-label="simple table">
           <TableHead
             sx={{
@@ -108,103 +113,102 @@ const GameHistory = ({ gid }) => {
               "&>tr": { borderBottom: "1px solid #ced4d7" },
             }}
           >
-            <TableRow>
-              <TableCell align="center"> 20240420010994</TableCell>
-              <TableCell
-                align="center"
-                sx={{ fontSize: "20px", fontWeight: 900, color: "red" }}
-              >
-                6
-              </TableCell>
-              <TableCell align="center"> small</TableCell>
-              <TableCell
-                align="center"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    background: "red",
-                    borderRadius: "50%",
-                    mt: "10px",
-                    mx: "4px",
-                  }}
-                ></Typography>
-                <Typography
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    background: "red",
-                    borderRadius: "50%",
-                    mt: "10px",
-                    mx: "4px",
-                  }}
-                ></Typography>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align="center"> 20240420010994</TableCell>
-              <TableCell
-                align="center"
-                sx={{ fontSize: "20px", fontWeight: 900, color: "red" }}
-              >
-                6
-              </TableCell>
-              <TableCell align="center"> small</TableCell>
-              <TableCell
-                align="center"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    background: "red",
-                    borderRadius: "50%",
-                    mt: "10px",
-                    mx: "4px",
-                  }}
-                ></Typography>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell align="center"> 20240420010994</TableCell>
-              <TableCell
-                align="center"
-                sx={{ fontSize: "20px", fontWeight: 900, color: "red" }}
-              >
-                6
-              </TableCell>
-              <TableCell align="center"> small</TableCell>
-              <TableCell
-                align="center"
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Typography
-                  sx={{
-                    width: "10px",
-                    height: "10px",
-                    background: "red",
-                    borderRadius: "50%",
-                    mt: "10px",
-                    mx: "4px",
-                  }}
-                ></Typography>
-              </TableCell>
-            </TableRow>
+            {visibleRows?.map((i, index) => {
+              return (
+                <TableRow>
+                  <TableCell align="center">{i?.tr_transaction_id}</TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontSize: "20px", fontWeight: 900, color: "red" }}
+                  >
+                    {i?.tr41_slot_id-1}
+                  </TableCell>
+                  <TableCell align="center">
+                    {i?.tr41_slot_id-1 > 4 ? "Big" : "Small"}
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    {[1, 3, 7, 9].includes(i?.tr41_slot_id-1) ? (
+                      <Typography
+                        sx={{
+                          width: "10px",
+                          height: "10px",
+                          borderRadius: "50%",
+                          mt: "10px",
+                          mx: "4px",
+                          background: "green",
+                        }}
+                      ></Typography>
+                    ) : [2, 4, 6, 8].includes(i?.tr41_slot_id-1) ? (
+                      <Typography
+                        sx={{
+                          width: "10px",
+                          height: "10px",
+                          borderRadius: "50%",
+                          mt: "10px",
+                          mx: "4px",
+                          background: "red",
+                        }}
+                      ></Typography>
+                    ) : i?.tr41_slot_id-1 == 0 ? (
+                      <div className="flex">
+                        <Typography
+                          sx={{
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                            mt: "10px",
+                            mx: "4px",
+                            background: "red",
+                          }}
+                        ></Typography>
+                        <Typography
+                          sx={{
+                            width: "10px",
+                            height: "10px",
+                            borderRadius: "50%",
+                            mt: "10px",
+                            mx: "4px",
+                            background: "#BF6DFE",
+                          }}
+                        ></Typography>
+                      </div>
+                    ) : (
+                      i?.tr41_slot_id-1 == 5 && (
+                        <div className="flex ">
+                          <Typography
+                            sx={{
+                              width: "10px",
+                              height: "10px",
+                              borderRadius: "50%",
+                              mt: "10px",
+                              mx: "4px",
+                              background: "green",
+                            }}
+                          ></Typography>
+                          <Typography
+                            sx={{
+                              width: "10px",
+                              height: "10px",
+                              borderRadius: "50%",
+                              mt: "10px",
+                              mx: "4px",
+                              background: "#BF6DFE",
+                            }}
+                          ></Typography>
+                        </div>
+                      )
+                    )}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -212,7 +216,7 @@ const GameHistory = ({ gid }) => {
         <Stack spacing={2}>
           <TablePagination
             sx={{ background: "#FBA343", color: "white" }}
-            rowsPerPageOptions={[5, 10, 15]}
+            rowsPerPageOptions={[10, 15,20]}
             component="div"
             count={game_history_data?.length}
             rowsPerPage={rowsPerPage}

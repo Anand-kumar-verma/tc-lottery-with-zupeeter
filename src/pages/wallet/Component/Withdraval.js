@@ -17,7 +17,7 @@ import trx from '../../../assets/images/trx.png';
 import withdravalhistory from '../../../assets/images/withdrawalhistory.png';
 import theme from '../../../utils/theme';
 
-function Withdraw() {
+function Withdraval() {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -348,9 +348,9 @@ function Withdraw() {
         </Stack>
       </Box>
       <Button sx={style.paytmbtntwo} variant='outlined'>All history</Button>
-    </Container >);
+    </Container>);
 }
-export default Withdraw;
+export default Withdraval;
 
 
 const style = {

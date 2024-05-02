@@ -26,6 +26,10 @@ import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
+import { useDispatch, useSelector } from "react-redux";
+import MyHistory from "../history/MyHistory";
+import { useFormik } from "formik";
+import { dummycounterFun } from "../../../redux/slices/counterSlice";
 
 function Wingo3Min() {
   const socket = useSocket();
@@ -36,6 +40,8 @@ function Wingo3Min() {
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
   const [isImageChange, setIsImageChange] = useState("1_2_3_4_5");
+  const next_step = useSelector((state) => state.aviator.next_step)
+  const dispatch = useDispatch()
   const img1 = Number(isImageChange?.split("_")[0]);
   const img2 = Number(isImageChange?.split("_")[1]);
   const img3 = Number(isImageChange?.split("_")[2]);
@@ -67,31 +73,40 @@ function Wingo3Min() {
     [three_min_time]
   );
 
+  const initialValue ={
+    openTimerDialog:false
+  }
+  const fk = useFormik({
+    initialValues:initialValue,
+    onSubmit:()=>{
+
+    }
+  })
+
   React.useEffect(() => {
     const handleThreeMin = (threemin) => {
       setThree_min_time(threemin);
-      //   fk.setFieldValue("show_this_one_min_time", threemin);
-      if (
-        (threemin?.split("_")?.[1] === "5" ||
-          threemin?.split("_")?.[1] === "4" ||
-          threemin?.split("_")?.[1] === "3" ||
-          threemin?.split("_")?.[1] === "2") &&
-        threemin?.split("_")?.[0] === "0"
-      )
-        handlePlaySound();
       if (
         threemin?.split("_")?.[1] === "1" &&
         threemin?.split("_")?.[0] === "0"
       )
         handlePlaySoundLast();
+        if (
+          Number(threemin?.split("_")?.[1]) <= 10 &&
+          Number(threemin?.split("_")?.[1]) > 1 && // 1 index means second
+          threemin?.split("_")?.[0] === "0" // 0 index means min
+        ) {
+          handlePlaySound();
+        }
+         
       if (
         Number(threemin?.split("_")?.[1]) <= 10 && // 1 index means second
         threemin?.split("_")?.[0] === "0" // 0 index means min
       ) {
-        // fk.setFieldValue("openTimerDialogBoxOneMin", true);
+        fk.setFieldValue("openTimerDialog", true);
       }
       if (threemin?.split("_")?.[1] === "59") {
-        // fk.setFieldValue("openTimerDialogBoxOneMin", false);
+        fk.setFieldValue("openTimerDialog", false);
       }
       if (
         threemin?.split("_")?.[1] === "25" &&
@@ -104,12 +119,12 @@ function Wingo3Min() {
         threemin?.split("_")?.[1] === "0" &&
         threemin?.split("_")?.[0] === "0"
       ) {
-        // client.refetchQueries("gamehistory");
-        // client.refetchQueries("walletamount");
+        client.refetchQueries("gamehistory");
+        client.refetchQueries("wallet_amount");
         // client.refetchQueries("gamehistory_chart");
-        // client.refetchQueries("myhistory");
-        // client.refetchQueries("myAllhistory");
-        // dispatch(dummycounterFun());
+        client.refetchQueries("myAllhistory");
+        dispatch(dummycounterFun());
+        fk.setFieldValue("openTimerDialog", false);
       }
     };
 
@@ -258,14 +273,56 @@ function Wingo3Min() {
                   color="initial"
                   className="idnumber"
                 >
-                  20240420010668{" "}
+                  {next_step}{" "}
                 </Typography>
               </Box>
             </Grid>
           </Grid>
         </Box>
-
-        <BetNumber />
+        <div className="relative">
+          <BetNumber gid={"2"} />
+          {fk.values.openTimerDialog && (
+            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+              <div
+                className="flex gap-2 justify-cente !bg-opacity-5"
+                sx={{ width: "100%" }}
+              >
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                {show_this_three_min_time_sec?.substring(0, 1)}
+                </div>
+                <div
+                  style={{
+                    fontSize: 200,
+                    borderRadius: 20,
+                    // background: "rgb(73, 57, 193)",
+                    fontWeight: 700,
+                    width: 150,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    // color: "white",
+                  }}
+                  className="!bg-[#F48901]  !text-white"
+                >
+                  {show_this_three_min_time_sec?.substring(1, 2)}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
         <Stack direction="row" justifyContent="space-between" mt={2}>
           <Button
             className={
@@ -292,8 +349,9 @@ function Wingo3Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory />}
-        {value === 2 && <Chart />}
+        {value === 1 && <GameHistory gid="2"/>}
+        {value === 2 && <Chart gid="2"/>}
+        {value === 3 && <MyHistory gid="2"/>}
       </Box>
     </Box>
   );
