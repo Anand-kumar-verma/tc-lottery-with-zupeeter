@@ -142,6 +142,18 @@ export const TokenLaunch = async () => {
     console.log(e);
   }
 };
+export const withdrawlHistoryFunction = async () => {
+  try {
+    const reqBody = {
+      userid: "1",
+    };
+    const response = await axios.post(endpoint.view_withdrwal_new_inr, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const bankListFuncton = async () => {
   try {
     const response = await axios.get(endpoint.bank);
