@@ -106,6 +106,18 @@ export const FundTransferHistoryFn = async () => {
     console.log(e);
   }
 };
+export const zupeeterTOkenHistory = async () => {
+  try {
+    const reqBody = {
+      userid: "2870",
+    };
+    const response = await axios.post(endpoint.view_ico_purchaseing, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const ViewSalaryIncomeFunction = async () => {
   try {
     const reqBody = {

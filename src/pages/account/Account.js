@@ -29,7 +29,7 @@ const Account = () => {
           className="!text-blue-500 cursor-pointer"
           onClick={() => navigate("/ico-token")}
         >
-          TCO TOken
+          ICO TOken
         </span>
         <span
           className="!text-blue-500 cursor-pointer"
@@ -48,6 +48,18 @@ const Account = () => {
           onClick={() => navigate("/upi-deposit-token")}
         >
           UPI Deposit Token
+        </span>
+        <span
+          className="!text-blue-500 cursor-pointer"
+          onClick={() => navigate("/password")}
+        >
+          Password
+        </span>
+        <span
+          className="!text-blue-500 cursor-pointer"
+          onClick={() => navigate("/zupeeter-token")}
+        >
+          Zupeeter Token
         </span>
       </div>
     </Layout>
