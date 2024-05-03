@@ -1,13 +1,13 @@
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { Box, Button, Container, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, Typography, Grid, TextField } from '@mui/material';
+import { Box, Button, Container, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import backbtn from '../../../assets/images/backBtn.png';
-import trx from '../../../assets/images/trx.png';
-import bankcardinactive from '../../../assets/images/bankcardinactive.png';
-import bankcardactive from '../../../assets/images/bankcardactive.png';
-import allactive from '../../../assets/images/allinactive.png';
 import allinactive from '../../../assets/images/allactive.png';
+import allactive from '../../../assets/images/allinactive.png';
+import backbtn from '../../../assets/images/backBtn.png';
+import bankcardactive from '../../../assets/images/bankcardactive.png';
+import bankcardinactive from '../../../assets/images/bankcardinactive.png';
+import trx from '../../../assets/images/trx.png';
 import theme from '../../../utils/theme';
 
 
@@ -17,8 +17,6 @@ function Withdrawlhistory() {
   const goBack = () => {
     navigate(-1);
   };
-
-  const [musicbtn, setMusicbtn] = useState(true);
 
   const [value, setValue] = useState(1);
 
