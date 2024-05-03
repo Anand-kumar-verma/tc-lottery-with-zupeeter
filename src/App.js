@@ -41,6 +41,10 @@ import ViewSalaryIncome from "./pages/salaryIncome/ViewSalaryIncome";
 import UPIDepositToken from "./pages/upiDepositToken/UPIDepositToken";
 import Deposite from "./pages/wallet/Component/Deposite";
 import Withdraval from "./pages/wallet/Component/Withdraval";
+import ChangePassword from "./pages/password/ChangePassword";
+import AccountPassword from "./pages/password/AccountPassword";
+import TransactionPassword from "./pages/password/TransactionPassword";
+import ZupeeterTokenReport from "./pages/zupeeterToken/ZupeeterTokenReport";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -86,6 +90,7 @@ function App() {
       <Route path="/fund-transfer" element={<FundTransfer />}></Route>
       <Route path="/view-salary-income" element={<ViewSalaryIncome />}></Route>
       <Route path="/upi-deposit-token" element={<UPIDepositToken />}></Route>
+      <Route path="/zupeeter-token" element={<ZupeeterTokenReport />}></Route>
       {/* // INCOME */}
       <Route
         path="/account/income-main/registration-bonus"
@@ -127,6 +132,18 @@ function App() {
       <Route
         path="/account/income-main/my-team/levels"
         element={<Tables />}
+      ></Route>
+      <Route
+        path="/password"
+        element={<ChangePassword />}
+      ></Route>
+      <Route
+        path="/password/account"
+        element={<AccountPassword />}
+      ></Route>
+      <Route
+        path="/password/transction"
+        element={<TransactionPassword />}
       ></Route>
     </Routes>
   );

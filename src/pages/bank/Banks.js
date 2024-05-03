@@ -105,9 +105,9 @@ export default function Banks() {
       };
       if (
         !reqBody.user_id ||
-        !reqBody.textacno ||
+        !reqBody.txtacno ||
         !reqBody.txtholdername ||
-        !reqBody.textifscnew ||
+        !reqBody.txtifscnew ||
         !reqBody.txtbank
       )
         return toast("Plese enter all data");

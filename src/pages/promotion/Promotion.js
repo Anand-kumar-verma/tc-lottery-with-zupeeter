@@ -1,22 +1,19 @@
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
-import { Box, Container, Dialog, IconButton, Stack, Typography } from "@mui/material";
-import { useQuery } from "react-query";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import ageantline from '../../assets/images/ageantline.png';
+import cardbg from '../../assets/images/cardbg.png';
+import comitiondetails from '../../assets/images/commissiondetails.png';
+import copyinvitationcode from '../../assets/images/copyinvitationcode.png';
+import invitationrules from '../../assets/images/invitationrules.png';
+import newsubordinatedata from '../../assets/images/newsubordinatedata.png';
+import promotiondata from '../../assets/images/promotiondata.png';
+import rebateratio from '../../assets/images/rebateratio.png';
+import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
 import theme from "../../utils/theme";
-import cardbg from '../../assets/images/cardbg.png'
-import comitiondetails from '../../assets/images/commissiondetails.png'
-import copyinvitationcode from '../../assets/images/copyinvitationcode.png'
-import subcordinatedata from '../../assets/images/subcordinatedata.png'
-import newsubordinatedata from '../../assets/images/newsubordinatedata.png'
-import invitationrules from '../../assets/images/invitationrules.png'
-import ageantline from '../../assets/images/ageantline.png'
-import rebateratio from '../../assets/images/rebateratio.png'
-import promotiondata from '../../assets/images/promotiondata.png'
 
 
 

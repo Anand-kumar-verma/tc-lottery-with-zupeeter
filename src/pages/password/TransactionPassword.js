@@ -1,62 +1,51 @@
 import { Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import toast from "react-hot-toast";
 import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
 
-const UPIDepositToken = () => {
-  const user_id = "2870";
-  const [amount, setAmount] = useState("");
+const TransactionPassword = () => {
+  const user_id = "1";
   const initialValue = {
-    token: "",
+    old_pass: "",
+    new_pass: "",
+    confirm_pass: "",
   };
 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if (Number(fk.values.token < 100))
-        return toast("Token must be grater or equal to 100");
       const reqBody = {
-        userid: user_id,
-        txtamount: amount || 0,
-        txttoken: fk.values.token,
+        user_id: user_id,
+        txtpassword: fk.values.new_pass,
+        txtcpassword: fk.values.confirm_pass,
+        txtopassword: fk.values.old_pass,
       };
-      if (!reqBody.userid || !reqBody.txtamount || !reqBody.txttoken)
+      if (
+        !reqBody.txtpassword ||
+        !reqBody.txtcpassword ||
+        !reqBody.txtopassword
+      )
         return toast("Plese enter all data");
-      purchaseToken(reqBody);
+      if (!reqBody.txtcpassword !== !reqBody.txtpassword)
+        return toast("New password and Confirm Password should be same");
+      changePasswordFn(reqBody);
     },
   });
 
-  async function purchaseToken(reqBody) {
+  async function changePasswordFn(reqBody) {
     try {
-      const res = await axios.post(endpoint?.indian_insert_deposite, reqBody);
+      const res = await axios.post(endpoint?.pin_password, reqBody);
       toast(res?.data?.message);
-      if (res?.data?.status === true) {
-        window.location.href = res?.data?.earning?.msg;
-      }
     } catch (e) {
       console.log(e);
     }
     // client.refetchQueries("bank_details");
   }
-  async function gettokenAmountFn() {
-    const reqBody = {
-      token: fk.values.token,
-    };
-    try {
-      const res = await axios.post(endpoint?.get_token_price, reqBody);
-      setAmount(res?.data?.earning?.bal);
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
-  useEffect(() => {
-    gettokenAmountFn();
-  }, [fk.values.token]);
   return (
     <Layout>
       <Container
@@ -71,28 +60,35 @@ const UPIDepositToken = () => {
         <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
           <span className="col-span-2 justify-end">
             <div className="flex justify-between">
-              <span className="font-bold">ICO Token UPI Payment</span>
+              <span className="font-bold">Change Transacton Password</span>
             </div>
           </span>
-          <span>Token*</span>
+          <span>Old Password*</span>
           <TextField
-            id="token"
-            name="token"
-            type="number"
-            value={fk.values.token}
-            onChange={fk.handleChange}
-            placeholder="Enter Token"
+            id="old_pass"
+            name="old_pass"
+            value={fk.values.old_pass}
+            placeholder="Enter Old Password"
             className="!w-[100%]"
           ></TextField>
-          <span>Amount *</span>
+          <span>New Password*</span>
           <TextField
-            id="amount"
-            name="amount"
-            value={amount || 0}
-            //   onChange={fk.handleChange}
+            id="new_pass"
+            name="new_pass"
+            value={fk.values.new_pass}
+            placeholder="Enter New Password"
+            onChange={fk.handleChange}
             className="!w-[100%]"
           />
-
+          <span>Confirm Password*</span>
+          <TextField
+            id="confirm_pass"
+            name="confirm_pass"
+            placeholder="Enter Confirm Password"
+            value={fk.values.confirm_pass}
+            onChange={fk.handleChange}
+            className="!w-[100%]"
+          />
           <div className="col-span-2 flex gap-2 mt-4">
             <Button
               className="!bg-[#FD565C] !text-white"
@@ -113,4 +109,4 @@ const UPIDepositToken = () => {
   );
 };
 
-export default UPIDepositToken;
+export default TransactionPassword;

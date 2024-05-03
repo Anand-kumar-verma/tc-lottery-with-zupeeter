@@ -1,15 +1,10 @@
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Box, Container, Stack, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import bank from '../../../assets/images/bank.png';
+import Select from 'react-select';
 import backbtn from '../../../assets/images/backBtn.png';
-import user from '../../../assets/images/user.png';
-import bankaccount from '../../../assets/images/bankaccount.png';
-import phone from '../../../assets/images/phone.png';
-import email from '../../../assets/images/email.png';
-import ifsc from '../../../assets/images/ifsc.png';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import Select from 'react-select'
+import bank from '../../../assets/images/bank.png';
 
 
 function AddBankAccount() {
