@@ -25,6 +25,7 @@ export const endpoint = {
   pin_password: `${baseUrl}/api/update_pin_password`,
   view_ico_purchaseing: `${baseUrl}/api/view_ico_purchaseing`,
   insert_ico_purchase: `${baseUrl}/api/insert_ico_purchase`,
+  view_withdrwal_new_inr: `${baseUrl}/api/view_withdrwal_new_inr`,
 
   // payment
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,

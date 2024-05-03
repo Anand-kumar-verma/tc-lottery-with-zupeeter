@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Container,
-  Input,
   MenuItem,
   Stack,
   TablePagination,
@@ -15,20 +14,20 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
+import copy from "clipboard-copy";
 import { useFormik } from "formik";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as React from "react";
 import toast from "react-hot-toast";
-import { useQuery, useQueryClient } from "react-query";
+import QRCode from "react-qr-code";
+import { useQuery } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
 import { TokenLaunch, zupeeterTOkenHistory } from "../../services/apiCallings";
 import { endpoint, rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-import QRCode from "react-qr-code";
-import copy from "clipboard-copy";
 export default function ZupeeterTokenReport() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
@@ -55,7 +54,6 @@ export default function ZupeeterTokenReport() {
       refetchOnReconnect: true,
     }
   );
-
   // const game_history_data = game_history?.data?.data;
   const game_history_data = React.useMemo(
     () => game_history?.data?.earning?.rid,
@@ -211,7 +209,7 @@ export default function ZupeeterTokenReport() {
           <span className="!text-white">Received ICO Token</span>
           <TextField
             className="!text-white !bg-[#a97025]"
-            value={`${rupees} 1222`}
+            value={`${rupees} ${game_history?.data?.earning?.total_ico}`}
           />
         </div>
         <div className="flex justify-between w-full items-center bg-[#F48901] px-2 py-6 rounded-lg mt-3 ">
