@@ -6,6 +6,7 @@ export const zubgback = "#F48901";
 export const baseUrl = "https://webs.ferryinfotech.in";
 
 export const endpoint = {
+  newlogin: `${baseUrl}/api/newlogin`,
   game_history: `${baseUrl}/api/color_result`,
   bet_placed: `${baseUrl}/api/betnew_color`,
   my_history: `${baseUrl}/api/one_min_myhistory`,
