@@ -12,6 +12,13 @@ const theme = createTheme({
                 },
             },
         },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    padding: '0 !important',
+                },
+            },
+        },
     },
     palette: {
         primary: {

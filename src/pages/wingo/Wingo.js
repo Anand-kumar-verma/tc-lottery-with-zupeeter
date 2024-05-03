@@ -17,9 +17,11 @@ import WinLossPopup from "./WinLossPopup";
 import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
+import musicoff from "../../assets/images/musicoff.png";
 import Wingo5Min from "./component/Wingo5Min";
 
 function Wingo() {
+  const [musicicon, setmusicicon] = useState(true)
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
   const [opendialogbox, setOpenDialogBox] = useState(false);
@@ -53,7 +55,7 @@ function Wingo() {
     }
   );
 
-  const wallet_amount_data = wallet_amount?.data?.earning ||0;
+  const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   return (
     <Container>
@@ -81,8 +83,12 @@ function Wingo() {
                 sx={{ mr: 2 }}
               ></Box>
             </NavLink>
-            <NavLink>
-              <Box component="img" src={music} width={25}></Box>
+            <NavLink onClick={() => setmusicicon(!musicicon)}>
+              {musicicon === true ?
+                <Box component="img" src={music} width={25}></Box>
+                :
+                <Box component="img" src={musicoff} width={25}></Box>
+              }
             </NavLink>
           </Stack>
         </Stack>
@@ -182,7 +188,7 @@ function Wingo() {
           width: "95%",
           display: "flex",
           alignItems: "center",
-          justifyContent:"space-between",
+          justifyContent: "space-between",
           margin: "auto",
           background: "#ededed",
           borderRadius: "10PX",
@@ -238,18 +244,18 @@ function Wingo() {
       {value === 4 && <Wingo10Min />}
       {/* opendialogbox */}
       {opendialogbox && (
-          <Dialog
-            open={opendialogbox}
-            PaperProps={{
-              style: {
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              },
-            }}
-          >
-            <WinLossPopup gid={isAppliedbet?.split("_")?.[0]} />
-          </Dialog>
-        )}
+        <Dialog
+          open={opendialogbox}
+          PaperProps={{
+            style: {
+              backgroundColor: "transparent",
+              boxShadow: "none",
+            },
+          }}
+        >
+          <WinLossPopup gid={isAppliedbet?.split("_")?.[0]} />
+        </Dialog>
+      )}
     </Container>
   );
 }

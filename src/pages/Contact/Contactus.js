@@ -1,7 +1,7 @@
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import { Box, Container, Stack, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import CStype from '../../assets/images/CStype.png'
 import backbtn from '../../assets/images/backBtn.png'
 import customerBg from '../../assets/images/customerBg.png'
@@ -11,12 +11,16 @@ import theme from '../../utils/theme'
 
 function Contactus() {
 
+  const navigatea = useNavigate();
+  const goBack = () => {
+    navigatea(-1);
+  };
 
   return (
     <Container sx={{ height: '100vh' }}>
       <Box sx={{ padding: 1, background: 'linear-gradient(90deg, rgb(255, 153, 1) 0%, rgb(230, 115, 1) 100%)', px: 2, }}>
         <Stack direction='row' sx={{ alignItems: 'end', justifyContent: 'space-between' }}>
-          <NavLink to="/">
+          <NavLink onClick={() => goBack()}>
             <Box component='img' src={backbtn} width={25}></Box>
           </NavLink>
           <NavLink>

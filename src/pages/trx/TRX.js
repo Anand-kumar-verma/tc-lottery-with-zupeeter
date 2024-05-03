@@ -9,6 +9,7 @@ import asistant from "../../assets/images/asistant.png";
 import backbtn from "../../assets/images/backBtn.png";
 import balance from "../../assets/images/balance.png";
 import music from "../../assets/images/music.png";
+import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
 import { getBalanceFunction } from "../../services/apiCallings";
@@ -20,11 +21,16 @@ import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
 
 function TRX() {
+  const [musicicon, setmusicicon] = useState(true)
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
+  const navigatea = useNavigate();
+  const goBack = () => {
+    navigatea(-1);
+  };
 
   const navigate = useNavigate()
   const handleChange = (newValue) => {
@@ -53,7 +59,7 @@ function TRX() {
     }
   );
 
-  const wallet_amount_data = wallet_amount?.data?.earning ||0;
+  const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   return (
     <Container>
@@ -73,7 +79,7 @@ function TRX() {
             <Box component="img" src={backbtn} width={25}></Box>
           </NavLink>
           <Stack direction="row">
-            <NavLink>
+            <NavLink to={"/CustomerService"}>
               <Box
                 component="img"
                 src={asistant}
@@ -81,8 +87,12 @@ function TRX() {
                 sx={{ mr: 2 }}
               ></Box>
             </NavLink>
-            <NavLink>
-              <Box component="img" src={music} width={25}></Box>
+            <NavLink onClick={() => setmusicicon(!musicicon)}>
+              {musicicon === true ?
+                <Box component="img" src={music} width={25}></Box>
+                :
+                <Box component="img" src={musicoff} width={25}></Box>
+              }
             </NavLink>
           </Stack>
         </Stack>
@@ -107,8 +117,8 @@ function TRX() {
             <Typography
               variant="body1"
               color="initial"
-              fontSize="15px"
-              fontWeight={600}
+              fontSize="18px"
+              fontWeight={700}
             >
               ₹ {wallet_amount_data}{" "}
             </Typography>
@@ -196,7 +206,7 @@ function TRX() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-            TRX Win Go
+              TRX Win Go
             </Typography>
             <Typography variant="body1" color="initial">
               1 Min
@@ -224,7 +234,7 @@ function TRX() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-             TRX Win Go
+              TRX Win Go
             </Typography>
             <Typography variant="body1" color="initial">
               5 Min
@@ -238,18 +248,18 @@ function TRX() {
       {value === 4 && <Wingo10Min />}
       {/* opendialogbox */}
       {opendialogbox && (
-          <Dialog
-            open={opendialogbox}
-            PaperProps={{
-              style: {
-                backgroundColor: "transparent",
-                boxShadow: "none",
-              },
-            }}
-          >
-            <WinLossPopup gid={isAppliedbet?.split("_")?.[0]} />
-          </Dialog>
-        )}
+        <Dialog
+          open={opendialogbox}
+          PaperProps={{
+            style: {
+              backgroundColor: "transparent",
+              boxShadow: "none",
+            },
+          }}
+        >
+          <WinLossPopup gid={isAppliedbet?.split("_")?.[0]} />
+        </Dialog>
+      )}
     </Container>
   );
 }

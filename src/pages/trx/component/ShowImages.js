@@ -88,10 +88,10 @@ const ShowImages = () => {
     const result = changeImagesTRX(trx_game_image_index);
     setReturn_index(result);
   }, [trx_game_image_index]);
-   
+
   return (
     <>
-      <div className="grid grid-cols-5 gap-2  mt-10">
+      <div className="grid grid-cols-5 gap-4  mt-10 mb-2">
         <Box
           component="img"
           className=""

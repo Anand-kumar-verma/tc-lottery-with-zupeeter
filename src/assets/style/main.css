@@ -217,17 +217,33 @@ button {
 
 .htpbutton {
     color: white !important;
-    font-size: 12px !important;
+    font-size: 11px !important;
     font-weight: 400 !important;
-    padding: 1px 15px !important;
     border: 1px solid white !important;
-    border-radius: 20px !important;
-    width: 100% !important;
+    border-radius: 5px !important;
+    padding: 0px !important;
 }
 
-.htpbutton>svg {
-    margin-right: 5%;
-    font-size: 20px !important;
+
+.htpbutton2 {
+    color: #F28E17 !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    padding: 0px 5px !important;
+    border: 1px solid white !important;
+    border-radius: 20px !important;
+    background-color: #ffffff !important;
+    margin-left: 10px !important;
+}
+
+.htpbutton3 {
+    color: #F28E17 !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    padding: 0px 5px !important;
+    border: 1px solid white !important;
+    border-radius: 20px !important;
+    background-color: #ffffff !important;
 }
 
 .psize {
@@ -237,31 +253,41 @@ button {
 }
 
 .timer {
-    background-color: #fff;
-    color: red;
+    background-color: transparent !important;
+    color: white !important;
     clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%, 0 30%);
-    padding: 5px 5px;
+    padding: 0px 5px;
     font-size: 18px;
     font-weight: 700;
     margin-right: 5px;
+    height: 28px;
+    background-repeat: no-repeat;
 }
 
 .timer1 {
-    background-color: #fff;
-    color: red;
-    padding: 5px 5px;
+    background-color: #ffffff1a !important;
+    color: white !important;
+    padding: 0px 5px;
     font-size: 18px;
     font-weight: 700;
     margin-right: 5px;
+    height: 26px;
+    background-repeat: no-repeat;
+    border: 1px solid white;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
 }
 
 .timer2 {
-    background-color: #fff;
-    color: red;
+    background-color: transparent !important;
+    color: white !important;
     clip-path: polygon(100% 0, 100% 70%, 70% 100%, 0 100%, 0 0);
-    padding: 5px 5px;
+    padding: 0px 5px;
     font-size: 18px;
     font-weight: 700;
+    height: 28px;
+    background-repeat: no-repeat;
 }
 
 .idnumber {
@@ -284,6 +310,7 @@ button {
     border-radius: 0px 10px !important;
     width: 31% !important;
     font-size: 15px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .violetbtn {
@@ -292,6 +319,7 @@ button {
     border-radius: 10px !important;
     width: 31% !important;
     font-weight: 500;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .redbtn {
@@ -299,6 +327,7 @@ button {
     color: white !important;
     border-radius: 10px 0px !important;
     width: 31% !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 
@@ -351,7 +380,7 @@ button {
     font-size: 12px !important;
     font-weight: 700;
     width: 32%;
-padding: 10px 0px !important;
+    padding: 10px 0px !important;
 
 }
 
@@ -362,23 +391,28 @@ padding: 10px 0px !important;
     font-size: 12px !important;
     font-weight: 700;
 }
-.css-1t1j96h-MuiPaper-root-MuiDialog-paper{
-border-radius: 10px !important;
+
+.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+    border-radius: 10px !important;
 }
-.htpbox{
-padding: 10px 0px;
-}
-.labelselect{
+
+.htpbox {
     padding: 10px 0px;
 }
+
+.labelselect {
+    padding: 10px 0px;
+}
+
 .rs-input-group.rs-input-group-inside {
     width: 100%;
     background-color: #fff;
     background-color: var(--rs-input-bg);
     padding: 10px !important;
 }
-.MuiSelect-select .MuiSelect-outlined .MuiInputBase-input{
-background: #ffffff !important;
+
+.MuiSelect-select .MuiSelect-outlined .MuiInputBase-input {
+    background: #ffffff !important;
 }
 
 .rs-picker-popup .rs-calendar {
@@ -386,11 +420,37 @@ background: #ffffff !important;
     display: block;
     margin: 0 auto;
 }
+
 .rs-picker-popup .rs-calendar {
     max-width: 200px !important;
     display: block;
     margin: 0 auto;
 }
-.apexcharts-text .apexcharts-datalabel-label{
+
+.apexcharts-text .apexcharts-datalabel-label {
     display: none !important;
+}
+
+
+.example {
+    overflow-y: scroll !important;
+}
+
+.example::-webkit-scrollbar {
+    display: none !important;
+}
+
+.example {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
+
+
+.MuiPaper-root.MuiPaper-elevation::-webkit-scrollbar {
+    display: none !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

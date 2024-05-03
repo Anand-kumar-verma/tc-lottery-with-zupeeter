@@ -1,5 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
@@ -13,8 +13,24 @@ import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
 import ShowImages from "./ShowImages";
+import { NavLink } from "react-router-dom";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
+import Howtoplay from "./Howtoplay";
+
 
 function Wingo5Min() {
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const socket = useSocket();
   const client = useQueryClient();
   const dispatch = useDispatch();
@@ -38,7 +54,7 @@ function Wingo5Min() {
   };
   const fk = useFormik({
     initialValues: initialValue,
-    onSubmit: () => {},
+    onSubmit: () => { },
   });
 
   React.useEffect(() => {
@@ -147,55 +163,66 @@ function Wingo5Min() {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
+              alignItems: "baseline",
               justifyContent: "space-between",
             }}
           >
             <Box
               sx={{
-                width: "50%",
-                borderRight: "1px dashed white",
-                paddingRight: "2%",
+                width: "60%",
               }}
               className="win-banner"
             >
               {React.useMemo(() => {
                 return (
                   <>
-                    <Box
-                    // onClick={() => handleClickOpenpoicy()}
-                    >
+                    <Stack direction='row' alignItems='center'>
                       <Button
                         variant="text"
                         color="primary"
                         className="htpbutton"
                       >
-                        <StickyNote2OutlinedIcon /> How To Play
+                        Period
                       </Button>
-                    </Box>
-                    <div className="flex gap-2">
-                      <div className="!text-white">Period:</div>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        className="htpbutton2"
+                        onClick={handleClickOpen}
+                      > How To Play
+                      </Button>
+                    </Stack>
+                    <Stack direction='row' sx={{ mt: 1.5, justifyContent: 'space-between' }}>
                       <Typography
                         variant="body1"
-                        color="initial"
-                        className="!text-white !font-bold"
+                        sx={{ color: 'white', fontSize: '14px', fontWeight: '500' }}
                       >
                         {next_step}{" "}
                       </Typography>
-                    </div>
-                    <div className="!text-white !text-sm">Draw Time</div>
+                      <Typography
+                        variant="body1"
+                        sx={{ color: 'white', fontSize: '12px', fontWeight: '500' }}
+                      >
+                        Draw Time
+                      </Typography>
+                    </Stack>
                   </>
                 );
               }, [])}
             </Box>
             <Box>
-              <Typography variant="h3" color="initial" className="timername">
-                Time remaining
-              </Typography>
+              <NavLink to='/trx/tron-scan'>
+                <Button
+                  variant="text"
+                  color="primary"
+                  className="htpbutton3"
+                >Public Chain Query
+                </Button>
+              </NavLink>
               {React.useMemo(() => {
                 return (
-                  <Stack direction="row">
-                    <Box className="timer">
+                  <Stack direction="row" mt={1.5}>
+                    <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_min?.substring(0, 1)}
                     </Box>
                     <Box className="timer1">
@@ -206,7 +233,7 @@ function Wingo5Min() {
                     <Box className="timer1">
                       {show_this_three_min_time_sec?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2">
+                    <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -292,6 +319,15 @@ function Wingo5Min() {
         {value === 2 && <Chart gid="3" />}
         {value === 3 && <MyHistory gid="3" />}
       </Box>
+      <Dialog sx={{ maxWidth: '400px !important', minWidth: '400px !important', margin: 'auto', minHeight: '70%', maxHeight: '80%', }} open={open} >
+        <Howtoplay />
+
+        <DialogActions sx={{ margin: 'auto', width: '100%' }}>
+          <Button disableElevation onClick={handleClose} autoFocus variant="contained" sx={{ color: 'white', borderRadius: '20px', width: '60%', margin: 'auto' }}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
