@@ -45,6 +45,9 @@ import ChangePassword from "./pages/password/ChangePassword";
 import AccountPassword from "./pages/password/AccountPassword";
 import TransactionPassword from "./pages/password/TransactionPassword";
 import ZupeeterTokenReport from "./pages/zupeeterToken/ZupeeterTokenReport";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
+import RiskDisclosureAgreement from "./pages/auth/Component/RiskDisclosureAgreement";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -63,6 +66,9 @@ function App() {
   //   );
   return (
     <Routes>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/register" element={<Register />}></Route>
+      <Route path="/RiskDisclosureAgreement" element={<RiskDisclosureAgreement />}></Route>
       <Route path="/" element={<Dashboard />}></Route>
       <Route path='/withdrawlhistory' element={<Withdrawlhistory />}></Route>
       <Route path='/depositehistory' element={<Depositehistory />}></Route>
