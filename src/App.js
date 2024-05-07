@@ -66,10 +66,10 @@ function App() {
   //   );
   return (
     <Routes>
-      <Route path="/login" element={<Login />}></Route>
+      <Route path="/" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/RiskDisclosureAgreement" element={<RiskDisclosureAgreement />}></Route>
-      <Route path="/" element={<Dashboard />}></Route>
+      <Route path="/dashboard" element={<Dashboard />}></Route>
       <Route path='/withdrawlhistory' element={<Withdrawlhistory />}></Route>
       <Route path='/depositehistory' element={<Depositehistory />}></Route>
       <Route path='/promotion' element={<Promotion />}></Route>

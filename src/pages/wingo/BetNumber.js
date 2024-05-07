@@ -30,7 +30,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 const BetNumber = ({ gid }) => {
-  const user_id = "1";
+  const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);

@@ -1,7 +1,7 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -47,6 +47,13 @@ import place2 from "../../assets/images/place2.png";
 import crown2 from "../../assets/images/crown2.png";
 import place3 from "../../assets/images/place3.png";
 import crown3 from "../../assets/images/crown3.png";
+import {
+  TokenLaunch,
+  TopWinner,
+  checkTokenValidity,
+} from "../../services/apiCallings";
+import { useQuery } from "react-query";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function Dashboard() {
   const progressCircle = useRef(null);
@@ -58,12 +65,25 @@ function Dashboard() {
   const [value, setValue] = useState(1);
 
   const handleChange = (newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
+  const { isLoading, data } = useQuery(["top_winner"], () => TopWinner(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
 
+  const res = data?.data?.earning || [];
+
+  useEffect(() => {
+    if (!checkTokenValidity()) {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/"; // Redirect to login page
+    }
+  }, []);
   return (
     <Layout>
+      <CustomCircularProgress isLoading={isLoading} />
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -311,186 +331,56 @@ function Dashboard() {
           </Typography>
         </Stack>
         <Box>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile1}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner1}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile2}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner2}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile3}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner1}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile4}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner2}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile5}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner1}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
+          {res?.slice(2)?.map((i, index) => {
+            return (
+              <Stack key={index} direction="row" sx={style.winnerslider}>
+                <Box
+                  width={45}
+                  height={45}
+                  component={"img"}
+                  src={profile1}
+                  sx={style.winnerprofile}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={style.winnername}
+                >
+                  {i?.or_m_email
+                    ? i.or_m_email.split("@")[0].substring(0, 2) +
+                      "**" +
+                      (i.or_m_email.split("@")[0].length > 2
+                        ? i.or_m_email.split("@")[0].substring(2, 4)
+                        : "")
+                    : "**"}
+                </Typography>
+                <Box sx={style.winnerbannerouter}>
+                  <Box
+                    height={45}
+                    component={"img"}
+                    src={winerbanner1}
+                    sx={style.winnerbannerinner}
+                  ></Box>
+                </Box>
+                <Box>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winneramout || 0}
+                  >
+                    Receive ₹{i?.max_tr_pv}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winnertitle}
+                  >
+                    Winning amount
+                  </Typography>
+                </Box>
+              </Stack>
+            );
+          })}
         </Box>
       </Box>
       <Box sx={{ px: 2, py: 3 }}>
@@ -531,14 +421,27 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    Mem***SMJ
+                    {res?.[1]?.i?.or_m_email
+                      ? res
+                          ?.[1]
+                          ?.i?.or_m_email?.split("@")[0]
+                          .substring(0, 2) +
+                        "**" +
+                        (res?.[1]?.i?.or_m_email?.split("@")[0]
+                          .length > 2
+                          ? res
+                              ?.[1]
+                              ?.i?.or_m_email?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
+                      : "**"}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
                     sx={style.winningamount}
                   >
-                    ₹97,974,520.00
+                    ₹{res?.[1]?.max_tr_pv}
                   </Typography>
                 </Box>
               </Box>
@@ -569,14 +472,27 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    Mem***SMJ
+                  {res?.[0]?.i?.or_m_email
+                      ? res
+                          ?.[0]
+                          ?.i?.or_m_email?.split("@")[0]
+                          .substring(0, 2) +
+                        "**" +
+                        (res?.[0]?.i?.or_m_email?.split("@")[0]
+                          .length > 2
+                          ? res
+                              ?.[0]
+                              ?.i?.or_m_email?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
+                      : "**"}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
                     sx={style.winningamount}
                   >
-                    ₹97,974,520.00
+                    ₹{res?.[0]?.max_tr_pv}
                   </Typography>
                 </Box>
               </Box>
@@ -608,99 +524,77 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    Mem***SMJ
+                    {res?.[2]?.i?.or_m_email
+                      ? res?.[2]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
+                        "**" +
+                        (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
+                          ? res?.[2]?.i?.or_m_email
+                              ?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
+                      : "**"}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
                     sx={style.winningamount}
                   >
-                    ₹97,974,520.00
+                    ₹{res?.[2]?.max_tr_pv}
                   </Typography>
                 </Box>
               </Box>
             </Stack>
           </Box>
-          <Stack
-            direction="row"
-            sx={{
-              ...style.winnerslider,
-              marginTop: "-15px",
-              position: "relative",
-              zIndex: 20,
-            }}
-          >
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile4}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner2}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
-          <Stack direction="row" sx={style.winnerslider}>
-            <Box
-              width={45}
-              height={45}
-              component={"img"}
-              src={profile5}
-              sx={style.winnerprofile}
-            ></Box>
-            <Typography variant="body1" color="initial" sx={style.winnername}>
-              mrm***iop
-            </Typography>
-            <Box sx={style.winnerbannerouter}>
-              <Box
-                height={45}
-                component={"img"}
-                src={winerbanner1}
-                sx={style.winnerbannerinner}
-              ></Box>
-            </Box>
-            <Box>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winneramout}
-              >
-                Receive ₹338.88
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.winnertitle}
-              >
-                Winning amount
-              </Typography>
-            </Box>
-          </Stack>
+          {res?.slice(0, 2)?.map((i, index) => {
+            return (
+              <Stack key={index} direction="row" sx={style.winnerslider}>
+                <Box
+                  width={45}
+                  height={45}
+                  component={"img"}
+                  src={profile1}
+                  sx={style.winnerprofile}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={style.winnername}
+                >
+                  {i?.or_m_email
+                    ? i.or_m_email.split("@")[0].substring(0, 2) +
+                      "**" +
+                      (i.or_m_email.split("@")[0].length > 2
+                        ? i.or_m_email.split("@")[0].substring(2, 4)
+                        : "")
+                    : "**"}
+                </Typography>
+                <Box sx={style.winnerbannerouter}>
+                  <Box
+                    height={45}
+                    component={"img"}
+                    src={winerbanner1}
+                    sx={style.winnerbannerinner}
+                  ></Box>
+                </Box>
+                <Box>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winneramout || 0}
+                  >
+                    Receive ₹{i?.max_tr_pv}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winnertitle}
+                  >
+                    Winning amount
+                  </Typography>
+                </Box>
+              </Stack>
+            );
+          })}
         </Box>
       </Box>
     </Layout>

@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
 .transparentColor {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

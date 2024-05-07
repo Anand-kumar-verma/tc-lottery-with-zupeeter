@@ -11,19 +11,6 @@ function Bankaccount() {
     navigate(-1);
   };
 
-  const [value, setValue] = useState(1);
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  const [transection, setTransection] = useState('All');
-
-  const handleChangeTransection = (event) => {
-    setTransection(event.target.value);
-  };
-  const [startDate, setStartDate] = useState(new Date());
-
   return (
     <Container sx={{ background: '#F7F8FF', height: '100vh' }}>
       <Box sx={{ background: 'linear-gradient(90deg, rgb(255, 153, 1) 0%, rgb(230, 115, 1) 100%)', padding: 1 }}>

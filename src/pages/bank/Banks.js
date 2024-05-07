@@ -33,12 +33,13 @@ import axios from "axios";
 import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
 export default function Banks() {
-  const user_id = "1";
+  const user_id = localStorage.getItem("user_id");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const tableRef = React.useRef(null);
   const client = useQueryClient()
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
+
   const { isLoading, data: game_history } = useQuery(
     ["bank_details"],
     () => BankDetailsFUnction(),
@@ -47,6 +48,7 @@ export default function Banks() {
       refetchOnReconnect: true,
     }
   );
+  
   const { isLoading: bank_list, data: bankList } = useQuery(
     ["bank_list"],
     () => bankListFuncton(),

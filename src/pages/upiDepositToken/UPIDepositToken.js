@@ -7,7 +7,7 @@ import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
 
 const UPIDepositToken = () => {
-  const user_id = "2870";
+  const user_id = localStorage.getItem("user_id");
   const [amount, setAmount] = useState("");
   const initialValue = {
     token: "",

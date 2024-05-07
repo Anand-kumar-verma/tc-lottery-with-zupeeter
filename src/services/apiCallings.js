@@ -1,7 +1,42 @@
 import toast from "react-hot-toast";
 import { endpoint } from "./urls";
 import axios from "axios";
-const user_id = "1";
+const user_id = localStorage.getItem("user_id");
+
+export const storeCookies = () => {
+  let expirationDate = new Date();
+  expirationDate.setTime(expirationDate.getTime() + 2 * 60 * 60 * 1000); // 2 hours in milliseconds
+  // expirationDate.setTime(expirationDate.getTime() + 60*1000); // 2 hours in milliseconds
+  document.cookie = `token=anandtoken; expires=${expirationDate.toUTCString()}; path=/`;
+};
+
+export function checkTokenValidity() {
+  const cookies = document.cookie.split("; ");
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].split("=");
+    if (cookie[0] === "token") {
+      const tokenExpiration = new Date(cookie[1]);
+      if (tokenExpiration < new Date()) {
+        // Token has expired
+        return false;
+      }
+      return true;
+    }
+  }
+  // Token not found
+  return false;
+}
+
+export const logOutFunction = async () => {
+  try {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "/"; // Redirect to login page
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 
 export const MyHistoryFn = async (gid) => {
   try {
@@ -85,7 +120,7 @@ export const registrationBonusFn = async (type) => {
 export const BankDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id: "2872",
+      user_id:  user_id
     };
     const response = await axios.post(endpoint.view_bank_details, reqBody);
     return response;
@@ -97,7 +132,7 @@ export const BankDetailsFUnction = async () => {
 export const FundTransferHistoryFn = async () => {
   try {
     const reqBody = {
-      userid: "1",
+      userid: user_id,
     };
     const response = await axios.post(endpoint.fund_transfer_history, reqBody);
     return response;
@@ -109,7 +144,7 @@ export const FundTransferHistoryFn = async () => {
 export const zupeeterTOkenHistory = async () => {
   try {
     const reqBody = {
-      userid: "2870",
+      userid: user_id,
     };
     const response = await axios.post(endpoint.view_ico_purchaseing, reqBody);
     return response;
@@ -121,7 +156,7 @@ export const zupeeterTOkenHistory = async () => {
 export const ViewSalaryIncomeFunction = async () => {
   try {
     const reqBody = {
-      userid: "2872",
+      userid: user_id,
     };
     const response = await axios.post(endpoint.view_salary_income, reqBody);
     return response;
@@ -133,9 +168,18 @@ export const ViewSalaryIncomeFunction = async () => {
 export const TokenLaunch = async () => {
   try {
     const reqBody = {
-      userid: "1",
+      userid: user_id,
     };
     const response = await axios.post(endpoint.token_launch, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const TopWinner = async () => {
+  try {
+    const response = await axios.get(endpoint.win_list_top);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -145,9 +189,21 @@ export const TokenLaunch = async () => {
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
-      userid: "1",
+      userid: user_id,
     };
     const response = await axios.post(endpoint.view_withdrwal_new_inr, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const depositHistoryFunction = async () => {
+  try {
+    const reqBody = {
+      userid: user_id,
+    };
+    const response = await axios.post(endpoint.wallet_deposit_history, reqBody);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -166,7 +222,7 @@ export const bankListFuncton = async () => {
 export const UPIDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id: "1",
+      user_id: user_id,
     };
     const response = await axios.post(endpoint.view_upi_details, reqBody);
     return response;
