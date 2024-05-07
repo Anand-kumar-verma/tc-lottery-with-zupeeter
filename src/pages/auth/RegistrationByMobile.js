@@ -353,7 +353,7 @@ const RegistrationByMobile = () => {
         >
           Register
         </Button>
-        <NavLink to="/Login">
+        <NavLink to="/">
           <Button
             sx={{
               width: "100%",

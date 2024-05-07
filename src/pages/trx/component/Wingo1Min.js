@@ -1,28 +1,41 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  Stack,
+  Typography
+} from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
 import timerbg1 from "../../../assets/images/timerbg.png";
-import PreSaleBg from "../../../assets/images/PreSaleBg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import trxbg from "../../../assets/images/trxbg.png";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
+import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import ShowImages from "./ShowImages";
-import BetNumber from "../BetNumber";
-import { NavLink } from "react-router-dom";
 import Howtoplay from "./Howtoplay";
+import ShowImages from "./ShowImages";
 
 function Wingo1Min() {
-
   const [open, setOpen] = useState(false);
+  const socket = useSocket();
+  const dispatch = useDispatch();
+  const [value, setValue] = useState(1);
+  const [one_min_time, setOne_min_time] = useState(0);
+  const show_this_one_min_time = String(one_min_time).padStart(2, "0");
+  const audioRefMusic = React.useRef(null);
+  const audioRefMusiclast = React.useRef(null);
+  const client = useQueryClient();
+  const next_step = useSelector((state) => state.aviator.next_step);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,23 +45,12 @@ function Wingo1Min() {
     setOpen(false);
   };
 
-  const socket = useSocket();
-  const dispatch = useDispatch();
-  const [value, setValue] = useState(1);
-  const [one_min_time, setOne_min_time] = useState(0);
-  const show_this_one_min_time = String(one_min_time).padStart(2, "0");
-  const audioRefMusic = React.useRef(null);
-  const audioRefMusiclast = React.useRef(null);
-  const client = useQueryClient();
-
-  const next_step = useSelector((state) => state.aviator.next_step);
-
   const initialValue = {
     openTimerDialog: false,
   };
   const fk = useFormik({
     initialValues: initialValue,
-    onSubmit: () => { },
+    onSubmit: () => {},
   });
 
   React.useEffect(() => {
@@ -145,7 +147,7 @@ function Wingo1Min() {
               {React.useMemo(() => {
                 return (
                   <>
-                    <Stack direction='row' alignItems='center'>
+                    <Stack direction="row" alignItems="center">
                       <Button
                         variant="text"
                         color="primary"
@@ -158,19 +160,32 @@ function Wingo1Min() {
                         variant="text"
                         color="primary"
                         className="htpbutton2"
-                      > How To Play
+                      >
+                        {" "}
+                        How To Play
                       </Button>
                     </Stack>
-                    <Stack direction='row' sx={{ mt: 1.5, justifyContent: 'space-between' }}>
+                    <Stack
+                      direction="row"
+                      sx={{ mt: 1.5, justifyContent: "space-between" }}
+                    >
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '14px', fontWeight: '500' }}
+                        sx={{
+                          color: "white",
+                          fontSize: "14px",
+                          fontWeight: "500",
+                        }}
                       >
                         {next_step}{" "}
                       </Typography>
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '12px', fontWeight: '500' }}
+                        sx={{
+                          color: "white",
+                          fontSize: "12px",
+                          fontWeight: "500",
+                        }}
                       >
                         Draw Time
                       </Typography>
@@ -180,25 +195,37 @@ function Wingo1Min() {
               }, [])}
             </Box>
             <Box>
-              <NavLink to='/trx/tron-scan'>
-                <Button
-                  variant="text"
-                  color="primary"
-                  className="htpbutton3"
-                >Public Chain Query
+              <NavLink to="/trx/tron-scan">
+                <Button variant="text" color="primary" className="htpbutton3">
+                  Public Chain Query
                 </Button>
               </NavLink>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-
-                    <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>0</Box>
+                    <Box
+                      className="timer"
+                      sx={{
+                        backgroundImage: `url(${timerbg1})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      0
+                    </Box>
                     <Box className="timer1">0</Box>
                     <Box className={"timer1"}>:</Box>
                     <Box className="timer1">
                       {show_this_one_min_time?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box
+                      className="timer2"
+                      sx={{
+                        backgroundImage: `url(${timerbg2})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
                       {show_this_one_min_time?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -284,10 +311,30 @@ function Wingo1Min() {
         {value === 2 && <Chart gid="1" />}
         {value === 3 && <MyHistory gid="1" />}
       </Box>
-      <Dialog sx={{ maxWidth: '400px !important', minWidth: '400px !important', margin: 'auto', minHeight: '70%', maxHeight: '80%', }} open={open} >
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
         <Howtoplay />
-        <DialogActions sx={{ margin: 'auto', width: '100%' }}>
-          <Button disableElevation onClick={handleClose} autoFocus variant="contained" sx={{ color: 'white', borderRadius: '20px', width: '60%', margin: 'auto' }}>
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
             Close
           </Button>
         </DialogActions>
@@ -299,5 +346,10 @@ function Wingo1Min() {
 export default Wingo1Min;
 
 const style = {
-  pilwal: { color: '#686868', fontSize: '13px', fontWeight: 600, fontFamily: 'sans-serif !important' },
-}
+  pilwal: {
+    color: "#686868",
+    fontSize: "13px",
+    fontWeight: 600,
+    fontFamily: "sans-serif !important",
+  },
+};
