@@ -1,24 +1,22 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
 import timerbg1 from "../../../assets/images/timerbg.png";
-import PreSaleBg from "../../../assets/images/PreSaleBg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import trxbg from "../../../assets/images/trxbg.png";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
+import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import ShowImages from "./ShowImages";
-import BetNumber from "../BetNumber";
-import { NavLink } from "react-router-dom";
 import Howtoplay from "./Howtoplay";
+import ShowImages from "./ShowImages";
 
 function Wingo1Min() {
 
