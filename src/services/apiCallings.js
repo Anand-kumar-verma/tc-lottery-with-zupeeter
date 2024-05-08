@@ -1,11 +1,10 @@
+import axios from "axios";
 import toast from "react-hot-toast";
 import { endpoint } from "./urls";
-import axios from "axios";
-const user_id = localStorage.getItem("user_id");
 
 export const storeCookies = () => {
   let expirationDate = new Date();
-  expirationDate.setTime(expirationDate.getTime() + 2 * 60 * 60 * 1000); // 2 hours in milliseconds
+  expirationDate.setTime(expirationDate.getTime() + 1 * 60 * 60 * 1000); // 2 hours in milliseconds
   // expirationDate.setTime(expirationDate.getTime() + 60*1000); // 2 hours in milliseconds
   document.cookie = `token=anandtoken; expires=${expirationDate.toUTCString()}; path=/`;
 };
@@ -39,9 +38,10 @@ export const logOutFunction = async () => {
 };
 
 export const MyHistoryFn = async (gid) => {
+  const id = localStorage.getItem("user_id")
   try {
     const response = await axios.get(
-      `${endpoint.my_history}?userid=${user_id}&limit=0&gameid=${gid}`
+      `${endpoint.my_history}?userid=${id}&limit=0&gameid=${gid}`
     );
     return response;
   } catch (e) {
@@ -52,7 +52,7 @@ export const MyHistoryFn = async (gid) => {
 export const getBalanceFunction = async (setBalance) => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(`${endpoint.get_balance}`, reqBody);
     setBalance(response?.data?.earning);
@@ -66,7 +66,7 @@ export const getBalanceFunction = async (setBalance) => {
 export const My_All_HistoryFn = async (gid) => {
   try {
     const reqBody = {
-      id: user_id,
+      id: localStorage.getItem("user_id"),
       gameid: gid,
     };
     const response = await axios.post(`${endpoint.my_history}`, reqBody);
@@ -79,7 +79,7 @@ export const My_All_HistoryFn = async (gid) => {
 export const My_All_TRX_HistoryFn = async (gid) => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
       gameid: gid,
     };
     const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
@@ -94,7 +94,7 @@ export const My_All_TRX_HistoryFn = async (gid) => {
 export const MyTeamLevel = async () => {
   try {
     const reqBody = {
-      profile_id: user_id,
+      profile_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.my_team_level, reqBody);
     return response;
@@ -107,7 +107,7 @@ export const MyTeamLevel = async () => {
 export const registrationBonusFn = async (type) => {
   try {
     const reqBody = {
-      profile_id: user_id,
+      profile_id: localStorage.getItem("user_id"),
       type: type,
     };
     const response = await axios.post(endpoint.registration_bonus, reqBody);
@@ -120,7 +120,7 @@ export const registrationBonusFn = async (type) => {
 export const BankDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id:  user_id
+      user_id:  localStorage.getItem("user_id")
     };
     const response = await axios.post(endpoint.view_bank_details, reqBody);
     return response;
@@ -132,7 +132,7 @@ export const BankDetailsFUnction = async () => {
 export const FundTransferHistoryFn = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.fund_transfer_history, reqBody);
     return response;
@@ -144,7 +144,7 @@ export const FundTransferHistoryFn = async () => {
 export const zupeeterTOkenHistory = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.view_ico_purchaseing, reqBody);
     return response;
@@ -156,7 +156,7 @@ export const zupeeterTOkenHistory = async () => {
 export const ViewSalaryIncomeFunction = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.view_salary_income, reqBody);
     return response;
@@ -168,7 +168,7 @@ export const ViewSalaryIncomeFunction = async () => {
 export const TokenLaunch = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.token_launch, reqBody);
     return response;
@@ -189,7 +189,7 @@ export const TopWinner = async () => {
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.view_withdrwal_new_inr, reqBody);
     return response;
@@ -201,7 +201,7 @@ export const withdrawlHistoryFunction = async () => {
 export const depositHistoryFunction = async () => {
   try {
     const reqBody = {
-      userid: user_id,
+      userid: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.wallet_deposit_history, reqBody);
     return response;
@@ -222,7 +222,7 @@ export const bankListFuncton = async () => {
 export const UPIDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id: user_id,
+      user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.view_upi_details, reqBody);
     return response;
