@@ -1,16 +1,16 @@
 import { Box, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import account from "../../../assets/images/account.png";
+import accountactive from "../../../assets/images/accountactive.png";
+import activity from "../../../assets/images/activity.png";
+import activityactive from "../../../assets/images/activityactive.png";
 import footer from "../../../assets/images/footer.png";
 import home from "../../../assets/images/home.png";
 import homeactive from "../../../assets/images/homeactive.png";
-import account from "../../../assets/images/account.png";
-import accountactive from "../../../assets/images/accountactive.png";
+import promotion from "../../../assets/images/promotion.png";
 import wallet from "../../../assets/images/wallet.png";
 import walletactive from "../../../assets/images/walletactive.png";
-import activity from "../../../assets/images/activity.png";
-import activityactive from "../../../assets/images/activityactive.png";
-import promotion from "../../../assets/images/promotion.png";
-import { NavLink } from "react-router-dom";
 import theme from "../../../utils/theme";
 
 function Footer() {
