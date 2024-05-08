@@ -30,6 +30,9 @@ import { useDispatch, useSelector } from "react-redux";
 import MyHistory from "../history/MyHistory";
 import { useFormik } from "formik";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
+import htp from "../../../assets/images/htp.png";
 
 function Wingo3Min() {
   const socket = useSocket();
@@ -73,12 +76,12 @@ function Wingo3Min() {
     [three_min_time]
   );
 
-  const initialValue ={
-    openTimerDialog:false
+  const initialValue = {
+    openTimerDialog: false
   }
   const fk = useFormik({
-    initialValues:initialValue,
-    onSubmit:()=>{
+    initialValues: initialValue,
+    onSubmit: () => {
 
     }
   })
@@ -91,14 +94,14 @@ function Wingo3Min() {
         threemin?.split("_")?.[0] === "0"
       )
         handlePlaySoundLast();
-        if (
-          Number(threemin?.split("_")?.[1]) <= 10 &&
-          Number(threemin?.split("_")?.[1]) > 1 && // 1 index means second
-          threemin?.split("_")?.[0] === "0" // 0 index means min
-        ) {
-          handlePlaySound();
-        }
-         
+      if (
+        Number(threemin?.split("_")?.[1]) <= 10 &&
+        Number(threemin?.split("_")?.[1]) > 1 && // 1 index means second
+        threemin?.split("_")?.[0] === "0" // 0 index means min
+      ) {
+        handlePlaySound();
+      }
+
       if (
         Number(threemin?.split("_")?.[1]) <= 10 && // 1 index means second
         threemin?.split("_")?.[0] === "0" // 0 index means min
@@ -193,7 +196,7 @@ function Wingo3Min() {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Button variant="text" color="primary" className="htpbutton">
-                <StickyNote2OutlinedIcon /> How To Play
+                <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box>  How To Play
               </Button>
               <Typography
                 variant="body1"
@@ -252,7 +255,7 @@ function Wingo3Min() {
                   Time remaining{" "}
                 </Typography>
                 <Box sx={{ display: "flex" }}>
-                  <Box className="timer">
+                  <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_min?.substring(0, 1)}
                   </Box>
                   <Box className="timer1">
@@ -264,7 +267,7 @@ function Wingo3Min() {
                     {" "}
                     {show_this_three_min_time_sec?.substring(0, 1)}
                   </Box>
-                  <Box className="timer2">
+                  <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_sec?.substring(1, 2)}
                   </Box>
                 </Box>
@@ -301,7 +304,7 @@ function Wingo3Min() {
                   }}
                   className="!bg-[#F48901]  !text-white"
                 >
-                {show_this_three_min_time_sec?.substring(0, 1)}
+                  {show_this_three_min_time_sec?.substring(0, 1)}
                 </div>
                 <div
                   style={{
@@ -349,9 +352,9 @@ function Wingo3Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory gid="2"/>}
-        {value === 2 && <Chart gid="2"/>}
-        {value === 3 && <MyHistory gid="2"/>}
+        {value === 1 && <GameHistory gid="2" />}
+        {value === 2 && <Chart gid="2" />}
+        {value === 3 && <MyHistory gid="2" />}
       </Box>
     </Box>
   );

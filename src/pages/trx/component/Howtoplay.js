@@ -1,5 +1,5 @@
-import { Box, Button, DialogActions, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Typography } from '@mui/material';
+import React from 'react';
 import PreSaleBg from "../../../assets/images/PreSaleBg.png";
 
 function Howtoplay() {

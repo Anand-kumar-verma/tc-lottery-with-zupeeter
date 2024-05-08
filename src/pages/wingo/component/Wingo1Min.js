@@ -24,8 +24,14 @@ import { useDispatch, useSelector } from "react-redux";
 import MyHistory from "../history/MyHistory";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useFormik } from "formik";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
+import htp from "../../../assets/images/htp.png";
+
 
 function Wingo1Min() {
+
+
   const socket = useSocket();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -64,7 +70,7 @@ function Wingo1Min() {
   };
   const fk = useFormik({
     initialValues: initialValue,
-    onSubmit: () => {},
+    onSubmit: () => { },
   });
 
   React.useEffect(() => {
@@ -72,7 +78,7 @@ function Wingo1Min() {
       setOne_min_time(onemin);
       // fk.setFieldValue("show_this_one_min_time", onemin);
       if (onemin === 1) handlePlaySoundLast();
-      if ([5,4,3,2].includes(onemin)) {
+      if ([5, 4, 3, 2].includes(onemin)) {
         handlePlaySound();
       }
 
@@ -153,7 +159,7 @@ function Wingo1Min() {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Button variant="text" color="primary" className="htpbutton">
-                <StickyNote2OutlinedIcon /> How To Play
+                <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box>  How To Play
               </Button>
               <Typography
                 variant="body1"
@@ -212,13 +218,13 @@ function Wingo1Min() {
                   Time remaining{" "}
                 </Typography>
                 <Box sx={{ display: "flex" }}>
-                  <Box className="timer">0</Box>
+                  <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>0</Box>
                   <Box className="timer1">0</Box>
                   <Box className="timer1">:</Box>
-                  <Box className="timer1">
+                  <Box className="timer1" >
                     {show_this_one_min_time?.substring(0, 1)}
                   </Box>
-                  <Box className="timer2">
+                  <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_one_min_time?.substring(1, 2)}
                   </Box>
                 </Box>

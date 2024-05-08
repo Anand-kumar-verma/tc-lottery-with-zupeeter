@@ -31,7 +31,7 @@ function Wallet() {
           },
         },
         stroke: {
-          colors: ['red'],
+          colors: ['#F02257'],
         },
       },
       radialBar: {
