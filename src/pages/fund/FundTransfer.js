@@ -8,7 +8,7 @@ import Layout from "../../component/layout/Layout";
 import { getBalanceFunction } from "../../services/apiCallings";
 
 const FundTransfer = () => {
-  const user_id = "1";
+  const user_id = localStorage.getItem("user_id");
   const [username, setusername] = useState("");
   const [balance, setsetBalance] = useState("");
   const initialValue = {

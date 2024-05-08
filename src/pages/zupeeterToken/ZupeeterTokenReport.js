@@ -34,7 +34,7 @@ export default function ZupeeterTokenReport() {
   const tableRef = React.useRef(null);
   const [receipt, setReceipt] = React.useState();
   const [amount, setAmount] = React.useState("");
-  const user_id = "2872";
+  const user_id = localStorage.getItem("user_id");
   const { isLoading: token_launch_rate, data } = useQuery(
     ["token_zupeeter"],
     () => TokenLaunch(),

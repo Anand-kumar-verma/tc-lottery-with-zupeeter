@@ -23,18 +23,86 @@ import refresh from "../../../assets/images/refwhite.png";
 import trx from "../../../assets/images/trx.png";
 import withdravalhistory from "../../../assets/images/withdrawalhistory.png";
 import theme from "../../../utils/theme";
-import { withdrawlHistoryFunction } from "../../../services/apiCallings";
+import {
+  BankDetailsFUnction,
+  getBalanceFunction,
+  withdrawlHistoryFunction,
+} from "../../../services/apiCallings";
 import { useQuery } from "react-query";
 import moment from "moment";
-
+import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
+import withdrawol_voice from "../../../assets/images/withdrawol_voice.mp3";
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { endpoint } from "../../../services/urls";
+import LockIcon from "@mui/icons-material/Lock";
 function Withdraval() {
+  const user_id =  localStorage.getItem("user_id");
+  const audioRefMusic = React.useRef(null);
+  const [isAllValue, setIsAllValue] = useState(false);
+  const [visibleData, setvisibleData] = useState([]);
+  const [balance, setBalance] = useState("");
   const navigate = useNavigate();
+  const [loding, setloding] = useState(false);
+  const [status, setStatus] = useState({});
+  const initialValue = {
+    amount: "",
+    t_password: "",
+  };
+
+  const fk = useFormik({
+    initialValues: initialValue,
+    enableReinitialize: true,
+    onSubmit: () => {
+      if (Number(fk.values.amount) > 10000)
+        return toast("Amount should be less 10,000");
+      const reqBody = {
+        userid: user_id,
+        txtamount: fk.values.amount,
+        pwd: fk.values.t_password,
+        txttype: "2",
+      };
+      console.log(reqBody);
+      if (!reqBody.txtamount) return toast("Plese enter all data");
+      if (status?.trx_status === "0" || status?.withdrawal_status === "0")
+        return toast(
+          <span className=" !text-red-600 rounded-lg p-2">
+            We are currently working on USDT token integration, leading to the
+            temporary suspension of our payment gateway services. We apologize
+            for any inconvenience caused. Please bear with us until the next
+            update. Thank you for your understanding.
+          </span>
+        );
+      withdraolFunction(reqBody);
+    },
+  });
+
+  async function withdraolFunction(reqBody) {
+    setloding(true);
+    try {
+      const res = await axios.post(endpoint?.wallet_withdrawl, reqBody);
+      toast(res?.data?.earning?.msg);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+    setloding(false);
+    // client.refetchQueries("bank_details");
+  }
+
   const goBack = () => {
     navigate(-1);
   };
-
-  const [isAllValue, setIsAllValue] = useState(false);
-  const [visibleData, setvisibleData] = useState([]);
+  const { isLoading: getbalance, data: wallet_amount } = useQuery(
+    ["wallet_amount"],
+    () => getBalanceFunction(setBalance),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   const { isLoading, data } = useQuery(
     ["withdrawl_history"],
@@ -46,12 +114,66 @@ function Withdraval() {
   );
 
   const res = data?.data?.earning?.info || [];
+
+  const { isLoading: bankList, data: game_history } = useQuery(
+    ["bank_details"],
+    () => BankDetailsFUnction(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const game_history_data = React.useMemo(
+    () => game_history?.data?.earning?.bank_details?.[0],
+    [game_history?.data?.earning?.bank_details]
+  );
+
   useEffect(() => {
     isAllValue ? setvisibleData(res) : setvisibleData(res?.slice(0, 3));
   }, [isAllValue, res]);
 
+  React.useEffect(() => {
+    handlePlaySound();
+  }, []);
+
+  const handlePlaySound = async () => {
+    try {
+      if (audioRefMusic?.current?.pause) {
+        await audioRefMusic?.current?.play();
+      } else {
+        await audioRefMusic?.current?.pause();
+      }
+    } catch (error) {
+      // Handle any errors during play
+      console.error("Error during play:", error);
+    }
+  };
+
+  const audio = React.useMemo(() => {
+    return (
+      <audio ref={audioRefMusic} hidden>
+        <source src={`${withdrawol_voice}`} type="audio/mp3" />
+      </audio>
+    );
+  }, []);
+
+  useEffect(() => {
+    getStatus();
+  }, []);
+
+  const getStatus = async () => {
+    try {
+      const res = await axios.get(endpoint.withdrawl_status);
+      setStatus(res?.data?.earning);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Container sx={{ background: "#F7F8FF" }}>
+      {audio}
+      <CustomCircularProgress isLoading={isLoading || getbalance || loding} />
       <Box
         sx={{
           background:
@@ -112,7 +234,7 @@ function Withdraval() {
               variant="body1"
               sx={{ color: "white", fontSize: "24px", fontWeight: "500" }}
             >
-              ₹ 0.41
+              ₹ {wallet_amount_data || 0}
             </Typography>
             <Box
               component="img"
@@ -201,7 +323,7 @@ function Withdraval() {
           padding: "10px 0px 10px 10px",
         }}
       >
-        <Stack direction="row" component={NavLink} to="/bankcard">
+        <Stack direction="row" component={NavLink} to="/banks-details">
           <Box sx={{ width: "35%" }}>
             <Box
               component="img"
@@ -214,7 +336,7 @@ function Withdraval() {
               color="initial"
               sx={{ fontSize: "15px", fontWeight: "500", mt: 1 }}
             >
-              BANK OF ***
+              {game_history_data?.BANKNAME?.substring(0, 8) + "****"}
             </Typography>
           </Box>
           <Stack
@@ -228,7 +350,7 @@ function Withdraval() {
               color="initial"
               sx={{ fontSize: "13px", fontWeight: "600" }}
             >
-              433801****728
+              {game_history_data?.AcNo?.substring(0, 5) + "****"}
             </Typography>
             <KeyboardArrowRightIcon />
           </Stack>
@@ -260,8 +382,38 @@ function Withdraval() {
             <CurrencyRupeeIcon sx={{ color: theme.palette.primary.main }} />
           </IconButton>
           <InputBase
+            id="amount"
+            name="amount"
+            onChange={fk.handleChange}
+            value={fk.values.amount}
             sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
             placeholder="Please enter the amount"
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+        </Paper>
+        <Paper
+          component="form"
+          sx={{
+            marginTop: "3px",
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            background: "#F2F2F2",
+            borderRadius: "20px",
+            border: "none",
+            boxShadow: "none",
+          }}
+        >
+          <IconButton sx={{ p: "10px" }} aria-label="menu">
+            <LockIcon sx={{ color: theme.palette.primary.main }} />
+          </IconButton>
+          <InputBase
+            id="t_password"
+            name="t_password"
+            onChange={fk.handleChange}
+            value={fk.values.t_password}
+            sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
+            placeholder="Transaction Password"
             inputProps={{ "aria-label": "search google maps" }}
           />
         </Paper>
@@ -288,7 +440,7 @@ function Withdraval() {
                 ml: 1,
               }}
             >
-              ₹0.41
+              ₹{wallet_amount_data || 0}
             </Typography>
           </Stack>
           <Button
@@ -329,7 +481,9 @@ function Withdraval() {
             ₹ 0.00
           </Typography>
         </Stack>
-        <Button sx={style.wdbtn}>Withdrawal</Button>
+        <Button sx={style.wdbtn} onClick={fk.handleSubmit}>
+          Withdrawal
+        </Button>
         <Box mt={3}>
           <Stack direction="row" alignItems="center" mt={1}>
             <Box
@@ -358,7 +512,7 @@ function Withdraval() {
               }}
             >
               {" "}
-              ₹0.41{" "}
+              ₹{wallet_amount_data || 0}{" "}
             </Typography>
             <Typography
               variant="body1"

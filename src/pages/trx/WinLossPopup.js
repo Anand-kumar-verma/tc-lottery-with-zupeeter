@@ -10,7 +10,7 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 const WinLossPopup = ({ gid }) => {
   //   const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null;
   //   const user_id = login_data && JSON.parse(login_data).UserID;
-  const user_id = "1";
+  const user_id = localStorage.getItem("user_id");
   const [loding, setloding] = useState(false);
   const [status, setstatus] = useState("");
   const [newstatus, setstatusNew] = useState("");

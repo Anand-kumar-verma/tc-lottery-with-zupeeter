@@ -7,7 +7,7 @@ import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
 
 const AccountPassword = () => {
-  const user_id = "1";
+  const user_id = localStorage.getItem("user_id");
   const initialValue = {
     old_pass: "",
     new_pass: "",

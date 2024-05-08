@@ -1,18 +1,11 @@
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import RedeemIcon from "@mui/icons-material/Redeem";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
-const zubgback = "#F48901";
-const zubgmid = "#F48901";
 
 function ChangePassword() {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
-
   const data_array = [
     {
       to: "/password/account",

@@ -1,40 +1,42 @@
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
-  Container,
-  FormControl,
-  Stack,
-  Typography,
-  TextField,
-  FilledInput,
-  InputAdornment,
-  IconButton,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Select,
   Button,
+  Checkbox,
+  Container,
+  FilledInput,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+  InputAdornment,
   MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import axios from "axios";
+import { useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { NavLink, useNavigate } from "react-router-dom";
 import backbtn from "../../assets/images/backBtn.png";
-import logphonedeactive from "../../assets/images/logphonedeactive.png";
-import logphoneactive from "../../assets/images/logphoneactive.png";
+import custom from "../../assets/images/custom.png";
 import logemailactive from "../../assets/images/logemailactive.png";
 import logemaildeactive from "../../assets/images/logemaildeactive.png";
-import custom from "../../assets/images/custom.png";
-import phoneaa from "../../assets/images/phoneaa.png";
+import logphoneactive from "../../assets/images/logphoneactive.png";
+import logphonedeactive from "../../assets/images/logphonedeactive.png";
 import password from "../../assets/images/password.png";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import { BorderRight, Visibility, VisibilityOff } from "@mui/icons-material";
-import axios from "axios";
+import phoneaa from "../../assets/images/phoneaa.png";
+import { storeCookies } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
-import { useFormik } from "formik";
-
 function Login() {
   const [value, setValue] = useState("one");
-
+  const user_id = localStorage.getItem("user_id");
+  const navigate = useNavigate();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -62,17 +64,36 @@ function Login() {
   const fk = useFormik({
     initialValues: initialValue,
     onSubmit: () => {
-      console.log(fk.values);
+      const reqBody = {
+        email: value === "one" ? String(fk.values.mobile) : fk.values.email,
+        password: fk.values.password,
+      };
+      if (!reqBody.password || !reqBody.email)
+        return toast("Plese enter all fields");
+      loginSubmit(reqBody);
     },
   });
 
   async function loginSubmit(reqBody) {
     try {
       const res = await axios.post(endpoint.newlogin, reqBody);
+      console.log(res);
+      if (res?.data?.success === "200") {
+        storeCookies();
+        toast(res?.data?.message);
+        localStorage.setItem("user_id", res?.data?.data?.or_user_id);
+        navigate("/dashboard");
+      } else {
+        toast(res?.data?.msg);
+      }
     } catch (e) {
       console.log(e);
     }
   }
+
+  useEffect(() => {
+    user_id && navigate("/dashboard");
+  }, [user_id]);
   return (
     <Container>
       <Box
@@ -217,6 +238,7 @@ function Login() {
                     id="mobile"
                     name="mobile"
                     onChange={fk.handleChange}
+                    value={fk.values.mobile}
                     label=""
                     placeholder=" Enter number"
                     fullWidth
@@ -244,7 +266,10 @@ function Login() {
               <FormControl fullWidth sx={{ ...style.passwordfield }}>
                 <FilledInput
                   placeholder="Enter password"
-                  id="filled-adornment-password"
+                  id="password"
+                  name="password"
+                  onChange={fk.handleChange}
+                  value={fk.values.password}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -281,7 +306,10 @@ function Login() {
               </Stack>
               <FormControl fullWidth sx={{ ...style.inputfield }}>
                 <TextField
-                  id=""
+                  id="email"
+                  name="email"
+                  onChange={fk.handleChange}
+                  value={fk.values.email}
                   label=""
                   placeholder="please input your email"
                   fullWidth
@@ -307,7 +335,10 @@ function Login() {
               <FormControl fullWidth sx={{ ...style.passwordfield }}>
                 <FilledInput
                   placeholder="please input your password"
-                  id="filled-adornment-password"
+                  id="password"
+                  name="password"
+                  onChange={fk.handleChange}
+                  value={fk.values.password}
                   type={showPassword ? "text" : "password"}
                   endAdornment={
                     <InputAdornment position="end">
@@ -335,6 +366,7 @@ function Login() {
         </Box>
         <Box sx={{ width: "80%", margin: "auto", mt: 3 }}>
           <Button
+            onClick={() => fk.handleSubmit()}
             sx={{
               boxShadow: " 0px 3px #b6bad0",
               padding: "10px",

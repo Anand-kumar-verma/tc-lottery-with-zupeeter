@@ -7,6 +7,8 @@ export const baseUrl = "https://webs.ferryinfotech.in";
 
 export const endpoint = {
   newlogin: `${baseUrl}/api/newlogin`,
+  register_candidate_mobile: `${baseUrl}/api/register_candidate`,
+  register_candidate_email: `${baseUrl}/api/register_candidate_new`,
   game_history: `${baseUrl}/api/color_result`,
   bet_placed: `${baseUrl}/api/betnew_color`,
   my_history: `${baseUrl}/api/one_min_myhistory`,
@@ -27,7 +29,11 @@ export const endpoint = {
   view_ico_purchaseing: `${baseUrl}/api/view_ico_purchaseing`,
   insert_ico_purchase: `${baseUrl}/api/insert_ico_purchase`,
   view_withdrwal_new_inr: `${baseUrl}/api/view_withdrwal_new_inr`,
-
+  win_list_top: `${baseUrl}/api/win_list_top`,
+  wallet_deposit_history: `${baseUrl}/api/wallet_deposit`,
+  wallet_deposit: `${baseUrl}/api/wallet_deposit_insert`,
+  wallet_withdrawl: `${baseUrl}/api/insert_withdrawal_request_inr_new`,
+  withdrawl_status: `${baseUrl}/api/status`,
   // payment
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis

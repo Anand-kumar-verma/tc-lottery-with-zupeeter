@@ -13,19 +13,6 @@ function AddBankAccount() {
     navigate(-1);
   };
 
-  const [value, setValue] = useState(1);
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  const [transection, setTransection] = useState('All');
-
-  const handleChangeTransection = (event) => {
-    setTransection(event.target.value);
-  };
-  const [startDate, setStartDate] = useState(new Date());
-
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },

@@ -1,9 +1,9 @@
 import { Box, Grid, Stack } from '@mui/material'
 import React from 'react'
-import theme from '../../../utils/theme'
-import logo from '../../../assets/images/logo.png'
 import downloadbtn from '../../../assets/images/downloadbtn.png'
+import logo from '../../../assets/images/logo.png'
 import messageicon from '../../../assets/images/messageicon.png'
+import theme from '../../../utils/theme'
 
 
 function Header() {
