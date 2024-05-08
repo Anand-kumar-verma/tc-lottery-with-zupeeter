@@ -9,7 +9,7 @@ import {
   TableContainer,
   TableHead,
   TablePagination,
-  TableRow
+  TableRow,
 } from "@mui/material";
 import axios from "axios";
 import React from "react";
@@ -62,6 +62,11 @@ const GameHistory = ({ gid }) => {
   );
 
   React.useEffect(() => {
+    console.log(
+      game_history?.data?.data
+        ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+        : 1
+    );
     dispatch(
       updateNextCounter(
         game_history?.data?.data
@@ -121,19 +126,54 @@ const GameHistory = ({ gid }) => {
             }}
           >
             <TableRow>
-              <TableCell sx={{ verticalAlign: 'bottom', padding: '10px 0px !important', textAlign: 'center' }} className="!text-sm  !pl-[2px] !pr-0">
+              <TableCell
+                sx={{
+                  verticalAlign: "bottom",
+                  padding: "10px 0px !important",
+                  textAlign: "center",
+                }}
+                className="!text-sm  !pl-[2px] !pr-0"
+              >
                 Period
               </TableCell>
-              <TableCell sx={{ verticalAlign: 'bottom', padding: '10px 0px  !important', textAlign: 'center' }} className="!text-sm  !pr-0 !pl-1">
+              <TableCell
+                sx={{
+                  verticalAlign: "bottom",
+                  padding: "10px 0px  !important",
+                  textAlign: "center",
+                }}
+                className="!text-sm  !pr-0 !pl-1"
+              >
                 Block
               </TableCell>
-              <TableCell sx={{ verticalAlign: 'bottom', padding: '10px 0px  !important', textAlign: 'center' }} className="!text-sm  !pr-0 !pl-1">
+              <TableCell
+                sx={{
+                  verticalAlign: "bottom",
+                  padding: "10px 0px  !important",
+                  textAlign: "center",
+                }}
+                className="!text-sm  !pr-0 !pl-1"
+              >
                 Block Time
               </TableCell>
-              <TableCell sx={{ verticalAlign: 'bottom', padding: '10px 0px  !important', textAlign: 'center' }} className="!text-sm  !pr-0 !pl-1">
+              <TableCell
+                sx={{
+                  verticalAlign: "bottom",
+                  padding: "10px 0px  !important",
+                  textAlign: "center",
+                }}
+                className="!text-sm  !pr-0 !pl-1"
+              >
                 Hash
               </TableCell>
-              <TableCell sx={{ verticalAlign: 'bottom', padding: '10px 0px  !important', textAlign: 'center' }} className="!text-sm  !pr-0 !pl-1">
+              <TableCell
+                sx={{
+                  verticalAlign: "bottom",
+                  padding: "10px 0px  !important",
+                  textAlign: "center",
+                }}
+                className="!text-sm  !pr-0 !pl-1"
+              >
                 Result
               </TableCell>
             </TableRow>
@@ -147,17 +187,16 @@ const GameHistory = ({ gid }) => {
             {visibleRows?.map((i) => {
               return (
                 <TableRow className="!w-[95%]">
-                  <TableCell sx={{ verticalAlign: 'bottom', textAlign: 'center' }} >
-                    <p
-                    >
-                      {i?.tr_transaction_id}
-                    </p>
+                  <TableCell
+                    sx={{ verticalAlign: "bottom", textAlign: "center" }}
+                  >
+                    <p>{i?.tr_transaction_id}</p>
                   </TableCell>
-                  <TableCell sx={{ verticalAlign: 'top', textAlign: 'center' }}>
+                  <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
                     <Stack>
                       <span>
                         <LiveHelpIcon
-                          sx={{ width: '20px' }}
+                          sx={{ width: "20px" }}
                           className="!text-[#FBA343] cursor-pointer"
                           onClick={() =>
                             navigate("/trx/tron-scan", {
@@ -171,39 +210,46 @@ const GameHistory = ({ gid }) => {
                       <span>{i?.tr_number}</span>
                     </Stack>
                   </TableCell>
-                  <TableCell sx={{ verticalAlign: 'bottom', textAlign: 'center' }} >
+                  <TableCell
+                    sx={{ verticalAlign: "bottom", textAlign: "center" }}
+                  >
                     <span>{i?.tr_block_time}</span>
                   </TableCell>
-                  <TableCell sx={{ verticalAlign: 'bottom', textAlign: 'center' }} >
+                  <TableCell
+                    sx={{ verticalAlign: "bottom", textAlign: "center" }}
+                  >
                     <span>{i?.tr_hashno}</span>
                   </TableCell>
 
-                  <TableCell sx={{ verticalAlign: 'bottom', textAlign: 'center' }} >
+                  <TableCell
+                    sx={{ verticalAlign: "bottom", textAlign: "center" }}
+                  >
                     <span
                       className={`
-                ${(String(Number(i?.tr41_slot_id - 1)) === "0" &&
-                          "!bg-gradient-to-t from-red-400 to-violet-400") ||
-                        (String(Number(i?.tr41_slot_id - 1)) === "5" &&
-                          "!bg-gradient-to-t from-violet-400 to-green-400") ||
-                        ((String(Number(i?.tr41_slot_id - 1)) === "1" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "3" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "7" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "9" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "10") &&
-                          "bg-gradient-to-t from-green-400 to-green-900") ||
-                        ((String(Number(i?.tr41_slot_id - 1)) === "2" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "4" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "6" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "8" ||
-                          String(Number(i?.tr41_slot_id - 1)) === "30") &&
-                          "bg-gradient-to-tl from-red-400 to-red-900") ||
-                        (String(Number(i?.tr41_slot_id - 1)) === "50" &&
-                          "bg-[#3183ee]") ||
-                        (String(Number(i?.tr41_slot_id - 1)) === "40" &&
-                          "bg-[#f1be24]") ||
-                        (String(Number(i?.tr41_slot_id - 1)) === "20" &&
-                          "bg-[#eb2feb]")
-                        }
+                ${
+                  (String(Number(i?.tr41_slot_id - 1)) === "0" &&
+                    "!bg-gradient-to-t from-red-400 to-violet-400") ||
+                  (String(Number(i?.tr41_slot_id - 1)) === "5" &&
+                    "!bg-gradient-to-t from-violet-400 to-green-400") ||
+                  ((String(Number(i?.tr41_slot_id - 1)) === "1" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "3" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "7" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "9" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "10") &&
+                    "bg-gradient-to-t from-green-400 to-green-900") ||
+                  ((String(Number(i?.tr41_slot_id - 1)) === "2" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "4" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "6" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "8" ||
+                    String(Number(i?.tr41_slot_id - 1)) === "30") &&
+                    "bg-gradient-to-tl from-red-400 to-red-900") ||
+                  (String(Number(i?.tr41_slot_id - 1)) === "50" &&
+                    "bg-[#3183ee]") ||
+                  (String(Number(i?.tr41_slot_id - 1)) === "40" &&
+                    "bg-[#f1be24]") ||
+                  (String(Number(i?.tr41_slot_id - 1)) === "20" &&
+                    "bg-[#eb2feb]")
+                }
                 transparentColor font-bold  text-lg
                 `}
                     >
