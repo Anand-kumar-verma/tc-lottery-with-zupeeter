@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./assets/style/main.css";
 import Contactus from "./pages/Contact/Contactus";
@@ -54,15 +54,17 @@ import Server from "./pages/promotion/Server";
 import RebateRatio from "./pages/promotion/RebateRatio";
 import PromotionRule from "./pages/promotion/PromotionRule";
 import TeamData from "./pages/promotion/TeamData";
+import Layout from "./component/layout/Layout";
+import SplashScreen from "./SplashScreen";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsOpenSplash(false);
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsOpenSplash(false);
+    }, 1000);
+  }, []);
 
 
   // if (isOpenSplash)
