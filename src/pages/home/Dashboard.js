@@ -2,6 +2,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,6 +16,9 @@ import banner4 from "../../assets/images/banner4.jpg";
 import banner5 from "../../assets/images/banner5.jpg";
 import banner6 from "../../assets/images/banner6.jpg";
 import banner7 from "../../assets/images/banner7.jpg";
+import crown1 from "../../assets/images/crown1.png";
+import crown2 from "../../assets/images/crown2.png";
+import crown3 from "../../assets/images/crown3.png";
 import game1 from "../../assets/images/game1.png";
 import game2 from "../../assets/images/game2.png";
 import game3 from "../../assets/images/game3.png";
@@ -23,14 +27,20 @@ import game5 from "../../assets/images/game5.png";
 import game6 from "../../assets/images/game6.png";
 import game7 from "../../assets/images/game7.png";
 import game8 from "../../assets/images/game8.png";
+import place1 from "../../assets/images/place1.png";
+import place2 from "../../assets/images/place2.png";
+import place3 from "../../assets/images/place3.png";
+import podium from "../../assets/images/podium.png";
 import profile1 from "../../assets/images/profile1.png";
 import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
-import profile4 from "../../assets/images/profile4.png";
-import profile5 from "../../assets/images/profile5.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
-import winerbanner2 from "../../assets/images/winerbanner2.png";
 import Layout from "../../component/layout/Layout";
+import {
+  TopWinner,
+  checkTokenValidity
+} from "../../services/apiCallings";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
 import Fishing from "./component/Fishing";
@@ -40,20 +50,6 @@ import PVC from "./component/PVC";
 import Populer from "./component/Populer";
 import Slots from "./component/Slots";
 import Sports from "./component/Sports";
-import podium from "../../assets/images/podium.png";
-import place1 from "../../assets/images/place1.png";
-import crown1 from "../../assets/images/crown1.png";
-import place2 from "../../assets/images/place2.png";
-import crown2 from "../../assets/images/crown2.png";
-import place3 from "../../assets/images/place3.png";
-import crown3 from "../../assets/images/crown3.png";
-import {
-  TokenLaunch,
-  TopWinner,
-  checkTokenValidity,
-} from "../../services/apiCallings";
-import { useQuery } from "react-query";
-import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function Dashboard() {
   const progressCircle = useRef(null);

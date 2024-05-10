@@ -261,7 +261,7 @@ export const TeamsubFunction = async () => {
 export const TeamFunction = async () => {
   try {
     const reqBody = {
-      user_id: user_id,
+      user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.team_report, reqBody);
     return response;
@@ -282,7 +282,7 @@ export const TeamDatafunction = async () => {
 export const ProfileDataFunction = async () => {
   try {
     const reqBody = {
-      user_id: user_id,
+      user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.profile_function, reqBody);
     return response;

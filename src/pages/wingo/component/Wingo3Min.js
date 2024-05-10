@@ -162,9 +162,7 @@ function Wingo3Min() {
     }
   };
 
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
+
 
   const handleChange = (newValue) => {
     setValue(newValue);
