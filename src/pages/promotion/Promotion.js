@@ -16,6 +16,7 @@ import Layout from "../../component/layout/Layout";
 import { Promotionfunction, TeamsubFunction} from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import { useQuery } from "react-query";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 
 function Promotion() {
@@ -26,7 +27,7 @@ function Promotion() {
 
   const prim = data?.data?.earning || [];
   
-  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
+  const { isLoading,data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
@@ -37,6 +38,7 @@ function Promotion() {
   return (
     <Layout header={false}>
       <Container >
+      <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header}>
           <Typography variant="body1" color="initial">
           </Typography>

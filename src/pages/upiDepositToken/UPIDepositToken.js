@@ -92,7 +92,6 @@ const UPIDepositToken = () => {
             //   onChange={fk.handleChange}
             className="!w-[100%]"
           />
-
           <div className="col-span-2 flex gap-2 mt-4">
             <Button
               className="!bg-[#FD565C] !text-white"

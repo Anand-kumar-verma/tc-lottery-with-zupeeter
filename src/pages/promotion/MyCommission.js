@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../component/layout/Layout";
 import { Box, Container, Drawer, Typography } from "@mui/material";
 import theme from "../../utils/theme";
-import { ArrowDownward, ExpandMore } from "@mui/icons-material";
+import {  ExpandMore } from "@mui/icons-material";
 import backbtn from "../../assets/images/backBtn.png";
 import { NavLink } from "react-router-dom";
 

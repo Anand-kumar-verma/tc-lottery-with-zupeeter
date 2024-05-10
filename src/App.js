@@ -55,6 +55,7 @@ import Server from "./pages/promotion/Server";
 import RebateRatio from "./pages/promotion/RebateRatio";
 import PromotionRule from "./pages/promotion/PromotionRule";
 import TeamData from "./pages/promotion/TeamData";
+import TeamIncome from "./pages/account/TeamIncome";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -146,6 +147,7 @@ function App() {
         path="/account/income-main/my-team/levels"
         element={<Tables />}
       ></Route>
+      <Route path='/account/Teamincome' element={<TeamIncome />}></Route>
       <Route path='/promotion/TeamReport' element={<TeamReport />}></Route>
       <Route path='/promotion/Teamdata' element={<TeamData />}></Route>
       <Route path='/promotion/MyCommission' element={<MyCommission />}></Route>
