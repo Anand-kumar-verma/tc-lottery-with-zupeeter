@@ -48,6 +48,13 @@ import ZupeeterTokenReport from "./pages/zupeeterToken/ZupeeterTokenReport";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import RiskDisclosureAgreement from "./pages/auth/Component/RiskDisclosureAgreement";
+import TeamReport from "./pages/promotion/TeamReport";
+import MyCommission from "./pages/promotion/MyCommission";
+import Subordinates from "./pages/promotion/Subordinates";
+import Server from "./pages/promotion/Server";
+import RebateRatio from "./pages/promotion/RebateRatio";
+import PromotionRule from "./pages/promotion/PromotionRule";
+import TeamData from "./pages/promotion/TeamData";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -139,6 +146,13 @@ function App() {
         path="/account/income-main/my-team/levels"
         element={<Tables />}
       ></Route>
+      <Route path='/promotion/TeamReport' element={<TeamReport />}></Route>
+      <Route path='/promotion/Teamdata' element={<TeamData />}></Route>
+      <Route path='/promotion/MyCommission' element={<MyCommission />}></Route>
+      <Route path='/promotion/Subordinates' element={<Subordinates />}></Route>
+      <Route path='/promotion/Server' element={<Server />}></Route>
+      <Route path='/promotion/Rebate' element={<RebateRatio />}></Route>
+      <Route path='/promotion/PromotionRule' element={<PromotionRule />}></Route>
       <Route
         path="/password"
         element={<ChangePassword />}

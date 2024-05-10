@@ -13,12 +13,26 @@ import promotiondata from '../../assets/images/promotiondata.png';
 import rebateratio from '../../assets/images/rebateratio.png';
 import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
+import { Promotionfunction, TeamsubFunction} from "../../services/apiCallings";
 import theme from "../../utils/theme";
-
-
+import { useQuery } from "react-query";
 
 
 function Promotion() {
+  const { data } = useQuery(["get_info"], () => Promotionfunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+
+  const prim = data?.data?.earning || [];
+  
+  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const Counting = count?.data?.earning || [];
+  
+  
 
   return (
     <Layout header={false}>
@@ -65,13 +79,33 @@ function Promotion() {
             </Stack>
             <Box sx={style.boxStyles}>
               <Box sx={style.innerBoxStyles}>
+
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-white"
                   >
-                    0
+                    {prim?.direct}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
+                    Direct
+
+                  </Typography>
+                </Box>
+
+
+                <Box sx={style.subcordinatelist}>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
+                    {prim?.number_of_register}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -88,90 +122,73 @@ function Promotion() {
                     color="initial"
                     className="!text-white"
                   >
-                    0
+                    {prim?.total_amt}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-white"
                   >
-                    {" "}
-                    Deposit number
+
+                    Total Amount
                   </Typography>
                 </Box>
-                <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-white"
-                  >
-                    0
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-white"
-                  >
-                    {" "}
-                    Deposit amount
-                  </Typography>
-                </Box>
-                <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-white"
-                  >
-                    0
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-white"
-                  >
-                    {" "}
-                    Number of people making first deposit
-                  </Typography>
-                </Box>
+
               </Box>
 
               <Box sx={style.innerBoxStylestwo}>
-                <Box sx={style.subcordinatelist}>
-                  <Typography variant="body1" color="initial">
-                    0
+              <Box sx={style.subcordinatelist}>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
+                   {Counting?.direct}
                   </Typography>
-                  <Typography variant="body1" color="initial">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
                     {" "}
-                    Number of register{" "}
+                    Direct
                   </Typography>
                 </Box>
                 <Box sx={style.subcordinatelist}>
-                  <Typography variant="body1" color="initial">
-                    0
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
+                   {Counting?.number_of_register}
                   </Typography>
-                  <Typography variant="body1" color="initial">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
                     {" "}
-                    Deposit number
+                    Number of Registers
                   </Typography>
                 </Box>
                 <Box sx={style.subcordinatelist}>
-                  <Typography variant="body1" color="initial">
-                    0
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
+                   {Counting?.total_amt}
                   </Typography>
-                  <Typography variant="body1" color="initial">
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-white"
+                  >
                     {" "}
-                    Deposit amount
+                    Total Amount
                   </Typography>
                 </Box>
-                <Box sx={style.subcordinatelist}>
-                  <Typography variant="body1" color="initial">
-                    0
-                  </Typography>
-                  <Typography variant="body1" color="initial">
-                    {" "}
-                    Number of people making first deposit
-                  </Typography>
-                </Box>
+
               </Box>
             </Box>
             <Box sx={style.invitebtn}>
@@ -208,7 +225,20 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/TeamReport/data">
+            <NavLink to="/promotion/Teamdata">
+              <Box sx={style.invitbox}>
+                <Stack direction="row">
+                  <Box component='img' src={subcordinatedata}></Box>
+                  <Typography variant="body1" color="initial">
+                   Team data
+                  </Typography>
+                </Stack>
+                <Stack direction="row">
+                  <ArrowForwardIosOutlinedIcon />
+                </Stack>
+              </Box>
+            </NavLink>
+            <NavLink to="/promotion/MyCommission">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={comitiondetails}></Box>
@@ -221,7 +251,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/MyCommission">
+            <NavLink to="/promotion/Subordinates">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component="img" src={newsubordinatedata}></Box>
@@ -247,7 +277,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/customerLine/">
+            <NavLink to="/promotion/Server/">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={ageantline}></Box>
@@ -260,7 +290,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/RebateRatio/">
+            <NavLink to="/promotion/Rebate/">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component="img" src={rebateratio}></Box>
@@ -279,7 +309,7 @@ function Promotion() {
                   <Box component='img' src={promotiondata}></Box>
                   {/* <Box component="img" src={data}></Box> */}
                   <Typography variant="body1" color="initial">
-                    Promotion data
+                    promotion data
                   </Typography>
                 </Stack>
               </Box>
@@ -288,7 +318,7 @@ function Promotion() {
                   <Typography variant="body1" color="initial">
                     0
                   </Typography>
-                  <Typography variant="body1" color="initial">
+                  <Typography   className="!text-gray-300">
                     This Week
                   </Typography>
                 </Box>
@@ -504,7 +534,7 @@ const style = {
     "&>div:nth-child(2)>div>p:nth-child(2)": {
       fontSize: "13px",
       fontWeight: 500,
-      color: "black !important",
+      color: "grey !important",
     },
     "&>div:nth-child(3)>div:nth-child(1)": {
       my: "10px",
@@ -521,7 +551,7 @@ const style = {
     "&>div:nth-child(3)>div>p:nth-child(2)": {
       fontSize: "13px",
       fontWeight: 500,
-      color: "black !important",
+      color: "grey !important",
     },
   },
   promotionBoxOutertwo: {

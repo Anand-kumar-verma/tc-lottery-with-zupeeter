@@ -44,4 +44,9 @@ export const endpoint = {
   view_bank_details: `${baseUrl}/api/view_bank_details_new`,
   view_upi_details: `${baseUrl}/api/view_upi_details`,
   token_launch: `${baseUrl}/api/token_launch`,
+  info_promotion:`${baseUrl}/api/get_info`,
+  team_info:`${baseUrl}/api/team_count`,
+  team_report:`${baseUrl}/api/TeamReport`,
+  profile_function:`${baseUrl}/api/profile`,
+  team_data:`${baseUrl}/api/get_all`,
 };

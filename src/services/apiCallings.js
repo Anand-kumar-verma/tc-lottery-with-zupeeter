@@ -240,3 +240,54 @@ export const upiListFuncton = async () => {
     console.log(e);
   }
 };
+export const Promotionfunction = async () => {
+  try {
+    const response = await axios.get(endpoint.info_promotion);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const TeamsubFunction = async () => {
+  try {
+    const response = await axios.get(endpoint.team_info);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const TeamFunction = async () => {
+  try {
+    const reqBody = {
+      user_id: user_id,
+    };
+    const response = await axios.post(endpoint.team_report, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const TeamDatafunction = async () => {
+  try {
+    const response = await axios.get(endpoint.team_data);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const ProfileDataFunction = async () => {
+  try {
+    const reqBody = {
+      user_id: user_id,
+    };
+    const response = await axios.post(endpoint.profile_function, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
