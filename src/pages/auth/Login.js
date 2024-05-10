@@ -84,7 +84,7 @@ function Login() {
         toast(res?.data?.msg);
       }
     } catch (e) {
-      console.log(e);
+      toast(e?.response?.data?.message);
     }
   }
 

@@ -1,53 +1,52 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import SplashScreen from "./SplashScreen";
-import Withdrawlhistory from "./pages/wallet/Component/Withdrawlhistory";
-import Depositehistory from "./pages/wallet/Component/Depositehistory";
-import Promotion from "./pages/promotion/Promotion";
-import Wallet from "./pages/wallet/Wallet";
-import Bankaccount from "./pages/wallet/Component/Bankaccount";
-import AddBankAccount from "./pages/wallet/Component/AddBankAccount";
 import "./assets/style/main.css";
-import Layout from "./component/layout/Layout";
 import Contactus from "./pages/Contact/Contactus";
 import ServiceCollection from "./pages/Contact/component/ServiceCollection";
 import SupportPage from "./pages/Contact/component/SupportPage";
-import Activity from "./pages/activity/Activity";
-import ComingSoon from "./pages/comingsoon/ComingSoon";
-import Dashboard from "./pages/home/Dashboard";
-import MainPageOFIncome from "./pages/income/MainPageOFIncome";
-import RegistrationBonus from "./pages/income/incomeSubSection/RegistrationBonus";
-import TRX from "./pages/trx/TRX";
-import TronScanPage from "./pages/trx/component/TronScanPage";
-import Wingo from "./pages/wingo/Wingo";
-import ReferralBonus from "./pages/income/incomeSubSection/ReferralBonus";
-import TeamBettingBonus from "./pages/income/incomeSubSection/TeamBettingBonus";
-import TeamSalaryBonus from "./pages/income/incomeSubSection/TeamSalaryBonus";
-import RoyalityBonus from "./pages/income/incomeSubSection/RoyalityBonus";
-import LevelBonus from "./pages/income/incomeSubSection/LevelBonus";
-import ICOLevelBonus from "./pages/income/incomeSubSection/ICOLevelBonus";
-import BettingBonus from "./pages/income/incomeSubSection/BettingBonus";
-import AllLevelOfTeam from "./pages/myteam/AllLevelOfTeam";
-import Tables from "./pages/myteam/Tables";
 import Account from "./pages/account/Account";
+import Activity from "./pages/activity/Activity";
+import RiskDisclosureAgreement from "./pages/auth/Component/RiskDisclosureAgreement";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import BankDetails from "./pages/bank/BankDetails";
 import Banks from "./pages/bank/Banks";
-import UPIDetails from "./pages/upi/UPIDetails";
-import ICOToken from "./pages/ioctoken/ICOToken";
+import ComingSoon from "./pages/comingsoon/ComingSoon";
 import FundMain from "./pages/fund/FundMain";
 import FundReport from "./pages/fund/FundReport";
 import FundTransfer from "./pages/fund/FundTransfer";
-import ViewSalaryIncome from "./pages/salaryIncome/ViewSalaryIncome";
-import UPIDepositToken from "./pages/upiDepositToken/UPIDepositToken";
-import Deposite from "./pages/wallet/Component/Deposite";
-import Withdraval from "./pages/wallet/Component/Withdraval";
-import ChangePassword from "./pages/password/ChangePassword";
+import Dashboard from "./pages/home/Dashboard";
+import MainPageOFIncome from "./pages/income/MainPageOFIncome";
+import BettingBonus from "./pages/income/incomeSubSection/BettingBonus";
+import ICOLevelBonus from "./pages/income/incomeSubSection/ICOLevelBonus";
+import LevelBonus from "./pages/income/incomeSubSection/LevelBonus";
+import ReferralBonus from "./pages/income/incomeSubSection/ReferralBonus";
+import RegistrationBonus from "./pages/income/incomeSubSection/RegistrationBonus";
+import RoyalityBonus from "./pages/income/incomeSubSection/RoyalityBonus";
+import TeamBettingBonus from "./pages/income/incomeSubSection/TeamBettingBonus";
+import TeamSalaryBonus from "./pages/income/incomeSubSection/TeamSalaryBonus";
+import ICOToken from "./pages/ioctoken/ICOToken";
+import AllLevelOfTeam from "./pages/myteam/AllLevelOfTeam";
+import Tables from "./pages/myteam/Tables";
 import AccountPassword from "./pages/password/AccountPassword";
+import ChangePassword from "./pages/password/ChangePassword";
 import TransactionPassword from "./pages/password/TransactionPassword";
+import Promotion from "./pages/promotion/Promotion";
+import ViewSalaryIncome from "./pages/salaryIncome/ViewSalaryIncome";
+import Test from "./pages/test";
+import TRX from "./pages/trx/TRX";
+import TronScanPage from "./pages/trx/component/TronScanPage";
+import UPIDetails from "./pages/upi/UPIDetails";
+import UPIDepositToken from "./pages/upiDepositToken/UPIDepositToken";
+import AddBankAccount from "./pages/wallet/Component/AddBankAccount";
+import Bankaccount from "./pages/wallet/Component/Bankaccount";
+import Deposite from "./pages/wallet/Component/Deposite";
+import Depositehistory from "./pages/wallet/Component/Depositehistory";
+import Withdraval from "./pages/wallet/Component/Withdraval";
+import Withdrawlhistory from "./pages/wallet/Component/Withdrawlhistory";
+import Wallet from "./pages/wallet/Wallet";
+import Wingo from "./pages/wingo/Wingo";
 import ZupeeterTokenReport from "./pages/zupeeterToken/ZupeeterTokenReport";
-import Login from "./pages/auth/Login";
-import Register from "./pages/auth/Register";
-import RiskDisclosureAgreement from "./pages/auth/Component/RiskDisclosureAgreement";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -58,15 +57,18 @@ function App() {
   //   }, 1000);
   // }, []);
 
+
   // if (isOpenSplash)
   //   return (
   //     <Layout header={false} footer={false}>
   //       <SplashScreen />
   //     </Layout>
   //   );
+
   return (
     <Routes>
       <Route path="/" element={<Login />}></Route>
+      <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/RiskDisclosureAgreement" element={<RiskDisclosureAgreement />}></Route>
       <Route path="/dashboard" element={<Dashboard />}></Route>
