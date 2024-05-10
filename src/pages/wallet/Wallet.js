@@ -20,7 +20,7 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 function Wallet() {
   const [balance, setBalance] = useState("");
   const { isLoading, data: wallet_amount } = useQuery(
-    ["wallet_amount"],
+    ["wallet_amount_amount"],
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
@@ -28,6 +28,7 @@ function Wallet() {
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+
   const { isLoading: total_deposit, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -43,9 +44,8 @@ function Wallet() {
       ?.reduce((a, b) => a + Number(b?.tr15_amt || 0), 0);
   }, [data]);
 
-  const [series, setSeries] = React.useState([
-    Number(wallet_amount_data % 100)?.toFixed(1) || 0,
-  ]);
+  const series = [Number(wallet_amount_data % 100)?.toFixed(1) || 0];
+  const series3rrparty = [0.0];
   const [options] = React.useState({
     colors: ["#F48901", "red", "green"],
     chart: {
@@ -63,7 +63,7 @@ function Wallet() {
           },
         },
         stroke: {
-          colors: ['#F02257'],
+          colors: ["#F02257"],
         },
       },
       radialBar: {
@@ -225,11 +225,11 @@ function Wallet() {
                   fontWeight: "700",
                 }}
               >
-                {series}%
+               00.0%
               </Typography>
               <ReactApexChart
                 options={options}
-                series={series}
+                series={series3rrparty}
                 type="radialBar"
                 height={150}
               />
@@ -240,7 +240,7 @@ function Wallet() {
                 }}
               >
                 <Typography variant="body1" color="initial">
-                  {wallet_amount_data}%
+                  00.00%
                 </Typography>
                 <Typography variant="body1" color="initial">
                   3rd party wallet

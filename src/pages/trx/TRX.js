@@ -27,10 +27,7 @@ function TRX() {
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
-  const navigatea = useNavigate();
-  const goBack = () => {
-    navigatea(-1);
-  };
+ 
 
   const navigate = useNavigate()
   const handleChange = (newValue) => {

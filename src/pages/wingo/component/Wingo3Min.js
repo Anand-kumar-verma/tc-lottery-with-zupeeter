@@ -1,4 +1,3 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import {
   Box,
   Button,
@@ -6,10 +5,13 @@ import {
   Stack,
   Typography
 } from "@mui/material";
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
+import htp from "../../../assets/images/htp.png";
 import zero from "../../../assets/images/n0-30bd92d1.png";
 import one from "../../../assets/images/n1-dfccbff5.png";
 import two from "../../../assets/images/n2-c2913607.png";
@@ -20,19 +22,16 @@ import six from "../../../assets/images/n6-a56e0b9a.png";
 import seven from "../../../assets/images/n7-5961a17f.png";
 import eight from "../../../assets/images/n8-d4d951a4.png";
 import nine from "../../../assets/images/n9-a20f6f42 (1).png";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
 import backbanner from "../../../assets/images/winbackbanner.png";
+import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { changeImages } from "../../../shared/nodeSchedular";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
-import { useDispatch, useSelector } from "react-redux";
 import MyHistory from "../history/MyHistory";
-import { useFormik } from "formik";
-import { dummycounterFun } from "../../../redux/slices/counterSlice";
-import timerbg1 from "../../../assets/images/timerbg.png";
-import timerbg2 from "../../../assets/images/timerbg2.png";
-import htp from "../../../assets/images/htp.png";
 
 function Wingo3Min() {
   const socket = useSocket();

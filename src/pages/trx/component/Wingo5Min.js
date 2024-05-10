@@ -208,7 +208,7 @@ function Wingo5Min() {
                     </Stack>
                   </>
                 );
-              }, [])}
+              }, [next_step])}
             </Box>
             <Box>
               <NavLink to='/trx/tron-scan'>

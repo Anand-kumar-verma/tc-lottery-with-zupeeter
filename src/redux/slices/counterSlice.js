@@ -4,6 +4,7 @@ export const slice = createSlice({
   name: "aviator",
   initialState: {
     value: 0,
+    user_id:localStorage.getItem("user_id"),
     // by user enabling and dissabling music and sound
     isEnableMusic: false,
     isEnableSound: false,
@@ -73,6 +74,9 @@ export const slice = createSlice({
     trx_game_image_index_function: (state,actions) => {
       state.trx_game_image_index = actions.payload;
     },
+    getUserIdFn: (state,actions) => {
+      state.user_id = actions.payload;
+    },
   },
 });
 
@@ -90,7 +94,8 @@ export const {
   updateNextCounter,
   pendingIdsFunction,
   aviator_login_data_fn,
-  trx_game_image_index_function
+  trx_game_image_index_function,
+  getUserIdFn
 } = slice.actions;
 
 // export const incrementAsync = amount => dispatch => {

@@ -20,17 +20,7 @@ import Howtoplay from "./Howtoplay";
 
 
 function Wingo3Min() {
-
   const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const socket = useSocket();
   const client = useQueryClient();
   const [three_min_time, setThree_min_time] = useState("0_0");
@@ -39,6 +29,17 @@ function Wingo3Min() {
   const audioRefMusiclast = React.useRef(null);
   const next_step = useSelector((state) => state.aviator.next_step);
   const dispatch = useDispatch();
+
+
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
 
   const show_this_three_min_time_sec = React.useMemo(
     () => String(three_min_time?.split("_")?.[1]).padStart(2, "0"),
@@ -213,7 +214,7 @@ function Wingo3Min() {
                     </Stack>
                   </>
                 );
-              }, [])}
+              }, [next_step])}
             </Box>
             <Box>
               <NavLink to='/trx/tron-scan'>

@@ -37,19 +37,16 @@ function Login() {
   const [value, setValue] = useState("one");
   const user_id = localStorage.getItem("user_id");
   const navigate = useNavigate();
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  const [country, setCountry] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-  const [country, setCountry] = React.useState("");
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const handleChangesetCountry = (event) => {
     setCountry(event.target.value);
@@ -87,7 +84,7 @@ function Login() {
         toast(res?.data?.msg);
       }
     } catch (e) {
-      console.log(e);
+      toast(e?.response?.data?.message);
     }
   }
 

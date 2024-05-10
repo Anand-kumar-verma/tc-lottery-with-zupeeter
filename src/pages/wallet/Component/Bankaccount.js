@@ -1,5 +1,5 @@
 import { Box, Checkbox, Container, Stack, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import addbank from '../../../assets/images/addbank.png';
 import backbtn from '../../../assets/images/backBtn.png';
@@ -72,7 +72,7 @@ function Bankaccount() {
         <Box component='img' src={addbank} width={50}></Box>
         <Typography variant="body1" color="initial" sx={{ mt: 2, fontSize: '14px', fontWeight: '600', color: '#d2d2d2' }}>Add a bank account number</Typography>
       </Box>
-    </Container >);
+    </Container>);
 }
 export default Bankaccount;
 
