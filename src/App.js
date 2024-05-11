@@ -68,12 +68,12 @@ function App() {
   }, []);
 
 
-  // if (isOpenSplash)
-  //   return (
-  //     <Layout header={false} footer={false}>
-  //       <SplashScreen />
-  //     </Layout>
-  //   );
+  if (isOpenSplash)
+    return (
+      <Layout header={false} footer={false}>
+        <SplashScreen />
+      </Layout>
+    );
 
   return (
     <Routes>
@@ -170,6 +170,10 @@ function App() {
       <Route
         path="/password/transction"
         element={<TransactionPassword />}
+      ></Route>
+      <Route
+        path="/splash"
+        element={<SplashScreen />}
       ></Route>
     </Routes>
   );

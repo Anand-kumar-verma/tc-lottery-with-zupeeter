@@ -1,5 +1,5 @@
 
-import {  Box, Container, Drawer, Typography } from "@mui/material";
+import {  Box, Container, Drawer, IconButton, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import cardbg from '../../assets/images/cardbg.png';
 import Layout from "../../component/layout/Layout";
@@ -12,10 +12,15 @@ import { Promotionfunction, TeamsubFunction, } from "../../services/apiCallings"
 import { useQuery } from "react-query";
 import { TeamFunction } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import { useCopyToClipboard } from "usehooks-ts";
+import { Check} from "@mui/icons-material";
 
-
+ 
 
 function TeamReport() {
+
+  const [value, copy] = useCopyToClipboard();
+  const [copied, setCopied] = useState(false);
 
   const { data:history } = useQuery(["get_info"], () => Promotionfunction(), {
     refetchOnMount: false,
@@ -119,7 +124,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-red-500"
                   >
                    {prim?.direct}
                   </Typography>
@@ -136,7 +141,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                    {prim?.number_of_register}
                   </Typography>
@@ -153,7 +158,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-green-600"
                   >
                    {prim?.total_amt}
                   </Typography>
@@ -175,7 +180,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-red-500"
                   >
                    {Counting?.direct}
                   </Typography>
@@ -192,7 +197,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                    {Counting?.number_of_register}
                   </Typography>
@@ -209,7 +214,7 @@ const team =data?.data?.earning || [];
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-green-600"
                   >
                    {Counting?.total_amt}
                   </Typography>
@@ -230,9 +235,19 @@ const team =data?.data?.earning || [];
             {team?.map((report)=>{
               return(
               <Box sx={style.invitbox} className="!my-2  !shadow-lg !rounded-lg">
-
-              <Box >
-                <Typography className="!text-lg !text-gray-600 my-2">UID:{report?.or_m_user_id} <CopyAll /> </Typography>
+               <Box >
+                <Typography className="!text-lg !text-gray-600 my-2"
+                >UID:{report?.or_m_user_id}  <IconButton onMouseLeave={() => setCopied(false)}
+                onClick={() => {
+                  copy(report?.or_m_user_id);
+                  setCopied(true);
+                }}>
+                   {copied ? (
+                  <Check className="h-5 w-5 text-blue-600" />
+                ) : (
+                  <CopyAll className="h-5 w-5 text-black" />
+                )} 
+                </IconButton></Typography>
               
               </Box>
               <Box className="!border-b !border-gray-400" />
@@ -263,13 +278,11 @@ const team =data?.data?.earning || [];
               </Box>
             )
             })}
-     
-          
-          </Box>
+      </Box>
         </Box>
 
       </Container>
-      <Drawer open={open}    anchor={"bottom"} onClose={toggleDrawer(false)}>
+      <Drawer open={open} anchor={"bottom"} onClose={toggleDrawer(false)}>
             {DrawerList}
         </Drawer>
       
@@ -366,7 +379,7 @@ const style = {
   innerBoxStylestwo: { width: "50%", padding: "0px 0px" },
   subcordinatelist: {
     textAlign: "center",
-    "&>p": { color: "white !important", fontSize: "13px" },
+    "&>p": { color: "white important", fontSize: "13px" },
     mb: 1,
   },
   subcordinateBox: {

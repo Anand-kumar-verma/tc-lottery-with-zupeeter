@@ -308,7 +308,7 @@ function Withdraval() {
                 mt: 1,
               }}
             >
-              USDT O
+              USDT 
             </Typography>
           </Stack>
         </Stack>

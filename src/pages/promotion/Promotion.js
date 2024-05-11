@@ -86,14 +86,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-orange-400"
                   >
                     {prim?.direct}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                     Direct
 
@@ -105,14 +105,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-green-500"
                   >
                     {prim?.number_of_register}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-whtie"
                   >
                     {" "}
                     Number of register
@@ -122,14 +122,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-orange-400"
                   >
                     {prim?.total_amt}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
 
                     Total Amount
@@ -143,14 +143,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-green-400"
                   >
                     {Counting?.direct}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                     {" "}
                     Direct
@@ -160,14 +160,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-orange-400"
                   >
                     {Counting?.number_of_register}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                     {" "}
                     Number of Registers
@@ -177,14 +177,14 @@ function Promotion() {
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-red-400"
                   >
                     {Counting?.total_amt}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-white"
+                    className="!text-black"
                   >
                     {" "}
                     Total Amount
@@ -451,7 +451,7 @@ const style = {
   innerBoxStylestwo: { width: "50%", padding: "0px 0px" },
   subcordinatelist: {
     textAlign: "center",
-    "&>p": { color: "black !important", fontSize: "13px" },
+    "&>p": { color: "black important", fontSize: "13px" },
     mb: 1,
   },
   subcordinateBox: {

@@ -8,7 +8,7 @@ import theme from '../../../utils/theme'
 
 function Header() {
     return (
-        <Box sx={{ background: theme.palette.primary.main, py: '5px', px: 1, }}>
+        <Box sx={{ background: theme.palette.primary.main, py: '5px', px: 1, }} className="">
             <Grid container spacing={0} xs={12}>
                 <Grid container item xs={6}>
                     <Box component='img' src={logo} sx={{ height: '40px !important' }}></Box>

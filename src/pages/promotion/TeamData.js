@@ -13,9 +13,6 @@ import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
-
-
-
 function TeamData() {
 
   const { isLoading,data} = useQuery(["get_all"], () => TeamDatafunction(), {
@@ -25,8 +22,7 @@ function TeamData() {
 const team =data?.data ?.earning|| [];
 
 
-
-  return (
+return (
     <Layout header={false}>
       <Container 
        sx={{
