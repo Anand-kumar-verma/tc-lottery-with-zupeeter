@@ -57,7 +57,7 @@ function Activity() {
                 </Box>
                 <Box sx={style.actimg2}>
                     <Box component='img' sx={{ width: '100%', borderRadius: '10px 10px 0px 0px' }} src={actbanner2}></Box>
-                    <Typography variant="body1" color="initial">TC CREATIVE VIDEO CONTEST</Typography>
+                    <Typography variant="body1" color="initial">ZUPEETER CREATIVE VIDEO CONTEST</Typography>
                 </Box>
                 <Box sx={style.actimg2}>
                     <Box component='img' sx={{ width: '100%', borderRadius: '10px 10px 0px 0px' }} src={actbanner3}></Box>
@@ -69,7 +69,7 @@ function Activity() {
                 </Box>
                 <Box sx={style.actimg2}>
                     <Box component='img' sx={{ width: '100%', borderRadius: '10px 10px 0px 0px' }} src={actbanner5}></Box>
-                    <Typography variant="body1" color="initial">BEST PILOT TC AIRLINES</Typography>
+                    <Typography variant="body1" color="initial">BEST PILOT Zupeeter AIRLINES</Typography>
                 </Box>
                 <Box sx={style.actimg2}>
                     <Box component='img' sx={{ width: '100%', borderRadius: '10px 10px 0px 0px' }} src={actbanner6}></Box>
@@ -77,7 +77,7 @@ function Activity() {
                 </Box>
                 <Box sx={style.actimg2}>
                     <Box component='img' sx={{ width: '100%', borderRadius: '10px 10px 0px 0px' }} src={actbanner7}></Box>
-                    <Typography variant="body1" color="initial">TC SUPPORT FUNDS</Typography>
+                    <Typography variant="body1" color="initial">ZUPEETER SUPPORT FUNDS</Typography>
                 </Box>
             </Stack>
         </Layout>
