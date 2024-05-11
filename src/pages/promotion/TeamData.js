@@ -1,12 +1,9 @@
 
 import {  Box, Container } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import cardbg from '../../assets/images/cardbg.png';
 import Layout from "../../component/layout/Layout";
 import theme from "../../utils/theme";
-import { CopyAll, ExpandMore, Search, SearchOffRounded, SearchOutlined } from "@mui/icons-material";
 import backbtn from "../../assets/images/backBtn.png";
-import { useState } from "react";
 import { TeamDatafunction, } from "../../services/apiCallings";
 import { useQuery } from "react-query";
 import Accordion from '@mui/material/Accordion';
@@ -14,13 +11,14 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 
 
 
 function TeamData() {
 
-  const { data} = useQuery(["get_all"], () => TeamDatafunction(), {
+  const { isLoading,data} = useQuery(["get_all"], () => TeamDatafunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
@@ -36,7 +34,7 @@ const team =data?.data ?.earning|| [];
         height: "100vh",
         overflow: "auto",
 
-    }}>
+    }}> <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header}>
           <Typography variant="body1" color="initial">
           <NavLink to="/promotion">
@@ -57,7 +55,7 @@ const team =data?.data ?.earning|| [];
         <Typography className="!text-xl">Deposits</Typography>
         <Typography className="!text-xl">*</Typography>
     </Box>
-    {team?.map((col,index)=>{
+    {team?.map((col)=>{
         return(
 <Accordion  className="!m-2">
         <AccordionSummary
@@ -81,7 +79,7 @@ const team =data?.data ?.earning|| [];
       </Box>
       <Typography className="border-t"/>
       <Box className="!flex !justify-between bg-white !px-5 !py-5">
-      <Typography className="">{index+1}</Typography>
+      <Typography className="">1</Typography>
           <Typography className="!text-sm">{col?.user_id}</Typography>
           <Typography className="!text-sm">{col?.or_m_name}</Typography>
       </Box>

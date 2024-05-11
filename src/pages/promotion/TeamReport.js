@@ -1,16 +1,17 @@
 
-import { Backdrop, Box, Container, Drawer, Icon, Stack, Typography } from "@mui/material";
+import {  Box, Container, Drawer, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import cardbg from '../../assets/images/cardbg.png';
 import Layout from "../../component/layout/Layout";
 import theme from "../../utils/theme";
 import icon from "../../assets/images/searchIcon.png"
-import { CopyAll, ExpandMore, Search, SearchOffRounded, SearchOutlined } from "@mui/icons-material";
+import { CopyAll, ExpandMore } from "@mui/icons-material";
 import backbtn from "../../assets/images/backBtn.png";
 import { useState } from "react";
 import { Promotionfunction, TeamsubFunction, } from "../../services/apiCallings";
 import { useQuery } from "react-query";
 import { TeamFunction } from "../../services/apiCallings";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 
 
@@ -27,9 +28,9 @@ function TeamReport() {
     refetchOnReconnect: true,
   });
   const Counting = count?.data?.earning || [];
-  console.log(Counting,"kkk")
 
-  const { data} = useQuery(["TeamReport"], () => TeamFunction(), {
+
+  const { isLoading,data} = useQuery(["TeamReport"], () => TeamFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
@@ -70,6 +71,7 @@ const team =data?.data?.earning || [];
         overflow: "auto",
 
     }}>
+       <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header}>
           <Typography variant="body1" color="initial">
           <NavLink to="/promotion">

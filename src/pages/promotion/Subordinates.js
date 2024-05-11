@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../component/layout/Layout";
-import { Box, Container, Drawer, Typography } from "@mui/material";
+import { Box, Container,  Typography } from "@mui/material";
 import theme from "../../utils/theme";
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';

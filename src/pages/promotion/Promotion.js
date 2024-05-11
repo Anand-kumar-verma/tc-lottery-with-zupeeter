@@ -13,9 +13,10 @@ import promotiondata from '../../assets/images/promotiondata.png';
 import rebateratio from '../../assets/images/rebateratio.png';
 import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
-import { Promotionfunction, TeamsubFunction} from "../../services/apiCallings";
+import { Promotionfunction, TeamsubFunction } from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import { useQuery } from "react-query";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 
 function Promotion() {
@@ -25,18 +26,19 @@ function Promotion() {
   });
 
   const prim = data?.data?.earning || [];
-  
-  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
+
+  const { isLoading, data: count } = useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
   const Counting = count?.data?.earning || [];
-  
-  
+
+
 
   return (
     <Layout header={false}>
       <Container >
+        <CustomCircularProgress isLoading={isLoading} />
         <Box sx={style.header}>
           <Typography variant="body1" color="initial">
           </Typography>
@@ -137,13 +139,13 @@ function Promotion() {
               </Box>
 
               <Box sx={style.innerBoxStylestwo}>
-              <Box sx={style.subcordinatelist}>
+                <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-white"
                   >
-                   {Counting?.direct}
+                    {Counting?.direct}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -160,7 +162,7 @@ function Promotion() {
                     color="initial"
                     className="!text-white"
                   >
-                   {Counting?.number_of_register}
+                    {Counting?.number_of_register}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -177,7 +179,7 @@ function Promotion() {
                     color="initial"
                     className="!text-white"
                   >
-                   {Counting?.total_amt}
+                    {Counting?.total_amt}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -230,7 +232,7 @@ function Promotion() {
                 <Stack direction="row">
                   <Box component='img' src={subcordinatedata}></Box>
                   <Typography variant="body1" color="initial">
-                   Team data
+                    Team data
                   </Typography>
                 </Stack>
                 <Stack direction="row">
@@ -318,7 +320,7 @@ function Promotion() {
                   <Typography variant="body1" color="initial">
                     0
                   </Typography>
-                  <Typography   className="!text-gray-300">
+                  <Typography className="!text-gray-300">
                     This Week
                   </Typography>
                 </Box>
