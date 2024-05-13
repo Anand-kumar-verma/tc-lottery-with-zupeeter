@@ -14,7 +14,7 @@ import banner2 from "../../assets/images/banner2.jpg";
 import banner3 from "../../assets/images/banner3.jpg";
 import banner4 from "../../assets/images/banner4.jpg";
 import banner5 from "../../assets/images/banner5.jpg";
-import banner6 from "../../assets/images/banner6.jpg";
+import banner6 from "../../assets/images/actbanner2.jpg";
 import banner7 from "../../assets/images/banner7.jpg";
 import crown1 from "../../assets/images/crown1.png";
 import crown2 from "../../assets/images/crown2.png";
