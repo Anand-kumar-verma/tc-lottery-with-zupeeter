@@ -57,9 +57,17 @@ import TeamData from "./pages/promotion/TeamData";
 import Layout from "./component/layout/Layout";
 import SplashScreen from "./SplashScreen";
 import TeamIncome from "./pages/account/TeamIncome";
+import { TeamsubFunction } from "./services/apiCallings";
+import { useQuery } from "react-query";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
+
+  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const Counting = count?.data?.earning || [];
 
   useEffect(() => {
     setTimeout(() => {

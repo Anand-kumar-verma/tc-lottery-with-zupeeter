@@ -1,8 +1,8 @@
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
-import { Box, Container, Stack, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
 import ageantline from '../../assets/images/ageantline.png';
 import cardbg from '../../assets/images/cardbg.png';
 import comitiondetails from '../../assets/images/commissiondetails.png';
@@ -13,11 +13,13 @@ import promotiondata from '../../assets/images/promotiondata.png';
 import rebateratio from '../../assets/images/rebateratio.png';
 import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
-import { Promotionfunction, TeamsubFunction } from "../../services/apiCallings";
+import { ProfileDataFunction, Promotionfunction, TeamsubFunction , } from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
-
+import { useState } from "react";
+import { useCopyToClipboard } from "usehooks-ts";
+import { Check } from "@mui/icons-material";
 
 function Promotion() {
   const { data } = useQuery(["get_info"], () => Promotionfunction(), {
@@ -33,7 +35,17 @@ function Promotion() {
   });
   const Counting = count?.data?.earning || [];
 
+  const user_id = localStorage.getItem("user_id");
 
+  const { data:user } = useQuery(["profile"], () => ProfileDataFunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const profile = user?.data?.earning || [];
+  const [copied, setCopied] = useState(false);
+  const [value, copy] = useCopyToClipboard();
+
+ 
 
   return (
     <Layout header={false}>
@@ -195,7 +207,7 @@ function Promotion() {
             </Box>
             <Box sx={style.invitebtn}>
               <NavLink >
-                <Typography sx={{}}>INVITATION LINK</Typography>
+                <Typography sx={{}} > INVITATION LINK </Typography> 
               </NavLink>
             </Box>
           </Box>
@@ -203,13 +215,22 @@ function Promotion() {
             <Box sx={style.invitbox}>
               <Stack direction="row">
                 <Box component='img' src={copyinvitationcode}></Box>
+                {copied ? (
+                   <Typography variant="body1" color="initial">
+                   Copied <Check className="!text-blue-700"/>
+                 </Typography>
+                     ) : (
                 <Typography variant="body1" color="initial">
                   Copy invitation code
                 </Typography>
-              </Stack>
-              <Stack direction="row">
+                )}  </Stack>
+              <Stack direction="row" onMouseLeave={() => setCopied(false)}
+                onClick={() => {
+                  copy(profile?.rec?.Login_Id);
+                  setCopied(true);
+                }}>
                 <Typography variant="body1" color="initial">
-                  547264301726
+              {profile?.rec?.Login_Id}
                 </Typography>
                 <ArrowForwardIosOutlinedIcon />
               </Stack>

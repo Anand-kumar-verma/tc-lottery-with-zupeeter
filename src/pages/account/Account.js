@@ -199,7 +199,7 @@ function Account() {
         </Box>
       </Box>
       <Box>
-        <button className="m-5 text-gray-500 flex w-80 p-1 rounded-full gap-1 justify-center border border-gray-600"
+        <button className="m-5 text-gray-500 flex w-80 p-1 bg-white shadow-2xl rounded-full gap-1 justify-center border border-gray-600"
           onClick={() => logOutFunction()}>
           <img src={l1} alt="" className="w-5 !mt-1" />
           Logout

@@ -329,7 +329,7 @@ function Dashboard() {
         <Box>
           {res?.slice(2)?.map((i, index) => {
             return (
-              <Stack key={index} direction="row" sx={style.winnerslider}>
+              <Stack key={index} direction="row" sx={style.winnerslider} className="">
                 <Box
                   width={45}
                   height={45}
@@ -379,7 +379,7 @@ function Dashboard() {
           })}
         </Box>
       </Box>
-      <Box sx={{ px: 2, py: 3 }}>
+      <Box sx={{ px: 2, py: 3 }} >
         <Stack direction={"row"} sx={{ alignItems: "center" }}>
           <Box
             sx={{
@@ -624,6 +624,7 @@ const style = {
     borderRadius: "10px",
     my: 1.5,
     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+    animation:"infinite moves"
   },
   winnerprofile: {
     borderRadius: "50%",

@@ -133,7 +133,7 @@ export default function Tables() {
           <div>
             <input
               type="text"
-              className="!bg-gray-600 !text-white !rounded-md px-2 py-1"
+              className="!bg-[#FBA343] !text-white !rounded-md px-2 py-1"
               placeholder="Search.."
             />
           </div>
