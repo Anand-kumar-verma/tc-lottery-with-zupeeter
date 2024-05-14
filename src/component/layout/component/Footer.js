@@ -47,7 +47,6 @@ function Footer() {
           ) : (
             <Box component="img" src={homeactive} width={20}></Box>
           )}
-
           <Typography
             variant="body1"
             color="initial"
