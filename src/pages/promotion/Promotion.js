@@ -13,7 +13,7 @@ import promotiondata from '../../assets/images/promotiondata.png';
 import rebateratio from '../../assets/images/rebateratio.png';
 import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
-import { ProfileDataFunction, Promotionfunction, TeamsubFunction , } from "../../services/apiCallings";
+import { ProfileDataFunction, Promotionfunction, TeamsubFunction, } from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
@@ -37,7 +37,7 @@ function Promotion() {
 
   const user_id = localStorage.getItem("user_id");
 
-  const { data:user } = useQuery(["profile"], () => ProfileDataFunction(), {
+  const { data: user } = useQuery(["profile"], () => ProfileDataFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
@@ -45,7 +45,7 @@ function Promotion() {
   const [copied, setCopied] = useState(false);
   const [value, copy] = useCopyToClipboard();
 
- 
+
 
   return (
     <Layout header={false}>
@@ -121,12 +121,13 @@ function Promotion() {
                   >
                     {prim?.number_of_register}
                   </Typography>
+                 
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-whtie"
                   >
-                    {" "}
+
                     Number of register
                   </Typography>
                 </Box>
@@ -207,8 +208,18 @@ function Promotion() {
             </Box>
             <Box sx={style.invitebtn}>
               <NavLink >
-                <Typography sx={{}} > INVITATION LINK </Typography> 
-              </NavLink>
+                {copied ? (
+                  <Typography variant="body1" color="initial">
+                    Successfully  Copied
+                  </Typography>
+                ) : (
+                  <Typography sx={{}}
+                    onMouseLeave={() => setCopied(false)}
+                    onClick={() => {
+                      copy(profile?.rec?.Login_Id);
+                      setCopied(true);
+                    }}> INVITATION LINK </Typography>
+                )} </NavLink>
             </Box>
           </Box>
           <Box sx={style.invitebutton} className="invitebutton">
@@ -216,13 +227,13 @@ function Promotion() {
               <Stack direction="row">
                 <Box component='img' src={copyinvitationcode}></Box>
                 {copied ? (
-                   <Typography variant="body1" color="initial">
-                   Copied <Check className="!text-blue-700"/>
-                 </Typography>
-                     ) : (
-                <Typography variant="body1" color="initial">
-                  Copy invitation code
-                </Typography>
+                  <Typography variant="body1" color="initial">
+                    Copied <Check className="!text-blue-700" />
+                  </Typography>
+                ) : (
+                  <Typography variant="body1" color="initial">
+                    Copy invitation code
+                  </Typography>
                 )}  </Stack>
               <Stack direction="row" onMouseLeave={() => setCopied(false)}
                 onClick={() => {
@@ -230,7 +241,7 @@ function Promotion() {
                   setCopied(true);
                 }}>
                 <Typography variant="body1" color="initial">
-              {profile?.rec?.Login_Id}
+                  {profile?.rec?.Login_Id}
                 </Typography>
                 <ArrowForwardIosOutlinedIcon />
               </Stack>
@@ -438,8 +449,6 @@ const style = {
     borderRight: "2px solid #fefefe",
     "&>svg": { color: theme.palette.primary.main, fontSize: "25px", marginRight: "10px" },
     "&>p": { color: "gray", fontSize: "14px", fontWeight: "500" },
-
-
   },
   subordinatesRight: {
     width: "50%",
@@ -452,8 +461,8 @@ const style = {
     borderTopRightRadius: "10px",
     "&>svg": { color: theme.palette.primary.main, fontSize: "25px", marginRight: "10px" },
     "&>p": { color: "gray", fontSize: "14px", fontWeight: "500" },
-
   },
+
   boxStyles: {
     background: '#ffffff',
     padding: "15px",

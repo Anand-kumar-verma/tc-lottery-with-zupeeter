@@ -77,6 +77,7 @@ function Dashboard() {
       window.location.href = "/"; // Redirect to login page
     }
   }, []);
+
   return (
     <Layout>
       <CustomCircularProgress isLoading={isLoading} />
@@ -326,57 +327,57 @@ function Dashboard() {
             Winning information
           </Typography>
         </Stack>
-        <Box>
-          {res?.slice(2)?.map((i, index) => {
-            return (
-              <Stack key={index} direction="row" sx={style.winnerslider} className="">
-                <Box
-                  width={45}
-                  height={45}
-                  component={"img"}
-                  src={profile1}
-                  sx={style.winnerprofile}
-                ></Box>
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  sx={style.winnername}
-                >
-                  {i?.or_m_email
-                    ? i.or_m_email.split("@")[0].substring(0, 2) +
+        <Box className="">
+            {res?.slice(2)?.map((i, index) => {
+              return (
+                <Stack key={index} direction="row" sx={style.winnerslider} className="">
+                  <Box
+                    width={45}
+                    height={45}
+                    component={"img"}
+                    src={profile1}
+                    sx={style.winnerprofile}
+                  ></Box>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winnername}
+                  >
+                    {i?.or_m_email
+                      ? i.or_m_email.split("@")[0].substring(0, 2) +
                       "**" +
                       (i.or_m_email.split("@")[0].length > 2
                         ? i.or_m_email.split("@")[0].substring(2, 4)
                         : "")
-                    : "**"}
-                </Typography>
-                <Box sx={style.winnerbannerouter}>
-                  <Box
-                    height={45}
-                    component={"img"}
-                    src={winerbanner1}
-                    sx={style.winnerbannerinner}
-                  ></Box>
-                </Box>
-                <Box>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    sx={style.winneramout || 0}
-                  >
-                    Receive ₹{i?.max_tr_pv}
+                      : "**"}
                   </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    sx={style.winnertitle}
-                  >
-                    Winning amount
-                  </Typography>
-                </Box>
-              </Stack>
-            );
-          })}
+                  <Box sx={style.winnerbannerouter}>
+                    <Box
+                      height={45}
+                      component={"img"}
+                      src={winerbanner1}
+                      sx={style.winnerbannerinner}
+                    ></Box>
+                  </Box>
+                  <Box>
+                    <Typography
+                      variant="body1"
+                      color="initial"
+                      sx={style.winneramout || 0}
+                    >
+                      Receive ₹{i?.max_tr_pv}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="initial"
+                      sx={style.winnertitle}
+                    >
+                      Winning amount
+                    </Typography>
+                  </Box>
+                </Stack>
+              );
+            })}
         </Box>
       </Box>
       <Box sx={{ px: 2, py: 3 }} >
@@ -419,17 +420,17 @@ function Dashboard() {
                   <Typography variant="body1" color="initial">
                     {res?.[1]?.i?.or_m_email
                       ? res
+                        ?.[1]
+                        ?.i?.or_m_email?.split("@")[0]
+                        .substring(0, 2) +
+                      "**" +
+                      (res?.[1]?.i?.or_m_email?.split("@")[0]
+                        .length > 2
+                        ? res
                           ?.[1]
                           ?.i?.or_m_email?.split("@")[0]
-                          .substring(0, 2) +
-                        "**" +
-                        (res?.[1]?.i?.or_m_email?.split("@")[0]
-                          .length > 2
-                          ? res
-                              ?.[1]
-                              ?.i?.or_m_email?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
+                          .substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -468,19 +469,19 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                  {res?.[0]?.i?.or_m_email
+                    {res?.[0]?.i?.or_m_email
                       ? res
+                        ?.[0]
+                        ?.i?.or_m_email?.split("@")[0]
+                        .substring(0, 2) +
+                      "**" +
+                      (res?.[0]?.i?.or_m_email?.split("@")[0]
+                        .length > 2
+                        ? res
                           ?.[0]
                           ?.i?.or_m_email?.split("@")[0]
-                          .substring(0, 2) +
-                        "**" +
-                        (res?.[0]?.i?.or_m_email?.split("@")[0]
-                          .length > 2
-                          ? res
-                              ?.[0]
-                              ?.i?.or_m_email?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
+                          .substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -522,12 +523,12 @@ function Dashboard() {
                   <Typography variant="body1" color="initial">
                     {res?.[2]?.i?.or_m_email
                       ? res?.[2]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
-                        "**" +
-                        (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
-                          ? res?.[2]?.i?.or_m_email
-                              ?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
+                      "**" +
+                      (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
+                        ? res?.[2]?.i?.or_m_email
+                          ?.split("@")[0]
+                          .substring(2, 4)
+                        : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -558,10 +559,10 @@ function Dashboard() {
                 >
                   {i?.or_m_email
                     ? i.or_m_email.split("@")[0].substring(0, 2) +
-                      "**" +
-                      (i.or_m_email.split("@")[0].length > 2
-                        ? i.or_m_email.split("@")[0].substring(2, 4)
-                        : "")
+                    "**" +
+                    (i.or_m_email.split("@")[0].length > 2
+                      ? i.or_m_email.split("@")[0].substring(2, 4)
+                      : "")
                     : "**"}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
@@ -624,7 +625,7 @@ const style = {
     borderRadius: "10px",
     my: 1.5,
     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-    animation:"infinite moves"
+    animation: "infinite moves"
   },
   winnerprofile: {
     borderRadius: "50%",

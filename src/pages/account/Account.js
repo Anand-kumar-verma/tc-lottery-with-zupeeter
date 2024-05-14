@@ -97,7 +97,7 @@ function Account() {
             </NavLink>
             <Box className="flex flex-col justify-center cursor-pointer items-center" onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}>
               <Typography><img src={trx} alt="" className="w-16" /></Typography>
-              <Typography className="!ml-5">USTD</Typography>
+              <Typography className="!ml-5">USDT</Typography>
             </Box>
           </Box>
         </Box>
@@ -135,7 +135,7 @@ function Account() {
       <Box className="flex justify-center gap-2 border-b-2 p-2 m-3 py-5 bg-white shadow rounded-lg "
         onClick={() => navigate("/account/Teamincome")}>
         <Typography> <GroupAddRounded className="text-[#F48901] !mt-1" /></Typography>
-        <Typography className="!mt-1 !text-lg text-gray-700"> Team/Income</Typography>
+        <Typography className="!mt-1 !text-lg text-gray-700 cursor-pointer"> Team/Income</Typography>
       </Box>
       <Box className="bg-white shadow rounded-lg flex flex-col justify-start p-1 m-3 !my-8">
         <Box className="flex justify-between gap-1 border-b-2 p-2">
@@ -198,7 +198,7 @@ function Account() {
           </Box>
         </Box>
       </Box>
-      <Box>
+      <Box >
         <button className="m-5 text-gray-500 flex w-80 p-1 bg-white shadow-2xl rounded-full gap-1 justify-center border border-gray-600"
           onClick={() => logOutFunction()}>
           <img src={l1} alt="" className="w-5 !mt-1" />
