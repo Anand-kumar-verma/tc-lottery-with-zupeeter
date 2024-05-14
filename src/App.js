@@ -63,11 +63,10 @@ import { useQuery } from "react-query";
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
 
-  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
+useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
-  const Counting = count?.data?.earning || [];
 
   useEffect(() => {
     setTimeout(() => {
