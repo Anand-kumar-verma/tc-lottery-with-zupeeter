@@ -68,7 +68,6 @@ function Account() {
             <Box className="flex justify-center items-center gap-1 text-white">
               <Typography className="!text-xs">Last login:</Typography>
               <Typography className="!text-xs">{profile?.rec?.Joining_Date} </Typography>
-
             </Box>
           </Box>
         </Box>

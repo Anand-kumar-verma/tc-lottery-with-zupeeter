@@ -164,7 +164,7 @@ function Dashboard() {
           mt: 1,
         }}
       >
-        <NavLink onClick={() => handleChange(1)}>
+         <NavLink onClick={() => handleChange(1)}>
           <Box
             className="gamecategory "
             sx={{

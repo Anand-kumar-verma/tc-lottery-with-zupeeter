@@ -210,7 +210,8 @@ const Chart = ({ gid }) => {
             return (
               <Box
                 sx={{
-                  padding: "10px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px",
                   borderBottom: "1px solid white",
                 }}
               >
@@ -218,13 +219,13 @@ const Chart = ({ gid }) => {
                   <span
                     className={`
                  !bg-gradient-to-t from-[#FE63FF] to-[#007AFF]
-                  transparentColor font-bold  pr-5
+                  transparentColor font-bold  pr-2
                  `}
                   >
                     {i?.tr_transaction_id}
                   </span>
                   {/* // main box of chart form 0 to 9 */}
-                  <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+                  <Box className="flex items-center justify-between !w-[80%]   lg:!w-[70%]">
                     {/* /// 0   //// */}
                     <div
                       id={`zero${indexi}`}
@@ -234,11 +235,11 @@ const Chart = ({ gid }) => {
                           : "!z-[-10px]"
                       }`}
                     >
-                      <Typography
+                      <Typography sx={{fontsize:"5px"}}
                         className={`circleNumberbody   ${
                           (i?.tr41_slot_id - 1)?.toString() === "0"
-                            ? "!bg-gradient-to-b from-[#e85053] to-[#8c06f2] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-gradient-to-b from-[#e85053] to-[#8c06f2] !text-white !mr-1 !font-bold circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px]  !border-black  !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -257,8 +258,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody  ${
                           (i?.tr41_slot_id - 1)?.toString() === "1"
-                            ? "!bg-[#4bef98] !text-white  !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#4bef98] !text-white !mr-1 !font-bold circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -277,8 +278,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody   ${
                           (i?.tr41_slot_id - 1)?.toString() === "2"
-                            ? "!bg-[#f1494c] !text-white !font-bold "
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#f1494c] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -297,8 +298,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody  ${
                           (i?.tr41_slot_id - 1)?.toString() === "3"
-                            ? "!bg-[#46eb93] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#46eb93] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -317,8 +318,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody ${
                           (i?.tr41_slot_id - 1)?.toString() === "4"
-                            ? "!bg-[#ed4b4e] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#ed4b4e] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -337,8 +338,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody ${
                           (i?.tr41_slot_id - 1)?.toString() === "5"
-                            ? "!bg-gradient-to-b from-[#55f8a1] to-[#8c06f2] !text-white  !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-gradient-to-b from-[#55f8a1] to-[#8c06f2] !text-white !mr-1 !font-bold circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -357,8 +358,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody ${
                           (i?.tr41_slot_id - 1)?.toString() === "6"
-                            ? "!bg-[#f54b4e] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#f54b4e] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -377,8 +378,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody ${
                           (i?.tr41_slot_id - 1)?.toString() === "7"
-                            ? "!bg-[#4af499] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#4af499] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -397,8 +398,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody  ${
                           (i?.tr41_slot_id - 1)?.toString() === "8"
-                            ? "!bg-[#eb494c] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#eb494c] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -417,8 +418,8 @@ const Chart = ({ gid }) => {
                       <Typography
                         className={`circleNumberbody  ${
                           (i?.tr41_slot_id - 1)?.toString() === "9"
-                            ? "!bg-[#4cf199] !text-white !font-bold"
-                            : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                            ? "!bg-[#4cf199] !text-white !font-bold !mr-1 circleNumberbody-number"
+                            : "!bg-white !text-black !border-[1px] !mr-1 !text-[5px] !border-black !opacity-20 circleNumberbody-number"
                         }`}
                       >
                         {" "}
@@ -430,7 +431,7 @@ const Chart = ({ gid }) => {
                         (i?.tr41_slot_id - 1)?.toString() <= 4
                           ? "!bg-[#468ce8] "
                           : "!bg-[#df4be1]"
-                      }  !h-[20px] !w-[20px] !rounded-full !text-center !text-white `}
+                      }  !h-[20px] !w-[20px] !rounded-full !text-center circleNumberbody-number !mr-1 !text-[5px] !text-white `}
                     >
                       {(i?.tr41_slot_id - 1)?.toString() <= 4 ? "S" : "B"}
                     </Typography>

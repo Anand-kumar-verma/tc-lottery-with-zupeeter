@@ -33,6 +33,7 @@ import Promotion from "./pages/promotion/Promotion";
 import ViewSalaryIncome from "./pages/salaryIncome/ViewSalaryIncome";
 import Test from "./pages/test";
 import TRX from "./pages/trx/TRX";
+import K3 from "./pages/k3lotre/K3";
 import TronScanPage from "./pages/trx/component/TronScanPage";
 import UPIDetails from "./pages/upi/UPIDetails";
 import UPIDepositToken from "./pages/upiDepositToken/UPIDepositToken";
@@ -99,6 +100,7 @@ useQuery(["team_count"], () => TeamsubFunction(), {
       <Route path="/activity" element={<Activity />}></Route>
       <Route path="/wingo" element={<Wingo />}></Route>
       <Route path="/trx" element={<TRX />}></Route>
+      <Route path="/k3" element={<K3 />}></Route>
       <Route path="/CustomerService" element={<Contactus />}></Route>
       <Route path="/ServiceCollections" element={<ServiceCollection />}></Route>
       <Route path="/supportPage" element={<SupportPage />}></Route>

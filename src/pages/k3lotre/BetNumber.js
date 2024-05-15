@@ -3,6 +3,7 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
+  Dialog,
   Drawer,
   Grid,
   Stack,
@@ -29,12 +30,15 @@ import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import { NavLink } from "react-router-dom";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
+  const [random, setRandomNumber] = useState(null)
+  const [open3, setOpen3] = useState(false);
   const client = useQueryClient();
   const initialValue = {
     balance: "1",
@@ -102,6 +106,15 @@ const BetNumber = ({ gid }) => {
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
+
+  const generatenumber = () => {
+    const randomBitNumber = Math.floor(Math.random() *10)+1;
+    setRandomNumber(randomBitNumber);
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  }
   return (
     <Box
       sx={{
@@ -109,57 +122,24 @@ const BetNumber = ({ gid }) => {
         background: "#FFFFFF",
         mt: 2,
         borderRadius: "10px",
-        boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+
       }}
     >
+
       <div>
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("green");
-            }}
-            className="greenbtn"
-          >
-            Green
-          </Button>
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("voilet");
-            }}
-            className="violetbtn"
-          >
-            Violet
-          </Button>
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("red");
-            }}
-            className="redbtn"
-          >
-            Red
-          </Button>
-        </Stack>
+
         <Box
           sx={{
-            background: "#EEEEEE",
-            padding: "8px 8px 0px 8px",
-            display: "flex",
+            background: "#",
+            padding: "0px 8px 0px 8px",
             alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
             borderRadius: "10px",
             mt: 2,
           }}
+          className="grid grid-cols-4 justify-center"
         >
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={zero}
             onClick={() => {
@@ -167,9 +147,10 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("0");
             }}
             className="!cursor-pointer"
-          ></Box>
+          >
+          </Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={one}
             onClick={() => {
@@ -179,7 +160,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={two}
             onClick={() => {
@@ -189,7 +170,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={three}
             onClick={() => {
@@ -199,7 +180,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={four}
             onClick={() => {
@@ -209,7 +190,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={five}
             onClick={() => {
@@ -219,7 +200,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={six}
             onClick={() => {
@@ -229,7 +210,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={seven}
             onClick={() => {
@@ -239,7 +220,7 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={eight}
             onClick={() => {
@@ -249,7 +230,67 @@ const BetNumber = ({ gid }) => {
             className="!cursor-pointer"
           ></Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
+            component="img"
+            src={nine}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("9");
+            }}
+            className="!cursor-pointer"
+          ></Box>
+          <Box
+            sx={{ width: "52%", m: 1 }}
             component="img"
             src={nine}
             onClick={() => {
@@ -265,11 +306,12 @@ const BetNumber = ({ gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined">Random</Button>
+          <Button variant="outlined" onClick={generatenumber}>Random</Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return <Box sx={style.bacancebtn3}>X{i}</Box>;
           })}
         </Stack>
+
         <ButtonGroup
           disableElevation
           variant="contained"
@@ -282,7 +324,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("one");
             }}
           >
-           Samll
+            Small
           </Button>
           <Button
             sx={style.smlbtn}
@@ -291,13 +333,13 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("two");
             }}
           >
-           Big
+            Big
           </Button>
         </ButtonGroup>
       </div>
 
       <Drawer
-        open={open}
+        open={open} 
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",
@@ -305,7 +347,7 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-      >
+        onClickCapture={handleClose}>
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -363,7 +405,7 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select Green
+              Select Green {random}
             </Typography>
           </Box>
           <Box mt={5} px={2}>

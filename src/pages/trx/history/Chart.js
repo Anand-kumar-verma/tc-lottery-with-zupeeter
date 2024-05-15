@@ -192,9 +192,9 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody   ${(i?.tr41_slot_id - 1)?.toString() === "0"
-                          ? "!bg-gradient-to-b from-[#e85053] to-[#8c06f2] !text-white !font-bold"
-                          : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
+                        className={`circleNumberbody-number   ${(i?.tr41_slot_id - 1)?.toString() === "0"
+                          ? "!bg-gradient-to-b from-[#e85053] to-[#8c06f2] !text-white !font-bold !text-[5px] "
+                          : "!bg-white !text-black !border-[1px] !border-black  !text-[5px]  !opacity-20"
                           }`}
                       >
                         {" "}
@@ -210,7 +210,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody  ${(i?.tr41_slot_id - 1)?.toString() === "1"
+                        className={`circleNumberbody-number  ${(i?.tr41_slot_id - 1)?.toString() === "1"
                           ? "!bg-[#4bef98] !text-white  !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -228,7 +228,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody   ${(i?.tr41_slot_id - 1)?.toString() === "2"
+                        className={`circleNumberbody-number   ${(i?.tr41_slot_id - 1)?.toString() === "2"
                           ? "!bg-[#f1494c] !text-white !font-bold "
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -246,7 +246,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody  ${(i?.tr41_slot_id - 1)?.toString() === "3"
+                        className={`circleNumberbody-number  ${(i?.tr41_slot_id - 1)?.toString() === "3"
                           ? "!bg-[#46eb93] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -264,7 +264,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody ${(i?.tr41_slot_id - 1)?.toString() === "4"
+                        className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() === "4"
                           ? "!bg-[#ed4b4e] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -282,7 +282,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody ${(i?.tr41_slot_id - 1)?.toString() === "5"
+                        className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() === "5"
                           ? "!bg-gradient-to-b from-[#55f8a1] to-[#8c06f2] !text-white  !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -291,8 +291,7 @@ const Chart = ({ gid }) => {
                         5
                       </Typography>
                     </div>
-                    {/* /// 6   //// */}
-                    <div
+                   <div
                       id={`six${indexi}`}
                       className={`${(i?.tr41_slot_id - 1)?.toString() === "6"
                         ? "!z-20"
@@ -300,7 +299,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody ${(i?.tr41_slot_id - 1)?.toString() === "6"
+                        className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() === "6"
                           ? "!bg-[#f54b4e] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -309,7 +308,6 @@ const Chart = ({ gid }) => {
                         6
                       </Typography>
                     </div>
-                    {/* /// 7   //// */}
                     <div
                       id={`seven${indexi}`}
                       className={`${(i?.tr41_slot_id - 1)?.toString() === "7"
@@ -318,7 +316,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody ${(i?.tr41_slot_id - 1)?.toString() === "7"
+                        className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() === "7"
                           ? "!bg-[#4af499] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -336,7 +334,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody  ${(i?.tr41_slot_id - 1)?.toString() === "8"
+                        className={`circleNumberbody-number  ${(i?.tr41_slot_id - 1)?.toString() === "8"
                           ? "!bg-[#eb494c] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -354,7 +352,7 @@ const Chart = ({ gid }) => {
                         }`}
                     >
                       <Typography
-                        className={`circleNumberbody  ${(i?.tr41_slot_id - 1)?.toString() === "9"
+                        className={`circleNumberbody-number  ${(i?.tr41_slot_id - 1)?.toString() === "9"
                           ? "!bg-[#4cf199] !text-white !font-bold"
                           : "!bg-white !text-black !border-[1px] !border-black !opacity-20"
                           }`}
@@ -364,7 +362,7 @@ const Chart = ({ gid }) => {
                       </Typography>
                     </div>
                     <Typography
-                      className={`circleNumberbody ${(i?.tr41_slot_id - 1)?.toString() <= 4
+                      className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() <= 4
                         ? "!bg-[#468ce8] "
                         : "!bg-[#df4be1]"
                         }  !h-[20px] !w-[20px] !rounded-full !text-center !text-white `}
