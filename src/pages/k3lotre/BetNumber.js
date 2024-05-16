@@ -108,8 +108,9 @@ const BetNumber = ({ gid }) => {
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
   const generatenumber = () => {
-    const randomBitNumber = Math.floor(Math.random() *10)+1;
+    const randomBitNumber = Math.floor(Math.random() *9)+1;
     setRandomNumber(randomBitNumber);
+    setSelectNumber(`${randomBitNumber}`)
     setOpen(true)
   }
   const handleClose = () => {

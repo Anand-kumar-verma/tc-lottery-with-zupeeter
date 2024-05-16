@@ -56,6 +56,15 @@ function Wingo() {
   );
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+   const generatenumber = () => {
+    const randomBitNumber = Math.floor(Math.random() *9)+1;
+    setRandomNumber(randomBitNumber);
+    setSelectNumber(`${randomBitNumber}`)
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   return (
     <Container>

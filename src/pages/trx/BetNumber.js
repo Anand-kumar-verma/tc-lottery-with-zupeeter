@@ -33,6 +33,7 @@ const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
+  const [random, setRandomNumber] = useState(null)
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const client = useQueryClient();
@@ -102,6 +103,15 @@ const BetNumber = ({ gid }) => {
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
+  const generatenumber = () => {
+    const randomBitNumber = Math.floor(Math.random() *9)+1;
+    setRandomNumber(randomBitNumber);
+    setSelectNumber(`${randomBitNumber}`)
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  }
   return (
     <Box
       sx={{
@@ -265,7 +275,7 @@ const BetNumber = ({ gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined">Random</Button>
+          <Button variant="outlined" onClick={generatenumber}>Random</Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return <Box sx={style.bacancebtn3}>X{i}</Box>;
           })}
@@ -282,7 +292,8 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("one");
             }}
           >
-           Samll
+          
+          Big
           </Button>
           <Button
             sx={style.smlbtn}
@@ -291,7 +302,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("two");
             }}
           >
-           Big
+          Small
           </Button>
         </ButtonGroup>
       </div>
@@ -305,7 +316,7 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-      >
+        onClickCapture={handleClose} >
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -363,7 +374,7 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select Green
+              Select {random}
             </Typography>
           </Box>
           <Box mt={5} px={2}>
