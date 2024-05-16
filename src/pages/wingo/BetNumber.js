@@ -294,7 +294,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("one");
             }}
           >
-            One
+            Small
           </Button>
           <Button
             sx={style.smlbtn}
@@ -303,7 +303,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("two");
             }}
           >
-            Two
+            Big
           </Button>
         </ButtonGroup>
       </div>

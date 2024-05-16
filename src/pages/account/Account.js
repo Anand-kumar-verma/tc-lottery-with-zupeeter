@@ -95,9 +95,11 @@ function Account() {
                 <Typography>Withdraw</Typography>
               </Box>
             </NavLink>
-            <Box className="flex flex-col justify-center cursor-pointer items-center" onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}>
+            <Box className="flex flex-col justify-center cursor-pointer items-center" 
+            onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
+            >
               <Typography><img src={trx} alt="" className="w-16" /></Typography>
-              <Typography className="!ml-5">USTD</Typography>
+              <Typography className="!ml-5">USDT</Typography>
             </Box>
           </Box>
         </Box>
@@ -133,7 +135,8 @@ function Account() {
 
       </Box>
       <Box className="flex justify-center gap-2 border-b-2 p-2 m-3 py-5 bg-white shadow rounded-lg "
-        onClick={() => navigate("/account/Teamincome")}>
+        onClick={() => navigate("/account/Teamincome")}
+        >
         <Typography> <GroupAddRounded className="text-[#F48901] !mt-1" /></Typography>
         <Typography className="!mt-1 !text-lg text-gray-700"> Team/Income</Typography>
       </Box>

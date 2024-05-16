@@ -2,7 +2,7 @@ export const domain = "https://sun-lottery-timer-tlhr.onrender.com/";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
-// export const baseUrl = "https://admin.zupeeter.com";
+// export const baseUrl = "min.righttime.fun";
 export const baseUrl = "https://webs.ferryinfotech.in";
 
 export const endpoint = {
