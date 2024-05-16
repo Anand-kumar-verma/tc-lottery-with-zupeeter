@@ -14,7 +14,6 @@ import banner2 from "../../assets/images/banner2.jpg";
 import banner3 from "../../assets/images/banner3.jpg";
 import banner4 from "../../assets/images/banner4.jpg";
 import banner5 from "../../assets/images/banner5.jpg";
-import banner6 from "../../assets/images/banner6.jpg";
 import banner7 from "../../assets/images/banner7.jpg";
 import crown1 from "../../assets/images/crown1.png";
 import crown2 from "../../assets/images/crown2.png";
@@ -36,10 +35,7 @@ import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
 import Layout from "../../component/layout/Layout";
-import {
-  TopWinner,
-  checkTokenValidity
-} from "../../services/apiCallings";
+import { TopWinner, checkTokenValidity } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
@@ -110,9 +106,6 @@ function Dashboard() {
         </SwiperSlide>
         <SwiperSlide>
           <Box component="img" src={banner5} sx={style.banner}></Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box component="img" src={banner6} sx={style.banner}></Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box component="img" src={banner7} sx={style.banner}></Box>

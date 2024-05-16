@@ -116,11 +116,15 @@ const BetNumber = ({ gid }) => {
 
   if (loding) return <CustomCircularProgress isLoading={loding} />;
   const generatenumber = () => {
-    const randomBitNumber = Math.floor(Math.random() *9)+1;
-    setRandomNumber(randomBitNumber);
-    setSelectNumber(`${randomBitNumber}`)
-    setOpen(true)
-  }
+    const randomBitNumber = Math.floor(Math.random() * 9) + 1;
+    setLoding(true);
+    setTimeout(() => {
+      setLoding(false);
+      setRandomNumber(randomBitNumber);
+      setSelectNumber(`${randomBitNumber}`);
+      setOpen(true);
+    }, 2000);
+  };
   const handleClose = () => {
     setOpen(false);
   }
@@ -304,7 +308,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("one");
             }}
           >
-         Big
+            Small
           </Button>
           <Button
             sx={style.smlbtn}
@@ -313,7 +317,7 @@ const BetNumber = ({ gid }) => {
               setSelectNumber("two");
             }}
           >
-           Small
+            Big
           </Button>
         </ButtonGroup>
       </div>
