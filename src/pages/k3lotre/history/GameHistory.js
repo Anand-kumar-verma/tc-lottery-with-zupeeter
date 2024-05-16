@@ -182,7 +182,7 @@ const GameHistory = ({ gid }) => {
                       <span>
                         Odd
                       </span>
-                      <span>Eve</span>
+                      <span>Even</span>
                     </div>
                   </TableCell>
 
