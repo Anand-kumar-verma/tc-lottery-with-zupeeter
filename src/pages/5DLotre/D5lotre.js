@@ -20,7 +20,7 @@ import K31Min from "./component/K31Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
 
-function K3() {
+function D5lotre() {
   const [musicicon, setmusicicon] = useState(true)
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
@@ -203,7 +203,7 @@ function K3() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-             k3 Lotre
+            5D Lotre
             </Typography>
             <Typography variant="body1" color="initial">
               1 Min
@@ -217,7 +217,7 @@ function K3() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-            k3 Lotre
+            5D Lotre
             </Typography>
             <Typography variant="body1" color="initial">
               3 Min
@@ -231,7 +231,7 @@ function K3() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-            k3 Lotre
+            5D Lotre
             </Typography>
             <Typography variant="body1" color="initial">
               5 Min
@@ -245,7 +245,7 @@ function K3() {
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
-            k3 Lotre
+            5D Lotre
             </Typography>
             <Typography variant="body1" color="initial">
               10 Min
@@ -275,7 +275,7 @@ function K3() {
   );
 }
 
-export default K3;
+export default D5lotre;
 
 const style = {
   withdrawalbtn: {

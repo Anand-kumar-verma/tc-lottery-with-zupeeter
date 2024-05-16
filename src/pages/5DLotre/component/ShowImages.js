@@ -13,24 +13,13 @@ const ShowImages = () => {
 
   return (
     <>
-      <div className="border-8 border-[#00b977] bg-black ">
-        <div className="grid grid-cols-3 gap-4  m-2">
-          <Box
-            component="img"
-            className=" "
-            src={p1}
-          ></Box>
-          <Box
-            component="img"
-            src={p2}
-            className=" "
-          ></Box>
-          <Box
-            component="img"
-            src={p3}
-            className=""
-          ></Box>
-
+      <div className="border-8 border-[#00b977] bg-black mt-5 rounded-lg ">
+        <div className="flex justify-center gap-1">
+          <p className="border-black border my-2  bg-green-400 px-7 py-5 rounded-full">1</p>
+          <p className="border-black border my-2  bg-gray-300 px-7 py-5 rounded-full">2</p>
+          <p className="border-black border my-2  bg-gray-300 px-7 py-5 rounded-full">3</p>
+          <p className="border-black border my-2  bg-gray-300 px-7 py-5 rounded-full">4</p>
+          <p className="border-black border my-2  bg-gray-300 px-7 py-5 rounded-full">5</p>
         </div>
       </div>
 

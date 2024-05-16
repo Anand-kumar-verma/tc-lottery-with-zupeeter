@@ -60,6 +60,7 @@ import SplashScreen from "./SplashScreen";
 import TeamIncome from "./pages/account/TeamIncome";
 import { TeamsubFunction } from "./services/apiCallings";
 import { useQuery } from "react-query";
+import D5lotre from "./pages/5DLotre/D5lotre";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -101,6 +102,7 @@ useQuery(["team_count"], () => TeamsubFunction(), {
       <Route path="/wingo" element={<Wingo />}></Route>
       <Route path="/trx" element={<TRX />}></Route>
       <Route path="/k3" element={<K3 />}></Route>
+      <Route path="/D5lotre" element={<D5lotre />}></Route>
       <Route path="/CustomerService" element={<Contactus />}></Route>
       <Route path="/ServiceCollections" element={<ServiceCollection />}></Route>
       <Route path="/supportPage" element={<SupportPage />}></Route>

@@ -189,6 +189,22 @@ button {
     font-weight: 700;
 }
 
+.D5 {
+    background: #ceced8 !important;
+    border-radius: 19px 19px 0 0;
+    color: #fff!important;
+    font-size: 24px !important; 
+   
+    padding: 10px 0px !important;
+}
+.D5active {
+    background: linear-gradient(180deg, #FF9901 0%, #E57201 100%) !important;
+    border-radius: 19px 19px 0 0 ;
+    color: white !important;
+    font-size: 24px !important;
+   
+}
+
 .wingonav {
     display: flex;
     flex-direction: column;
