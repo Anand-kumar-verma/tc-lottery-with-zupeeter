@@ -17,6 +17,9 @@ import { NavLink } from "react-router-dom";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import Howtoplay from "./Howtoplay";
+import Same2 from "./Same2";
+import Same3 from "./Same3";
+import Different from "./Different";
 
 
 function Wingo5Min() {
@@ -138,7 +141,11 @@ function Wingo5Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-
+  const [bettype, setbettype] = useState(1);
+ 
+  const handleChangebet = (newValue) => {
+    setbettype(newValue);
+  };
   return (
     <Box>
       {React.useMemo(() => {
@@ -171,7 +178,7 @@ function Wingo5Min() {
               }}
               className="win-banner"
             >
-            {React.useMemo(() => {
+          {React.useMemo(() => {
                 return (
                   <>
                     <Stack direction="row" alignItems="center">
@@ -206,29 +213,22 @@ function Wingo5Min() {
               }, [next_step])}
             </Box>
             <Box>
-              <NavLink to='/trx/tron-scan'>
-                <Button
-                  variant="text"
-                  color="primary"
-                  className="htpbutton3"
-                >Public Chain Query
-                </Button>
-              </NavLink>
+            <Typography className="text-gray-500" > Time remaining </Typography>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-                    <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_min?.substring(0, 1)}
                     </Box>
-                    <Box className="timer1">
+                    <Box className="timer1 !text-[#00b977]">
                       {" "}
                       {show_this_three_min_time_min?.substring(1, 2)}
                     </Box>
-                    <Box className={"timer1"}>:</Box>
-                    <Box className="timer1">
+                    <Box className={"timer1 !text-[#00b977]"}>:</Box>
+                    <Box className="timer1 !text-[#00b977]">
                       {show_this_three_min_time_sec?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer2 !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -240,8 +240,35 @@ function Wingo5Min() {
             return <ShowImages />;
           }, [])}
         </Box>
+        <Stack direction="row" justifyContent="space-between" mt={2}>
+            <Button
+              className={bettype === 1 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(1)}
+            >Total </Button>
+         
+          <Button
+              className={bettype === 2 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(2)}
+            >2same </Button>
+
+             <Button
+              className={bettype === 3 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(3)}
+            >  3same </Button>
+
+           <Button
+              className={bettype === 4 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(4)}
+            >Differents</Button>
+          </Stack>
+
+       
         <div className="relative">
-          <BetNumber gid={"3"} />
+          {bettype === 1 && <BetNumber gid={"1"} />}
+          {bettype === 2 && <Same2 gid={"1"} />}
+          {bettype === 3 && <Same3 gid={"1"} />}
+          {bettype === 4 && <Different gid={"1"} />}
+        
           {fk.values.openTimerDialog && (
             <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
               <div
