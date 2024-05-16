@@ -25,6 +25,8 @@ import MyHistory from "../history/MyHistory";
 import Howtoplay from "./Howtoplay";
 import ShowImages from "./ShowImages";
 import Same2 from "./Same2";
+import Same3 from "./Same3";
+import Different from "./Different";
 ////
 function K31Min() {
   const [open, setOpen] = useState(false);
@@ -112,7 +114,7 @@ function K31Min() {
     setValue(newValue);
   };
 
-  
+
   const handleChangebet = (newValue) => {
     setbettype(newValue);
   };
@@ -223,70 +225,35 @@ function K31Min() {
           }, [])}
         </Box>
         <div>
-          <Box
-            sx={{
-              width: "95%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              margin: "auto",
-              background: "#ededed",
-              borderRadius: "10PX",
-              mt: 2,
-            }}
-          >
-            <Box sx={{ width: "30%" }} className="mx-2">
-              <NavLink
-                className={value === 1}
-                onClick={() => handleChangebet(1)}
-              >
 
-                <Typography className=" bg-orange-400 text-white  text-center p-2">
-                  Total
-                </Typography>
+          <Stack direction="row" justifyContent="space-between" mt={2}>
+            <Button
+              className={bettype === 1 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(1)}
+            >Total </Button>
+         
+          <Button
+              className={bettype === 2 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(2)}
+            >2same </Button>
 
-              </NavLink>
-            </Box>
-            <Box sx={{ width: "30%" }} className="mx-2">
-              <NavLink
-                className={value === 2}
-                onClick={() => handleChangebet(2)}
-              >
+             <Button
+              className={bettype === 3 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(3)}
+            >  3same </Button>
 
-                <Typography className=" bg-orange-400 text-white  text-center p-2">
-                  2same
-                </Typography>
+           <Button
+              className={bettype === 4 ? " k3active k3" : " k3"}
+              onClick={() => handleChangebet(4)}
+            >Differents</Button>
+          </Stack>
 
-              </NavLink>
-            </Box>
-            <Box sx={{ width: "30%" }} className="mx-2">
-              <NavLink
-                className={value === 3}
-                onClick={() => handleChangebet(3)}
-              >
-
-                <Typography className=" bg-orange-400 text-white  text-center p-2">
-                  3same
-                </Typography>
-
-              </NavLink>
-            </Box>
-            <Box sx={{ width: "30%" }} className="mx-2">
-              <NavLink
-                className={value === 4}
-                onClick={() => handleChangebet(4)}
-              >
-
-                <Typography className=" rounded bg-orange-400 text-white  text-center p-2">
-                  Differents  </Typography>
-
-              </NavLink>
-            </Box>
-          </Box>
         </div>
         <div className="relative">
-          {bettype===1 && <BetNumber gid={"1"} />}
-          {bettype===2 && <Same2 gid={"1"} />}
+          {bettype === 1 && <BetNumber gid={"1"} />}
+          {bettype === 2 && <Same2 gid={"1"} />}
+          {bettype === 3 && <Same3 gid={"1"} />}
+          {bettype === 4 && <Different gid={"1"} />}
           {fk.values.openTimerDialog && (
             <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
               <div

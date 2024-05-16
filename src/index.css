@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.blinking{
+  animation:blinker is linear infinite
+}
+@keyframes blinker{
+  50% {
+    opacity: 0;
+  }
+}
 .error {
   color: red;
   font-size: 0.8rem;
