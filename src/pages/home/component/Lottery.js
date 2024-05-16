@@ -49,7 +49,7 @@ function lottery() {
                     </Box>
                 </Box>
             </NavLink>
-            <NavLink to='/k3'>
+            <NavLink to='/comingsoon'>
                 <Box sx={style.winbox}>
                     <Box component='img' src={win2} sx={{ width: '100%', height: '70%' }}></Box>
                     <Box sx={style.positiongame}>
