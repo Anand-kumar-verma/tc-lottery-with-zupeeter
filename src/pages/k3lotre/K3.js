@@ -202,10 +202,10 @@ function K3() {
             onClick={() => handleChange(1)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
              k3 Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               1 Min
             </Typography>
           </NavLink>
@@ -216,10 +216,10 @@ function K3() {
             onClick={() => handleChange(2)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             k3 Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               3 Min
             </Typography>
           </NavLink>
@@ -230,10 +230,10 @@ function K3() {
             onClick={() => handleChange(3)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             k3 Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               5 Min
             </Typography>
           </NavLink>
@@ -244,10 +244,10 @@ function K3() {
             onClick={() => handleChange(4)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             k3 Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               10 Min
             </Typography>
           </NavLink>

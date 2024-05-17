@@ -173,7 +173,7 @@ button {
     width: 100%;
 }
 .k3 {
-    background: #ffffff !important;
+    background: white !important;
     border-radius: 10px;
     color: rgb(154 154 154) !important;
     font-size: 12px !important;
@@ -184,7 +184,7 @@ button {
 .k3active {
     background: linear-gradient(180deg, #FF9901 0%, #E57201 100%) !important;
     border-radius: 10px;
-    color: white !important;
+    color: gray !important;
     font-size: 12px !important;
     font-weight: 700;
 }
