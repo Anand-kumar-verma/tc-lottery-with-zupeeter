@@ -8,7 +8,7 @@ import p5 from "../../../assets/images/n4.png";
 
 const ShowImages = () => {
 
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(40);
   const [i, setI] = useState([1, 2, 3, 4, 5]);
   const image_arary = [
     p1,
@@ -88,8 +88,8 @@ const ShowImages = () => {
   }, [image_scroll.length]);
   return (
     <>
-            <div>Time left: {timer} seconds</div>
-      <div className="border-8 border-[#00b977] !h-36 my-4  p-1 rounded-lg !overflow-hidden bg-[#00b977] " >
+     <div>Time left: {timer} seconds</div>
+      <div className="border-8 border-[#00b977] !h-32 my-4  p-1 rounded-lg !overflow-hidden bg-[#00b977] " >
         <div className="grid grid-cols-3 " >
           <div className="flex flex-col gap-1 justify-start" > 
            <Box

@@ -226,9 +226,9 @@ function K31Min() {
         </Box>
         <div>
 
-          <Stack direction="row" justifyContent="space-between" mt={2}>
+          <Box className="!flex !justify-center !mx-2 " >
             <Button
-              className={bettype === 1 ? " k3active k3" : " k3"}
+              className={bettype === 1 ? " k3active k3" : " k3 "} 
               onClick={() => handleChangebet(1)}
             >Total </Button>
          
@@ -246,7 +246,7 @@ function K31Min() {
               className={bettype === 4 ? " k3active k3" : " k3"}
               onClick={() => handleChangebet(4)}
             >Differents</Button>
-          </Stack>
+          </Box>
 
         </div>
         <div className="relative">
