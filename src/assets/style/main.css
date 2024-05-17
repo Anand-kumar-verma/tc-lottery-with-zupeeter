@@ -485,3 +485,39 @@ button {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+.stuff p {
+    padding: 30px 0;
+    font-family: sans-serif;
+    font-size: 30px;
+  }
+  .totop {
+    border: none;
+    outline: none;
+    position: fixed;
+    right: 0;
+    bottom: 30px;
+    background: none;
+    padding: 30px 30px;
+    border-radius: 50%;
+  }
+  .totop:before {
+    font-family: FontAwesome;
+    content: "\f106";
+    font-size: 70px;
+    color: #fff;
+    padding: 0px 15px 3px;
+    display: block;
+    vertical-align: middle;
+    align-content: center;
+    position: fixed;
+    right: 0;
+    bottom: 30px;
+    background: #00f;
+    border: none;
+    border-radius: 50%;
+    transition: right 0.5s ease;
+  }
+  .hidetop:before {
+    right: -200px;
+  }
+  
