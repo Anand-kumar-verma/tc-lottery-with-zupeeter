@@ -1,43 +1,46 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  Stack,
+  Typography
+} from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
+import trxbg from "../../../assets/images/trxbg.png";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
+import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import ShowImages from "./ShowImages";
-import BetNumber from "../BetNumber";
-import { NavLink } from "react-router-dom";
-import timerbg1 from "../../../assets/images/timerbg.png";
-import timerbg2 from "../../../assets/images/timerbg2.png";
 import Howtoplay from "./Howtoplay";
+import ShowImages from "./ShowImages";
 import Same2 from "./Same2";
 import Same3 from "./Same3";
 import Different from "./Different";
-
-
-function Wingo3Min() {
+////
+function K31Min() {
   const [open, setOpen] = useState(false);
   const socket = useSocket();
-  const client = useQueryClient();
-  const [three_min_time, setThree_min_time] = useState("0_0");
+  const dispatch = useDispatch();
   const [value, setValue] = useState(1);
+  const [bettype, setbettype] = useState(1);
+  const [one_min_time, setOne_min_time] = useState(0);
+  const show_this_one_min_time = String(one_min_time).padStart(2, "0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
+  const client = useQueryClient();
   const next_step = useSelector((state) => state.aviator.next_step);
-  const dispatch = useDispatch();
-  const [bettype, setbettype] = useState(1);
- 
-  const handleChangebet = (newValue) => {
-    setbettype(newValue);
-  };
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -45,17 +48,6 @@ function Wingo3Min() {
   const handleClose = () => {
     setOpen(false);
   };
-
-
-  const show_this_three_min_time_sec = React.useMemo(
-    () => String(three_min_time?.split("_")?.[1]).padStart(2, "0"),
-    [three_min_time]
-  );
-
-  const show_this_three_min_time_min = React.useMemo(
-    () => String(three_min_time?.split("_")?.[0]).padStart(2, "0"),
-    [three_min_time]
-  );
 
   const initialValue = {
     openTimerDialog: false,
@@ -66,58 +58,30 @@ function Wingo3Min() {
   });
 
   React.useEffect(() => {
-    const handleThreeMin = (threemin) => {
-      setThree_min_time(threemin);
-      if (
-        threemin?.split("_")?.[1] === "1" &&
-        threemin?.split("_")?.[0] === "0"
-      )
-        handlePlaySoundLast();
-      if (
-        Number(threemin?.split("_")?.[1]) <= 10 &&
-        Number(threemin?.split("_")?.[1]) > 1 && // 1 index means second
-        threemin?.split("_")?.[0] === "0" // 0 index means min
-      ) {
+    const handleOneMin = (onemin) => {
+      setOne_min_time(onemin);
+      // fk.setFieldValue("show_this_one_min_time", onemin);
+      if (onemin === 1) handlePlaySoundLast();
+      if ([5, 4, 3, 2].includes(onemin)) {
         handlePlaySound();
       }
 
-      if (
-        Number(threemin?.split("_")?.[1]) <= 10 && // 1 index means second
-        threemin?.split("_")?.[0] === "0" // 0 index means min
-      ) {
+      if (onemin <= 5) {
         fk.setFieldValue("openTimerDialog", true);
       }
-      if (threemin?.split("_")?.[1] === "59") {
+      if (onemin === 59) {
         fk.setFieldValue("openTimerDialog", false);
       }
-      if (
-        threemin?.split("_")?.[1] === "25" &&
-        threemin?.split("_")?.[0] === "0"
-      ) {
-        // oneMinCheckResult();
-        // oneMinColorWinning();
-      }
-      if (
-        threemin?.split("_")?.[1] === "59" &&
-        threemin?.split("_")?.[0] === "3"
-      ) {
-        fk.setFieldValue("openTimerDialog", false);
-      }
-      if (
-        threemin?.split("_")?.[1] === "56" &&
-        threemin?.split("_")?.[0] === "3"
-      ) {
+      if (onemin === 56) {
         client.refetchQueries("myAll_trx_history");
-        client.refetchQueries("trx_gamehistory");
         client.refetchQueries("wallet_amount");
+        client.refetchQueries("trx_gamehistory");
         dispatch(dummycounterFun());
       }
     };
-
-    socket.on("threemintrx", handleThreeMin);
-
+    socket.on("onemintrx", handleOneMin);
     return () => {
-      socket.off("threemintrx", handleThreeMin);
+      socket.off("onemintrx", handleOneMin);
     };
   }, []);
 
@@ -146,9 +110,13 @@ function Wingo3Min() {
     }
   };
 
-
   const handleChange = (newValue) => {
     setValue(newValue);
+  };
+
+
+  const handleChangebet = (newValue) => {
+    setbettype(newValue);
   };
 
   return (
@@ -166,10 +134,31 @@ function Wingo3Min() {
         );
       }, [audioRefMusic, audioRefMusiclast])}
       <Box sx={{ px: 1, mt: 3 }}>
-        <Box
-          className="countdownbgtrx"
-         
-        >
+      
+          <Box
+          className="flex flex-col justify-center bg-white shadow-2xl my-4 rounded-lg"
+          >
+           <Box className="flex justify-center gap-2 w-full  ">
+              
+                <p className="border-black border my-2  bg-gray-300 px-4 py-2 rounded-full">1</p> 
+                <p className="border-black border my-2  bg-gray-300 px-4 py-2 rounded-full">2</p> 
+                <p className="border-black border my-2  bg-gray-300 px-4 py-2 rounded-full">3</p> 
+                <p className="border-black border my-2  bg-gray-300 px-4 py-2 rounded-full">4</p>
+                <p className="border-black border my-2  bg-gray-300 px-4 py-2 rounded-full">5</p>
+                 <p className="my-2  py-2 ">=</p> <p className="my-2  bg-orange-300 px-4 rounded-full py-2 ">6</p>
+              </Box>
+              <Box className="flex justify-start ml-10 mb-5 gap-10 w-96">
+               <p className="">A</p> 
+              <p className="">A</p> 
+              <p className="">A</p> 
+              <p className="">A</p>
+              <p className="">A</p>
+            </Box>
+           
+
+          </Box>
+          <Box
+          className="countdownbgtrx bg-white shadow-2xl rounded-lg p-2">
           <Box
             sx={{
               display: "flex",
@@ -183,7 +172,7 @@ function Wingo3Min() {
               }}
               className="win-banner"
             >
-          {React.useMemo(() => {
+              {React.useMemo(() => {
                 return (
                   <>
                     <Stack direction="row" alignItems="center">
@@ -217,56 +206,74 @@ function Wingo3Min() {
                 );
               }, [next_step])}
             </Box>
-            <Box>
-            <Typography className="text-gray-500" > Time remaining </Typography>
+            <Box className="!text-[#00b977] ">
+              <Typography className="text-gray-500" > Time remaining </Typography>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-                    <Box className="timer !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
-                      {show_this_three_min_time_min?.substring(0, 1)}
+                    <Box
+                      className="timer !text-[#00b977] "
+                      sx={{
+                        backgroundImage: `url(${timerbg1})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      0
                     </Box>
-                    <Box className="timer1 !text-[#00b977]">
-                      {" "}
-                      {show_this_three_min_time_min?.substring(1, 2)}
+                    <Box className="timer1 !text-[#00b977] ">0</Box>
+                    <Box className={"timer1 !text-[#00b977] "} >:</Box>
+                    <Box className="timer1 !text-[#00b977] ">
+                      {show_this_one_min_time?.substring(0, 1)}
                     </Box>
-                    <Box className={"timer1 !text-[#00b977]"}>:</Box>
-                    <Box className="timer1 !text-[#00b977]">
-                      {show_this_three_min_time_sec?.substring(0, 1)}
-                    </Box>
-                    <Box className="timer2 !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
-                      {show_this_three_min_time_sec?.substring(1, 2)}
+                    <Box
+                      className="timer2 !text-[#00b977] "
+                      sx={{
+                        backgroundImage: `url(${timerbg2})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      {show_this_one_min_time?.substring(1, 2)}
                     </Box>
                   </Stack>
                 );
-              }, [show_this_three_min_time_sec])}
+              }, [show_this_one_min_time])}
             </Box>
           </Box>
           {React.useMemo(() => {
             return <ShowImages />;
           }, [])}
         </Box>
-        <Stack direction="row" justifyContent="space-between" mt={2}>
+        <div>
+
+          <Stack direction="row" justifyContent="space-evenly"  mt={2}>
             <Button
-              className={bettype === 1 ? " k3active k3" : " k3"}
+              className={bettype === 1 ? " D5active D5" : " D5"}
               onClick={() => handleChangebet(1)}
-            >Total </Button>
-         
-          <Button
-              className={bettype === 2 ? " k3active k3" : " k3"}
+            >A </Button>
+
+            <Button
+              className={bettype === 2 ? " D5active D5" : " D5"}
               onClick={() => handleChangebet(2)}
-            >2same </Button>
+            >B </Button>
 
-             <Button
-              className={bettype === 3 ? " k3active k3" : " k3"}
+            <Button
+              className={bettype === 3 ? " D5active D5" : " D5"}
               onClick={() => handleChangebet(3)}
-            >  3same </Button>
+            >  C </Button>
 
-           <Button
-              className={bettype === 4 ? " k3active k3" : " k3"}
+            <Button
+              className={bettype === 4 ? " D5active D5" : " D5"}
               onClick={() => handleChangebet(4)}
-            >Differents</Button>
+            >D</Button>
+               <Button
+              className={bettype === 4 ? " D5active D5" : " D5"}
+              onClick={() => handleChangebet(4)}
+            >SUM</Button>
           </Stack>
-      
+
+        </div>
         <div className="relative">
           {bettype === 1 && <BetNumber gid={"1"} />}
           {bettype === 2 && <Same2 gid={"1"} />}
@@ -292,7 +299,7 @@ function Wingo3Min() {
                   }}
                   className="!bg-[#F48901]  !text-white"
                 >
-                  {show_this_three_min_time_sec?.substring(0, 1)}
+                  {show_this_one_min_time?.substring(0, 1)}
                 </div>
                 <div
                   style={{
@@ -308,7 +315,7 @@ function Wingo3Min() {
                   }}
                   className="!bg-[#F48901]  !text-white"
                 >
-                  {show_this_three_min_time_sec?.substring(1, 2)}
+                  {show_this_one_min_time?.substring(1, 2)}
                 </div>
               </div>
             </div>
@@ -340,14 +347,35 @@ function Wingo3Min() {
             My history
           </Button>
         </Stack>
-        {value === 1 && <GameHistory gid="2" />}
-        {value === 2 && <Chart gid="2" />}
-        {value === 3 && <MyHistory gid="2" />}
+        {value === 1 && <GameHistory gid="1" />}
+        {value === 2 && <Chart gid="1" />}
+        {value === 3 && <MyHistory gid="1" />}
       </Box>
-      <Dialog sx={{ maxWidth: '400px !important', minWidth: '400px !important', margin: 'auto', minHeight: '70%', maxHeight: '80%', }} open={open} >
+   
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
         <Howtoplay />
-        <DialogActions sx={{ margin: 'auto', width: '100%' }}>
-          <Button disableElevation onClick={handleClose} autoFocus variant="contained" sx={{ color: 'white', borderRadius: '20px', width: '60%', margin: 'auto' }}>
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
             Close
           </Button>
         </DialogActions>
@@ -356,5 +384,13 @@ function Wingo3Min() {
   );
 }
 
-export default Wingo3Min;
+export default K31Min;
 
+const style = {
+  pilwal: {
+    color: "#686868",
+    fontSize: "13px",
+    fontWeight: 600,
+    fontFamily: "sans-serif !important",
+  },
+};

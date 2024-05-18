@@ -3,6 +3,7 @@ import {
   Button,
   ButtonGroup,
   Checkbox,
+  Dialog,
   Drawer,
   Grid,
   Stack,
@@ -29,13 +30,15 @@ import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import { NavLink } from "react-router-dom";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
-  const [random, setRandomNumber] = useState(null);
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
+  const [random, setRandomNumber] = useState(null)
+  const [isBlinking, setIsBlinking] = useState(false)
   const client = useQueryClient();
   const initialValue = {
     balance: "1",
@@ -66,14 +69,13 @@ const BetNumber = ({ gid }) => {
       amount: (
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
       )?.toString(),
-      number: `${
-        (selectNumber === "green" && 11) ||
+      number: `${(selectNumber === "green" && 11) ||
         (selectNumber === "voilet" && 12) ||
         (selectNumber === "red" && 13) ||
         (selectNumber === "two" && 15) || // this is big
         (selectNumber === "one" && 14) || // this is small
         Number(selectNumber) + 1
-      }`,
+        }`,
       gameid: `${Number(gid)}`,
     };
 
@@ -107,17 +109,14 @@ const BetNumber = ({ gid }) => {
 
   const generatenumber = () => {
     const randomBitNumber = Math.floor(Math.random() * 9) + 1;
-    setLoding(true);
-    setTimeout(() => {
-      setLoding(false);
-      setRandomNumber(randomBitNumber);
-      setSelectNumber(`${randomBitNumber}`);
-      setOpen(true);
-    }, 2000);
-  };
+    setRandomNumber(randomBitNumber);
+    setSelectNumber(`${randomBitNumber}`)
+    setIsBlinking(!isBlinking);
+    setOpen(true)
+  }
   const handleClose = () => {
     setOpen(false);
-  };
+  }
   return (
     <Box
       sx={{
@@ -125,173 +124,121 @@ const BetNumber = ({ gid }) => {
         background: "#FFFFFF",
         mt: 2,
         borderRadius: "10px",
-        boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;",
+
       }}
     >
+
       <div>
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("green");
-            }}
-            className="greenbtn"
-          >
-            Green
-          </Button>
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("voilet");
-            }}
-            className="violetbtn"
-          >
-            Violet
-          </Button>
-          <Button
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("red");
-            }}
-            className="redbtn"
-          >
-            Red
-          </Button>
-        </Stack>
+
         <Box
           sx={{
-            background: "#EEEEEE",
-            padding: "8px 8px 0px 8px",
-            display: "flex",
+            background: "#",
+            padding: "0px 8px 0px 8px",
             alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
             borderRadius: "10px",
             mt: 2,
           }}
+          className="grid grid-cols-4 justify-center"
         >
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={zero}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
             onClick={() => {
               setOpen(true);
               setSelectNumber("0");
-            }}
-            className="!cursor-pointer"
-          ></Box>
+            }}>1</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={one}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("1");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >2</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={two}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("2");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >3</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={three}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("3");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >4</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={four}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("4");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >5</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={five}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("5");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >6</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={six}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("6");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >7</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={seven}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("7");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >8</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={eight}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
               setSelectNumber("8");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >9</Box>
           <Box
-            sx={{ width: "17%", mb: 1 }}
-            component="img"
-            src={nine}
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
             onClick={() => {
               setOpen(true);
-              setSelectNumber("9");
+              setSelectNumber("10");
             }}
-            className="!cursor-pointer"
-          ></Box>
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >10</Box>
+          <Box
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("10");
+            }}
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >11</Box>
+          <Box
+            sx={{ width: "52%", m: 1, cursor: "pointer" }}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("10");
+            }}
+            className="border-black border  bg-gray-200 px-4 py-2 rounded-full"
+          >12</Box>
+
         </Box>
-        <Stack
-          direction="row"
-          my={1}
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Button variant="outlined" onClick={generatenumber}>
-            Random 
-          </Button>
-          {[1, 5, 10, 20, 50, 100]?.map((i) => {
-            return <Box 
-            className="cursor-pointer"
-            onClick={() => fk.setFieldValue("qnt", i)}
-            sx={style.bacancebtn3}>X{i}</Box>;
-          })}
-        </Stack>
-        <ButtonGroup
+
+        {/* <ButtonGroup
           disableElevation
           variant="contained"
           sx={{ width: "100%" }}
@@ -314,7 +261,7 @@ const BetNumber = ({ gid }) => {
           >
             Big
           </Button>
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
 
       <Drawer
@@ -326,8 +273,7 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-        // onClickCapture={handleClose}
-      >
+        onClickCapture={handleClose}>
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -341,26 +287,26 @@ const BetNumber = ({ gid }) => {
             }}
             className={
               selectNumber === "green" ||
-              selectNumber === "1" ||
-              selectNumber === "3" ||
-              selectNumber === "7" ||
-              selectNumber === "9"
+                selectNumber === "1" ||
+                selectNumber === "3" ||
+                selectNumber === "7" ||
+                selectNumber === "9"
                 ? "!bg-[#40AD72]"
                 : selectNumber === "voilet"
-                ? "!bg-[#B659FE]"
-                : selectNumber === "red" ||
-                  selectNumber === "2" ||
-                  selectNumber === "4" ||
-                  selectNumber === "6" ||
-                  selectNumber === "8"
-                ? "!bg-[#FD565C]"
-                : selectNumber === "one"
-                ? "!bg-[#F48901]"
-                : selectNumber === "two"
-                ? "!bg-[#6DA7F4]"
-                : selectNumber === "0"
-                ? "!bg-[#BF6DFE]"
-                : selectNumber === "5" && "!bg-[#BF6DFE]"
+                  ? "!bg-[#B659FE]"
+                  : selectNumber === "red" ||
+                    selectNumber === "2" ||
+                    selectNumber === "4" ||
+                    selectNumber === "6" ||
+                    selectNumber === "8"
+                    ? "!bg-[#FD565C]"
+                    : selectNumber === "one"
+                      ? "!bg-[#F48901]"
+                      : selectNumber === "two"
+                        ? "!bg-[#6DA7F4]"
+                        : selectNumber === "0"
+                          ? "!bg-[#BF6DFE]"
+                          : selectNumber === "5" && "!bg-[#BF6DFE]"
             }
           >
             {" "}
@@ -385,10 +331,8 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select{" "}
-              {random || isNaN(Number(selectNumber))
-                ? selectNumber?.toString()?.toLocaleUpperCase()
-                : selectNumber}
+              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
+
             </Typography>
           </Box>
           <Box mt={5} px={2}>
@@ -410,28 +354,27 @@ const BetNumber = ({ gid }) => {
                         onClick={() => fk.setFieldValue("balance", i)}
                         sx={style.bacancebtn}
                         className={` !cursor-pointer
-                          ${
-                            selectNumber === "green" ||
+                          ${selectNumber === "green" ||
                             selectNumber === "1" ||
                             selectNumber === "3" ||
                             selectNumber === "7" ||
                             selectNumber === "9"
-                              ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet"
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "voilet"
                               ? "!bg-[#B659FE]"
                               : selectNumber === "red" ||
                                 selectNumber === "2" ||
                                 selectNumber === "4" ||
                                 selectNumber === "6" ||
                                 selectNumber === "8"
-                              ? "!bg-[#FD565C]"
-                              : selectNumber === "one"
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "two"
-                              ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0"
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "one"
+                                  ? "!bg-[#F48901]"
+                                  : selectNumber === "two"
+                                    ? "!bg-[#6DA7F4]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
                           }
                        `}
                       >
@@ -456,28 +399,27 @@ const BetNumber = ({ gid }) => {
                 >
                   <Box
                     className={` !cursor-pointer
-                      ${
-                        selectNumber === "green" ||
+                      ${selectNumber === "green" ||
                         selectNumber === "1" ||
                         selectNumber === "3" ||
                         selectNumber === "7" ||
                         selectNumber === "9"
-                          ? "!bg-[#40AD72]"
-                          : selectNumber === "voilet"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
                           ? "!bg-[#B659FE]"
                           : selectNumber === "red" ||
                             selectNumber === "2" ||
                             selectNumber === "4" ||
                             selectNumber === "6" ||
                             selectNumber === "8"
-                          ? "!bg-[#FD565C]"
-                          : selectNumber === "one"
-                          ? "!bg-[#F48901]"
-                          : selectNumber === "two"
-                          ? "!bg-[#6DA7F4]"
-                          : selectNumber === "0"
-                          ? "!bg-[#BF6DFE]"
-                          : selectNumber === "5" && "!bg-[#BF6DFE]"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "one"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "two"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "0"
+                                  ? "!bg-[#BF6DFE]"
+                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
                       }
                     `}
                     sx={style.addsumbtn}
@@ -495,29 +437,28 @@ const BetNumber = ({ gid }) => {
                   <TextField value={fk.values.qnt} className="inputamt" />
                   <Box
                     className={` !cursor-pointer
-                     ${
-                       selectNumber === "green" ||
-                       selectNumber === "1" ||
-                       selectNumber === "3" ||
-                       selectNumber === "7" ||
-                       selectNumber === "9"
-                         ? "!bg-[#40AD72]"
-                         : selectNumber === "voilet"
-                         ? "!bg-[#B659FE]"
-                         : selectNumber === "red" ||
-                           selectNumber === "2" ||
-                           selectNumber === "4" ||
-                           selectNumber === "6" ||
-                           selectNumber === "8"
-                         ? "!bg-[#FD565C]"
-                         : selectNumber === "one"
-                         ? "!bg-[#F48901]"
-                         : selectNumber === "two"
-                         ? "!bg-[#6DA7F4]"
-                         : selectNumber === "0"
-                         ? "!bg-[#BF6DFE]"
-                         : selectNumber === "5" && "!bg-[#BF6DFE]"
-                     }
+                     ${selectNumber === "green" ||
+                        selectNumber === "1" ||
+                        selectNumber === "3" ||
+                        selectNumber === "7" ||
+                        selectNumber === "9"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
+                          ? "!bg-[#B659FE]"
+                          : selectNumber === "red" ||
+                            selectNumber === "2" ||
+                            selectNumber === "4" ||
+                            selectNumber === "6" ||
+                            selectNumber === "8"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "one"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "two"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "0"
+                                  ? "!bg-[#BF6DFE]"
+                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
+                      }
                     `}
                     sx={style.addsumbtn}
                     onClick={() =>
@@ -543,28 +484,27 @@ const BetNumber = ({ gid }) => {
                         onClick={() => fk.setFieldValue("qnt", i)}
                         sx={style.bacancebtn2}
                         className={` !cursor-pointer
-                          ${
-                            selectNumber === "green" ||
+                          ${selectNumber === "green" ||
                             selectNumber === "1" ||
                             selectNumber === "3" ||
                             selectNumber === "7" ||
                             selectNumber === "9"
-                              ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet"
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "voilet"
                               ? "!bg-[#B659FE]"
                               : selectNumber === "red" ||
                                 selectNumber === "2" ||
                                 selectNumber === "4" ||
                                 selectNumber === "6" ||
                                 selectNumber === "8"
-                              ? "!bg-[#FD565C]"
-                              : selectNumber === "one"
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "two"
-                              ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0"
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "one"
+                                  ? "!bg-[#F48901]"
+                                  : selectNumber === "two"
+                                    ? "!bg-[#6DA7F4]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
                           }`}
                       >
                         X{i}
@@ -612,28 +552,27 @@ const BetNumber = ({ gid }) => {
             <Grid item xs={8}>
               <Button
                 className={`
-                  ${
-                    selectNumber === "green" ||
+                  ${selectNumber === "green" ||
                     selectNumber === "1" ||
                     selectNumber === "3" ||
                     selectNumber === "7" ||
                     selectNumber === "9"
-                      ? "!bg-[#40AD72]"
-                      : selectNumber === "voilet"
+                    ? "!bg-[#40AD72]"
+                    : selectNumber === "voilet"
                       ? "!bg-[#B659FE]"
                       : selectNumber === "red" ||
                         selectNumber === "2" ||
                         selectNumber === "4" ||
                         selectNumber === "6" ||
                         selectNumber === "8"
-                      ? "!bg-[#FD565C]"
-                      : selectNumber === "one"
-                      ? "!bg-[#F48901]"
-                      : selectNumber === "two"
-                      ? "!bg-[#6DA7F4]"
-                      : selectNumber === "0"
-                      ? "!bg-[#BF6DFE]"
-                      : selectNumber === "5" && "!bg-[#BF6DFE]"
+                        ? "!bg-[#FD565C]"
+                        : selectNumber === "one"
+                          ? "!bg-[#F48901]"
+                          : selectNumber === "two"
+                            ? "!bg-[#6DA7F4]"
+                            : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "5" && "!bg-[#BF6DFE]"
                   } !cursor-pointer`}
                 variant="contained"
                 sx={style.submitbtn}
@@ -683,7 +622,8 @@ const style = {
     alignItems: "center",
     height: "30px",
     ["@media (max-width:340px)"]: { fontSize: "13px" },
-    cursor: "pointer",
+    cursor: 'pointer',
+
   },
   addsumbtn: {
     padding: "4px 13px",

@@ -148,7 +148,8 @@ const GameHistory = ({ gid }) => {
                 }}
                 className="!text-sm  !pr-0 !pl-1"
               >
-                Sum
+                
+                Result
               </TableCell>
               <TableCell
                 sx={{
@@ -158,7 +159,7 @@ const GameHistory = ({ gid }) => {
                 }}
                 className="!text-sm  !pr-0 !pl-1"
               >
-                Result
+               Total
               </TableCell>
             </TableRow>
           </TableHead>
@@ -171,30 +172,23 @@ const GameHistory = ({ gid }) => {
           >
             {visibleRows?.map((i) => {
               return (
-                <TableRow className="!w-[95%]">
-                  <TableCell
-                    sx={{ verticalAlign: "bottom", textAlign: "center" }}
-                  >
+                <TableRow className="!w-[95%] ">
+                  <TableCell className="!text-lg"
+                    sx={{ verticalAlign: "bottom", textAlign: "center" }} >
                     <p>{i?.tr_transaction_id}</p>
                   </TableCell>
                   <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
                     <div className="flex justify-center gap-2">
-                      <span>
-                        Odd
-                      </span>
-                      <span>Even</span>
+                    <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">1</p> 
+                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">2</p> 
+                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">3</p> 
                     </div>
                   </TableCell>
-
-
-
                   <TableCell
                     sx={{ verticalAlign: "bottom", textAlign: "center" }}
                   >
                     <div className="flex justify-center gap-2">
-                      <img src={d1} alt="" className="w-5"/>
-                      <img src={d2} alt=""  className="w-5"/>
-                      <img src={d3} alt="" className="w-5"/>
+                    <p className="border-orange border my-2  bg-orange-300 px-2  rounded-full">28</p> 
                     </div>
 
                   </TableCell>

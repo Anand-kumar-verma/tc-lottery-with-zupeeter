@@ -38,7 +38,7 @@ const BetNumber = ({ gid }) => {
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const [random, setRandomNumber] = useState(null)
-  const [open3, setOpen3] = useState(false);
+  const [isBlinking, setIsBlinking] = useState(false)
   const client = useQueryClient();
   const initialValue = {
     balance: "1",
@@ -111,6 +111,7 @@ const BetNumber = ({ gid }) => {
     const randomBitNumber = Math.floor(Math.random() *9)+1;
     setRandomNumber(randomBitNumber);
     setSelectNumber(`${randomBitNumber}`)
+    setIsBlinking(!isBlinking);
     setOpen(true)
   }
   const handleClose = () => {
@@ -140,165 +141,165 @@ const BetNumber = ({ gid }) => {
           className="grid grid-cols-4 justify-center"
         >
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={zero}
             onClick={() => {
               setOpen(true);
               setSelectNumber("0");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           >
           </Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer"}}
             component="img"
             src={one}
             onClick={() => {
               setOpen(true);
               setSelectNumber("1");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={two}
             onClick={() => {
               setOpen(true);
               setSelectNumber("2");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={three}
             onClick={() => {
               setOpen(true);
               setSelectNumber("3");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={four}
             onClick={() => {
               setOpen(true);
               setSelectNumber("4");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={five}
             onClick={() => {
               setOpen(true);
               setSelectNumber("5");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={six}
             onClick={() => {
               setOpen(true);
               setSelectNumber("6");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={seven}
             onClick={() => {
               setOpen(true);
               setSelectNumber("7");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={eight}
             onClick={() => {
               setOpen(true);
               setSelectNumber("8");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1, cursor:"pointer" }}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
           <Box
-            sx={{ width: "52%", m: 1 }}
+            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
             component="img"
             src={nine}
             onClick={() => {
               setOpen(true);
               setSelectNumber("9");
             }}
-            className="!cursor-pointer"
+            className={isBlinking ? 'blinking':''}
           ></Box>
         </Box>
         <Stack
@@ -307,7 +308,8 @@ const BetNumber = ({ gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined" onClick={generatenumber}>Random</Button>
+          <Button variant="outlined" onClick={generatenumber}>
+            Random</Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return <Box sx={style.bacancebtn3}>X{i}</Box>;
           })}
@@ -406,7 +408,8 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select Green {random}
+                Select {random||isNaN(Number(selectNumber))?selectNumber?.toString()?.toLocaleUpperCase():selectNumber}
+           
             </Typography>
           </Box>
           <Box mt={5} px={2}>
