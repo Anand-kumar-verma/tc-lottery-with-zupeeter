@@ -137,9 +137,9 @@ const BetNumber = ({ gid }) => {
             borderRadius: "10px",
             mt: 1,
           }}
-          className="grid grid-cols-4 justify-center mx-3 "
+          className="grid grid-cols-4  justify-center mx-3 "
         >
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center my-1 ">
             <Box
               component="img"
               src={three}

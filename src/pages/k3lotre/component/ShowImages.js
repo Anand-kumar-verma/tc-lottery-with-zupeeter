@@ -176,7 +176,7 @@ React.useEffect(() => {
               src={image_scroll[images]} alt={`image-${i}`}
               className="w-20 m-2 "
             ></Box></div>
-
+         
         </div>
       </div>
     </>
