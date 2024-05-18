@@ -293,7 +293,10 @@ const BetNumber = ({ gid }) => {
         >
           <Button variant="outlined" onClick={generatenumber}>Random</Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
-            return <Box sx={style.bacancebtn3}>X{i}</Box>;
+            return <Box 
+            className="cursor-pointer"
+            onClick={() => fk.setFieldValue("qnt", i)}
+            sx={style.bacancebtn3}>X{i}</Box>;
           })}
         </Stack>
         <ButtonGroup
@@ -331,7 +334,8 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-        onClickCapture={handleClose} >
+        // onClickCapture={handleClose} 
+        >
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
