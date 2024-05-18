@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import splash_screen from "./assets/images/splash_screen.PNG";
-import theme from "./utils/theme";
 import { Box, Container } from "@mui/material";
+import React from "react";
+import splash_screen from "./assets/images/splash_screen.PNG";
 
 const SplashScreen = () => {
   // const [message, setMessage] = useState('');

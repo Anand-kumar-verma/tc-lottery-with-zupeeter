@@ -35,7 +35,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import moment from "moment";
 
-import { endpoint } from "../../../services/urls";
+import { endpoint, usdt_base_url } from "../../../services/urls";
 function Deposite() {
   const user_id = localStorage.getItem("user_id");
   const [isAllValue, setIsAllValue] = useState(false);
@@ -252,7 +252,7 @@ function Deposite() {
           <Stack
             sx={{
               width: "32%",
-              
+
               padding: "16px 0px",
               borderRadius: 2,
               background:
@@ -280,7 +280,9 @@ function Deposite() {
             </Typography>
           </Stack>
           <Stack
-          onClick={()=>document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
+            onClick={() =>
+              (document.location.href = `${usdt_base_url}/?user_id=${user_id}`)
+            }
             sx={{
               width: "32%",
               background: "#FFFFFF",
@@ -306,7 +308,6 @@ function Deposite() {
                 textAlign: "center",
                 mt: 1,
               }}
-
             >
               USDT
             </Typography>
@@ -412,9 +413,10 @@ function Deposite() {
             inputProps={{ "aria-label": "search google maps" }}
           />
         </Paper>
-        <Button 
-        sx={style.wdbtn} 
-        onClick={fk.handleSubmit}
+        <Button
+          sx={style.wdbtn}
+          onClick={fk.handleSubmit}
+          className={`${fk.values.amount ? "!bg-[#F48901]" : "!bg-gray-400"}`}
         >
           Deposite
         </Button>
@@ -728,8 +730,8 @@ const style = {
     fontSize: "15px",
     height: "0.93333rem",
     width: "100%",
-    background:
-      "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%), linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
+    // background:
+    //   "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%), linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
     backgroundSize: "100% 100%, 100% 100%",
     backgroundPosition: "center, center",
     backgroundRepeat: "no-repeat, no-repeat",

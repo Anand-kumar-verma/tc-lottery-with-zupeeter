@@ -28,7 +28,7 @@ import {
   getBalanceFunction,
   withdrawlHistoryFunction,
 } from "../../../services/apiCallings";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import moment from "moment";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import withdrawol_voice from "../../../assets/images/withdrawol_voice.mp3";
@@ -38,7 +38,8 @@ import axios from "axios";
 import { endpoint } from "../../../services/urls";
 import LockIcon from "@mui/icons-material/Lock";
 function Withdraval() {
-  const user_id =  localStorage.getItem("user_id");
+  const client = useQueryClient();
+  const user_id = localStorage.getItem("user_id");
   const audioRefMusic = React.useRef(null);
   const [isAllValue, setIsAllValue] = useState(false);
   const [visibleData, setvisibleData] = useState([]);
@@ -83,12 +84,14 @@ function Withdraval() {
     try {
       const res = await axios.post(endpoint?.wallet_withdrawl, reqBody);
       toast(res?.data?.earning?.msg);
-      console.log(res);
+      navigate("/account");
     } catch (e) {
       console.log(e);
     }
     setloding(false);
-    // client.refetchQueries("bank_details");
+    client.refetchQueries("wallet_amount");
+    client.refetchQueries("withdrawl_history");
+    client.refetchQueries("profile");
   }
 
   const goBack = () => {
@@ -308,7 +311,7 @@ function Withdraval() {
                 mt: 1,
               }}
             >
-              USDT 
+              USDT
             </Typography>
           </Stack>
         </Stack>
@@ -350,7 +353,7 @@ function Withdraval() {
               color="initial"
               sx={{ fontSize: "13px", fontWeight: "600" }}
             >
-              {game_history_data?.AcNo?.substring(0, 5) + "****"}
+              {game_history_data?.account_number?.substring(0, 5) + "****"}
             </Typography>
             <KeyboardArrowRightIcon />
           </Stack>

@@ -83,6 +83,8 @@ export default function Banks() {
     [page, rowsPerPage, game_history_data]
   );
 
+  console.log(visibleRows);
+
   const initialValue = {
     bank_name: openDialogBox,
     holder:
@@ -249,7 +251,7 @@ export default function Banks() {
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         <Button
                           className="!bg-[#FD565C] !py-0 !text-white"
-                          onClick={() => setOpenDialogBox(i?.BANKID)}
+                          onClick={() => setOpenDialogBox(i?.BID)}
                         >
                           Update
                         </Button>
