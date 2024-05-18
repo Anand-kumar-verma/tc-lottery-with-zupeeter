@@ -16,15 +16,22 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import zero from "../../assets/images/n0-30bd92d1.png";
-import one from "../../assets/images/n1-dfccbff5.png";
-import two from "../../assets/images/n2-c2913607.png";
-import three from "../../assets/images/n3-f92c313f.png";
-import four from "../../assets/images/n4-cb84933b.png";
-import five from "../../assets/images/n5-49d0e9c5.png";
-import six from "../../assets/images/n6-a56e0b9a.png";
-import seven from "../../assets/images/n7-5961a17f.png";
-import eight from "../../assets/images/n8-d4d951a4.png";
-import nine from "../../assets/images/n9-a20f6f42 (1).png";
+import three from "../../assets/images/a3.png";
+import four from "../../assets/images/a4.png";
+import five from "../../assets/images/a5.png";
+import six from "../../assets/images/a6.png";
+import seven from "../../assets/images/a7.png";
+import eight from "../../assets/images/a8.png";
+import nine from "../../assets/images/a9.png";
+import ten from "../../assets/images/a10.png";
+import eleven from "../../assets/images/a11.png";
+import twelve from "../../assets/images/a12.png";
+import thirteen from "../../assets/images/a13.png";
+import fourteen from "../../assets/images/a14.png";
+import fifteen from "../../assets/images/a15.png";
+import sixteen from "../../assets/images/a16.png";
+import seventeen from "../../assets/images/a17.png";
+import eighteen from "../../assets/images/a18.png";
 import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
@@ -74,6 +81,8 @@ const BetNumber = ({ gid }) => {
         (selectNumber === "red" && 13) ||
         (selectNumber === "two" && 15) || // this is big
         (selectNumber === "one" && 14) || // this is small
+        (selectNumber === "even" && 16) || // this is small
+        (selectNumber === "odd" && 17) || // this is small
         Number(selectNumber) + 1
         }`,
       gameid: `${Number(gid)}`,
@@ -107,16 +116,6 @@ const BetNumber = ({ gid }) => {
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
-  const generatenumber = () => {
-    const randomBitNumber = Math.floor(Math.random() *9)+1;
-    setRandomNumber(randomBitNumber);
-    setSelectNumber(`${randomBitNumber}`)
-    setIsBlinking(!isBlinking);
-    setOpen(true)
-  }
-  const handleClose = () => {
-    setOpen(false);
-  }
   return (
     <Box
       sx={{
@@ -133,216 +132,273 @@ const BetNumber = ({ gid }) => {
         <Box
           sx={{
             background: "#",
-            padding: "0px 8px 0px 8px",
+            padding: "0px 0px 0px 0px",
             alignItems: "center",
             borderRadius: "10px",
-            mt: 2,
+            mt: 1,
           }}
-          className="grid grid-cols-4 justify-center"
+          className="grid grid-cols-4 justify-center mx-3 "
         >
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={zero}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("0");
-            }}
-            className={isBlinking ? 'blinking':''}
-          >
-          </Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer"}}
-            component="img"
-            src={one}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("1");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={two}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("2");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={three}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("3");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={four}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("4");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={five}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("5");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={six}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("6");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={seven}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("7");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={eight}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("8");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1, cursor:"pointer" }}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
-          <Box
-            sx={{ width: "52%", m: 1 , cursor:"pointer"}}
-            component="img"
-            src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
-            className={isBlinking ? 'blinking':''}
-          ></Box>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={three}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("3");
+              }}
+              className="!items-center !w-14 "
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={four}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("4");
+              }}
+              className="!items-center !w-[65%]"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={five}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("5");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={six}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("6");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={seven}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("7");
+              }}
+              className="!items-center !w-12 ml-1"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={eight}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("8");
+              }}
+              className="!items-center !w-16"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={nine}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("9");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={ten}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("10");
+              }}
+              className="!items-center !w-16"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={eleven}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("11");
+              }}
+              className="!items-center !w-16"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={twelve}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("12");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={thirteen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("13");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={fourteen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("14");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={fifteen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("15");
+              }}
+              className="!items-center !w-16"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={sixteen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("16");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={seventeen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("17");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
+          <div className="flex flex-col justify-center my-1">
+            <Box
+              component="img"
+              src={eighteen}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("18");
+              }}
+              className="!items-center !w-14"
+            >
+            </Box>
+            <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
+          </div>
         </Box>
-        <Stack
-          direction="row"
-          my={1}
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <Button variant="outlined" onClick={generatenumber}>
-            Random</Button>
-          {[1, 5, 10, 20, 50, 100]?.map((i) => {
-            return <Box sx={style.bacancebtn3}>X{i}</Box>;
-          })}
-        </Stack>
+
+
 
         <ButtonGroup
           disableElevation
           variant="contained"
           sx={{ width: "100%" }}
+          className=" !my-4"
         >
           <Button
-            sx={style.bigbtn}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("one");
-            }}
-          >
-            Small
-          </Button>
-          <Button
-            sx={style.smlbtn}
+            className="!bg-[#F48901] !text-white !rounded !text-sm !mx-1"
             onClick={() => {
               setOpen(true);
               setSelectNumber("two");
             }}
           >
-            Big
+            Big 1.92x
+          </Button>
+          <Button
+            className="!bg-[#6da7f4] !text-white !rounded !text-sm !mx-1"
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("one");
+            }}
+          >
+            Small 1.92X
+          </Button>
+          <Button
+            className="!bg-[#fa574a] !text-white !rounded !text-sm !mx-1"
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("Odd");
+            }}
+          >
+            Odd 1.92X
+          </Button>
+          <Button
+            className="!bg-[#40ad72] !text-white !rounded !text-sm !mx-1"
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("Even");
+            }}
+          >
+            Even 1.92X
           </Button>
         </ButtonGroup>
+
       </div>
 
       <Drawer
-        open={open} 
+        open={open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",
@@ -350,7 +406,7 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-        onClickCapture={handleClose}>
+      >
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -362,29 +418,43 @@ const BetNumber = ({ gid }) => {
               left: "-11%",
               zIndex: "-1",
             }}
-            className={
-              selectNumber === "green" ||
-                selectNumber === "1" ||
-                selectNumber === "3" ||
-                selectNumber === "7" ||
-                selectNumber === "9"
+            className={` !cursor-pointer
+            ${selectNumber === "green" ||
+                selectNumber === "4" ||
+                selectNumber === "8" ||
+                selectNumber === "12" ||
+                selectNumber === "6" ||
+                selectNumber === "10" ||
+                selectNumber === "14" ||
+                selectNumber === "18" ||
+                selectNumber === "16"
                 ? "!bg-[#40AD72]"
                 : selectNumber === "voilet"
                   ? "!bg-[#B659FE]"
                   : selectNumber === "red" ||
-                    selectNumber === "2" ||
-                    selectNumber === "4" ||
-                    selectNumber === "6" ||
+                    selectNumber === "3" ||
+                    selectNumber === "7" ||
+                    selectNumber === "11" ||
+                    selectNumber === "15" ||
+                    selectNumber === "5" ||
+                    selectNumber === "9" ||
+                    selectNumber === "13" ||
+                    selectNumber === "17" ||
                     selectNumber === "8"
                     ? "!bg-[#FD565C]"
-                    : selectNumber === "one"
+                    : selectNumber === "two"
                       ? "!bg-[#F48901]"
-                      : selectNumber === "two"
-                        ? "!bg-[#6DA7F4]"
-                        : selectNumber === "0"
-                          ? "!bg-[#BF6DFE]"
-                          : selectNumber === "5" && "!bg-[#BF6DFE]"
-            }
+                      : selectNumber === "one"
+                        ? "!bg-[#6da7f4]"
+                        : selectNumber === "Odd"
+                          ? "!bg-[#fa574a]"
+                          : selectNumber === "Even"
+                            ? "!bg-[#40ad72]"
+                            : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+              }
+         `}
           >
             {" "}
           </Box>
@@ -408,8 +478,8 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-                Select {random||isNaN(Number(selectNumber))?selectNumber?.toString()?.toLocaleUpperCase():selectNumber}
-           
+              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
+
             </Typography>
           </Box>
           <Box mt={5} px={2}>
@@ -432,26 +502,39 @@ const BetNumber = ({ gid }) => {
                         sx={style.bacancebtn}
                         className={` !cursor-pointer
                           ${selectNumber === "green" ||
-                            selectNumber === "1" ||
-                            selectNumber === "3" ||
-                            selectNumber === "7" ||
-                            selectNumber === "9"
-                            ? "!bg-[#40AD72]"
-                            : selectNumber === "voilet"
-                              ? "!bg-[#B659FE]"
-                              : selectNumber === "red" ||
-                                selectNumber === "2" ||
-                                selectNumber === "4" ||
-                                selectNumber === "6" ||
-                                selectNumber === "8"
+                          selectNumber === "4" ||
+                          selectNumber === "8" ||
+                          selectNumber === "12" ||
+                          selectNumber === "6" ||
+                          selectNumber === "10" ||
+                          selectNumber === "14" ||
+                          selectNumber === "18" ||
+                          selectNumber === "16"
+                          ? "!bg-[#40AD72]"
+                          : selectNumber === "voilet"
+                            ? "!bg-[#B659FE]"
+                            : selectNumber === "red" ||
+                              selectNumber === "3" ||
+                              selectNumber === "7" ||
+                              selectNumber === "11" ||
+                              selectNumber === "15" ||
+                              selectNumber === "5" ||
+                              selectNumber === "9" ||
+                              selectNumber === "13" ||
+                              selectNumber === "17" ||
+                              selectNumber === "8"
                                 ? "!bg-[#FD565C]"
-                                : selectNumber === "one"
+                                : selectNumber === "two"
                                   ? "!bg-[#F48901]"
-                                  : selectNumber === "two"
-                                    ? "!bg-[#6DA7F4]"
-                                    : selectNumber === "0"
-                                      ? "!bg-[#BF6DFE]"
-                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
+                                  : selectNumber === "one"
+                                    ? "!bg-[#6da7f4]"
+                                    : selectNumber === "Odd"
+                                      ? "!bg-[#fa574a]"
+                                      : selectNumber === "Even"
+                                        ? "!bg-[#40ad72]"
+                                        : selectNumber === "0"
+                                          ? "!bg-[#BF6DFE]"
+                                          : selectNumber === "5" && "!bg-[#BF6DFE]"
                           }
                        `}
                       >
@@ -477,26 +560,39 @@ const BetNumber = ({ gid }) => {
                   <Box
                     className={` !cursor-pointer
                       ${selectNumber === "green" ||
-                        selectNumber === "1" ||
-                        selectNumber === "3" ||
-                        selectNumber === "7" ||
-                        selectNumber === "9"
-                        ? "!bg-[#40AD72]"
-                        : selectNumber === "voilet"
-                          ? "!bg-[#B659FE]"
-                          : selectNumber === "red" ||
-                            selectNumber === "2" ||
-                            selectNumber === "4" ||
-                            selectNumber === "6" ||
-                            selectNumber === "8"
+                      selectNumber === "4" ||
+                      selectNumber === "8" ||
+                      selectNumber === "12" ||
+                      selectNumber === "6" ||
+                      selectNumber === "10" ||
+                      selectNumber === "14" ||
+                      selectNumber === "18" ||
+                      selectNumber === "16"
+                      ? "!bg-[#40AD72]"
+                      : selectNumber === "voilet"
+                        ? "!bg-[#B659FE]"
+                        : selectNumber === "red" ||
+                          selectNumber === "3" ||
+                          selectNumber === "7" ||
+                          selectNumber === "11" ||
+                          selectNumber === "15" ||
+                          selectNumber === "5" ||
+                          selectNumber === "9" ||
+                          selectNumber === "13" ||
+                          selectNumber === "17" ||
+                          selectNumber === "8"
                             ? "!bg-[#FD565C]"
-                            : selectNumber === "one"
+                            : selectNumber === "two"
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two"
-                                ? "!bg-[#6DA7F4]"
-                                : selectNumber === "0"
-                                  ? "!bg-[#BF6DFE]"
-                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
+                              : selectNumber === "one"
+                                ? "!bg-[#6da7f4]"
+                                : selectNumber === "Odd"
+                                  ? "!bg-[#fa574a]"
+                                  : selectNumber === "Even"
+                                    ? "!bg-[#40ad72]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
                       }
                     `}
                     sx={style.addsumbtn}
@@ -515,26 +611,39 @@ const BetNumber = ({ gid }) => {
                   <Box
                     className={` !cursor-pointer
                      ${selectNumber === "green" ||
-                        selectNumber === "1" ||
-                        selectNumber === "3" ||
-                        selectNumber === "7" ||
-                        selectNumber === "9"
-                        ? "!bg-[#40AD72]"
-                        : selectNumber === "voilet"
-                          ? "!bg-[#B659FE]"
-                          : selectNumber === "red" ||
-                            selectNumber === "2" ||
-                            selectNumber === "4" ||
-                            selectNumber === "6" ||
-                            selectNumber === "8"
+                     selectNumber === "4" ||
+                     selectNumber === "8" ||
+                     selectNumber === "12" ||
+                     selectNumber === "6" ||
+                     selectNumber === "10" ||
+                     selectNumber === "14" ||
+                     selectNumber === "18" ||
+                     selectNumber === "16"
+                     ? "!bg-[#40AD72]"
+                     : selectNumber === "voilet"
+                       ? "!bg-[#B659FE]"
+                       : selectNumber === "red" ||
+                         selectNumber === "3" ||
+                         selectNumber === "7" ||
+                         selectNumber === "11" ||
+                         selectNumber === "15" ||
+                         selectNumber === "5" ||
+                         selectNumber === "9" ||
+                         selectNumber === "13" ||
+                         selectNumber === "17" ||
+                         selectNumber === "8"
                             ? "!bg-[#FD565C]"
-                            : selectNumber === "one"
+                            : selectNumber === "two"
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two"
-                                ? "!bg-[#6DA7F4]"
-                                : selectNumber === "0"
-                                  ? "!bg-[#BF6DFE]"
-                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
+                              : selectNumber === "one"
+                                ? "!bg-[#6da7f4]"
+                                : selectNumber === "Odd"
+                                  ? "!bg-[#fa574a]"
+                                  : selectNumber === "Even"
+                                    ? "!bg-[#40ad72]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
                       }
                     `}
                     sx={style.addsumbtn}
@@ -562,26 +671,39 @@ const BetNumber = ({ gid }) => {
                         sx={style.bacancebtn2}
                         className={` !cursor-pointer
                           ${selectNumber === "green" ||
-                            selectNumber === "1" ||
-                            selectNumber === "3" ||
-                            selectNumber === "7" ||
-                            selectNumber === "9"
-                            ? "!bg-[#40AD72]"
-                            : selectNumber === "voilet"
-                              ? "!bg-[#B659FE]"
-                              : selectNumber === "red" ||
-                                selectNumber === "2" ||
-                                selectNumber === "4" ||
-                                selectNumber === "6" ||
-                                selectNumber === "8"
+                          selectNumber === "4" ||
+                          selectNumber === "8" ||
+                          selectNumber === "12" ||
+                          selectNumber === "6" ||
+                          selectNumber === "10" ||
+                          selectNumber === "14" ||
+                          selectNumber === "18" ||
+                          selectNumber === "16"
+                          ? "!bg-[#40AD72]"
+                          : selectNumber === "voilet"
+                            ? "!bg-[#B659FE]"
+                            : selectNumber === "red" ||
+                              selectNumber === "3" ||
+                              selectNumber === "7" ||
+                              selectNumber === "11" ||
+                              selectNumber === "15" ||
+                              selectNumber === "5" ||
+                              selectNumber === "9" ||
+                              selectNumber === "13" ||
+                              selectNumber === "17" ||
+                              selectNumber === "8"
                                 ? "!bg-[#FD565C]"
-                                : selectNumber === "one"
+                                : selectNumber === "two"
                                   ? "!bg-[#F48901]"
-                                  : selectNumber === "two"
-                                    ? "!bg-[#6DA7F4]"
-                                    : selectNumber === "0"
-                                      ? "!bg-[#BF6DFE]"
-                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
+                                  : selectNumber === "one"
+                                    ? "!bg-[#6da7f4]"
+                                    : selectNumber === "Odd"
+                                      ? "!bg-[#fa574a]"
+                                      : selectNumber === "Even"
+                                        ? "!bg-[#40ad72]"
+                                        : selectNumber === "0"
+                                          ? "!bg-[#BF6DFE]"
+                                          : selectNumber === "5" && "!bg-[#BF6DFE]"
                           }`}
                       >
                         X{i}
@@ -630,23 +752,36 @@ const BetNumber = ({ gid }) => {
               <Button
                 className={`
                   ${selectNumber === "green" ||
-                    selectNumber === "1" ||
-                    selectNumber === "3" ||
-                    selectNumber === "7" ||
-                    selectNumber === "9"
-                    ? "!bg-[#40AD72]"
-                    : selectNumber === "voilet"
-                      ? "!bg-[#B659FE]"
-                      : selectNumber === "red" ||
-                        selectNumber === "2" ||
-                        selectNumber === "4" ||
-                        selectNumber === "6" ||
-                        selectNumber === "8"
+                  selectNumber === "4" ||
+                  selectNumber === "8" ||
+                  selectNumber === "12" ||
+                  selectNumber === "6" ||
+                  selectNumber === "10" ||
+                  selectNumber === "14" ||
+                  selectNumber === "18" ||
+                  selectNumber === "16"
+                  ? "!bg-[#40AD72]"
+                  : selectNumber === "voilet"
+                    ? "!bg-[#B659FE]"
+                    : selectNumber === "red" ||
+                      selectNumber === "3" ||
+                      selectNumber === "7" ||
+                      selectNumber === "11" ||
+                      selectNumber === "15" ||
+                      selectNumber === "5" ||
+                      selectNumber === "9" ||
+                      selectNumber === "13" ||
+                      selectNumber === "17" ||
+                      selectNumber === "8"
                         ? "!bg-[#FD565C]"
+                        : selectNumber === "two"
+                        ? "!bg-[#F48901]"
                         : selectNumber === "one"
-                          ? "!bg-[#F48901]"
-                          : selectNumber === "two"
-                            ? "!bg-[#6DA7F4]"
+                          ? "!bg-[#6da7f4]"
+                          : selectNumber === "Odd"
+                          ? "!bg-[#fa574a]"
+                          : selectNumber === "Even"
+                          ? "!bg-[#40ad72]"
                             : selectNumber === "0"
                               ? "!bg-[#BF6DFE]"
                               : selectNumber === "5" && "!bg-[#BF6DFE]"
@@ -735,7 +870,7 @@ const style = {
     color: "white",
     fontSize: "16px",
     fontWeight: "500",
-    background: "#6DA7F4",
+    background: "#6da7f4",
   },
   linetable: {
     "&>p": {
