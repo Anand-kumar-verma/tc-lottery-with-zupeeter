@@ -348,10 +348,7 @@ const BetNumber = ({ gid }) => {
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
         </Box>
-
-
-
-        <ButtonGroup
+ <ButtonGroup
           disableElevation
           variant="contained"
           sx={{ width: "100%" }}

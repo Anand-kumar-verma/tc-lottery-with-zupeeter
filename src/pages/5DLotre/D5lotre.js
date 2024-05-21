@@ -191,10 +191,10 @@ function D5lotre() {
           alignItems: "center",
           justifyContent: "space-between",
           margin: "auto",
-          background: "#ededed",
+          background: "white",
           borderRadius: "10PX",
-          mt: 2,
         }}
+        className="shadow-2xl rounded-xl"
       >
         <Box sx={{ width: "30%" }}>
           <NavLink
@@ -202,10 +202,10 @@ function D5lotre() {
             onClick={() => handleChange(1)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               1 Min
             </Typography>
           </NavLink>
@@ -216,10 +216,10 @@ function D5lotre() {
             onClick={() => handleChange(2)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               3 Min
             </Typography>
           </NavLink>
@@ -230,10 +230,10 @@ function D5lotre() {
             onClick={() => handleChange(3)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               5 Min
             </Typography>
           </NavLink>
@@ -244,10 +244,10 @@ function D5lotre() {
             onClick={() => handleChange(4)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               10 Min
             </Typography>
           </NavLink>

@@ -187,12 +187,12 @@ const Chart = ({ gid }) => {
         <div className="flex justify-between my-2">
           <span className="!text-sm">Avg Missing </span>
           <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
-            {preData?.map((i) => {
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
               return (
                 <div
-                  className=" !text-gray-500"
+                  className="text-gray-500"
                 >
-                  {i+1}
+                  {i}
                 </div>
               );
             })}

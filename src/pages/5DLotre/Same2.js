@@ -31,7 +31,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
-const BetNumber = ({ gid }) => {
+const Same2 = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
@@ -106,9 +106,9 @@ const BetNumber = ({ gid }) => {
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
-
   return (
-
+       
+    
     <Box
       sx={{
         padding: 1,
@@ -603,7 +603,7 @@ const BetNumber = ({ gid }) => {
   );
 };
 
-export default BetNumber;
+export default Same2;
 
 const style = {
   bacancebtn: {

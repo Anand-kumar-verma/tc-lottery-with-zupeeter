@@ -179,9 +179,9 @@ const GameHistory = ({ gid }) => {
                   </TableCell>
                   <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
                     <div className="flex justify-center gap-2">
-                    <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">1</p> 
-                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">2</p> 
-                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">3</p> 
+                    <p className="border-black border my-2  bg-gray-100 px-2  rounded-full">1</p> 
+                <p className="border-black border my-2  bg-gray-100 px-2  rounded-full">2</p> 
+                <p className="border-black border my-2  bg-gray-100 px-2  rounded-full">3</p> 
                     </div>
                   </TableCell>
                   <TableCell
