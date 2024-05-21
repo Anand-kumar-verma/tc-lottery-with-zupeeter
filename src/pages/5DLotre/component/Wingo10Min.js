@@ -279,30 +279,30 @@ function Wingo10Min() {
             <p className="px-2">result</p>
           </Box>
           <Box className="flex flex-col justify-center  my-2">
-            <p className="border-black border   bg-gray-100 px-3 py-1 rounded-full ">{numbers[index]}</p>
+            <p className="border-black border   bg-gray-100 px-3 py-1 rounded-full ">{numbers[index] ||5}</p>
             <p className="px-2 text-gray-400 ">A</p>
           </Box>
           <Box className="flex flex-col justify-center  my-2">
-            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{num[index]}</p>
+            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{num[index] ||7}</p>
             <p className="px-2 text-gray-400">B</p>
           </Box>
           <Box className="flex flex-col justify-center  my-2">
-            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{number[index]}</p>
+            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{number[index] ||1}</p>
             <p className="px-2 text-gray-400">C</p>
           </Box>
           <Box className="flex flex-col justify-center  my-2">
-            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{numb[index]}</p>
+            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{numb[index] ||5}</p>
             <p className="px-2 text-gray-400">D</p>
           </Box>
           <Box className="flex flex-col justify-center  my-2">
-            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{no[index]}</p>
+            <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{no[index] ||3}</p>
             <p className="px-2 text-gray-400">E</p>
           </Box>
           <Box className="flex flex-col justify-center  mb-7">
             <p className="">=</p>
           </Box>
           <Box className="flex flex-col justify-center  mb-7">
-            <p className="border-orange-300 border my-2  bg-orange-300 px-2 py-1 text-white rounded-full ">{no[index] + number[index] + numb[index] + numbers[index] + num[index]}</p>
+            <p className="border-orange-300 border my-2  bg-orange-300 px-2 py-1 text-white rounded-full ">{no[index] + number[index] + numb[index] + numbers[index] + num[index] ||21}</p>
           </Box>
 
         </Box>
@@ -435,10 +435,10 @@ function Wingo10Min() {
               <div className="flex flex-col bg-black gap-1  justify-start" >
                 <Box
                   className=" bg-gray-200 m-1  py-4
-             p-2 rounded-full text-center !text-2xl !text-gray-400  !font-extrabold"   >{no[index]}</Box>
+             p-2 rounded-full text-center !text-2xl !text-gray-400  !font-extrabold"   >{no[index]||3}</Box>
                 <Box
                   className=" bg-gray-300  mx-1  py-4
-             p-2 rounded-full text-center"  >{no[index] ||3}</Box>
+             p-2 rounded-full text-center"  >{no[index] }</Box>
                 <Box >{no[index]}</Box>
                 <Box  >{no[index]}</Box>
                 <Box >{no[index]}</Box>
