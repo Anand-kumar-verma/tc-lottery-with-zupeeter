@@ -18,24 +18,6 @@ button {
     text-transform: capitalize !important;
 }
 
-.container {
-    position: relative;
-    width: 100%;
-    height: 500px; /* Adjust height as needed */
-    border: 1px solid #ccc;
-    overflow: hidden;
-  }
-  
-  .letter {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 24px;
-    transition: top 0.01s linear;
-  }
-  
-  
-  
 .redDot {
     width: 8px;
     height: 8px;
