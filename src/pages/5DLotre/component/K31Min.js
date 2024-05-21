@@ -26,7 +26,7 @@ import Same2 from "../Same2";
 import Same3 from "../Same3";
 import Different from "../Different";
 import Sum from "../Sum";
-import Show from "./Show";
+
 
 ////
 function K31Min() {
