@@ -270,7 +270,7 @@ function Wingo3Min() {
   return (
     <Box>
       <Box
-       
+
       >
         <Box
           className="flex flex-col justify-center bg-white shadow-2xl m-4 rounded-lg "
@@ -400,9 +400,10 @@ function Wingo3Min() {
           </Box>
           <div className="border-8 border-[#00b977] !h-28 my-4  p-1 rounded-lg !overflow-hidden bg-[#00b977] " >
             <div className="grid grid-cols-5 " >
-              <div className="flex flex-col bg-black gap-1  justify-start" >
+             
+              <div className="flex flex-col bg-black  gap-1  justify-start" >
                 <Box className="  !bg-[#00e065] !text-white !text-2xl !font-extrabold m-1  py-4
-                  p-2 rounded-full text-center">{numbers[index]}</Box>
+                  p-2 rounded-full text-center">{numbers[index]  || 5}</Box>
                 <Box className=" !bg-[#00e065]  mx-1  py-4 p-2 rounded-full" >{numbers[index]}</Box>
                 <Box>{numbers[index]}</Box>
                 <Box>{numbers[index]}</Box>
@@ -410,7 +411,7 @@ function Wingo3Min() {
               </div>
               <div className="flex flex-col bg-black gap-1  justify-start" >
                 <Box className=" bg-gray-200 m-1 !text-2xl !text-gray-400  !font-extrabold py-4
-             p-2 rounded-full text-center"   >{num[index]}</Box>
+             p-2 rounded-full text-center"   >{num[index]  || 7}</Box>
                 <Box className="  bg-gray-300  mx-1  py-4 p-2 rounded-full " >{num[index]}</Box>
                 <Box>{num[index]}</Box>
                 <Box >{num[index]}</Box>
@@ -418,7 +419,7 @@ function Wingo3Min() {
               </div>
               <div className="flex flex-col bg-black gap-1  justify-start" >
                 <Box className=" bg-gray-200 m-1  py-4 !text-2xl !text-gray-400  !font-extrabold
-             p-2 rounded-full text-center"  >{number[index]}</Box>
+             p-2 rounded-full text-center"  >{number[index] ||1}</Box>
                 <Box className=" bg-gray-300  mx-1  py-4 p-2 rounded-full" >{number[index]}</Box>
                 <Box >{number[index]}</Box>
                 <Box>{number[index]}</Box>
@@ -426,7 +427,7 @@ function Wingo3Min() {
               </div>
               <div className="flex flex-col bg-black gap-1  justify-start" >
                 <Box className=" bg-gray-200 m-1  py-4 !text-2xl !text-gray-400  !font-extrabold
-             p-2 rounded-full text-center">{numb[index]}</Box>
+             p-2 rounded-full text-center">{numb[index] ||5}</Box>
                 <Box className=" bg-gray-300  mx-1  py-4  p-2 rounded-full text-center"
                 >{numb[index]}</Box>
                 <Box>{numb[index]}</Box>
@@ -439,7 +440,7 @@ function Wingo3Min() {
              p-2 rounded-full text-center !text-2xl !text-gray-400  !font-extrabold"   >{no[index]}</Box>
                 <Box
                   className=" bg-gray-300  mx-1  py-4
-             p-2 rounded-full text-center"  >{no[index]}</Box>
+             p-2 rounded-full text-center"  >{no[index] ||3}</Box>
                 <Box >{no[index]}</Box>
                 <Box  >{no[index]}</Box>
                 <Box >{no[index]}</Box>
