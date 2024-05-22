@@ -313,7 +313,7 @@ function K31Min() {
                       <Typography
                         onClick={handleClickOpen}
                         variant="text"
-                        className="!border  !px-5 !ml-5 !text-sm text-[#F48901] !border-[#F48901] !rounded-xl"
+                        className="!border !cursor-pointer !px-5 !ml-5 !text-sm text-[#F48901] !border-[#F48901] !rounded-xl"
                       >
                         {" "}
                         How To Play

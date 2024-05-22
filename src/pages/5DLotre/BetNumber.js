@@ -4,6 +4,7 @@ import {
   ButtonGroup,
   Checkbox,
   Dialog,
+  DialogActions,
   Drawer,
   Grid,
   Stack,
@@ -15,36 +16,32 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
-import zero from "../../assets/images/n0-30bd92d1.png";
-import one from "../../assets/images/n1-dfccbff5.png";
-import two from "../../assets/images/n2-c2913607.png";
-import three from "../../assets/images/n3-f92c313f.png";
-import four from "../../assets/images/n4-cb84933b.png";
-import five from "../../assets/images/n5-49d0e9c5.png";
-import six from "../../assets/images/n6-a56e0b9a.png";
-import seven from "../../assets/images/n7-5961a17f.png";
-import eight from "../../assets/images/n8-d4d951a4.png";
-import nine from "../../assets/images/n9-a20f6f42 (1).png";
 import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
+import Howtoplay from "./component/Howtoplay";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
+  const [opend, setOpend] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
-  const [random, setRandomNumber] = useState(null)
-  const [isBlinking, setIsBlinking] = useState(false)
   const client = useQueryClient();
   const initialValue = {
     balance: "1",
     qnt: "1",
   };
+  const handleClickOpend = () => {
+    setOpend(true);
+  };
 
+  const handleClosed = () => {
+    setOpend(false);
+  }; 
   useEffect(() => {
     getBalanceFunction(setBalance);
   }, []);
@@ -539,16 +536,18 @@ const BetNumber = ({ gid }) => {
                 >
                   I agree
                 </Typography>
-                <Typography
-                  component="a"
-                  sx={{
-                    color: `${theme.palette.primary.main} !important`,
-                    cursor: "pointer",
-                    fontSize: "14px",
-                  }}
-                >
-                  《Pre-sale rules》
-                </Typography>
+                <NavLink onClick={handleClickOpend}>
+                  <Typography
+                    component="a"
+                    sx={{
+                      color: `${theme.palette.primary.main} !important`,
+                      cursor: "pointer",
+                      fontSize: "14px",
+                    }}
+                  >
+                    《Pre-sale rules》
+                  </Typography>
+                </NavLink>
               </Stack>
             </Grid>
           </Grid>
@@ -599,6 +598,34 @@ const BetNumber = ({ gid }) => {
           </Grid>
         </Box>
       </Drawer>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={opend}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClosed}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            I Know
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
