@@ -1,6 +1,8 @@
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
   Grid,
   Stack,
   Typography
@@ -32,6 +34,7 @@ import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
+import Howtoplay from "./Howtoplay";
 
 function Wingo3Min() {
   const socket = useSocket();
@@ -162,7 +165,13 @@ function Wingo3Min() {
     }
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -192,7 +201,7 @@ function Wingo3Min() {
         >
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Button variant="text" color="primary" className="htpbutton">
+              <Button variant="text" color="primary" className="htpbutton" onClick={handleClickOpen}>
                 <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box>  How To Play
               </Button>
               <Typography
@@ -353,6 +362,34 @@ function Wingo3Min() {
         {value === 2 && <Chart gid="2" />}
         {value === 3 && <MyHistory gid="2" />}
       </Box>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

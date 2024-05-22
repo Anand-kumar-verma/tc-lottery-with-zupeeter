@@ -27,6 +27,7 @@ import l1 from "../../assets/images/l1.png";
 import { ArrowForwardIos, CopyAll, GroupAddRounded } from "@mui/icons-material";
 import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import Layout from "../../component/layout/Layout";
 
 function Account() {
   const user_id = localStorage.getItem("user_id");
@@ -39,6 +40,7 @@ function Account() {
   const profile = data?.data?.earning || [];
 
   return (
+    <Layout header={false}>
     <Container>
       <CustomCircularProgress isLoading={isLoading} />
       <Box
@@ -78,56 +80,56 @@ function Account() {
           <Box className="flex justify-center gap-5 pt-5">
             <NavLink to="/wallet">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={wal} alt="" className="w-16" /></Typography>
+                <Typography><img src={wal} alt="" className="w-12" /></Typography>
                 <Typography>Wallet</Typography>
               </Box>
             </NavLink>
             <NavLink to="/deposit">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={dep} alt="" className="w-16" /></Typography>
+                <Typography><img src={dep} alt="" className="w-12" /></Typography>
                 <Typography>Deposit</Typography>
               </Box>
             </NavLink>
             <NavLink to="/withdraw">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={wih} alt="" className="w-16" /></Typography>
+                <Typography><img src={wih} alt="" className="w-12" /></Typography>
                 <Typography>Withdraw</Typography>
               </Box>
             </NavLink>
             <Box className="flex flex-col justify-center cursor-pointer items-center" 
             onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
             >
-              <Typography><img src={trx} alt="" className="w-16" /></Typography>
-              <Typography className="!ml-5">USDT</Typography>
+              <Typography><img src={trx} alt="" className="w-12" /></Typography>
+              <Typography className="">USDT</Typography>
             </Box>
           </Box>
         </Box>
       </Box>
       <Box className="flex justify-center py-1 m-5 !mt-20 shadow rounded-lg bg-orange-400">
         <img src={w1} alt="" className="mt-5 h-10 m-1" />
-        <Typography className="!text-white !font-bold !mt-2 ">SAFE</Typography>
+        <Typography className="!text-white !font-bold !mt-2 !ml-2 ">SAFE</Typography>
         <Typography className="text-white !font-bold !text-sm !-ml-8 !mt-8">
           Daily interest rate 0.1%  + VIP extra income safe, calculated every 1 minute
         </Typography>
       </Box>
-      <Box className="grid grid-cols-2 gap-3 m-4 !my-8">
-        <Box className="flex gap-1 justify-center p-1 items-center  shadow-xl bg-white rounded-lg">
-          <Typography><img src={game} alt="" className="w-16" /></Typography>
+      <Box className="grid grid-cols-2 gap-3 m-4  !my-8">
+        <Box className="flex gap-1 justify-center p-1 py-4 items-center  shadow-xl bg-white rounded-lg">
+          <Typography><img src={game} alt="" className="w-10" /></Typography>
           <Typography className="">Game History <br /><span className="!text-xs !text-gray-500"> My game history</span></Typography>
         </Box>
-        <Box className="flex gap-1 p-1 justify-center items-center shadow-xl bg-white rounded-lg">
-          <Typography><img src={trans} alt="" className="w-16" /></Typography>
+        <Box className="flex gap-1 p-1 justify-center items-center py-4 shadow-xl bg-white rounded-lg">
+          <Typography><img src={trans} alt="" className="w-10" /></Typography>
           <Typography>Transaction <br /><span className="!text-xs !text-gray-500"> My Transaction history</span></Typography>
         </Box>
         <NavLink to="/depositehistory">
-          <Box className="flex gap-1 p-1 justify-center items-center shadow-xl bg-white rounded-lg">
-            <Typography><img src={depo} alt="" className="w-16" /></Typography>
+          <Box className="flex gap-1 p-1 py-4 justify-center items-center shadow-xl bg-white rounded-lg">
+            <Typography><img src={depo} alt="" className="w-10" /></Typography>
             <Typography>Deposit <br /><span className="!text-xs !text-gray-500"> My Deposit history</span></Typography>
           </Box>
         </NavLink>
         <NavLink to="/withdrawlhistory">
-          <Box className="flex gap-1 p-1 justify-center items-center shadow-xl bg-white rounded-lg">
-            <Typography><img src={wit} alt="" className="w-16" /></Typography>
+          <Box className="flex gap-1 p-1 py-4 justify-center items-center shadow-xl bg-white rounded-lg">
+            <Typography><img src={wit} alt="" className="w-10" /></Typography>
             <Typography>Withdraw <br /><span className="!text-xs !text-gray-500"> My Withdraw history</span></Typography>
           </Box>
         </NavLink>
@@ -141,31 +143,31 @@ function Account() {
       </Box>
       <Box className="bg-white shadow rounded-lg flex flex-col justify-start p-1 m-3 !my-8">
         <Box className="flex justify-between gap-1 border-b-2 p-2">
-        <Box className="flex items-center gap-1">
-        <Typography> <img src={not} alt="" className="w-10" /></Typography>
+        <Box className="flex items-center gap-2">
+        <Typography> <img src={not} alt="" className="w-6" /></Typography>
           <Typography className="!mt-1 text-gray-500"> Notification</Typography>
         </Box>
          
           <IconButton> <ArrowForwardIos className="text-gray-500  " fontSize="small" /></IconButton>
         </Box>
         <Box className="flex justify-between gap-1 border-b-2 p-2">
-          <Box className="flex items-center gap-1">
-            <Typography> <img src={g} alt="" className="w-10" /></Typography>
+          <Box className="flex items-center gap-2">
+            <Typography> <img src={g} alt="" className="w-6" /></Typography>
             <Typography className="!mt-1 text-gray-500"> Gifts</Typography></Box>
 
 
           <IconButton> <ArrowForwardIos className="text-gray-500  " fontSize="small" /></IconButton>
         </Box>
         <Box className="flex justify-between gap-1 border-b-2 p-2">
-          <Box className="flex items-center gap-1">
-            <Typography> <img src={star} alt="" className="w-10" /></Typography>
+          <Box className="flex items-center gap-2">
+            <Typography> <img src={star} alt="" className="w-6" /></Typography>
             <Typography className="!mt-1 text-gray-500">Game Statics</Typography>
           </Box>
           <IconButton> <ArrowForwardIos className="text-gray-500  " fontSize="small" /></IconButton>
         </Box>
         <Box className="flex justify-between gap-1  p-2">
-          <Box className="flex items-center gap-1">
-            <Typography> <img src={lang} alt="" className="w-10" /></Typography>
+          <Box className="flex items-center gap-2">
+            <Typography> <img src={lang} alt="" className="w-6" /></Typography>
             <Typography className="!mt-1 text-gray-500"> Language </Typography>
           </Box>
           <IconButton><ArrowForwardIos className="text-gray-500  " fontSize="small" /></IconButton>
@@ -208,6 +210,7 @@ function Account() {
         </button>
       </Box>
     </Container>
+    </Layout>
   );
 }
 

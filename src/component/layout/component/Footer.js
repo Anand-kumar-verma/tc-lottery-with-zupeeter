@@ -42,11 +42,12 @@ function Footer() {
           onClick={() => navigation(1)}
           to="/dashboard"
         >
-          {nav !== 1 ? (
-            <Box component="img" src={home} width={20}></Box>
+        {nav !== 1 ? (
+            <Box className="!w-6" component="img" src={home} width={20}></Box>
           ) : (
-            <Box component="img" src={homeactive} width={20}></Box>
-          )}
+            <Box className="!w-6" component="img" src={homeactive} width={20}></Box>
+          )} 
+    
           <Typography
             variant="body1"
             color="initial"
@@ -70,9 +71,9 @@ function Footer() {
           to="/activity"
         >
           {nav !== 2 ? (
-            <Box component="img" src={activity} width={20}></Box>
+            <Box className="!w-6" component="img" src={activity} width={20}></Box>
           ) : (
-            <Box component="img" src={activityactive} width={20}></Box>
+            <Box className="!w-6" component="img" src={activityactive} width={20}></Box>
           )}
 
           <Typography
@@ -132,9 +133,9 @@ function Footer() {
           to="/wallet"
         >
           {nav === 4 ? (
-            <Box component="img" src={walletactive} width={20}></Box>
+            <Box component="img" className="!w-6" src={walletactive} width={20}></Box>
           ) : (
-            <Box component="img" src={wallet} width={20}></Box>
+            <Box component="img" className="!w-6" src={wallet} width={20}></Box>
           )}
           <Typography
             variant="body1"
@@ -159,9 +160,9 @@ function Footer() {
           to="/account"
         >
           {nav === 5 ? (
-            <Box component="img" src={accountactive} width={20}></Box>
+            <Box component="img" className="!w-6" src={accountactive} width={20}></Box>
           ) : (
-            <Box component="img" src={account} width={20}></Box>
+            <Box component="img" className="!w-6" src={account} width={20}></Box>
           )}
           <Typography
             variant="body1"

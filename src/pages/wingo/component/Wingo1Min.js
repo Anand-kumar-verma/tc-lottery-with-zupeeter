@@ -1,5 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import htp from "../../../assets/images/htp.png";
+import Howtoplay from "./Howtoplay";
 
 
 function Wingo1Min() {
@@ -134,6 +135,13 @@ function Wingo1Min() {
     setValue(newValue);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Box>
       {React.useMemo(() => {
@@ -158,7 +166,7 @@ function Wingo1Min() {
         >
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Button variant="text" color="primary" className="htpbutton">
+              <Button variant="text" color="primary" className="htpbutton"  onClick={handleClickOpen}>
                 <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box>  How To Play
               </Button>
               <Typography
@@ -314,6 +322,34 @@ function Wingo1Min() {
         {value === 2 && <Chart gid="1" />}
         {value === 3 && <MyHistory gid="1" />}
       </Box>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

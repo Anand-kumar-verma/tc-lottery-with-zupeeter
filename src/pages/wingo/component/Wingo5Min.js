@@ -1,5 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
+import Howtoplay from "./Howtoplay";
 
 
 
@@ -35,6 +36,7 @@ function Wingo5Min() {
   const client = useQueryClient();
   const dispatch = useDispatch();
   const [value, setValue] = useState(1);
+  const [opend, setOpend] = useState(false);
   const [one_min_time, setOne_min_time] = useState("0_0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
@@ -157,7 +159,13 @@ function Wingo5Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const handleClickOpen = () => {
+    setOpend(true);
+  };
 
+  const handleClosed = () => {
+    setOpend(false);
+  };
   return (
     <Box>
       {React.useMemo(() => {
@@ -182,7 +190,7 @@ function Wingo5Min() {
         >
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Button variant="text" color="primary" className="htpbutton">
+              <Button variant="text" color="primary" className="htpbutton" onClick={handleClickOpen}>
                 <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box> How To Play
               </Button>
               <Typography
@@ -343,6 +351,34 @@ function Wingo5Min() {
         {value === 2 && <Chart gid="3" />}
         {value === 3 && <MyHistory gid="3" />}
       </Box>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={opend}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClosed}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            I Know
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
