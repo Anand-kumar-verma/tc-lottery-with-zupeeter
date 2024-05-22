@@ -19,6 +19,7 @@ import Wingo10Min from "./component/Wingo10Min";
 import K31Min from "./component/K31Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
+import { orange } from "@mui/material/colors";
 
 function D5lotre() {
   const [musicicon, setmusicicon] = useState(true)
@@ -177,12 +178,11 @@ function D5lotre() {
           >
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
-          <Button
-            sx={{ background: theme.palette.primary.main, color: "white" }}
-            className="detailsbutton"
+          <Typography
+            className="!bg-orange-400 !text-white rounded-xl px-2 py-1 !flex justify-center"
           >
             <WhatshotIcon /> Details
-          </Button>
+          </Typography>
         </Stack>
       </Box>
       <Box

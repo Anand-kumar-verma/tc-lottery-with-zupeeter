@@ -29,6 +29,7 @@ import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import Layout from "../../component/layout/Layout";
 
+
 function Account() {
   const user_id = localStorage.getItem("user_id");
   const navigate = useNavigate();

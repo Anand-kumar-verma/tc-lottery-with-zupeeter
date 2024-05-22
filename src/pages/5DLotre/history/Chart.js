@@ -153,7 +153,7 @@ const Chart = ({ gid }) => {
   return (
     <Box className="chartTable">
       <Stack direction="row" className="onegotextbox">
-        <Typography variant="body1" color="initial" className="!text-[#F48901]">
+        <Typography variant="body1" color="initial" className="!text-[#F48901] !my-5">
          
           Statistic(last 100 Periods)
         </Typography>
@@ -185,13 +185,13 @@ const Chart = ({ gid }) => {
         }}
       >
         <div className="flex justify-between my-2">
-          <span className="!text-sm">Avg Missing </span>
+          <span className="!text-sm">Avg </span>
           <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
               return (
                 <div
                   className="text-gray-500"
-                >
+                  >
                   {i}
                 </div>
               );

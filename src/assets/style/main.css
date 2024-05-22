@@ -173,6 +173,24 @@ button {
     height: 70px;
     width: 100%;
 }
+
+.I3 {
+    background: white !important;
+    border-radius: 10px;
+    color: rgb(154 154 154) !important;
+    font-size: 15px !important;
+    /* font-weight: 700; */
+    width: 32%;
+    /* padding: 10px 0px !important; */
+}
+.I3active {
+    background: linear-gradient(180deg, #FF9901 0%, #E57201 100%) !important;
+    border-radius: 10px;
+    color: white !important;
+    font-size: 15px !important;
+}
+
+
 .k3 {
     background: white !important;
     border-radius: 10px;
