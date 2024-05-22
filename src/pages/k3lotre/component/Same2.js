@@ -30,7 +30,6 @@ const Same2 = ({ gid }) => {
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
-  const [random, setRandomNumber] = useState(null)
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
   const initialValue = {
@@ -258,7 +257,7 @@ const Same2 = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
+              Select { isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
 
             </Typography>
           </Box>
