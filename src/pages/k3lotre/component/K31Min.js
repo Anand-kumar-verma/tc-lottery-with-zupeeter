@@ -224,7 +224,7 @@ function K31Min() {
         </Box>
         <div>
 
-          <Box className="!flex !justify-center !mx-2 !-mb-5 " >
+          <Box className="!flex !justify-center !mx-2 !-mb-2" >
             <Button
               className={bettype === 1 ? " k3active k3" : " k3 "} 
               onClick={() => handleChangebet(1)}

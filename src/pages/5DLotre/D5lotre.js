@@ -179,7 +179,7 @@ function D5lotre() {
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
           <Typography
-            className="!bg-orange-400 !text-white rounded-xl px-2 py-1 !flex justify-center"
+            className="!bg-orange-400 !text-white rounded-2xl px-2 py-1 !flex justify-center"
           >
             <WhatshotIcon /> Details
           </Typography>
