@@ -191,11 +191,10 @@ function D5lotre() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "auto",
           background: "white",
           borderRadius: "10PX",
         }}
-        className="shadow-2xl rounded-xl"
+        className="shadow-2xl rounded-xl !m-2 !mt-4 "
       >
         <Box sx={{ width: "30%" }}>
           <NavLink
