@@ -4,6 +4,7 @@ import {
   ButtonGroup,
   Checkbox,
   Dialog,
+  DialogActions,
   Drawer,
   Grid,
   Stack,
@@ -38,6 +39,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
+import Howtoplay from "../5DLotre/component/Howtoplay";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -45,7 +47,7 @@ const BetNumber = ({ gid }) => {
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const [random, setRandomNumber] = useState(null)
-  const [isBlinking, setIsBlinking] = useState(false)
+  const [opend, setOpend] = useState(false);
   const client = useQueryClient();
   const initialValue = {
     balance: "1",
@@ -115,6 +117,14 @@ const BetNumber = ({ gid }) => {
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
+
+  const handleClickOpend = () => {
+    setOpend(true);
+  };
+
+  const handleClosed = () => {
+    setOpend(false);
+  };
 
   return (
     <Box
@@ -722,16 +732,18 @@ const BetNumber = ({ gid }) => {
                 >
                   I agree
                 </Typography>
-                <Typography
-                  component="a"
-                  sx={{
-                    color: `${theme.palette.primary.main} !important`,
-                    cursor: "pointer",
-                    fontSize: "14px",
-                  }}
-                >
-                  《Pre-sale rules》
-                </Typography>
+                <NavLink onClick={handleClickOpend}>
+                  <Typography
+                    component="a"
+                    sx={{
+                      color: `${theme.palette.primary.main} !important`,
+                      cursor: "pointer",
+                      fontSize: "14px",
+                    }}
+                  >
+                    《Pre-sale rules》
+                  </Typography>
+                </NavLink>
               </Stack>
             </Grid>
           </Grid>
@@ -796,6 +808,34 @@ const BetNumber = ({ gid }) => {
           </Grid>
         </Box>
       </Drawer>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={opend}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClosed}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            I Know
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
