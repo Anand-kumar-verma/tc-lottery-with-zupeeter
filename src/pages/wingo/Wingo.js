@@ -133,21 +133,23 @@ function Wingo() {
             </Typography>
           </Stack>
           <Stack
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            mt={2}
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          mt={2}
+        >
+          <Button
+            onClick={() => navigate("/withdraw")}
+            sx={style.withdrawalbtn}
           >
-            <Button
-              onClick={() => navigate("/withdraw")}
-              sx={style.withdrawalbtn}
-            >
-              Withdraw
-            </Button>
-            <Button onClick={() => navigate("/deposit")} sx={style.depositebtn}>
-              Deposit
-            </Button>
-          </Stack>
+            Withdraw
+          </Button>
+          <Button onClick={() => navigate("/deposit")} sx={style.depositebtn}>
+            Deposit
+          </Button>
+        </Stack>
+        
+          
         </Box>
         <Stack
           direction="row"

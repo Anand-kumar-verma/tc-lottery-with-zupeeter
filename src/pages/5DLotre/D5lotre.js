@@ -95,6 +95,7 @@ function D5lotre() {
         </Stack>
       </Box>
       <Box
+      className="!pt-6"
         sx={{
           padding: 1,
           background:
