@@ -68,7 +68,7 @@ const WinLossPopup = ({ gid }) => {
         height: "400px",
         margin: "auto",
         backgroundImage: `url(${
-          (status?.status === "1" && win) || (status?.status === "2" && Loss)
+          (status?.status === "1" && Loss) || (status?.status === "2" && win)
         })`,
         // backgroundImage: `url(${win})`,
         backgroundSize: "100% 100%",
