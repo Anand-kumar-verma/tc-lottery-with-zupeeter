@@ -30,7 +30,6 @@ const Same3 = ({ gid }) => {
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
-  const [random, setRandomNumber] = useState(null)
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
   const initialValue = {
@@ -95,7 +94,6 @@ const Same3 = ({ gid }) => {
       toast(e?.message);
       console.log(e);
     }
-    // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAll_trx_history");
     setLoding(false);
@@ -161,7 +159,6 @@ const Same3 = ({ gid }) => {
    </div>
 
       </div>
-
       <Drawer
         open={open}
         anchor={"bottom"}
@@ -209,7 +206,7 @@ const Same3 = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
+              Select { isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
 
             </Typography>
           </Box>
@@ -243,7 +240,7 @@ const Same3 = ({ gid }) => {
             <Grid container mt={2}>
               <Grid item xs={4}>
                 <Typography variant="body1" color="initial">
-                  Quantity{" "}
+                  Quantity
                 </Typography>
               </Grid>
               <Grid item xs={8}>
