@@ -203,6 +203,9 @@ button {
     font-size: 24px !important;
    
 }
+.ti{
+    background-color: rgba(0, 0, 0, .6);
+}
 .R5 {
     color: #fff!important;
    background: gray;

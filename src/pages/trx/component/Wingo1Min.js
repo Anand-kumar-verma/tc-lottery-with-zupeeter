@@ -148,13 +148,8 @@ function Wingo1Min() {
                 return (
                   <>
                     <Stack direction="row" alignItems="center">
-                      <Button
-                        variant="text"
-                        color="primary"
-                        className="htpbutton"
-                      >
-                        Period
-                      </Button>
+                    <Typography className="border border-white text-white px-1 !text-sm rounded" >Period</Typography>
+                   
                       <Button
                         onClick={handleClickOpen}
                         variant="text"
@@ -173,7 +168,7 @@ function Wingo1Min() {
                         variant="body1"
                         sx={{
                           color: "white",
-                          fontSize: "14px",
+                          fontSize: "18px",
                           fontWeight: "500",
                         }}
                       >
@@ -183,7 +178,7 @@ function Wingo1Min() {
                         variant="body1"
                         sx={{
                           color: "white",
-                          fontSize: "12px",
+                          fontSize: "15px",
                           fontWeight: "500",
                         }}
                       >
@@ -204,7 +199,7 @@ function Wingo1Min() {
                 return (
                   <Stack direction="row" mt={1.5}>
                     <Box
-                      className="timer"
+                      className="timer "
                       sx={{
                         backgroundImage: `url(${timerbg1})`,
                         backgroundSize: "100%",
@@ -213,13 +208,13 @@ function Wingo1Min() {
                     >
                       0
                     </Box>
-                    <Box className="timer1">0</Box>
-                    <Box className={"timer1"}>:</Box>
-                    <Box className="timer1">
+                    <Box className="timer1 ">0</Box>
+                    <Box className={"timer1 "}>:</Box>
+                    <Box className="timer1 ">
                       {show_this_one_min_time?.substring(0, 1)}
                     </Box>
                     <Box
-                      className="timer2"
+                      className="timer2 "
                       sx={{
                         backgroundImage: `url(${timerbg2})`,
                         backgroundSize: "100%",
@@ -240,7 +235,7 @@ function Wingo1Min() {
         <div className="relative">
           <BetNumber gid={"1"} />
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+            <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}

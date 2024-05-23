@@ -141,12 +141,11 @@ function Dashboard() {
         >
           1.All recharge methods only available in RECHARGE menu on OFFICIAL
         </Typography>
-        <Button
-          sx={{ background: theme.palette.primary.main, color: "white" }}
-          className="detailsbutton"
-        >
-          <WhatshotIcon /> Details
-        </Button>
+        <Typography
+                 className="!bg-orange-400 !text-white !text-xs  !font-bold rounded-2xl px-2 !flex justify-center"
+                >
+            <WhatshotIcon fontSize="small"/> <span className="my-1">Details</span>
+          </Typography>
       </Stack>
       <Stack
         direction="row"

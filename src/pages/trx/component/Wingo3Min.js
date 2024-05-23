@@ -183,13 +183,8 @@ function Wingo3Min() {
                 return (
                   <>
                     <Stack direction='row' alignItems='center'>
-                      <Button
-                        variant="text"
-                        color="primary"
-                        className="htpbutton"
-                      >
-                        Period
-                      </Button>
+                    <Typography className="border border-white text-white px-1 !text-sm rounded" >Period</Typography>
+                   
                       <Button
                         variant="text"
                         color="primary"
@@ -201,13 +196,13 @@ function Wingo3Min() {
                     <Stack direction='row' sx={{ mt: 1.5, justifyContent: 'space-between' }}>
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '14px', fontWeight: '500' }}
+                        sx={{ color: 'white', fontSize: '18px', fontWeight: '500' }}
                       >
                         {next_step}{" "}
                       </Typography>
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '12px', fontWeight: '500' }}
+                        sx={{ color: 'white', fontSize: '15px', fontWeight: '500' }}
                       >
                         Draw Time
                       </Typography>
@@ -228,18 +223,18 @@ function Wingo3Min() {
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-                    <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer " sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_min?.substring(0, 1)}
                     </Box>
-                    <Box className="timer1">
+                    <Box className="timer1 ">
                       {" "}
                       {show_this_three_min_time_min?.substring(1, 2)}
                     </Box>
-                    <Box className={"timer1"}>:</Box>
-                    <Box className="timer1">
+                    <Box className={"timer1 "}>:</Box>
+                    <Box className="timer1 ">
                       {show_this_three_min_time_sec?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer2 " sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -254,7 +249,7 @@ function Wingo3Min() {
         <div className="relative">
           <BetNumber gid={"2"} />
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+            <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}
