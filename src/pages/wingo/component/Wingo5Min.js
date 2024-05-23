@@ -1,5 +1,5 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, Grid, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -27,6 +27,7 @@ import { useFormik } from "formik";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
+import Howtoplay from "./Howtoplay";
 
 
 
@@ -35,6 +36,7 @@ function Wingo5Min() {
   const client = useQueryClient();
   const dispatch = useDispatch();
   const [value, setValue] = useState(1);
+  const [open, setOpen] = useState(false);
   const [one_min_time, setOne_min_time] = useState("0_0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
@@ -157,7 +159,13 @@ function Wingo5Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Box>
       {React.useMemo(() => {
@@ -182,7 +190,7 @@ function Wingo5Min() {
         >
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Button variant="text" color="primary" className="htpbutton">
+              <Button variant="text" color="primary" className="htpbutton" onClick={handleClickOpen}>
                 <Box component='img' src={htp} width={20} sx={{ mr: 1 }}></Box> How To Play
               </Button>
               <Typography
@@ -242,19 +250,19 @@ function Wingo5Min() {
                   Time remaining{" "}
                 </Typography>
                 <Box sx={{ display: "flex" }}>
-                  <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                  <Box className="timer !text-red-500" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_min?.substring(0, 1)}
                   </Box>
-                  <Box className="timer1">
+                  <Box className="timer1 !text-red-500">
                     {" "}
                     {show_this_three_min_time_min?.substring(1, 2)}
                   </Box>
-                  <Box className="timer1">:</Box>
-                  <Box className="timer1">
+                  <Box className="timer1 !text-red-500">:</Box>
+                  <Box className="timer1 !text-red-500">
                     {" "}
                     {show_this_three_min_time_sec?.substring(0, 1)}
                   </Box>
-                  <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                  <Box className="timer2 !text-red-500" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_sec?.substring(1, 2)}
                   </Box>
                 </Box>
@@ -343,6 +351,34 @@ function Wingo5Min() {
         {value === 2 && <Chart gid="3" />}
         {value === 3 && <MyHistory gid="3" />}
       </Box>
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
+        <Howtoplay />
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

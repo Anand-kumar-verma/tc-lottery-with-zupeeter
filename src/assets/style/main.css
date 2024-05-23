@@ -203,6 +203,16 @@ button {
     font-size: 24px !important;
    
 }
+.R5 {
+    color: #fff!important;
+   background: gray;
+}
+.R5active {
+    background: green !important; 
+    color: white !important;
+ 
+   
+}
 
 .wingonav {
     display: flex;
@@ -219,11 +229,13 @@ button {
     font-size: 13px;
     font-weight: 500;
     margin-top: 3px;
+    color: gray ;
 }
 
 .wingonav>p:nth-child(3) {
     font-size: 13px;
     font-weight: 500;
+    color: gray ;
 }
 
 .wingonavactive {
