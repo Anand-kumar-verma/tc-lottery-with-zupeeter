@@ -245,7 +245,7 @@ function Promotion() {
                 <ArrowForwardIosOutlinedIcon />
               </Stack>
             </Box>
-            <NavLink to="/promotion/TeamReport">
+            <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={subcordinatedata}></Box>

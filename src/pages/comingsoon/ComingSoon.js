@@ -1,6 +1,8 @@
 
 
 import React, { useState, useEffect } from 'react';
+import backbtn from "../../assets/images/backBtn.png";
+import { NavLink } from 'react-router-dom';
 
 
 const ComingSoon = () => {
@@ -31,10 +33,18 @@ const ComingSoon = () => {
   }, [targetDate]);
 
   return (
-    <div className="coming-soon-container">
+    
+    
+      <div className="coming-soon-container">
+     
       <div className="background"></div>
+     
       <div className="content">
-        <h1 className="heading">Get Ready!</h1>
+      <NavLink to="/">
+      <img src={backbtn} alt=''  className='mx-5 pb-10' />
+        </NavLink>
+      
+        <h1 className="heading ">Get Ready!</h1>
         <p className="subheading">Our amazing new games is launching soon.</p>
         {countdown && (
           <div className="countdown-box">
@@ -44,6 +54,7 @@ const ComingSoon = () => {
         )}
       </div>
     </div>
+   
   );
 };
 

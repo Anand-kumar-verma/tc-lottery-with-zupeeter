@@ -1,7 +1,7 @@
 
 import { Box, Container, Dialog, IconButton, Typography } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { ProfileDataFunction, logOutFunction } from "../../services/apiCallings";
+import { ProfileDataFunction, getBalanceFunction, logOutFunction } from "../../services/apiCallings";
 import pr from "../../assets/images/pr.png";
 import vip from "../../assets/images/vip.png";
 import w1 from "../../assets/images/w1.png";
@@ -28,6 +28,7 @@ import { ArrowForwardIos, CopyAll, GroupAddRounded } from "@mui/icons-material";
 import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import Layout from "../../component/layout/Layout";
+import { useState } from "react";
 
 
 function Account() {
@@ -39,6 +40,17 @@ function Account() {
     refetchOnReconnect: true,
   });
   const profile = data?.data?.earning || [];
+
+  const [balance, setBalance] = useState("");
+  const { data: wallet_amount } = useQuery(
+    ["wallet_amount_amount"],
+    () => getBalanceFunction(setBalance),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   return (
     <Layout header={false}>
@@ -76,7 +88,7 @@ function Account() {
         </Box>
         <Box className="bg-white shadow-xl rounded-lg py-5 relative top-8">
           <Typography className="!text-gray-500 px-3">Total Balance</Typography>
-          <Typography className="!font-bold px-3">₹{profile?.user?.tota_earning}
+          <Typography className="!font-bold px-3"> ₹ {Number(wallet_amount_data || 0)?.toFixed(2)}
           </Typography>
           <Box className="flex justify-center gap-8 pt-5">
             <NavLink to="/wallet">
