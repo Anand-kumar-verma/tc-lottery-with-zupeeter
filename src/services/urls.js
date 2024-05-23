@@ -3,9 +3,13 @@ export const rupees = "₹";
 export const zubgback = "#F48901";
 
 // export const baseUrl = "min.righttime.fun";
-export const baseUrl = "https://webs.ferryinfotech.in";
+// export const baseUrl = "https://webs.ferryinfotech.in";
+export const baseUrl = "https://admin.zupeeter.com";
 export const front_end_domain = "https://zupeeter.com";
 export const usdt_base_url = "https://zupeegame.info"
+
+
+
 
 export const endpoint = {
   newlogin: `${baseUrl}/api/newlogin`,
