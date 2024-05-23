@@ -261,19 +261,19 @@ function Wingo3Min() {
                   Time remaining{" "}
                 </Typography>
                 <Box sx={{ display: "flex" }}>
-                  <Box className="timer !text-red-500" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                  <Box className="timer !text-red-500 !bg-white" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_min?.substring(0, 1)}
-                  </Box>
-                  <Box className="timer1 !text-red-500">
+                  </Box> 
+                  <Box className="timer1 !text-red-500 !bg-white">
                     {" "}
                     {show_this_three_min_time_min?.substring(1, 2)}
                   </Box>
-                  <Box className="timer1 !text-red-500">:</Box>
-                  <Box className="timer1 !text-red-500">
+                  <Box className="timer1 !text-red-500 !bg-white">:</Box>
+                  <Box className="timer1 !text-red-500 !bg-white" >
                     {" "}
                     {show_this_three_min_time_sec?.substring(0, 1)}
                   </Box>
-                  <Box className="timer2 !text-red-500" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                  <Box className="timer2 !text-red-500 !bg-white" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_three_min_time_sec?.substring(1, 2)}
                   </Box>
                 </Box>
