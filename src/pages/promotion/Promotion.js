@@ -35,7 +35,6 @@ function Promotion() {
   });
   const Counting = count?.data?.earning || [];
 
-  const user_id = localStorage.getItem("user_id");
 
   const { data: user } = useQuery(["profile"], () => ProfileDataFunction(), {
     refetchOnMount: false,

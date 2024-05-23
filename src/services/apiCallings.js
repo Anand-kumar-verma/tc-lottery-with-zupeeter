@@ -241,8 +241,11 @@ export const upiListFuncton = async () => {
   }
 };
 export const Promotionfunction = async () => {
+  const reqBody = {
+    userid:localStorage.getItem("user_id"),
+  }
   try {
-    const response = await axios.get(endpoint.info_promotion);
+    const response = await axios.post(endpoint.info_promotion,reqBody);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -250,8 +253,11 @@ export const Promotionfunction = async () => {
   }
 };
 export const TeamsubFunction = async () => {
+  const reqBody = {
+    userid:localStorage.getItem("user_id"),
+  }
   try {
-    const response = await axios.get(endpoint.team_info);
+    const response = await axios.post(endpoint.team_info,reqBody);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -261,7 +267,7 @@ export const TeamsubFunction = async () => {
 export const TeamFunction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id:localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.team_report, reqBody);
     return response;
