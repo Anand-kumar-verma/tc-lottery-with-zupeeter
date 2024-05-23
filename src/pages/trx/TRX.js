@@ -176,12 +176,11 @@ function TRX() {
           >
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
-          <Button
-            sx={{ background: theme.palette.primary.main, color: "white" }}
-            className="detailsbutton"
-          >
-            <WhatshotIcon /> Details
-          </Button>
+          <Typography
+                 className="!bg-orange-400 !text-white !text-xs !pt-1 rounded-2xl px-2 py-1 !flex justify-center"
+                >
+            <WhatshotIcon fontSize="small"/> Details
+          </Typography>
         </Stack>
       </Box>
       <Box

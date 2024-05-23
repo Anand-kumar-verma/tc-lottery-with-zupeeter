@@ -696,18 +696,12 @@ function Withdraval() {
                 borderBottom: "1px solid #efefef",
               }}
             >
-              <Box>
-                <Button
-                  sx={{
-                    background: theme.palette.primary.main,
-                    color: "white",
-                    textTransform: "capitalize",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}
+             <Box>
+                <Typography
+                 className="!bg-orange-400 !text-white rounded px-2 py-1 "
                 >
                   Withdrawl
-                </Button>
+                </Typography>
               </Box>
               <Box
                 sx={{

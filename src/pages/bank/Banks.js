@@ -196,7 +196,7 @@ export default function Banks() {
             />
           </div>
         </div>
-        <Box>
+        <Box className="!m-2">
           <TableContainer>
             <Table
               id="my-table"
@@ -216,7 +216,7 @@ export default function Banks() {
                 }}
               >
                 <TableRow>
-                  <TableCell className="!text-sm !text-center !pl-[2px] !pr-0 border-2 border-r border-white">
+                  <TableCell className="!text-sm !text-center !pl-[2px] !pr-0 border-2 border-r  border-white">
                     S.No.
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
