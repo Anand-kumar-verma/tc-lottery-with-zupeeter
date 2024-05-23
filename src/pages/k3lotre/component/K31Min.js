@@ -118,7 +118,8 @@ function K31Min() {
   };
 
   return (
-    <Box>
+    <Box
+   >
       {React.useMemo(() => {
         return (
           <>
@@ -131,9 +132,10 @@ function K31Min() {
           </>
         );
       }, [audioRefMusic, audioRefMusiclast])}
-      <Box sx={{ px: 1, mt: 3 }}>
+      <Box sx={{ px: 1, mt: 3 }}
+       >
         <Box
-          className="countdownbgtrx"
+          className="countdownbgtrx !shadow-2xl !bg-white"
 
         >
           <Box
@@ -152,7 +154,7 @@ function K31Min() {
               {React.useMemo(() => {
                 return (
                   <>
-                    <Stack direction="row" alignItems="center">
+                    <Stack direction="row" alignItems="center" >
                       <Typography className="text-gray-500" > Period </Typography>
                       <Typography
                         onClick={handleClickOpen}
@@ -224,7 +226,7 @@ function K31Min() {
         </Box>
         <div>
 
-          <Box className="!flex !justify-center !mx-2 !-mb-2" >
+          <Box className="!flex !justify-center !mx-2 !-mb-2 !mt-5" >
             <Button
               className={bettype === 1 ? " k3active k3" : " k3 "} 
               onClick={() => handleChangebet(1)}
@@ -294,10 +296,10 @@ function K31Min() {
             </div>
           )}
         </div>
-        <Stack direction="row" justifyContent="space-between" mt={2}>
+        <Stack direction="row" justifyContent="space-between" >
           <Button
             className={
-              value === 1 ? " gametableactive gametable" : " gametable"
+              value === 1 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(1)}
           >
@@ -305,7 +307,7 @@ function K31Min() {
           </Button>
           <Button
             className={
-              value === 2 ? " gametableactive gametable" : " gametable"
+              value === 2 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(2)}
           >
@@ -313,7 +315,7 @@ function K31Min() {
           </Button>
           <Button
             className={
-              value === 3 ? " gametableactive gametable" : " gametable"
+              value === 3 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(3)}
           >

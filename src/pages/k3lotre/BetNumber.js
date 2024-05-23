@@ -147,9 +147,9 @@ const BetNumber = ({ gid }) => {
             borderRadius: "10px",
             mt: 1,
           }}
-          className="grid grid-cols-4  justify-center mx-3 "
+          className="grid grid-cols-4 gap-4 justify-center !ml-4 "
         >
-          <div className="flex flex-col justify-center my-1 ">
+          <div className="flex flex-col justify-center  ">
             <Box
               component="img"
               src={three}
@@ -162,7 +162,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={four}
@@ -175,7 +175,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={five}
@@ -188,7 +188,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={six}
@@ -201,7 +201,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={seven}
@@ -214,7 +214,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={eight}
@@ -227,7 +227,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={nine}
@@ -240,7 +240,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={ten}
@@ -253,7 +253,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={eleven}
@@ -266,7 +266,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={twelve}
@@ -279,7 +279,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={thirteen}
@@ -292,7 +292,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={fourteen}
@@ -305,7 +305,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={fifteen}
@@ -318,7 +318,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={sixteen}
@@ -331,7 +331,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={seventeen}
@@ -344,7 +344,7 @@ const BetNumber = ({ gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center my-1">
+          <div className="flex flex-col justify-center ">
             <Box
               component="img"
               src={eighteen}
@@ -365,7 +365,7 @@ const BetNumber = ({ gid }) => {
           className=" !my-4"
         >
           <Button
-            className="!bg-[#F48901] !text-white !rounded !text-sm !mx-1"
+            className="!bg-[#F48901] !text-white !rounded !h-10  !text-sm !mx-1"
             onClick={() => {
               setOpen(true);
               setSelectNumber("two");
@@ -374,7 +374,7 @@ const BetNumber = ({ gid }) => {
             Big 1.92x
           </Button>
           <Button
-            className="!bg-[#6da7f4] !text-white !rounded !text-sm !mx-1"
+            className="!bg-[#6da7f4] !text-white !rounded !h-10 !text-sm !mx-1"
             onClick={() => {
               setOpen(true);
               setSelectNumber("one");
@@ -383,7 +383,7 @@ const BetNumber = ({ gid }) => {
             Small 1.92X
           </Button>
           <Button
-            className="!bg-[#fa574a] !text-white !rounded !text-sm !mx-1"
+            className="!bg-[#fa574a] !text-white !rounded !h-10 !text-sm !mx-1"
             onClick={() => {
               setOpen(true);
               setSelectNumber("Odd");
@@ -392,7 +392,7 @@ const BetNumber = ({ gid }) => {
             Odd 1.92X
           </Button>
           <Button
-            className="!bg-[#40ad72] !text-white !rounded !text-sm !mx-1"
+            className="!bg-[#40ad72] !text-white !rounded !text-sm !h-10 !mx-1"
             onClick={() => {
               setOpen(true);
               setSelectNumber("Even");

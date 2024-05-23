@@ -226,13 +226,13 @@ function Wingo1Min() {
                   Time remaining{" "}
                 </Typography>
                 <Box sx={{ display: "flex" }}>
-                  <Box className="timer" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>0</Box>
-                  <Box className="timer1">0</Box>
-                  <Box className="timer1">:</Box>
-                  <Box className="timer1" >
+                  <Box className="timer !text-red-500" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>0</Box>
+                  <Box className="timer1 !text-red-500">0</Box>
+                  <Box className="timer1 !text-red-500">:</Box>
+                  <Box className="timer1 !text-red-500" >
                     {show_this_one_min_time?.substring(0, 1)}
                   </Box>
-                  <Box className="timer2" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                  <Box className="timer2 !text-red-500" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                     {show_this_one_min_time?.substring(1, 2)}
                   </Box>
                 </Box>

@@ -56,8 +56,8 @@ const style = {
 function Activity() {
   return (
     <Layout header={false}>
-      <Box sx={style.root}>
-        <Typography variant="body1" color="initial">
+      <Box sx={style.root} className="!pt-12 !px-3 ">
+        <Typography variant="body1" color="initial" className="!text-xl">
           Activity
         </Typography>
         <Typography variant="body1" color="initial">

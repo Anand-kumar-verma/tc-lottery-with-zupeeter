@@ -52,9 +52,9 @@ function Account() {
           px: 2,
         }}
       >
-        <Box className="flex justify-start items-center gap-1 mt-5">
+        <Box className="flex justify-start items-center gap-1 ">
           <Typography>
-            <img src={pr} alt="" className="rounded-full w-20 h-18 mt-5" />
+            <img src={pr} alt="" className="rounded-full w-[80px] h-[80px] mt-5" />
           </Typography>
           <Box className="flex flex-col gap-1">
             <Box className="flex justify-start items-center">
@@ -68,48 +68,48 @@ function Account() {
               <Typography className="text-white !text-xs">| </Typography>
               <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
             </Box>
-            <Box className="flex justify-center items-center gap-1 text-white">
-              <Typography className="!text-xs">Last login:</Typography>
-              <Typography className="!text-xs">{profile?.rec?.Joining_Date} </Typography>
+            <Box className="flex justify-center items-center gap-1 text-white !mr-2 ">
+              <Typography className="!text-xs !font-bold">Last login:</Typography>
+              <Typography className="!text-xs !font-bold">{profile?.rec?.Joining_Date} </Typography>
             </Box>
           </Box>
         </Box>
-        <Box className="bg-white shadow-xl rounded-lg py-5 relative top-14">
+        <Box className="bg-white shadow-xl rounded-lg py-5 relative top-8">
           <Typography className="!text-gray-500 px-3">Total Balance</Typography>
           <Typography className="!font-bold px-3">₹{profile?.user?.tota_earning}
           </Typography>
-          <Box className="flex justify-center gap-5 pt-5">
+          <Box className="flex justify-center gap-8 pt-5">
             <NavLink to="/wallet">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={wal} alt="" className="w-12" /></Typography>
+                <Typography><img src={wal} alt="" className="w-8" /></Typography>
                 <Typography>Wallet</Typography>
               </Box>
             </NavLink>
             <NavLink to="/deposit">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={dep} alt="" className="w-12" /></Typography>
+                <Typography><img src={dep} alt="" className="w-8" /></Typography>
                 <Typography>Deposit</Typography>
               </Box>
             </NavLink>
             <NavLink to="/withdraw">
               <Box className="flex flex-col justify-center items-center">
-                <Typography><img src={wih} alt="" className="w-12" /></Typography>
+                <Typography><img src={wih} alt="" className="w-8" /></Typography>
                 <Typography>Withdraw</Typography>
               </Box>
             </NavLink>
             <Box className="flex flex-col justify-center cursor-pointer items-center" 
             onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
             >
-              <Typography><img src={trx} alt="" className="w-12" /></Typography>
+              <Typography><img src={trx} alt="" className="w-8" /></Typography>
               <Typography className="">USDT</Typography>
             </Box>
           </Box>
         </Box>
       </Box>
-      <Box className="flex justify-center py-1 m-5 !mt-20 shadow rounded-lg bg-orange-400">
+      <Box className="flex justify-center  m-5 !mt-10 !p-5 rounded-lg bg-orange-400 shadow-xl">
         <img src={w1} alt="" className="mt-5 h-10 m-1" />
-        <Typography className="!text-white !font-bold !mt-2 !ml-2 ">SAFE</Typography>
-        <Typography className="text-white !font-bold !text-sm !-ml-8 !mt-8">
+        <Typography className="!text-white !font-bold !mt-2  !ml-2 ">SAFE</Typography>
+        <Typography className="text-white !font-bold !text-sm !-ml-10 !mt-8">
           Daily interest rate 0.1%  + VIP extra income safe, calculated every 1 minute
         </Typography>
       </Box>
