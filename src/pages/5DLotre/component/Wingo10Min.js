@@ -482,7 +482,7 @@ function Wingo10Min() {
           {bettype === 4 && <Different gid={"1"} />}
           {bettype === 5 && <Sum gid={"1"} />}
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+           <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}

@@ -96,7 +96,13 @@ React.useEffect(() => {
      }
   return (
     <>
- 
+<div className="!-mb-14">
+<div className=" bg-[#00b977] text-[#00b977] w-10 h-14 relative top-14 left-3 "  style={{
+          clipPath: "polygon(41% 40%, 0 25%, 0 57%)"
+        }}>
+fhgfhghfg
+ </div>
+</div>
       <div className="border-8 border-[#00b977] !h-32 my-4  p-1 rounded-lg !overflow-hidden bg-[#00b977] " >
         <div className="grid grid-cols-3 " >
           <div className="flex flex-col gap-1 justify-start" >
@@ -179,6 +185,13 @@ React.useEffect(() => {
          
         </div>
       </div>
+      <div className="">
+<div className=" bg-[#00b977] text-[#00b977] w-5 h-8 relative bottom-[95px] left-[335px]  "  style={{
+          clipPath: "polygon(100% 18%, 0 44%, 100% 77%)"
+        }}>
+fhgfhghfg
+ </div>
+</div>
     </>
   );
 };

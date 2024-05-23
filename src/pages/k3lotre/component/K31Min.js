@@ -185,13 +185,13 @@ function K31Min() {
                 );
               }, [next_step])}
             </Box>
-            <Box className="!text-[#00b977] ">
+            <Box className="!text-[#00b977]  ">
               <Typography className="text-gray-500" > Time remaining </Typography>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
                     <Box
-                      className="timer !text-[#00b977] "
+                      className="timer !text-[#00b977] !bg-gray-200 "
                       sx={{
                         backgroundImage: `url(${timerbg1})`,
                         backgroundSize: "100%",
@@ -200,13 +200,13 @@ function K31Min() {
                     >
                       0
                     </Box>
-                    <Box className="timer1 !text-[#00b977] ">0</Box>
-                    <Box className={"timer1 !text-[#00b977] "} >:</Box>
-                    <Box className="timer1 !text-[#00b977] ">
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200 ">0</Box>
+                    <Box className={"timer1 !text-[#00b977] !bg-gray-200"} >:</Box>
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200">
                       {show_this_one_min_time?.substring(0, 1)}
                     </Box>
                     <Box
-                      className="timer2 !text-[#00b977] "
+                      className="timer2 !text-[#00b977] !bg-gray-200"
                       sx={{
                         backgroundImage: `url(${timerbg2})`,
                         backgroundSize: "100%",
@@ -255,7 +255,7 @@ function K31Min() {
           {bettype === 3 && <Same3 gid={"1"} />}
           {bettype === 4 && <Different gid={"1"} />}
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+            <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}
