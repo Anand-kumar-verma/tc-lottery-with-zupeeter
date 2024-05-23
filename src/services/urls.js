@@ -3,7 +3,10 @@ export const rupees = "₹";
 export const zubgback = "#F48901";
 
 // export const baseUrl = "min.righttime.fun";
-export const baseUrl = "https://webs.ferryinfotech.in";
+// export const baseUrl = "https://webs.ferryinfotech.in";
+// https://admin.zupeeter.com/api/newlogin
+
+export const baseUrl = "https://admin.zupeeter.com";
 
 export const endpoint = {
   newlogin: `${baseUrl}/api/newlogin`,
