@@ -81,7 +81,6 @@ function Deposite() {
         userid: user_id,
         txtamount: fk.values.amount,
       };
-      console.log(reqBody);
       if (!reqBody.txtamount) return toast("Plese enter all data");
       WalletDipositFun(reqBody);
     },
@@ -95,7 +94,6 @@ function Deposite() {
       if (res?.data?.status === true) {
         window.location.href = res?.data?.earning?.msg;
       }
-      console.log(res);
     } catch (e) {
       console.log(e);
     }

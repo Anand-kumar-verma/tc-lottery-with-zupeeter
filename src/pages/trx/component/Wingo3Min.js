@@ -103,6 +103,7 @@ function Wingo3Min() {
       ) {
         client.refetchQueries("myAll_trx_history");
         client.refetchQueries("trx_gamehistory");
+        client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
         dispatch(dummycounterFun());
       }

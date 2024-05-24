@@ -41,6 +41,8 @@ export const endpoint = {
   wallet_deposit: `${baseUrl}/api/wallet_deposit_insert`,
   wallet_withdrawl: `${baseUrl}/api/insert_withdrawal_request_inr_new`,
   withdrawl_status: `${baseUrl}/api/status`,
+  payin_response: `${baseUrl}/api/payin_response`,
+  payin_response_akash: `${baseUrl}/api/payin_response_new`,
   // payment
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis

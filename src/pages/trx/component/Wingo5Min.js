@@ -98,6 +98,7 @@ function Wingo5Min() {
       ) {
         dispatch(dummycounterFun());
         client.refetchQueries("wallet_amount");
+        client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("myAll_trx_history");
         client.refetchQueries("trx_gamehistory");
       }

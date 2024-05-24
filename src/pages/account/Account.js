@@ -1,6 +1,6 @@
 
 import { Box, Container, Dialog, IconButton, Typography } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { ProfileDataFunction, getBalanceFunction, logOutFunction } from "../../services/apiCallings";
 import pr from "../../assets/images/pr.png";
 import vip from "../../assets/images/vip.png";
@@ -25,13 +25,19 @@ import n1 from "../../assets/images/n1.png";
 import s1 from "../../assets/images/s1.png";
 import l1 from "../../assets/images/l1.png";
 import { ArrowForwardIos, CopyAll, GroupAddRounded } from "@mui/icons-material";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import Layout from "../../component/layout/Layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { endpoint, front_end_domain } from "../../services/urls";
+import axios from "axios";
 
 
 function Account() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const transactionId = searchParams?.get("orderid");
+  const client = useQueryClient();
   const user_id = localStorage.getItem("user_id");
   const navigate = useNavigate();
 
@@ -51,6 +57,28 @@ function Account() {
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+
+  async function sendUrlCallBackToBackend(transactionId) {
+    try {
+      const res = await axios.get(
+        `${endpoint?.payin_response_akash}?orderid=${transactionId}`
+      );
+      if (res?.data?.status === "200") {
+        window.location.href = `${front_end_domain}/account`
+      }
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+    client.removeQueries("profile");
+    client.removeQueries("wallet_amount_amount");
+  }
+
+  useEffect(() => {
+    if (transactionId) {
+      sendUrlCallBackToBackend(transactionId);
+    }
+  }, []);
 
   return (
     <Layout header={false}>

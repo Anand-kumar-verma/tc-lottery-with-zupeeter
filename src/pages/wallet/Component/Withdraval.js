@@ -84,14 +84,16 @@ function Withdraval() {
     try {
       const res = await axios.post(endpoint?.wallet_withdrawl, reqBody);
       toast(res?.data?.earning?.msg);
+      client.refetchQueries("wallet_amount");
+      client.refetchQueries("withdrawl_history");
+      client.refetchQueries("wallet_amount_amount");
+      client.refetchQueries("profile");
       navigate("/account");
     } catch (e) {
       console.log(e);
     }
     setloding(false);
-    client.refetchQueries("wallet_amount");
-    client.refetchQueries("withdrawl_history");
-    client.refetchQueries("profile");
+   
   }
 
   const goBack = () => {
@@ -488,44 +490,7 @@ function Withdraval() {
           Withdrawal
         </Button>
         <Box mt={3}>
-          <Stack direction="row" alignItems="center" mt={1}>
-            <Box
-              sx={{
-                width: "5px",
-                height: "5px",
-                background: theme.palette.primary.main,
-                transform: "rotate(45deg)",
-                mr: 1,
-              }}
-            ></Box>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ fontSize: "12px" }}
-            >
-              Need to bet{" "}
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                fontSize: "12px",
-                color: theme.palette.primary.main,
-                mx: 0.5,
-              }}
-            >
-              {" "}
-              ₹{wallet_amount_data || 0}{" "}
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ fontSize: "12px" }}
-            >
-              {" "}
-              to be able to withdraw{" "}
-            </Typography>
-          </Stack>
+        
           <Stack direction="row" alignItems="center" mt={1}>
             <Box
               sx={{
@@ -555,68 +520,9 @@ function Withdraval() {
               00:00-23:50{" "}
             </Typography>
           </Stack>
+        
           <Stack direction="row" alignItems="center" mt={1}>
-            <Box
-              sx={{
-                width: "5px",
-                height: "5px",
-                background: theme.palette.primary.main,
-                transform: "rotate(45deg)",
-                mr: 1,
-              }}
-            ></Box>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ fontSize: "12px" }}
-            >
-              Inday Remaining Withdrawal Times{" "}
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                fontSize: "12px",
-                color: theme.palette.primary.main,
-                mx: 0.5,
-              }}
-            >
-              {" "}
-              3{" "}
-            </Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" mt={1}>
-            <Box
-              sx={{
-                width: "5px",
-                height: "5px",
-                background: theme.palette.primary.main,
-                transform: "rotate(45deg)",
-                mr: 1,
-              }}
-            ></Box>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ fontSize: "12px" }}
-            >
-              Withdrawal amount range{" "}
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                fontSize: "12px",
-                color: theme.palette.primary.main,
-                mx: 0.5,
-              }}
-            >
-              {" "}
-              ₹110.00-₹100,000.00{" "}
-            </Typography>
-          </Stack>
-          <Stack direction="row" alignItems="center" mt={1}>
-            <Box
+          <Box
               sx={{
                 width: "5px",
                 height: "5px",

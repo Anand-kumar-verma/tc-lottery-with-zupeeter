@@ -1,25 +1,22 @@
+import { Check } from "@mui/icons-material";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
-import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
-import ageantline from '../../assets/images/ageantline.png';
+import { Box, Container, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { NavLink } from "react-router-dom";
+import { useCopyToClipboard } from "usehooks-ts";
 import cardbg from '../../assets/images/cardbg.png';
 import comitiondetails from '../../assets/images/commissiondetails.png';
 import copyinvitationcode from '../../assets/images/copyinvitationcode.png';
-import invitationrules from '../../assets/images/invitationrules.png';
 import newsubordinatedata from '../../assets/images/newsubordinatedata.png';
 import promotiondata from '../../assets/images/promotiondata.png';
-import rebateratio from '../../assets/images/rebateratio.png';
 import subcordinatedata from '../../assets/images/subcordinatedata.png';
 import Layout from "../../component/layout/Layout";
 import { ProfileDataFunction, Promotionfunction, TeamsubFunction, } from "../../services/apiCallings";
-import theme from "../../utils/theme";
-import { useQuery } from "react-query";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
-import { useState } from "react";
-import { useCopyToClipboard } from "usehooks-ts";
-import { Check } from "@mui/icons-material";
+import theme from "../../utils/theme";
 
 function Promotion() {
   const { data } = useQuery(["get_info"], () => Promotionfunction(), {
@@ -92,31 +89,11 @@ function Promotion() {
             </Stack>
             <Box sx={style.boxStyles}>
               <Box sx={style.innerBoxStyles}>
-
-                <Box sx={style.subcordinatelist}>
+              <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
-                    className="!text-orange-400"
-                  >
-                    {prim?.direct}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-black"
-                  >
-                    Direct
-
-                  </Typography>
-                </Box>
-
-
-                <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-green-500"
+                    className="!text-orange-500"
                   >
                     {prim?.number_of_register}
                   </Typography>
@@ -127,9 +104,29 @@ function Promotion() {
                     className="!text-whtie"
                   >
 
-                    Number of register
+                    Number of Register
                   </Typography>
                 </Box>
+                <Box sx={style.subcordinatelist}>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-green-400"
+                  >
+                    {prim?.number_of_active_direct}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-black"
+                  >
+                    Total Active Direct
+
+                  </Typography>
+                </Box>
+
+
+                
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
@@ -151,23 +148,7 @@ function Promotion() {
               </Box>
 
               <Box sx={style.innerBoxStylestwo}>
-                <Box sx={style.subcordinatelist}>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-green-400"
-                  >
-                    {Counting?.direct}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    className="!text-black"
-                  >
-                    {" "}
-                    Direct
-                  </Typography>
-                </Box>
+               
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
@@ -185,6 +166,25 @@ function Promotion() {
                     Number of Registers
                   </Typography>
                 </Box>
+
+                <Box sx={style.subcordinatelist}>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-green-400"
+                  >
+                    {Counting?.number_of_active_direct}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    className="!text-black"
+                  >
+                    {" "}
+                    Total Active Team
+                  </Typography>
+                </Box>
+
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
@@ -297,7 +297,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/PromotionRule">
+            {/* <NavLink to="/promotion/PromotionRule">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={invitationrules}></Box>
@@ -309,8 +309,8 @@ function Promotion() {
                   <ArrowForwardIosOutlinedIcon />
                 </Stack>
               </Box>
-            </NavLink>
-            <NavLink to="/promotion/Server/">
+            </NavLink> */}
+            {/* <NavLink to="/promotion/Server/">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={ageantline}></Box>
@@ -322,8 +322,8 @@ function Promotion() {
                   <ArrowForwardIosOutlinedIcon />
                 </Stack>
               </Box>
-            </NavLink>
-            <NavLink to="/promotion/Rebate/">
+            </NavLink> */}
+            {/* <NavLink to="/promotion/Rebate/">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component="img" src={rebateratio}></Box>
@@ -335,7 +335,7 @@ function Promotion() {
                   <ArrowForwardIosOutlinedIcon />
                 </Stack>
               </Box>
-            </NavLink>
+            </NavLink> */}
             <Box sx={style.promotionBoxOuter}>
               <Box sx={style.promotionBox}>
                 <Stack direction="row">
