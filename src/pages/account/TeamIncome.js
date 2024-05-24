@@ -63,14 +63,14 @@ const TeamIncome = () => {
           Fund Main
         </span>
         </Box>
-        <Box sx={style.fx}>
+        {/* <Box sx={style.fx}>
         <span
           className="!text-blue-500 cursor-pointer"
           onClick={() => navigate("/view-salary-income")}
         >
           View Salary Income
         </span>
-        </Box>
+        </Box> */}
         <Box sx={style.fx}>
         <span
           className="!text-blue-500 cursor-pointer"

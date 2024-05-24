@@ -490,7 +490,44 @@ function Withdraval() {
           Withdrawal
         </Button>
         <Box mt={3}>
-        
+        <Stack direction="row" alignItems="center" mt={1}>
+            <Box
+              sx={{
+                width: "5px",
+                height: "5px",
+                background: theme.palette.primary.main,
+                transform: "rotate(45deg)",
+                mr: 1,
+              }}
+            ></Box>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{ fontSize: "12px" }}
+            >
+              Need to bet{" "}
+            </Typography>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{
+                fontSize: "12px",
+                color: theme.palette.primary.main,
+                mx: 0.5,
+              }}
+            >
+              {" "}
+              ₹{wallet_amount_data || 0}{" "}
+            </Typography>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{ fontSize: "12px" }}
+            >
+              {" "}
+              to be able to withdraw{" "}
+            </Typography>
+          </Stack>
           <Stack direction="row" alignItems="center" mt={1}>
             <Box
               sx={{

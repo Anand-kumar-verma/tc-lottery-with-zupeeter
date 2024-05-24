@@ -16,6 +16,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import { NavLink } from "react-router-dom";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
 import two from "../../assets/images/n2-c2913607.png";
@@ -28,18 +29,18 @@ import eight from "../../assets/images/n8-d4d951a4.png";
 import nine from "../../assets/images/n9-a20f6f42 (1).png";
 import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
+import FalseCheck from "../../shared/check/FalseCheck";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
-import { NavLink } from "react-router-dom";
 
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [opend, setOpend] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
-  const [random, setRandomNumber] = useState(null)
+  const [random, setRandomNumber] = useState(null);
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const client = useQueryClient();
@@ -83,16 +84,23 @@ const BetNumber = ({ gid }) => {
     try {
       const response = await axios.post(`${endpoint.bet_placed}`, reqBody);
       if (response?.data?.error === "200") {
-        toast(
-          <SuccessCheck
-            message={
-              <span className="!text-sm">Bid Placed Successfully !</span>
-            }
-          />
-        );
-        fk.setFieldValue("isSuccessPlaceBet", true);
+        if (response?.data?.msg === "Bid Placed Successfully.") {
+          toast(
+            <SuccessCheck
+              message={<span className="!text-sm">{response?.data?.msg}</span>}
+            />
+          );
+          fk.setFieldValue("isSuccessPlaceBet", true);
+          localStorage.setItem("betApplied", `${gid}_true`);
+        } else {
+          toast(
+            <FalseCheck
+              message={<span className="!text-sm">{response?.data?.msg}</span>}
+            />
+          );
+        }
+
         setOpen(false);
-        localStorage.setItem("betApplied", `${gid}_true`);
       } else {
         toast(response?.data?.msg);
       }
@@ -127,7 +135,7 @@ const BetNumber = ({ gid }) => {
   };
   const handleClose = () => {
     setOpen(false);
-  }
+  };
   return (
     <Box
       sx={{
@@ -291,12 +299,19 @@ const BetNumber = ({ gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined" onClick={generatenumber}>Random</Button>
+          <Button variant="outlined" onClick={generatenumber}>
+            Random
+          </Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
-            return <Box 
-            className="cursor-pointer" 
-            onClick={() => fk.setFieldValue("qnt", i)}
-            sx={style.bacancebtn3}>X{i}</Box>;
+            return (
+              <Box
+                className="cursor-pointer"
+                onClick={() => fk.setFieldValue("qnt", i)}
+                sx={style.bacancebtn3}
+              >
+                X{i}
+              </Box>
+            );
           })}
         </Stack>
         <ButtonGroup
@@ -334,8 +349,8 @@ const BetNumber = ({ gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-        // onClickCapture={handleClose} 
-        >
+        // onClickCapture={handleClose}
+      >
         <Box sx={{ position: "relative" }}>
           <Box
             sx={{
@@ -393,7 +408,10 @@ const BetNumber = ({ gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select {random||isNaN(Number(selectNumber))?selectNumber?.toString()?.toLocaleUpperCase():selectNumber}
+              Select{" "}
+              {random || isNaN(Number(selectNumber))
+                ? selectNumber?.toString()?.toLocaleUpperCase()
+                : selectNumber}
             </Typography>
           </Box>
           <Box mt={5} px={2}>
@@ -497,7 +515,13 @@ const BetNumber = ({ gid }) => {
                   >
                     -
                   </Box>
-                  <TextField value={fk.values.qnt} className="inputamt" />
+                  <TextField
+                    id="qnt"
+                    name="qnt"
+                    onChange={fk.handleChange}
+                    value={fk.values.qnt}
+                    className="inputamt"
+                  />
                   <Box
                     className={` !cursor-pointer
                      ${

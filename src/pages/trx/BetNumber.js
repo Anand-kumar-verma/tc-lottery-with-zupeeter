@@ -29,6 +29,7 @@ import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import FalseCheck from "../../shared/check/FalseCheck";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -80,17 +81,22 @@ const BetNumber = ({ gid }) => {
     try {
       const response = await axios.post(`${endpoint.trx_bet_placed}`, reqBody);
       if (response?.data?.error === "200") {
-        toast(
-          <SuccessCheck
-            message={
-              <span className="!text-sm">Bid Placed Successfully !</span>
-            }
-          />
-        );
-        fk.setFieldValue("isSuccessPlaceBet", true);
+        if (response?.data?.msg === "Bid Placed Successfully.") {
+          toast(
+            <SuccessCheck
+              message={<span className="!text-sm">{response?.data?.msg}</span>}
+            />
+          );
+          fk.setFieldValue("isSuccessPlaceBet", true);
+          localStorage.setItem("betApplied", `${gid}_true`);
+        } else {
+          toast(
+            <FalseCheck
+              message={<span className="!text-sm">{response?.data?.msg}</span>}
+            />
+          );
+        }
         setOpen(false);
-        localStorage.setItem("betApplied", `${gid}_true`);
-        console.log(response, "This is response");
       } else {
         toast(response?.data?.msg);
       }
@@ -282,13 +288,18 @@ const BetNumber = ({ gid }) => {
           justifyContent="space-between"
         >
           <Button variant="outlined" onClick={generatenumber}>
-            Random 
+            Random
           </Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
-            return <Box 
-            className="cursor-pointer"
-            onClick={() => fk.setFieldValue("qnt", i)}
-            sx={style.bacancebtn3}>X{i}</Box>;
+            return (
+              <Box
+                className="cursor-pointer"
+                onClick={() => fk.setFieldValue("qnt", i)}
+                sx={style.bacancebtn3}
+              >
+                X{i}
+              </Box>
+            );
           })}
         </Stack>
         <ButtonGroup
@@ -492,7 +503,13 @@ const BetNumber = ({ gid }) => {
                   >
                     -
                   </Box>
-                  <TextField value={fk.values.qnt} className="inputamt" />
+                  <TextField
+                    id="qnt"
+                    name="qnt"
+                    value={fk.values.qnt}
+                    onChange={fk.handleChange}
+                    className="inputamt"
+                  />
                   <Box
                     className={` !cursor-pointer
                      ${

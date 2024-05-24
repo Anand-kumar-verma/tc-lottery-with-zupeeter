@@ -64,8 +64,9 @@ import D5lotre from "./pages/5DLotre/D5lotre";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
+  const isAuthenticated = localStorage.getItem("user_id");
 
-useQuery(["team_count"], () => TeamsubFunction(), {
+  useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
@@ -75,7 +76,6 @@ useQuery(["team_count"], () => TeamsubFunction(), {
       setIsOpenSplash(false);
     }, 1000);
   }, []);
-
 
   if (isOpenSplash)
     return (
@@ -89,103 +89,117 @@ useQuery(["team_count"], () => TeamsubFunction(), {
       <Route path="/" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
-      <Route path="/RiskDisclosureAgreement" element={<RiskDisclosureAgreement />}></Route>
-      <Route path="/dashboard" element={<Dashboard />}></Route>
-      <Route path='/withdrawlhistory' element={<Withdrawlhistory />}></Route>
-      <Route path='/depositehistory' element={<Depositehistory />}></Route>
-      <Route path='/promotion' element={<Promotion />}></Route>
-      <Route path='/wallet' element={<Wallet />}></Route>
-      <Route path='/bankcard' element={<Bankaccount />}></Route>
-      <Route path='/addbankaccount' element={<AddBankAccount />}></Route>
-      <Route path="/account" element={<Account />}></Route>
-      <Route path="/activity" element={<Activity />}></Route>
-      <Route path="/wingo" element={<Wingo />}></Route>
-      <Route path="/trx" element={<TRX />}></Route>
-      <Route path="/k3" element={<K3 />}></Route>
-      <Route path="/D5lotre" element={<D5lotre />}></Route>
-      <Route path="/CustomerService" element={<Contactus />}></Route>
-      <Route path="/ServiceCollections" element={<ServiceCollection />}></Route>
-      <Route path="/supportPage" element={<SupportPage />}></Route>
-      <Route path="/comingsoon" element={<ComingSoon />}></Route>
-      <Route path="/withdraw" element={<Withdraval />}></Route>
-      <Route path="/deposit" element={<Deposite />}></Route>
-      <Route path="/trx/tron-scan" element={<TronScanPage />}></Route>
-      <Route path="/bank" element={<BankDetails />}></Route>
-      <Route path="/banks-details" element={<Banks />}></Route>
-      <Route path="/banks-upi" element={<UPIDetails />}></Route>
-      <Route path="/ico-token" element={<ICOToken />}></Route>
-      <Route path="/fund-main" element={<FundMain />}></Route>
-      <Route path="/fund-report" element={<FundReport />}></Route>
-      <Route path="/fund-transfer" element={<FundTransfer />}></Route>
-      <Route path="/view-salary-income" element={<ViewSalaryIncome />}></Route>
-      <Route path="/upi-deposit-token" element={<UPIDepositToken />}></Route>
-      <Route path="/zupeeter-token" element={<ZupeeterTokenReport />}></Route>
-      {/* // INCOME */}
-      <Route
-        path="/account/income-main/registration-bonus"
-        element={<RegistrationBonus />}
-      ></Route>
-      <Route path="/account/income-main" element={<MainPageOFIncome />}></Route>
-      <Route
-        path="/account/income-main/referral-bonus"
-        element={<ReferralBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/team-betting-bonus"
-        element={<TeamBettingBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/team-salary-bonus"
-        element={<TeamSalaryBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/royality-bonus"
-        element={<RoyalityBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/level-bonus"
-        element={<LevelBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/ico-level-bonus"
-        element={<ICOLevelBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/betting-bonus"
-        element={<BettingBonus />}
-      ></Route>
-      <Route
-        path="/account/income-main/my-team"
-        element={<AllLevelOfTeam />}
-      ></Route>
-      <Route
-        path="/account/income-main/my-team/levels"
-        element={<Tables />}
-      ></Route>
-      <Route path='/account/Teamincome' element={<TeamIncome />}></Route>
-      <Route path='/promotion/TeamReport' element={<TeamReport />}></Route>
-      <Route path='/promotion/Teamdata' element={<TeamData />}></Route>
-      <Route path='/promotion/MyCommission' element={<MyCommission />}></Route>
-      <Route path='/promotion/Subordinates' element={<Subordinates />}></Route>
-      <Route path='/promotion/Server' element={<Server />}></Route>
-      <Route path='/promotion/Rebate' element={<RebateRatio />}></Route>
-      <Route path='/promotion/PromotionRule' element={<PromotionRule />}></Route>
-      <Route
-        path="/password"
-        element={<ChangePassword />}
-      ></Route>
-      <Route
-        path="/password/account"
-        element={<AccountPassword />}
-      ></Route>
-      <Route
-        path="/password/transction"
-        element={<TransactionPassword />}
-      ></Route>
-      <Route
-        path="/splash"
-        element={<SplashScreen />}
-      ></Route>
+      <>
+        <Route
+          path="/RiskDisclosureAgreement"
+          element={<RiskDisclosureAgreement />}
+        ></Route>
+        <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/withdrawlhistory" element={<Withdrawlhistory />}></Route>
+        <Route path="/depositehistory" element={<Depositehistory />}></Route>
+        <Route path="/promotion" element={<Promotion />}></Route>
+        <Route path="/wallet" element={<Wallet />}></Route>
+        <Route path="/bankcard" element={<Bankaccount />}></Route>
+        <Route path="/addbankaccount" element={<AddBankAccount />}></Route>
+        <Route path="/account" element={<Account />}></Route>
+        <Route path="/activity" element={<Activity />}></Route>
+        <Route path="/wingo" element={<Wingo />}></Route>
+        <Route path="/trx" element={<TRX />}></Route>
+        <Route path="/k3" element={<K3 />}></Route>
+        <Route path="/D5lotre" element={<D5lotre />}></Route>
+        <Route path="/CustomerService" element={<Contactus />}></Route>
+        <Route
+          path="/ServiceCollections"
+          element={<ServiceCollection />}
+        ></Route>
+        <Route path="/supportPage" element={<SupportPage />}></Route>
+        <Route path="/comingsoon" element={<ComingSoon />}></Route>
+        <Route path="/withdraw" element={<Withdraval />}></Route>
+        <Route path="/deposit" element={<Deposite />}></Route>
+        <Route path="/trx/tron-scan" element={<TronScanPage />}></Route>
+        <Route path="/bank" element={<BankDetails />}></Route>
+        <Route path="/banks-details" element={<Banks />}></Route>
+        <Route path="/banks-upi" element={<UPIDetails />}></Route>
+        <Route path="/ico-token" element={<ICOToken />}></Route>
+        <Route path="/fund-main" element={<FundMain />}></Route>
+        <Route path="/fund-report" element={<FundReport />}></Route>
+        <Route path="/fund-transfer" element={<FundTransfer />}></Route>
+        <Route
+          path="/view-salary-income"
+          element={<ViewSalaryIncome />}
+        ></Route>
+        <Route path="/upi-deposit-token" element={<UPIDepositToken />}></Route>
+        <Route path="/zupeeter-token" element={<ZupeeterTokenReport />}></Route>
+        {/* // INCOME */}
+        <Route
+          path="/account/income-main/registration-bonus"
+          element={<RegistrationBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main"
+          element={<MainPageOFIncome />}
+        ></Route>
+        <Route
+          path="/account/income-main/referral-bonus"
+          element={<ReferralBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/team-betting-bonus"
+          element={<TeamBettingBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/team-salary-bonus"
+          element={<TeamSalaryBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/royality-bonus"
+          element={<RoyalityBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/level-bonus"
+          element={<LevelBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/ico-level-bonus"
+          element={<ICOLevelBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/betting-bonus"
+          element={<BettingBonus />}
+        ></Route>
+        <Route
+          path="/account/income-main/my-team"
+          element={<AllLevelOfTeam />}
+        ></Route>
+        <Route
+          path="/account/income-main/my-team/levels"
+          element={<Tables />}
+        ></Route>
+        <Route path="/account/Teamincome" element={<TeamIncome />}></Route>
+        <Route path="/promotion/TeamReport" element={<TeamReport />}></Route>
+        <Route path="/promotion/Teamdata" element={<TeamData />}></Route>
+        <Route
+          path="/promotion/MyCommission"
+          element={<MyCommission />}
+        ></Route>
+        <Route
+          path="/promotion/Subordinates"
+          element={<Subordinates />}
+        ></Route>
+        <Route path="/promotion/Server" element={<Server />}></Route>
+        <Route path="/promotion/Rebate" element={<RebateRatio />}></Route>
+        <Route
+          path="/promotion/PromotionRule"
+          element={<PromotionRule />}
+        ></Route>
+        <Route path="/password" element={<ChangePassword />}></Route>
+        <Route path="/password/account" element={<AccountPassword />}></Route>
+        <Route
+          path="/password/transction"
+          element={<TransactionPassword />}
+        ></Route>
+      </>
+      <Route path="/splash" element={<SplashScreen />}></Route>
     </Routes>
   );
 }

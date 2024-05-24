@@ -18,7 +18,7 @@ import { endpoint } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 export default function Tables() {
-  const userid = localStorage.getItem("user_id")
+  const userid = localStorage.getItem("user_id");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const tableRef = React.useRef(null);
@@ -167,6 +167,11 @@ export default function Tables() {
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Name
                   </TableCell>
+                  {Number(member_id) === 1 && (
+                    <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                      Mobile
+                    </TableCell>
+                  )}
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Total Recharge
                   </TableCell>
@@ -196,6 +201,11 @@ export default function Tables() {
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {i?.or_m_name}
                       </TableCell>
+                      {Number(member_id) === 1 && (
+                        <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                          {i?.or_m_mobile_no}
+                        </TableCell>
+                      )}
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {i?.recharge}
                       </TableCell>

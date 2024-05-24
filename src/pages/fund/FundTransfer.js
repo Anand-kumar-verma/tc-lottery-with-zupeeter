@@ -5,12 +5,23 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { endpoint } from "../../services/urls";
 import Layout from "../../component/layout/Layout";
-import { getBalanceFunction } from "../../services/apiCallings";
+import { ProfileDataFunction, getBalanceFunction } from "../../services/apiCallings";
+import { useQuery } from "react-query";
 
 const FundTransfer = () => {
   const user_id = localStorage.getItem("user_id");
+
   const [username, setusername] = useState("");
   const [balance, setsetBalance] = useState("");
+
+
+  const { isLoading, data } = useQuery(["profile"], () => ProfileDataFunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const profile = data?.data?.earning || [];
+
+
   const initialValue = {
     wallet: balance || "",
     userid: "",
@@ -24,10 +35,10 @@ const FundTransfer = () => {
     enableReinitialize: true,
     onSubmit: () => {
       const reqBody = {
-        userid: fk.values.userid,
+        userid: profile?.rec?.Login_Id,
         txtpassword: fk.values.transaction_password,
         txtamount: fk.values.transfer_amount,
-        txtuserid: fk.values.transferid,
+        txtuserid: fk.values.userid,
         txtwallet: fk.values.wallet,
       };
       if (
@@ -99,7 +110,8 @@ const FundTransfer = () => {
             placeholder="Select Bank"
             className="!w-[100%]"
           ></TextField>
-          <span>User Id *</span>
+    
+          <span>Transfer Id*</span>
           <div>
             <TextField
               id="userid"
@@ -112,15 +124,6 @@ const FundTransfer = () => {
               <p className="!text-[10px] !text-red-500 pl-2">{username}</p>
             )}
           </div>
-          <span>Transfer Id*</span>
-          <TextField
-            id="transferid"
-            name="transferid"
-            placeholder="Enter Transfer Id"
-            value={fk.values.transferid}
-            onChange={fk.handleChange}
-            className="!w-[100%]"
-          />
           <span>Tranfer Amount*</span>
           <TextField
             id="transfer_amount"

@@ -258,7 +258,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/Teamdata">
+            <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component='img' src={subcordinatedata}></Box>

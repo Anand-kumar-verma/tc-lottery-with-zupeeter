@@ -61,6 +61,8 @@ const GameHistory = ({ gid }) => {
     [game_history?.data?.data]
   );
 
+
+  
   React.useEffect(() => {
     console.log(
       game_history?.data?.data
@@ -86,6 +88,10 @@ const GameHistory = ({ gid }) => {
     }
     dispatch(trx_game_image_index_function(array));
   }, [game_history?.data?.data]);
+
+
+
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

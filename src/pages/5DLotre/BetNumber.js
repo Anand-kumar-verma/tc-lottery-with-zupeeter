@@ -1,36 +1,23 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   Checkbox,
-  Dialog,
   Drawer,
   Grid,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
-import zero from "../../assets/images/n0-30bd92d1.png";
-import one from "../../assets/images/n1-dfccbff5.png";
-import two from "../../assets/images/n2-c2913607.png";
-import three from "../../assets/images/n3-f92c313f.png";
-import four from "../../assets/images/n4-cb84933b.png";
-import five from "../../assets/images/n5-49d0e9c5.png";
-import six from "../../assets/images/n6-a56e0b9a.png";
-import seven from "../../assets/images/n7-5961a17f.png";
-import eight from "../../assets/images/n8-d4d951a4.png";
-import nine from "../../assets/images/n9-a20f6f42 (1).png";
 import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-import { NavLink } from "react-router-dom";
 const BetNumber = ({ gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -85,14 +72,14 @@ const BetNumber = ({ gid }) => {
         toast(
           <SuccessCheck
             message={
-              <span className="!text-sm">Bid Placed Successfully !</span>
+              <span className="!text-sm">{response?.data?.msg}</span>
             }
           />
         );
         fk.setFieldValue("isSuccessPlaceBet", true);
         setOpen(false);
         localStorage.setItem("betApplied", `${gid}_true`);
-        console.log(response, "This is response");
+        console.log(response);
       } else {
         toast(response?.data?.msg);
       }

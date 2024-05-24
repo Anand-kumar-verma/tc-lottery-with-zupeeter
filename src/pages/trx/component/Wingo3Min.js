@@ -2,11 +2,11 @@ import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
-import { dummycounterFun } from "../../../redux/slices/counterSlice";
+import { dummycounterFun, trx_game_image_index_function, updateNextCounter } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
@@ -17,6 +17,9 @@ import { NavLink } from "react-router-dom";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import Howtoplay from "./Howtoplay";
+import { endpoint } from "../../../services/urls";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 
 function Wingo3Min() {
@@ -105,6 +108,7 @@ function Wingo3Min() {
         client.refetchQueries("trx_gamehistory");
         client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
+        client.refetchQueries("trx_gamehistory_3");
         dispatch(dummycounterFun());
       }
     };
@@ -115,6 +119,62 @@ function Wingo3Min() {
       socket.off("threemintrx", handleThreeMin);
     };
   }, []);
+
+  const { isLoading, data: game_history } = useQuery(
+    ["trx_gamehistory_3"],
+    () => GameHistoryFn("2"),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+
+  const GameHistoryFn = async (gid) => {
+    try {
+      const reqBody = {
+        gameid: gid,
+        limit: 100,
+      };
+      const response = await axios.post(
+        `${endpoint.trx_game_history}`,
+        reqBody
+      );
+      return response;
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+  };
+
+  
+  React.useEffect(() => {
+    console.log(
+      game_history?.data?.data
+        ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+        : 1
+    );
+    dispatch(
+      updateNextCounter(
+        game_history?.data?.data
+          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+          : 1
+      )
+    );
+    const tr_digit =
+      game_history?.data?.data && game_history?.data?.data?.[0]?.tr_digits;
+    let array = [];
+    for (let i = 0; i < tr_digit?.length; i++) {
+      if (/[a-zA-Z]/.test(tr_digit[i])) {
+        array.push(tr_digit[i].toUpperCase());
+      } else {
+        array.push(tr_digit[i]);
+      }
+    }
+    dispatch(trx_game_image_index_function(array));
+  }, [game_history?.data?.data]);
+
+
+
 
   const handlePlaySoundLast = async () => {
     try {
