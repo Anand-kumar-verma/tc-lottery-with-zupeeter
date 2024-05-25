@@ -1,5 +1,4 @@
-// export const domain = "https://sun-lottery-timer-tlhr.onrender.com/";
-export const domain = "https://aviator-backend-pyup.onrender.com/";
+export const domain = "https://sun-lottery-timer-tlhr.onrender.com/";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
@@ -8,8 +7,6 @@ export const zubgback = "#F48901";
 export const baseUrl = "https://admin.zupeeter.com";
 export const front_end_domain = "https://zupeeter.com";
 export const usdt_base_url = "https://zupeegame.info"
-
-
 
 
 export const endpoint = {
@@ -41,9 +38,10 @@ export const endpoint = {
   wallet_deposit: `${baseUrl}/api/wallet_deposit_insert`,
   wallet_withdrawl: `${baseUrl}/api/insert_withdrawal_request_inr_new`,
   withdrawl_status: `${baseUrl}/api/status`,
+  // payment
   payin_response: `${baseUrl}/api/payin_response`,
   payin_response_akash: `${baseUrl}/api/payin_response_new`,
-  // payment
+  
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis
   trx_game_history: `${baseUrl}/api/trx_result`,
