@@ -17,6 +17,7 @@ import Layout from "../../component/layout/Layout";
 import { ProfileDataFunction, Promotionfunction, TeamsubFunction, } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import { front_end_domain } from "../../services/urls";
 
 function Promotion() {
   const { data } = useQuery(["get_info"], () => Promotionfunction(), {
@@ -215,7 +216,7 @@ function Promotion() {
                   <Typography sx={{}}
                     onMouseLeave={() => setCopied(false)}
                     onClick={() => {
-                      copy(profile?.rec?.Login_Id);
+                      copy(`${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`);
                       setCopied(true);
                     }}> INVITATION LINK </Typography>
                 )} </NavLink>
@@ -236,7 +237,7 @@ function Promotion() {
                 )}  </Stack>
               <Stack direction="row" onMouseLeave={() => setCopied(false)}
                 onClick={() => {
-                  copy(profile?.rec?.Login_Id);
+                  copy(`${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`);
                   setCopied(true);
                 }}>
                 <Typography variant="body1" color="initial">

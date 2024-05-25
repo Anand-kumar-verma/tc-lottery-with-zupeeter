@@ -17,7 +17,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import invite from "../../assets/images/invite.png";
 import logemaildeactive from "../../assets/images/logemaildeactive.png";
 import password from "../../assets/images/password.png";
@@ -36,11 +36,14 @@ const RegistrationByEmail = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const inviteid = params.get('inviteid');
   const initialValue = {
     email: "",
     password: "",
     confirmed_password: "",
-    invite_code: "",
+    invite_code: inviteid|| "",
     name: "",
   };
   const fk = useFormik({
