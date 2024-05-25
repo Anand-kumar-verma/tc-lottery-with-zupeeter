@@ -297,7 +297,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                    className="!bg-[#F48901]  !text-white !h-52 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(0, 1)}
                 </div>
@@ -313,7 +313,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                    className="!bg-[#F48901]  !text-white !h-52 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(1, 2)}
                 </div>

@@ -269,7 +269,7 @@ function Wingo1Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                  className="!bg-[#F48901]  !text-white !h-52 !pb-5"
                 >
                   {show_this_one_min_time?.substring(0, 1)}
                 </div>
@@ -285,7 +285,7 @@ function Wingo1Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                  className="!bg-[#F48901]  !text-white !h-52 !pb-5"
                 >
                   {show_this_one_min_time?.substring(1, 2)}
                 </div>
