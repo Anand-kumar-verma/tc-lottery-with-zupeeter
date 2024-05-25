@@ -49,6 +49,7 @@ const BetNumber = ({ gid }) => {
 
   const fk = useFormik({
     initialValues: initialValue,
+    enableReinitialize:true,
     isSuccessPlaceBet: true,
     onSubmit: () => {
       if (
@@ -107,6 +108,7 @@ const BetNumber = ({ gid }) => {
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAll_trx_history");
+    fk.setFieldValue("balance", "1")
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
@@ -420,29 +422,37 @@ const BetNumber = ({ gid }) => {
                       <Box
                         onClick={() => fk.setFieldValue("balance", i)}
                         sx={style.bacancebtn}
-                        className={` !cursor-pointer
+                        className={` !cursor-pointer !text-black bg-gray-200 
                           ${
-                            selectNumber === "green" ||
-                            selectNumber === "1" ||
-                            selectNumber === "3" ||
-                            selectNumber === "7" ||
-                            selectNumber === "9"
+                            (selectNumber === "green" ||
+                              selectNumber === "1" ||
+                              selectNumber === "3" ||
+                              selectNumber === "7" ||
+                              selectNumber === "9") &&
+                            fk?.values?.balance === i
                               ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet"
+                              : selectNumber === "voilet" &&
+                                fk?.values?.balance === i
                               ? "!bg-[#B659FE]"
-                              : selectNumber === "red" ||
-                                selectNumber === "2" ||
-                                selectNumber === "4" ||
-                                selectNumber === "6" ||
-                                selectNumber === "8"
+                              : (selectNumber === "red" ||
+                                  selectNumber === "2" ||
+                                  selectNumber === "4" ||
+                                  selectNumber === "6" ||
+                                  selectNumber === "8") &&
+                                fk?.values?.balance === i
                               ? "!bg-[#FD565C]"
-                              : selectNumber === "one"
+                              : selectNumber === "one" &&
+                                fk?.values?.balance === i
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two"
+                              : selectNumber === "two" &&
+                                fk?.values?.balance === i
                               ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0"
+                              : selectNumber === "0" &&
+                                fk?.values?.balance === i
                               ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                              : selectNumber === "5" &&
+                                fk?.values?.balance === i &&
+                                "!bg-[#BF6DFE]"
                           }
                        `}
                       >
@@ -621,7 +631,10 @@ const BetNumber = ({ gid }) => {
               <Button
                 variant="contained"
                 sx={style.cancelbtn}
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  fk.setFieldValue("balance", "1")
+                  setOpen(false)
+                  }}
               >
                 Cancel
               </Button>
