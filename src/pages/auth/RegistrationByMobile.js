@@ -81,7 +81,7 @@ const RegistrationByMobile = () => {
         localStorage.setItem("user_id", res?.data?.userid);
         navigate("/dashboard");
       } else {
-        toast(res);
+        toast(res?.data?.msg);
       }
     } catch (e) {
       console.log(e);
