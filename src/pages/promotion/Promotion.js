@@ -96,7 +96,7 @@ function Promotion() {
                     color="initial"
                     className="!text-orange-500"
                   >
-                    {prim?.number_of_register}
+                    {prim?.number_of_register || "0"} 
                   </Typography>
                  
                   <Typography
@@ -108,13 +108,13 @@ function Promotion() {
                     Number of Register
                   </Typography>
                 </Box>
-                <Box sx={style.subcordinatelist}>
+                <Box sx={style.subcordinatelist }>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-green-400"
                   >
-                    {prim?.number_of_active_direct}
+                    {prim?.number_of_active_direct|| "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -134,7 +134,7 @@ function Promotion() {
                     color="initial"
                     className="!text-orange-400"
                   >
-                    {prim?.total_amt}
+                    {prim?.total_amt|| "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -156,7 +156,7 @@ function Promotion() {
                     color="initial"
                     className="!text-orange-400"
                   >
-                    {Counting?.number_of_register}
+                    {Counting?.number_of_register|| "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -174,7 +174,7 @@ function Promotion() {
                     color="initial"
                     className="!text-green-400"
                   >
-                    {Counting?.number_of_active_direct}
+                    {Counting?.number_of_active_direct|| "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -192,7 +192,7 @@ function Promotion() {
                     color="initial"
                     className="!text-red-400"
                   >
-                    {Counting?.total_amt}
+                    {Counting?.total_amt|| "0"}
                   </Typography>
                   <Typography
                     variant="body1"
