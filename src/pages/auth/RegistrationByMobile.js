@@ -19,7 +19,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import invite from "../../assets/images/invite.png";
 import password from "../../assets/images/password.png";
 import phoneaa from "../../assets/images/phoneaa.png";
@@ -41,9 +41,11 @@ const RegistrationByMobile = () => {
   const handleChangesetCountry = (event) => {
     setCountry(event.target.value);
   };
-
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const inviteid = params.get('inviteid');
   const initialValue = {
-    invite_code: "",
+    invite_code: inviteid|| "",
     password: "",
     confirmed_password: "",
     mobile: "",
