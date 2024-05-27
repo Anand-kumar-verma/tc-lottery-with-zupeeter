@@ -64,9 +64,9 @@ function Withdraval() {
         pwd: fk.values.t_password,
         txttype: "2",
       };
-      console.log(reqBody);
+      // console.log(reqBody);
       if (!reqBody.txtamount) return toast("Plese enter all data");
-      if (status?.trx_status === "0" || status?.withdrawal_status === "0")
+      if (status?.withdrawal_status === "0")
         return toast(
           <span className=" !text-red-600 rounded-lg p-2">
             We are currently working on USDT token integration, leading to the
@@ -93,7 +93,6 @@ function Withdraval() {
       console.log(e);
     }
     setloding(false);
-   
   }
 
   const goBack = () => {
@@ -486,11 +485,19 @@ function Withdraval() {
             ₹ 0.00
           </Typography>
         </Stack>
-        <Button sx={style.wdbtn} onClick={fk.handleSubmit}>
+        <Button
+          sx={style.wdbtn}
+          className={`${
+            fk.values.amount || fk.values.t_password
+              ? "!bg-[#F39E2A]"
+              : "!bg-gray-400"
+          }`}
+          onClick={fk.handleSubmit}
+        >
           Withdrawal
         </Button>
         <Box mt={3}>
-        <Stack direction="row" alignItems="center" mt={1}>
+          <Stack direction="row" alignItems="center" mt={1}>
             <Box
               sx={{
                 width: "5px",
@@ -557,9 +564,9 @@ function Withdraval() {
               00:00-23:50{" "}
             </Typography>
           </Stack>
-        
+
           <Stack direction="row" alignItems="center" mt={1}>
-          <Box
+            <Box
               sx={{
                 width: "5px",
                 height: "5px",
@@ -639,10 +646,8 @@ function Withdraval() {
                 borderBottom: "1px solid #efefef",
               }}
             >
-             <Box>
-                <Typography
-                 className="!bg-orange-400 !text-white rounded px-2 py-1 "
-                >
+              <Box>
+                <Typography className="!bg-orange-400 !text-white rounded px-2 py-1 ">
                   Withdrawl
                 </Typography>
               </Box>
@@ -838,8 +843,8 @@ const style = {
     fontSize: "15px",
     height: "0.93333rem",
     width: "100%",
-    background:
-      "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%), linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
+    // background:
+    //   "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%), linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
     backgroundSize: "100% 100%, 100% 100%",
     backgroundPosition: "center, center",
     backgroundRepeat: "no-repeat, no-repeat",

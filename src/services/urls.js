@@ -1,5 +1,5 @@
 // export const domain = "https://demo2.ferryinfotech.in/";
-export const domain = "https://sun-lottery-timer-tlhr.onrender.com/";
+export const domain = "https://aviator-backend-pyup.onrender.com/";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 

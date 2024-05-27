@@ -131,9 +131,9 @@ const Chart = ({ gid }) => {
           borderBottom: "1px solid white",
         }}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between !w-[95%]">
           <span className="!text-sm">Winning Number</span>
-          <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+          <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
               return (
                 <div
@@ -152,9 +152,9 @@ const Chart = ({ gid }) => {
           paddingTop: "5px",
         }}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between !w-[95%]">
           <span className="!text-sm">Missing Number</span>
-          <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+          <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
             {preData?.map((i) => {
               return (
                 <div
@@ -167,7 +167,7 @@ const Chart = ({ gid }) => {
           </Box>
         </div>
       </Box>
-      <div className="relative !h-[65vh] overflow-auto !w-[100%] no-scrollbar !overflow-x-hidden">
+      <div className="relative !h-[65vh] overflow-auto !w-[95%] no-scrollbar !overflow-x-hidden">
         <div className="absolute !w-[100%]">
           {visibleRows?.map((i, indexi) => {
             return (
@@ -182,7 +182,7 @@ const Chart = ({ gid }) => {
                     {i?.tr_transaction_id}
                   </span>
                   {/* // main box of chart form 0 to 9 */}
-                  <Box className="flex items-center justify-between !w-[80%]  lg:!w-[70%]">
+                  <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
                     {/* /// 0   //// */}
                     <div
                       id={`zero${indexi}`}

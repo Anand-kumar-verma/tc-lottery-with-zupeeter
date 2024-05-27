@@ -88,12 +88,12 @@ export default function Banks() {
   const initialValue = {
     bank_name: openDialogBox,
     holder:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.Associate_Name ||
+      visibleRows?.find((i) => i?.regid === openDialogBox)?.Associate_Name ||
       "",
     ifsc:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.ifsc_code || "",
+      visibleRows?.find((i) => i?.regid === openDialogBox)?.ifsc_code || "",
     account:
-      visibleRows?.find((i) => i?.BANKID === openDialogBox)?.account_number ||
+      visibleRows?.find((i) => i?.regid === openDialogBox)?.account_number ||
       "",
   };
   const fk = useFormik({
@@ -251,7 +251,11 @@ export default function Banks() {
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         <Button
                           className="!bg-[#FD565C] !py-0 !text-white"
-                          onClick={() => setOpenDialogBox(i?.BID)}
+                          onClick={() => {
+                            Number(i?.bank_update) === 0
+                          ? setOpenDialogBox(i?.regid)
+                          : toast("You have already changed your bank account")
+                            }}
                         >
                           Update
                         </Button>

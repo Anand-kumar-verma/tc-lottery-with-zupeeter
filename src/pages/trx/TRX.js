@@ -1,6 +1,13 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { Box, Button, Container, Dialog, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
@@ -19,17 +26,17 @@ import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
+import toast from "react-hot-toast";
 
 function TRX() {
-  const [musicicon, setmusicicon] = useState(true)
+  const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
- 
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
   };
@@ -44,8 +51,6 @@ function TRX() {
       }
     }, 1000);
   }, [dummycounter]);
-
-
 
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
@@ -85,11 +90,11 @@ function TRX() {
               ></Box>
             </NavLink>
             <NavLink onClick={() => setmusicicon(!musicicon)}>
-              {musicicon === true ?
+              {musicicon === true ? (
                 <Box component="img" src={music} width={25}></Box>
-                :
+              ) : (
                 <Box component="img" src={musicoff} width={25}></Box>
-              }
+              )}
             </NavLink>
           </Stack>
         </Stack>
@@ -176,10 +181,8 @@ function TRX() {
           >
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
-          <Typography
-                 className="!bg-orange-400 !text-white !text-xs !pt-1 rounded-2xl px-2 py-1 !flex justify-center"
-                >
-            <WhatshotIcon fontSize="small"/> Details
+          <Typography className="!bg-orange-400 !text-white !text-xs !pt-1 rounded-2xl px-2 py-1 !flex justify-center">
+            <WhatshotIcon fontSize="small" /> Details
           </Typography>
         </Stack>
       </Box>
@@ -212,7 +215,12 @@ function TRX() {
         <Box sx={{ width: "30%" }}>
           <NavLink
             className={value === 2 ? " wingonavactive wingonav" : " wingonav"}
-            onClick={() => handleChange(2)}
+            onClick={() =>
+              // handleChange(2)
+              toast(
+                "The system is currently under maintenance. Please try again later."
+              )
+            }
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">
@@ -226,7 +234,13 @@ function TRX() {
         <Box sx={{ width: "30%" }}>
           <NavLink
             className={value === 3 ? " wingonavactive wingonav" : " wingonav"}
-            onClick={() => handleChange(3)}
+            onClick={
+              () =>
+                toast(
+                  "The system is currently under maintenance. Please try again later."
+                )
+              // handleChange(3)
+            }
           >
             <Box component="img" src={time} width={40}></Box>
             <Typography variant="body1" color="initial">

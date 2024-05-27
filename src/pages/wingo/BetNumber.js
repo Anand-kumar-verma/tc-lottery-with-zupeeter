@@ -111,7 +111,8 @@ const BetNumber = ({ gid }) => {
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAllhistory");
-    fk.setFieldValue("balance", "1")
+    fk.setFieldValue("balance", "1");
+    fk.setFieldValue("qnt", "1");
     setLoding(false);
   }
 
@@ -428,7 +429,7 @@ const BetNumber = ({ gid }) => {
                   alignItems={"center"}
                   justifyContent={"space-between"}
                 >
-                 {[1, 10, 100, 1000]?.map((i) => {
+                  {[1, 10, 100, 1000]?.map((i) => {
                     return (
                       <Box
                         onClick={() => fk.setFieldValue("balance", i)}
@@ -440,29 +441,29 @@ const BetNumber = ({ gid }) => {
                               selectNumber === "3" ||
                               selectNumber === "7" ||
                               selectNumber === "9") &&
-                            fk?.values?.balance === i
+                           String( fk?.values?.balance) === String(i)
                               ? "!bg-[#40AD72]"
                               : selectNumber === "voilet" &&
-                                fk?.values?.balance === i
+                              String( fk?.values?.balance) === String(i)
                               ? "!bg-[#B659FE]"
                               : (selectNumber === "red" ||
                                   selectNumber === "2" ||
                                   selectNumber === "4" ||
                                   selectNumber === "6" ||
                                   selectNumber === "8") &&
-                                fk?.values?.balance === i
+                                  String( fk?.values?.balance) === String(i)
                               ? "!bg-[#FD565C]"
                               : selectNumber === "one" &&
-                                fk?.values?.balance === i
+                              String( fk?.values?.balance) === String(i)
                               ? "!bg-[#F48901]"
                               : selectNumber === "two" &&
-                                fk?.values?.balance === i
+                              String( fk?.values?.balance) === String(i)
                               ? "!bg-[#6DA7F4]"
                               : selectNumber === "0" &&
-                                fk?.values?.balance === i
+                              String( fk?.values?.balance) === String(i)
                               ? "!bg-[#BF6DFE]"
                               : selectNumber === "5" &&
-                                fk?.values?.balance === i &&
+                              String( fk?.values?.balance) === String(i) &&
                                 "!bg-[#BF6DFE]"
                           }
                        `}
@@ -580,29 +581,37 @@ const BetNumber = ({ gid }) => {
                       <Box
                         onClick={() => fk.setFieldValue("qnt", i)}
                         sx={style.bacancebtn2}
-                        className={` !cursor-pointer
+                        className={` !cursor-pointer bg-gray-400
                           ${
-                            selectNumber === "green" ||
-                            selectNumber === "1" ||
-                            selectNumber === "3" ||
-                            selectNumber === "7" ||
-                            selectNumber === "9"
+                            (selectNumber === "green" ||
+                              selectNumber === "1" ||
+                              selectNumber === "3" ||
+                              selectNumber === "7" ||
+                              selectNumber === "9") &&
+                            String(fk.values.qnt) === String(i)
                               ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet"
+                              : selectNumber === "voilet" &&
+                                String(fk.values.qnt) === String(i)
                               ? "!bg-[#B659FE]"
-                              : selectNumber === "red" ||
-                                selectNumber === "2" ||
-                                selectNumber === "4" ||
-                                selectNumber === "6" ||
-                                selectNumber === "8"
+                              : (selectNumber === "red" ||
+                                  selectNumber === "2" ||
+                                  selectNumber === "4" ||
+                                  selectNumber === "6" ||
+                                  selectNumber === "8") &&
+                                String(fk.values.qnt) === String(i)
                               ? "!bg-[#FD565C]"
-                              : selectNumber === "one"
+                              : selectNumber === "one" &&
+                                String(fk.values.qnt) === String(i)
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two"
+                              : selectNumber === "two" &&
+                                String(fk.values.qnt) === String(i)
                               ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0"
+                              : selectNumber === "0" &&
+                                String(fk.values.qnt) === String(i)
                               ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
+                              : selectNumber === "5" &&
+                                String(fk.values.qnt) === String(i) &&
+                                "!bg-[#BF6DFE]"
                           }`}
                       >
                         X{i}
@@ -645,8 +654,9 @@ const BetNumber = ({ gid }) => {
                 variant="contained"
                 sx={style.cancelbtn}
                 onClick={() => {
-                  fk.setFieldValue("balance", "1")
-                  setOpen(false)}}
+                  fk.setFieldValue("balance", "1");
+                  setOpen(false);
+                }}
               >
                 Cancel
               </Button>

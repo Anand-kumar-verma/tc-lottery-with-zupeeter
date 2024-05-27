@@ -7,17 +7,23 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import { useCopyToClipboard } from "usehooks-ts";
-import cardbg from '../../assets/images/cardbg.png';
-import comitiondetails from '../../assets/images/commissiondetails.png';
-import copyinvitationcode from '../../assets/images/copyinvitationcode.png';
-import newsubordinatedata from '../../assets/images/newsubordinatedata.png';
-import promotiondata from '../../assets/images/promotiondata.png';
-import subcordinatedata from '../../assets/images/subcordinatedata.png';
+import cardbg from "../../assets/images/cardbg.png";
+import comitiondetails from "../../assets/images/commissiondetails.png";
+import copyinvitationcode from "../../assets/images/copyinvitationcode.png";
+import newsubordinatedata from "../../assets/images/newsubordinatedata.png";
+import promotiondata from "../../assets/images/promotiondata.png";
+import subcordinatedata from "../../assets/images/subcordinatedata.png";
 import Layout from "../../component/layout/Layout";
-import { ProfileDataFunction, Promotionfunction, TeamsubFunction, } from "../../services/apiCallings";
+import {
+  ProfileDataFunction,
+  Promotionfunction,
+  TeamsubFunction,
+} from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { front_end_domain } from "../../services/urls";
+import copy from "clipboard-copy";
+import toast from "react-hot-toast";
 
 function Promotion() {
   const { data } = useQuery(["get_info"], () => Promotionfunction(), {
@@ -27,53 +33,87 @@ function Promotion() {
 
   const prim = data?.data?.earning || [];
 
-  const { isLoading, data: count } = useQuery(["team_count"], () => TeamsubFunction(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { isLoading, data: count } = useQuery(
+    ["team_count"],
+    () => TeamsubFunction(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
   const Counting = count?.data?.earning || [];
 
-
-  const { data: user } = useQuery(["profile"], () => ProfileDataFunction(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { isLoading: profileLoding, data: user } = useQuery(
+    ["profile"],
+    () => ProfileDataFunction(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
   const profile = user?.data?.earning || [];
   const [copied, setCopied] = useState(false);
-  const [value, copy] = useCopyToClipboard();
 
-
+  const functionTOCopy = (value) => {
+    copy(value);
+    toast.success("Copied to clipboard!");
+  };
 
   return (
     <Layout header={false}>
-      <Container >
-        <CustomCircularProgress isLoading={isLoading} />
+      <Container>
+        <CustomCircularProgress isLoading={isLoading || profileLoding} />
         <Box sx={style.header}>
-          <Typography variant="body1" color="initial">
-          </Typography>
+          <Typography variant="body1" color="initial"></Typography>
           <Typography variant="body1" color="initial" className="!text-white">
             Agency
           </Typography>
-          <Box component={NavLink} to="/promotion/Subordinate/">
-
-          </Box>
+          <Box component={NavLink} to="/promotion/Subordinate/"></Box>
         </Box>
         <Box sx={style.commitionboxOuter}>
-          <Box sx={{ width: '92%', margin: 'auto', background: theme.palette.primary.main, mt: 2, borderRadius: '10px', pb: 3, }}>
+          <Box
+            sx={{
+              width: "92%",
+              margin: "auto",
+              background: theme.palette.primary.main,
+              mt: 2,
+              borderRadius: "10px",
+              pb: 3,
+            }}
+          >
             <Box sx={style.commitionbox}>
-              <Typography variant="body1" color="initial" className="!text-white">
+              <Typography
+                variant="body1"
+                color="initial"
+                className="!text-white"
+              >
                 0
               </Typography>
-              <Typography variant="body1" color="initial" className="!text-white">
+              <Typography
+                variant="body1"
+                color="initial"
+                className="!text-white"
+              >
                 Yesterday's total commission
               </Typography>
-              <Typography variant="body1" color="initial" className="!text-white">
+              <Typography
+                variant="body1"
+                color="initial"
+                className="!text-white"
+              >
                 Upgrade the level to increase turnover
               </Typography>
             </Box>
           </Box>
           <Box sx={style.subcordinateBox}>
-            <Stack direction="row" sx={{ width: "92%", background: theme.palette.primary.main, margin: 'auto' }}>
+            <Stack
+              direction="row"
+              sx={{
+                width: "92%",
+                background: theme.palette.primary.main,
+                margin: "auto",
+              }}
+            >
               <Box sx={style.subordinatesleft}>
                 <EmojiPeopleOutlinedIcon />
                 <Typography variant="body1" color="initial">
@@ -90,31 +130,30 @@ function Promotion() {
             </Stack>
             <Box sx={style.boxStyles}>
               <Box sx={style.innerBoxStyles}>
-              <Box sx={style.subcordinatelist}>
+                <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-orange-500"
                   >
-                    {prim?.number_of_register || "0"} 
+                    {prim?.number_of_register || "0"}
                   </Typography>
-                 
+
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-whtie"
                   >
-
                     Number of Register
                   </Typography>
                 </Box>
-                <Box sx={style.subcordinatelist }>
+                <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-green-400"
                   >
-                    {prim?.number_of_active_direct|| "0"}
+                    {prim?.number_of_active_direct || "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -122,41 +161,35 @@ function Promotion() {
                     className="!text-black"
                   >
                     Total Active Direct
-
                   </Typography>
                 </Box>
 
-
-                
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-orange-400"
                   >
-                    {prim?.total_amt|| "0"}
+                    {prim?.total_amt || "0"}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-black"
                   >
-
                     Total Amount
                   </Typography>
                 </Box>
-
               </Box>
 
               <Box sx={style.innerBoxStylestwo}>
-               
                 <Box sx={style.subcordinatelist}>
                   <Typography
                     variant="body1"
                     color="initial"
                     className="!text-orange-400"
                   >
-                    {Counting?.number_of_register|| "0"}
+                    {Counting?.number_of_register || "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -174,7 +207,7 @@ function Promotion() {
                     color="initial"
                     className="!text-green-400"
                   >
-                    {Counting?.number_of_active_direct|| "0"}
+                    {Counting?.number_of_active_direct || "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -192,7 +225,7 @@ function Promotion() {
                     color="initial"
                     className="!text-red-400"
                   >
-                    {Counting?.total_amt|| "0"}
+                    {Counting?.total_amt || "0"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -203,29 +236,36 @@ function Promotion() {
                     Total Amount
                   </Typography>
                 </Box>
-
               </Box>
             </Box>
             <Box sx={style.invitebtn}>
-              <NavLink >
+              <NavLink>
                 {copied ? (
                   <Typography variant="body1" color="initial">
-                    Successfully  Copied
+                    Successfully Copied
                   </Typography>
                 ) : (
-                  <Typography sx={{}}
-                    onMouseLeave={() => setCopied(false)}
+                  <Typography
+                    sx={{}}
+                    // onMouseLeave={() => setCopied(false)}
                     onClick={() => {
-                      copy(`${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`);
-                      setCopied(true);
-                    }}> INVITATION LINK </Typography>
-                )} </NavLink>
+                      functionTOCopy(
+                        `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
+                      );
+                      // setCopied(true);
+                    }}
+                  >
+                    {" "}
+                    INVITATION LINK{" "}
+                  </Typography>
+                )}{" "}
+              </NavLink>
             </Box>
           </Box>
           <Box sx={style.invitebutton} className="invitebutton">
             <Box sx={style.invitbox}>
               <Stack direction="row">
-                <Box component='img' src={copyinvitationcode}></Box>
+                <Box component="img" src={copyinvitationcode}></Box>
                 {copied ? (
                   <Typography variant="body1" color="initial">
                     Copied <Check className="!text-blue-700" />
@@ -234,12 +274,16 @@ function Promotion() {
                   <Typography variant="body1" color="initial">
                     Copy invitation code
                   </Typography>
-                )}  </Stack>
-              <Stack direction="row" onMouseLeave={() => setCopied(false)}
+                )}{" "}
+              </Stack>
+              <Stack
+                direction="row"
                 onClick={() => {
-                  copy(`${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`);
-                  setCopied(true);
-                }}>
+                  functionTOCopy(
+                        `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
+                      );
+                }}
+              >
                 <Typography variant="body1" color="initial">
                   {profile?.rec?.Login_Id}
                 </Typography>
@@ -249,7 +293,7 @@ function Promotion() {
             <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
-                  <Box component='img' src={subcordinatedata}></Box>
+                  <Box component="img" src={subcordinatedata}></Box>
                   <Typography variant="body1" color="initial">
                     Subordinate data
                   </Typography>
@@ -262,7 +306,7 @@ function Promotion() {
             <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
-                  <Box component='img' src={subcordinatedata}></Box>
+                  <Box component="img" src={subcordinatedata}></Box>
                   <Typography variant="body1" color="initial">
                     Team data
                   </Typography>
@@ -275,7 +319,7 @@ function Promotion() {
             <NavLink to="/promotion/MyCommission">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
-                  <Box component='img' src={comitiondetails}></Box>
+                  <Box component="img" src={comitiondetails}></Box>
                   <Typography variant="body1" color="initial">
                     Commission detail
                   </Typography>
@@ -340,7 +384,7 @@ function Promotion() {
             <Box sx={style.promotionBoxOuter}>
               <Box sx={style.promotionBox}>
                 <Stack direction="row">
-                  <Box component='img' src={promotiondata}></Box>
+                  <Box component="img" src={promotiondata}></Box>
                   {/* <Box component="img" src={data}></Box> */}
                   <Typography variant="body1" color="initial">
                     promotion data
@@ -352,9 +396,7 @@ function Promotion() {
                   <Typography variant="body1" color="initial">
                     0
                   </Typography>
-                  <Typography className="!text-gray-300">
-                    This Week
-                  </Typography>
+                  <Typography className="!text-gray-300">This Week</Typography>
                 </Box>
                 <Box>
                   <Typography variant="body1" color="initial">
@@ -388,7 +430,6 @@ function Promotion() {
             <Box sx={style.promotionBoxOutertwo}></Box>
           </Box>
         </Box>
-
       </Container>
     </Layout>
   );
@@ -413,11 +454,10 @@ const style = {
   commitionboxOuter: {
     width: "100%",
     height: "20vh",
-    background: '#F7F8FF',
+    background: "#F7F8FF",
     "&>img": { width: "100%", height: "100%" },
   },
   commitionbox: {
-
     margin: "auto",
     width: "70%",
     textAlign: "center",
@@ -428,7 +468,7 @@ const style = {
       fontSize: "13px",
       fontWeight: "400",
       padding: "5px 0px",
-      background: '#ffa43f',
+      background: "#ffa43f",
       borderRadius: "20px",
     },
     "&>p:nth-child(3)": {
@@ -444,10 +484,14 @@ const style = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: '#F6F6F6',
+    background: "#F6F6F6",
     borderTopLeftRadius: "10px",
     borderRight: "2px solid #fefefe",
-    "&>svg": { color: theme.palette.primary.main, fontSize: "25px", marginRight: "10px" },
+    "&>svg": {
+      color: theme.palette.primary.main,
+      fontSize: "25px",
+      marginRight: "10px",
+    },
     "&>p": { color: "gray", fontSize: "14px", fontWeight: "500" },
   },
   subordinatesRight: {
@@ -457,20 +501,24 @@ const style = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    background: '#F6F6F6',
+    background: "#F6F6F6",
     borderTopRightRadius: "10px",
-    "&>svg": { color: theme.palette.primary.main, fontSize: "25px", marginRight: "10px" },
+    "&>svg": {
+      color: theme.palette.primary.main,
+      fontSize: "25px",
+      marginRight: "10px",
+    },
     "&>p": { color: "gray", fontSize: "14px", fontWeight: "500" },
   },
 
   boxStyles: {
-    background: '#ffffff',
+    background: "#ffffff",
     padding: "15px",
     display: "flex",
     borderRadius: " 0px 0px 10px 10px",
-    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     width: "92%",
-    margin: 'auto;'
+    margin: "auto;",
   },
   innerBoxStyles: {
     width: "50%",
@@ -487,13 +535,12 @@ const style = {
   subcordinateBox: {
     width: "100%",
 
-    background: '#F7F8FF',
+    background: "#F7F8FF",
     mt: -2,
-
   },
   invitebutton: {
     width: "100%",
-    background: '#F7F8FF',
+    background: "#F7F8FF",
   },
   invitebtn: {
     mt: "20px",
@@ -504,7 +551,7 @@ const style = {
       borderRadius: "20px",
       textAlign: "center",
       padding: "10px",
-      background: 'orange',
+      background: "orange",
       color: "white",
       fontSize: "17px",
       fontWeight: 600,
@@ -512,7 +559,7 @@ const style = {
   },
   invitbox: {
     width: "92%",
-    background: '#ffffff',
+    background: "#ffffff",
     padding: "10px",
     mb: "20px",
     borderRadius: "10px",
@@ -521,7 +568,11 @@ const style = {
     alignItems: "center",
     justifyContent: "space-between",
     "&>div>img": { width: "30px", marginRight: "10px" },
-    "&>div>p": { fontSize: "14px", color: "black !important", fontWeight: '600' },
+    "&>div>p": {
+      fontSize: "14px",
+      color: "black !important",
+      fontWeight: "600",
+    },
     "&>div": { alignItems: "center" },
     "&>div:nth-child(2)>p": { marginRight: "20px", color: "gray !important" },
     "&>div:nth-child(2)>svg": {
@@ -543,9 +594,9 @@ const style = {
     },
   },
   promotionBoxOuter: {
-    boxShadow: 'rgba(149, 157, 165, 0.2) 0px 8px 24px',
+    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
     width: "92%",
-    background: '#ffffff',
+    background: "#ffffff",
     padding: "10px",
     mt: "20px",
     borderRadius: "5px",

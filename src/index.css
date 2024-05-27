@@ -50,8 +50,8 @@
   display: none;
 }
 .circleNumberbody {
-  width: 20px !important;
-  height: 20px !important;
+  width: 15px !important;
+  height: 15px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
@@ -59,8 +59,8 @@
   font-size: 13px !important;
 }
 .circleNumberbody-number {
-  width: 20px !important;
-  height: 20px !important;
+  width: 15px !important;
+  height: 15px !important;
   border-radius: 50% !important;
   display: flex !important;
   align-items: center !important;
