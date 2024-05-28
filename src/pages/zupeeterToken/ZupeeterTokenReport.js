@@ -24,18 +24,35 @@ import QRCode from "react-qr-code";
 import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
-import { TokenLaunch, zupeeterTOkenHistory } from "../../services/apiCallings";
+import { TokenLaunch, getBalanceFunction, zupeeterTOkenHistory } from "../../services/apiCallings";
 import { endpoint, rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import moment from "moment/moment";
 export default function ZupeeterTokenReport() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
+  const [balance, setBalance] = React.useState("");
   const tableRef = React.useRef(null);
   const [receipt, setReceipt] = React.useState();
   const [amount, setAmount] = React.useState("");
   const user_id = localStorage.getItem("user_id");
   const [loading, setIsLoading] = React.useState(false);
+  const [status, setStatus] = React.useState(false);
+
+  const getStatus = async () => {
+    try {
+      const res = await axios.get(endpoint.withdrawl_status);
+      setStatus(res?.data?.earning);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  React.useEffect(() => {
+    getStatus();
+  }, []);
+
   const client = useQueryClient();
   const { isLoading: token_launch_rate, data } = useQuery(
     ["token_zupeeter"],
@@ -55,7 +72,16 @@ export default function ZupeeterTokenReport() {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
+  );//wallet
+  const { data: wallet_amount } = useQuery(
+    ["wallet_amount_amount"],
+    () => getBalanceFunction(setBalance),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
   );
+  const wallet_amount_data = wallet_amount?.data?.earning || 0;
   // const game_history_data = game_history?.data?.data;
   const game_history_data = React.useMemo(
     () => game_history?.data?.earning?.rid,
@@ -119,20 +145,37 @@ export default function ZupeeterTokenReport() {
     hash_number: "",
   };
 
+  {/* ₹{Number(wallet_amount_data || 0)?.toFixed(2)} */ }
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
       const fd = new FormData();
-
+      if (fk.values.payment_method !== "Wallet") {
+        if (!receipt) {
+          toast('Please Select a Receipt Before Submitting.');
+          return;
+        }
+      }
+      if (fk.values.payment_method === 'USDT') {
+        if (Number(wallet_amount_data || 0) < Number(Number(amount || 0) * Number(status?.doller || 0))) {
+          toast("Insufficient balance")
+          return
+        }
+      } else {
+        if (Number(wallet_amount_data || 0) < Number(amount || 0)) {
+          toast("Insufficient balance")
+          return
+        }
+      }
       fd.append("userid", user_id); // userid
       fd.append(
         "txtmethod",
         fk.values.payment_method === "Wallet"
           ? "1"
           : fk.values.payment_method === "UPI"
-          ? "2"
-          : fk.values.payment_method === "USDT" && "3"
+            ? "2"
+            : fk.values.payment_method === "USDT" && "3"
       ); // 1 -- Wallet, 2: upi 3 usdt
       fd.append("txtprice", amount); // price
       fd.append("txtbatchid", fk.values.hash_number); // hash no
@@ -140,16 +183,16 @@ export default function ZupeeterTokenReport() {
       fd.append("txttoken", fk.values.token_qnt); // token no of token
       fd.append("txtwa", fk.values.token_address); // token address
       fd.append("txtfd", receipt); // receipt
-      setIsLoading(true)
+      // setIsLoading(true)
       insertFundFn(fd);
     },
   });
   async function insertFundFn(fd) {
     try {
       const res = await axios.post(endpoint?.insert_ico_purchase, fd);
-      toast(res?.data?.earning?.msg );
+      toast(res?.data?.earning?.msg);
       setIsLoading(false)
-      if("ICO purchase recorded successfully."=== res?.data?.earning?.msg)
+      if ("ICO purchase recorded successfully." === res?.data?.earning?.msg)
         fk.handleReset()
     } catch (e) {
       console.log(e);
@@ -166,11 +209,11 @@ export default function ZupeeterTokenReport() {
     const reqBody =
       fk.values.payment_method === "USDT"
         ? {
-            token_price: fk.values.token_qnt,
-          }
+          token_price: fk.values.token_qnt,
+        }
         : {
-            token: fk.values.token_qnt,
-          };
+          token: fk.values.token_qnt,
+        };
     try {
       const url =
         fk.values.payment_method === "USDT"
@@ -186,7 +229,9 @@ export default function ZupeeterTokenReport() {
   React.useEffect(() => {
     gettokenAmountFn();
   }, [fk.values.token_qnt, fk.values.payment_method]);
-  if (loading) return <CustomCircularProgress isLoading={loading} />;
+  if (loading) return <CustomCircularProgress isLoading={loading} />
+
+
   return (
     <Layout>
       <Container
@@ -198,18 +243,31 @@ export default function ZupeeterTokenReport() {
         }}
         className="no-scrollbar"
       >
-        <div className="flex justify-between w-full items-center bg-[#F48901] px-2 py-1 rounded-lg mt-3">
-          <span className="text-white">
-            ICO Price: {rupees}{" "}
-            <span className="!text-green-600 font-bold">
-              {Number(res?.ico_rate || 0).toFixed(5)}
+        <div className="flex  flex-col  w-full items-center bg-[#F48901] px-2 py-1 rounded-lg mt-3">
+          <div className="flex  justify-start w-full items-center -mb-6 mt-3">
+            <span className="text-white">
+              Your Wallet Amount : {rupees}
+              
             </span>
-          </span>
-          <img
-            className="h-20"
-            src="https://zupeeter.com/application/libraries/token.png"
-          />
+            <span className="!text-green-600 font-bold px-1">
+                {Number(wallet_amount_data || 0)}
+              </span>
+          </div>
+          <div className="flex  justify-between w-full items-center">
+            <span className="text-white">
+              ICO Price: {rupees}
+              <span className="!text-green-600 font-bold px-1">
+                {Number(res?.ico_rate || 0).toFixed(5)}
+              </span>
+            </span>
+            <img
+              className="h-20"
+              src="https://zupeeter.com/application/libraries/token.png"
+            />
+
+          </div>
         </div>
+
         <div className="flex justify-between w-full items-center bg-[#F48901] px-2 py-6 rounded-lg mt-3 ">
           <span className="!text-white">Received ICO Token</span>
           <TextField
@@ -252,7 +310,7 @@ export default function ZupeeterTokenReport() {
                 className="!w-[100%] !bg-[#A97025]"
               />
             </div>
-            <span className="!text-white !text-sm">No of Token*</span>
+            <span className="!text-white !text-sm">No. of Token*</span>
             <TextField
               id="token_qnt"
               name="token_qnt"
@@ -272,7 +330,6 @@ export default function ZupeeterTokenReport() {
               // onChange={fk.handleChange}
               className="!w-[100%] !bg-[#A97025]"
             />
-
             {fk.values.payment_method === "USDT" && (
               <>
                 <span className="!text-white !text-sm">Hash Number* *</span>
@@ -302,17 +359,18 @@ export default function ZupeeterTokenReport() {
             )}
             {(fk.values.payment_method === "UPI" ||
               fk.values.payment_method === "USDT") && (
-              <>
-                <span className="!text-white !text-sm">Receipt*</span>
-                <input
-                  type="file"
-                  id="myfile"
-                  name="myfile"
-                  className="!text-sm"
-                  onChange={(e) => setReceipt(e.target.files[0])}
-                />
-              </>
-            )}
+                <>
+                  <span className="!text-white !text-sm">Receipt*</span>
+                  <input
+                    type="file"
+                    id="myfile"
+                    name="myfile"
+                    className="!text-sm"
+                    onChange={(e) => setReceipt(e.target.files[0])}
+                    required
+                  />
+                </>
+              )}
             {fk.values.payment_method === "USDT" && (
               <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
                 <div className=" w-1/2">
@@ -426,6 +484,9 @@ export default function ZupeeterTokenReport() {
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Price
                   </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Date
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -454,6 +515,9 @@ export default function ZupeeterTokenReport() {
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {Number(i?.tr61_price || 0)?.toFixed()}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {moment(i?.tr61_date)?.format("YYYY-MM-DD")}
                       </TableCell>
                     </TableRow>
                   );
