@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../component/layout/Layout";
 import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
@@ -12,6 +12,7 @@ import actbanner4 from "../../assets/images/actbanner4.jpg";
 import actbanner5 from "../../assets/images/actbanner5.jpg";
 import actbanner6 from "../../assets/images/actbanner6.jpg";
 import actbanner7 from "../../assets/images/actbanner7.jpg";
+import { checkTokenValidity } from "../../services/apiCallings";
 
 const style = {
   root: {
@@ -54,6 +55,13 @@ const style = {
   },
 };
 function Activity() {
+  useEffect(() => {
+    if (!checkTokenValidity()) {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/"; // Redirect to login page
+    }
+  }, []);
   return (
     <Layout header={false}>
       <Box sx={style.root}>

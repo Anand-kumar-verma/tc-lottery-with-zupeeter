@@ -78,8 +78,8 @@ const tableRef = React.useRef(null);
       toast(res?.data?.message);
       console.log(res);
       if (res?.data?.status === true) {
-        // window.location.href = res?.data?.earning?.msg;
-        window.open(res?.data?.earning?.msg, '_blank');
+        window.location.href = res?.data?.earning?.msg;
+        // window.open(res?.data?.earning?.msg, '_blank');
       }
     } catch (e) {
       console.log(e);

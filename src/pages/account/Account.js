@@ -63,6 +63,7 @@ function Account() {
       const res = await axios.get(
         `${endpoint?.payin_response_akash}?orderid=${transactionId}`
       );
+      
       if (res?.data?.status === "200") {
         window.location.href = `${front_end_domain}/account`
       }
