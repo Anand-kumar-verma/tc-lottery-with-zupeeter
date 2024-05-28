@@ -3,7 +3,7 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import { Box, Container, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import { useCopyToClipboard } from "usehooks-ts";
@@ -18,6 +18,7 @@ import {
   ProfileDataFunction,
   Promotionfunction,
   TeamsubFunction,
+  checkTokenValidity,
 } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -59,6 +60,13 @@ function Promotion() {
     toast.success("Copied to clipboard!");
   };
 
+  useEffect(() => {
+    if (!checkTokenValidity()) {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/"; // Redirect to login page
+    }
+  }, []);
   return (
     <Layout header={false}>
       <Container>

@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { NavLink } from "react-router-dom";
 import depositeimg from "../../assets/images/deposite.png";
@@ -10,6 +10,7 @@ import withdraw from "../../assets/images/withdraw.png";
 import Layout from "../../component/layout/Layout";
 import theme from "../../utils/theme";
 import {
+  checkTokenValidity,
   depositHistoryFunction,
   getBalanceFunction,
 } from "../../services/apiCallings";
@@ -46,6 +47,17 @@ function Wallet() {
 
   const series = [Number(wallet_amount_data % 100)?.toFixed(1) || 0];
   const series3rrparty = [0.0];
+
+
+  useEffect(() => {
+    if (!checkTokenValidity()) {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/"; // Redirect to login page
+    }
+  }, []);
+
+
   const [options] = React.useState({
     colors: ["#F48901", "red", "green"],
     chart: {

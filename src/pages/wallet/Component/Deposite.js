@@ -92,8 +92,8 @@ function Deposite() {
       const res = await axios.post(endpoint?.wallet_deposit, reqBody);
       toast(res?.data?.message);
       if (res?.data?.status === true) {
-        // window.location.href = res?.data?.earning?.msg;
-        window.open(res?.data?.earning?.msg, '_blank');
+        window.location.href = res?.data?.earning?.msg;
+        // window.open(res?.data?.earning?.msg, '_blank');
       }
     } catch (e) {
       console.log(e);
