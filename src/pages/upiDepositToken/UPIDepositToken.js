@@ -5,25 +5,29 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
+import CircularProgress from '@mui/material/CircularProgress';
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 const UPIDepositToken = () => {
   const user_id = localStorage.getItem("user_id");
   const [amount, setAmount] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const initialValue = {
     token: "",
   };
-
+ 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
       if (Number(fk.values.token < 100))
-        return toast("Token must be grater or equal to 100");
+        return toast("Token must be greater or equal to 100");
       const reqBody = {
         userid: user_id,
         txtamount: amount || 0,
         txttoken: fk.values.token,
       };
+        setIsLoading(true);
       if (!reqBody.userid || !reqBody.txtamount || !reqBody.txttoken)
         return toast("Plese enter all data");
       purchaseToken(reqBody);
@@ -58,6 +62,8 @@ const UPIDepositToken = () => {
   useEffect(() => {
     gettokenAmountFn();
   }, [fk.values.token]);
+
+  if (isLoading) return <CustomCircularProgress isLoading={isLoading} />;
   return (
     <Layout>
       <Container
@@ -68,7 +74,8 @@ const UPIDepositToken = () => {
           mb: 5,
         }}
         className="no-scrollbar"
-      >
+
+    >
         <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
           <span className="col-span-2 justify-end">
             <div className="flex justify-between">
@@ -103,8 +110,7 @@ const UPIDepositToken = () => {
             <Button
               className="!bg-[#BF6DFE] !text-white"
               onClick={() => fk.handleSubmit()}
-            >
-              Submit
+            >Submit
             </Button>
           </div>
         </div>
