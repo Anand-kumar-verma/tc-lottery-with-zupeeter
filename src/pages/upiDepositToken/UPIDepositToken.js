@@ -112,7 +112,7 @@ const UPIDepositToken = () => {
               Cancel
             </Button>
             <Button
-            startIcon={isLoading ? <CircularProgress size={20} /> : null}
+          
               className="!bg-[#BF6DFE] !text-white"
               onClick={() => fk.handleSubmit()}
             >Submit
