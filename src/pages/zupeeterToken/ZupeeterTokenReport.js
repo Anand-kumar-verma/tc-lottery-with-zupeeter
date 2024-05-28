@@ -198,6 +198,7 @@ export default function ZupeeterTokenReport() {
       console.log(e);
     }
     client.refetchQueries("token_zupeeter");
+    client.refetchQueries("wallet_amount_amount");
   }
 
   const functionTOCopy = (value) => {
