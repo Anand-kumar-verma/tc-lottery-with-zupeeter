@@ -39,7 +39,7 @@ function App() {
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/before-login" element={<BeforeLogin />}></Route>
-      {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+      <Route path="*" element={<Navigate to="/" replace />} />
       {isAuthenticated ? (
         routes?.map((route, index) => {
           return (

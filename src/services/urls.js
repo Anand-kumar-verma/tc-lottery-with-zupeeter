@@ -42,6 +42,7 @@ export const endpoint = {
   // payment
   payin_response: `${baseUrl}/api/payin_response`,
   payin_response_akash: `${baseUrl}/api/payin_response_new`,
+  payin_response_ico_token_akash: `${baseUrl}/api/payin_response_upi_token`,
   
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis
