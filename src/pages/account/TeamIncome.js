@@ -1,15 +1,44 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
 import { logOutFunction } from "../../services/apiCallings";
 import { Box, Stack, Typography } from "@mui/material";
 import theme from "../../utils/theme";
+import { endpoint, front_end_domain } from "../../services/urls";
+import axios from "axios";
+import { useQueryClient } from "react-query";
 
 const TeamIncome = () => {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const transactionId = searchParams?.get("orderid");
+  const client = useQueryClient()
+  async function sendUrlCallBackToBackend(transactionId) {
+    try {
+      const res = await axios.get(
+        `${endpoint?.payin_response_ico_token_akash}?orderid=${transactionId}`
+      );
+      if (res?.data?.status === "200") {
+        window.location.href = `${front_end_domain}/account/Teamincome`;
+      }
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+    client.removeQueries("profile");
+    client.removeQueries("wallet_amount_amount");
+  }
+
+  useEffect(() => {
+    if (transactionId) {
+      sendUrlCallBackToBackend(transactionId);
+    }
+  }, []);
+
   return (
     <Layout>
-
       <Stack
         direction="row"
         alignItems="center"
@@ -24,44 +53,44 @@ const TeamIncome = () => {
         }}
       >
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/account/income-main/my-team")}
-        >
-          My Team
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/account/income-main/my-team")}
+          >
+            My Team
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/account/income-main")}
-        >
-          INCOME
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/account/income-main")}
+          >
+            INCOME
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/bank")}
-        >
-          Bank
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/bank")}
+          >
+            Bank
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/ico-token")}
-        >
-          ICO TOken
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/ico-token")}
+          >
+            ICO TOken
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/fund-main")}
-        >
-          Fund Main
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/fund-main")}
+          >
+            Fund Main
+          </span>
         </Box>
         {/* <Box sx={style.fx}>
         <span
@@ -72,38 +101,37 @@ const TeamIncome = () => {
         </span>
         </Box> */}
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/upi-deposit-token")}
-        >
-          UPI Deposit Token
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/upi-deposit-token")}
+          >
+            UPI Deposit Token
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/password")}
-        >
-          Password
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/password")}
+          >
+            Password
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => navigate("/zupeeter-token")}
-        >
-          Zupeeter Token
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => navigate("/zupeeter-token")}
+          >
+            Zupeeter Token
+          </span>
         </Box>
         <Box sx={style.fx}>
-        <span
-          className="!text-blue-500 cursor-pointer"
-          onClick={() => logOutFunction()}
-        >
-          Logout
-        </span>
+          <span
+            className="!text-blue-500 cursor-pointer"
+            onClick={() => logOutFunction()}
+          >
+            Logout
+          </span>
         </Box>
-
       </Stack>
     </Layout>
   );
@@ -198,7 +226,7 @@ const style = {
     alignItems: "center",
     justifyContent: "center",
     mb: 1.5,
-    padding:'10px'
+    padding: "10px",
   },
   fxone: {
     width: "31%",

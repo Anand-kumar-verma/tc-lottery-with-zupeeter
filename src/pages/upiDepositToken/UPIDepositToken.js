@@ -38,8 +38,10 @@ const UPIDepositToken = () => {
     try {
       const res = await axios.post(endpoint?.indian_insert_deposite, reqBody);
       toast(res?.data?.message);
+      console.log(res);
       if (res?.data?.status === true) {
-        window.location.href = res?.data?.earning?.msg;
+        // window.location.href = res?.data?.earning?.msg;
+        window.open(res?.data?.earning?.msg, '_blank');
       }
     } catch (e) {
       console.log(e);
