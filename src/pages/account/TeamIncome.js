@@ -36,7 +36,7 @@ const TeamIncome = () => {
           className="!text-blue-500 cursor-pointer"
           onClick={() => navigate("/account/income-main")}
         >
-          Income
+          INCOME
         </span>
         </Box>
         <Box sx={style.fx}>
@@ -52,7 +52,7 @@ const TeamIncome = () => {
           className="!text-blue-500 cursor-pointer"
           onClick={() => navigate("/ico-token")}
         >
-          ICO Token
+          ICO TOken
         </span>
         </Box>
         <Box sx={style.fx}>
