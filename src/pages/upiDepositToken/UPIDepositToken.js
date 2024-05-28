@@ -15,12 +15,7 @@ const UPIDepositToken = () => {
   const initialValue = {
     token: "",
   };
-  // const handleSubmit = async () => {
-  //   setIsLoading(true);
-  //   // Simulate a network request
-  //   await new Promise(resolve => setTimeout(resolve, 2000));
-  //   setIsLoading(false);
-  // };
+ 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
@@ -112,7 +107,6 @@ const UPIDepositToken = () => {
               Cancel
             </Button>
             <Button
-          
               className="!bg-[#BF6DFE] !text-white"
               onClick={() => fk.handleSubmit()}
             >Submit
