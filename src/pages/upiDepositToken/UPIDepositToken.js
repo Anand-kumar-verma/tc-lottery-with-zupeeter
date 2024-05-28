@@ -1,17 +1,55 @@
-import { Button, Container, TextField } from "@mui/material";
+import { Box, Button, Container, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
-import CircularProgress from '@mui/material/CircularProgress';
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import { upiTOkenHistory } from "../../services/apiCallings";
+import { useQuery } from "react-query";
+import theme from "../../utils/theme";
+import moment from "moment/moment";
 
 const UPIDepositToken = () => {
   const user_id = localStorage.getItem("user_id");
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const [page, setPage] = React.useState(0);
+const tableRef = React.useRef(null);
+  const { data: upi_history } = useQuery(
+    ["upi_token_details"],
+    () => upiTOkenHistory(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+
+  const upi_history_data = React.useMemo(
+    () => upi_history?.data?.earning?.rid,
+    [upi_history?.data?.earning?.rid]
+  );
+
+ const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const visibleRows = React.useMemo(
+    () =>
+      upi_history_data?.slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [page, rowsPerPage, upi_history_data]
+  );
+
   const initialValue = {
     token: "",
   };
@@ -115,6 +153,90 @@ const UPIDepositToken = () => {
             </Button>
           </div>
         </div>
+        <Box>
+          <TableContainer>
+            <Table
+              id="my-table"
+              ref={tableRef}
+              sx={{ maxWidth: 400 }}
+              aria-label="simple table"
+            >
+              <TableHead
+                sx={{
+                  background: theme.palette.primary.main,
+                  "&>tr>th": {
+                    padding: 1,
+                    fontSize: "13px",
+                    fontWeight: 700,
+                    color: "white",
+                  },
+                }}
+              >
+                <TableRow>
+                  <TableCell className="!text-sm !text-center !pl-[2px] !pr-0 border-2 border-r border-white">
+                    S.No.
+                  </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Transaction Id
+                  </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Token
+                  </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Price
+                  </TableCell>
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Date
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody
+              // sx={{
+              //   "&>tr>td": { padding: "10px 5px", border: "none" },
+              //   "&>tr": { borderBottom: "1px solid #ced4d7" },
+              // }}
+              >
+                {visibleRows?.map((i, index) => {
+                  return (
+                    <TableRow key={index} className="!w-[95%]">
+                      <TableCell className="!text-black !pl-[2px] !pr-2 !text-center !border-2 !border-r !border-[#F48901]">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {i?.tr80_transaction_id}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {i?.tr80_token}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {Number(i?.tr80_amount || 0)?.toFixed()}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {moment(i?.tr80_date)?.format("YYYY-MM-DD")}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Box sx={{ background: "white", mt: 3 }}>
+            <Stack spacing={2}>
+              <TablePagination
+                sx={{ background: "#FBA343", color: "white" }}
+                rowsPerPageOptions={[10, 15, 20]}
+                component="div"
+                count={upi_history_data?.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                labelRowsPerPage="Rows"
+              />
+            </Stack>
+          </Box>
+        </Box>
+
       </Container>
     </Layout>
   );

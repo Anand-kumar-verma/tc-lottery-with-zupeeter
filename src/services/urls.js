@@ -58,4 +58,5 @@ export const endpoint = {
   team_report:`${baseUrl}/api/TeamReport`,
   profile_function:`${baseUrl}/api/profile`,
   team_data:`${baseUrl}/api/get_all`,
+  view_paying_api: `${baseUrl}/api/view_paying_api`,
 };

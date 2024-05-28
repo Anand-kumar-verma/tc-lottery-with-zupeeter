@@ -153,6 +153,19 @@ export const zupeeterTOkenHistory = async () => {
     console.log(e);
   }
 };
+
+export const upiTOkenHistory = async () => {
+  try {
+    const reqBody = {
+      userid: localStorage.getItem("user_id"),
+    };
+    const response = await axios.post(endpoint.view_paying_api, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const ViewSalaryIncomeFunction = async () => {
   try {
     const reqBody = {

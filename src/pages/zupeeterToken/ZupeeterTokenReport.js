@@ -272,7 +272,7 @@ export default function ZupeeterTokenReport() {
           <span className="!text-white">Received ICO Token</span>
           <TextField
             className="!text-white !bg-[#a97025]"
-            value={`${rupees} ${game_history?.data?.earning?.total_ico}`}
+            value={` ${game_history?.data?.earning?.total_ico}`}
           />
         </div>
         <div className="flex justify-between w-full items-center bg-[#F48901] px-2 py-6 rounded-lg mt-3 ">
