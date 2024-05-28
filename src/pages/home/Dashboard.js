@@ -35,7 +35,7 @@ import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
 import Layout from "../../component/layout/Layout";
-import { TopWinner, checkTokenValidity } from "../../services/apiCallings";
+import {checkTokenValidity } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
@@ -46,6 +46,9 @@ import PVC from "./component/PVC";
 import Populer from "./component/Populer";
 import Slots from "./component/Slots";
 import Sports from "./component/Sports";
+import axios from "axios";
+import { endpoint } from "../../services/urls";
+import toast from "react-hot-toast";
 
 function Dashboard() {
   const progressCircle = useRef(null);
@@ -65,6 +68,16 @@ function Dashboard() {
   });
 
   const res = data?.data?.earning || [];
+
+   const TopWinner = async () => {
+    try {
+      const response = await axios.get(endpoint.win_list_top);
+      return response;
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     if (!checkTokenValidity()) {

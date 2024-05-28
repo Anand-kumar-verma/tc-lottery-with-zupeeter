@@ -79,7 +79,8 @@ function Login() {
         storeCookies();
         toast(res?.data?.message);
         localStorage.setItem("user_id", res?.data?.data?.or_user_id);
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        navigate("/before-login");
       } else {
         toast(res?.data?.msg);
       }
@@ -89,7 +90,9 @@ function Login() {
   }
 
   useEffect(() => {
-    user_id && navigate("/dashboard");
+    user_id && 
+    navigate("/before-login");
+    // navigate("/dashboard");
   }, [user_id]);
   return (
     <Container>

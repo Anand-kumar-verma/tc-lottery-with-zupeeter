@@ -5,7 +5,7 @@ import Diversity2Icon from "@mui/icons-material/Diversity2";
 import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import StoreIcon from "@mui/icons-material/Store";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
@@ -49,16 +49,16 @@ function MainPageOFIncome() {
         />
       ),
     },
-    {
-      to: "/account/income-main/team-salary-bonus",
-      name: "Team Salary Bonus",
-      logo: (
-        <AccountBalanceIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
+    // {
+    //   to: "/account/income-main/team-salary-bonus",
+    //   name: "Team Salary Bonus",
+    //   logo: (
+    //     <AccountBalanceIcon
+    //       className="!w-[40px] !h-[40px] !text-[#F48901]"
+    //       color="#8f5206"
+    //     />
+    //   ),
+    // },
     {
       to: "/account/income-main/royality-bonus",
       name: "Royality Bonus",
