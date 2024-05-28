@@ -21,7 +21,7 @@ import "jspdf-autotable";
 import * as React from "react";
 import toast from "react-hot-toast";
 import QRCode from "react-qr-code";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
 import { TokenLaunch, zupeeterTOkenHistory } from "../../services/apiCallings";
@@ -35,6 +35,8 @@ export default function ZupeeterTokenReport() {
   const [receipt, setReceipt] = React.useState();
   const [amount, setAmount] = React.useState("");
   const user_id = localStorage.getItem("user_id");
+  const [loading, setIsLoading] = React.useState(false);
+  const client = useQueryClient();
   const { isLoading: token_launch_rate, data } = useQuery(
     ["token_zupeeter"],
     () => TokenLaunch(),
@@ -138,18 +140,21 @@ export default function ZupeeterTokenReport() {
       fd.append("txttoken", fk.values.token_qnt); // token no of token
       fd.append("txtwa", fk.values.token_address); // token address
       fd.append("txtfd", receipt); // receipt
-
+      setIsLoading(true)
       insertFundFn(fd);
     },
   });
   async function insertFundFn(fd) {
     try {
       const res = await axios.post(endpoint?.insert_ico_purchase, fd);
-      toast(res?.data?.message);
+      toast(res?.data?.earning?.msg );
+      setIsLoading(false)
+      if("ICO purchase recorded successfully."=== res?.data?.earning?.msg)
+        fk.handleReset()
     } catch (e) {
       console.log(e);
     }
-    // client.refetchQueries("bank_details");
+    client.refetchQueries("token_zupeeter");
   }
 
   const functionTOCopy = (value) => {
@@ -181,7 +186,7 @@ export default function ZupeeterTokenReport() {
   React.useEffect(() => {
     gettokenAmountFn();
   }, [fk.values.token_qnt, fk.values.payment_method]);
-
+  if (loading) return <CustomCircularProgress isLoading={loading} />;
   return (
     <Layout>
       <Container
