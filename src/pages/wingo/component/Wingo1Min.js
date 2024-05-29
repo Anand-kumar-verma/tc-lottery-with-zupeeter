@@ -83,7 +83,7 @@ function Wingo1Min() {
         handlePlaySound();
       }
 
-      if (onemin <= 5) {
+      if (onemin <= 10) {
         fk.setFieldValue("openTimerDialog", true);
       }
       if (onemin === 0) {
@@ -250,7 +250,7 @@ function Wingo1Min() {
           </Grid>
         </Box>
         <div className="relative">
-          <BetNumber gid={"1"} />
+          <BetNumber timing={show_this_one_min_time} gid={"1"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div

@@ -278,7 +278,7 @@ function Wingo5Min() {
           </Grid>
         </Box>
         <div className="relative">
-          <BetNumber gid={"3"} />
+          <BetNumber timing={show_this_three_min_time_sec} gid={"3"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div

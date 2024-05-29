@@ -35,7 +35,7 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
 
-const BetNumber = ({ gid }) => {
+const BetNumber = ({timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [opend, setOpend] = useState(false);
   const [open, setOpen] = useState(false);
@@ -343,7 +343,7 @@ const BetNumber = ({ gid }) => {
       </div>
 
       <Drawer
-        open={open}
+        open={Number(timing)>10 &&  open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",

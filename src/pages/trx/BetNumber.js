@@ -30,7 +30,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import FalseCheck from "../../shared/check/FalseCheck";
-const BetNumber = ({ gid }) => {
+const BetNumber = ({timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
@@ -46,6 +46,8 @@ const BetNumber = ({ gid }) => {
   useEffect(() => {
     getBalanceFunction(setBalance);
   }, []);
+
+
 
   const fk = useFormik({
     initialValues: initialValue,
@@ -332,7 +334,7 @@ const BetNumber = ({ gid }) => {
       </div>
 
       <Drawer
-        open={open}
+        open={Number(timing)>10 &&  open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",
