@@ -379,7 +379,8 @@ function Login() {
         </Box>
         <Box sx={{ width: "80%", margin: "auto", mt: 3 }}>
           <Button
-            onClick={() => fk.handleClickShowPassword()}
+            // onClick={() => fk.handleClickShowPassword()}
+            onClick={() => fk.handleSubmit()}
             sx={{
               boxShadow: " 0px 3px #b6bad0",
               padding: "10px",

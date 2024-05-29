@@ -53,6 +53,8 @@ const BetNumber = ({timing, gid }) => {
     getBalanceFunction(setBalance);
   }, []);
 
+
+
   const fk = useFormik({
     initialValues: initialValue,
     isSuccessPlaceBet: true,
@@ -343,7 +345,8 @@ const BetNumber = ({timing, gid }) => {
       </div>
 
       <Drawer
-        open={Number(timing)>10 &&  open}
+      // open={ Number(timing) > 10 && !(min>0 && sec > 10)}
+         open={Number(timing)>10 &&  open} 
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",
