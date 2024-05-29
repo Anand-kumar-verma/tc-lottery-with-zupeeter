@@ -1,12 +1,23 @@
 import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
-import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogActions,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
-import { dummycounterFun, trx_game_image_index_function, updateNextCounter } from "../../../redux/slices/counterSlice";
+import {
+  dummycounterFun,
+  trx_game_image_index_function,
+  updateNextCounter,
+} from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
@@ -21,9 +32,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { endpoint } from "../../../services/urls";
 
-
 function Wingo5Min() {
-
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -57,7 +66,7 @@ function Wingo5Min() {
   };
   const fk = useFormik({
     initialValues: initialValue,
-    onSubmit: () => { },
+    onSubmit: () => {},
   });
 
   React.useEffect(() => {
@@ -141,7 +150,6 @@ function Wingo5Min() {
     }
   };
 
-  
   React.useEffect(() => {
     console.log(
       game_history?.data?.data
@@ -234,26 +242,41 @@ function Wingo5Min() {
               {React.useMemo(() => {
                 return (
                   <>
-                    <Stack direction='row' alignItems='center'>
-                    <Typography className="border border-white text-white px-1 !text-sm rounded" >Period</Typography>
+                    <Stack direction="row" alignItems="center">
+                      <Typography className="border border-white text-white px-1 !text-sm rounded">
+                        Period
+                      </Typography>
                       <Button
                         variant="text"
                         color="primary"
                         className="htpbutton2"
                         onClick={handleClickOpen}
-                      > How To Play
+                      >
+                        {" "}
+                        How To Play
                       </Button>
                     </Stack>
-                    <Stack direction='row' sx={{ mt: 1.5, justifyContent: 'space-between' }}>
+                    <Stack
+                      direction="row"
+                      sx={{ mt: 1.5, justifyContent: "space-between" }}
+                    >
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '18px', fontWeight: '500' }}
+                        sx={{
+                          color: "white",
+                          fontSize: "18px",
+                          fontWeight: "500",
+                        }}
                       >
                         {next_step}{" "}
                       </Typography>
                       <Typography
                         variant="body1"
-                        sx={{ color: 'white', fontSize: '15px', fontWeight: '500' }}
+                        sx={{
+                          color: "white",
+                          fontSize: "15px",
+                          fontWeight: "500",
+                        }}
                       >
                         Draw Time
                       </Typography>
@@ -263,18 +286,22 @@ function Wingo5Min() {
               }, [next_step])}
             </Box>
             <Box>
-              <NavLink to='/trx/tron-scan'>
-                <Button
-                  variant="text"
-                  color="primary"
-                  className="htpbutton3"
-                >Public Chain Query
+              <NavLink to="/trx/tron-scan">
+                <Button variant="text" color="primary" className="htpbutton3">
+                  Public Chain Query
                 </Button>
               </NavLink>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-                    <Box className="timer " sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box
+                      className="timer "
+                      sx={{
+                        backgroundImage: `url(${timerbg1})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
                       {show_this_three_min_time_min?.substring(0, 1)}
                     </Box>
                     <Box className="timer1 ">
@@ -285,7 +312,14 @@ function Wingo5Min() {
                     <Box className="timer1 ">
                       {show_this_three_min_time_sec?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2 " sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box
+                      className="timer2 "
+                      sx={{
+                        backgroundImage: `url(${timerbg2})`,
+                        backgroundSize: "100%",
+                        backgroundPosition: "center",
+                      }}
+                    >
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -298,11 +332,11 @@ function Wingo5Min() {
           }, [])}
         </Box>
         <div className="relative">
-          <BetNumber timing={show_this_three_min_time_sec}  gid={"3"} />
+          <BetNumber timing={show_this_three_min_time_sec} gid={"3"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
-                className="flex gap-2 justify-cente !bg-opacity-5"
+                className="flex gap-2 justify-cente !bg-opacity-5 !py-5"
                 sx={{ width: "100%" }}
               >
                 <div
@@ -317,7 +351,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                   className="!bg-[#F48901]  !text-white !h-52 !pb-5"
+                  className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(0, 1)}
                 </div>
@@ -333,7 +367,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                   className="!bg-[#F48901]  !text-white !h-52 !pb-5"
+                  className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(1, 2)}
                 </div>
@@ -371,11 +405,31 @@ function Wingo5Min() {
         {value === 2 && <Chart gid="3" />}
         {value === 3 && <MyHistory gid="3" />}
       </Box>
-      <Dialog sx={{ maxWidth: '400px !important', minWidth: '400px !important', margin: 'auto', minHeight: '70%', maxHeight: '80%', }} open={open} >
+      <Dialog
+        sx={{
+          maxWidth: "400px !important",
+          minWidth: "400px !important",
+          margin: "auto",
+          minHeight: "70%",
+          maxHeight: "80%",
+        }}
+        open={open}
+      >
         <Howtoplay />
 
-        <DialogActions sx={{ margin: 'auto', width: '100%' }}>
-          <Button disableElevation onClick={handleClose} autoFocus variant="contained" sx={{ color: 'white', borderRadius: '20px', width: '60%', margin: 'auto' }}>
+        <DialogActions sx={{ margin: "auto", width: "100%" }}>
+          <Button
+            disableElevation
+            onClick={handleClose}
+            autoFocus
+            variant="contained"
+            sx={{
+              color: "white",
+              borderRadius: "20px",
+              width: "60%",
+              margin: "auto",
+            }}
+          >
             Close
           </Button>
         </DialogActions>
@@ -385,4 +439,3 @@ function Wingo5Min() {
 }
 
 export default Wingo5Min;
-

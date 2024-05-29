@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { NavLink } from "react-router-dom";
@@ -35,7 +35,7 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
 
-const BetNumber = ({timing, gid }) => {
+const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [opend, setOpend] = useState(false);
   const [open, setOpen] = useState(false);
@@ -49,11 +49,25 @@ const BetNumber = ({timing, gid }) => {
     qnt: "1",
   };
 
+    
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 10) setOpen(false);
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
+      }
+    }
+  }, [timing]);
+
+
   useEffect(() => {
     getBalanceFunction(setBalance);
   }, []);
-
-
 
   const fk = useFormik({
     initialValues: initialValue,
@@ -137,9 +151,8 @@ const BetNumber = ({timing, gid }) => {
       setOpen(true);
     }, 2000);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+
   return (
     <Box
       sx={{
@@ -345,8 +358,8 @@ const BetNumber = ({timing, gid }) => {
       </div>
 
       <Drawer
-      // open={ Number(timing) > 10 && !(min>0 && sec > 10)}
-         open={Number(timing)>10 &&  open} 
+        // open={ Number(timing) > 10 && !(min>0 && sec > 10)}
+        open={open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",
@@ -399,7 +412,7 @@ const BetNumber = ({timing, gid }) => {
               color="initial"
               sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-              Win Go 1Min
+              Win Go {gid} Min
             </Typography>
             <Typography
               variant="body1"
@@ -444,29 +457,29 @@ const BetNumber = ({timing, gid }) => {
                               selectNumber === "3" ||
                               selectNumber === "7" ||
                               selectNumber === "9") &&
-                           String( fk?.values?.balance) === String(i)
+                            String(fk?.values?.balance) === String(i)
                               ? "!bg-[#40AD72]"
                               : selectNumber === "voilet" &&
-                              String( fk?.values?.balance) === String(i)
+                                String(fk?.values?.balance) === String(i)
                               ? "!bg-[#B659FE]"
                               : (selectNumber === "red" ||
                                   selectNumber === "2" ||
                                   selectNumber === "4" ||
                                   selectNumber === "6" ||
                                   selectNumber === "8") &&
-                                  String( fk?.values?.balance) === String(i)
+                                String(fk?.values?.balance) === String(i)
                               ? "!bg-[#FD565C]"
                               : selectNumber === "one" &&
-                              String( fk?.values?.balance) === String(i)
+                                String(fk?.values?.balance) === String(i)
                               ? "!bg-[#F48901]"
                               : selectNumber === "two" &&
-                              String( fk?.values?.balance) === String(i)
+                                String(fk?.values?.balance) === String(i)
                               ? "!bg-[#6DA7F4]"
                               : selectNumber === "0" &&
-                              String( fk?.values?.balance) === String(i)
+                                String(fk?.values?.balance) === String(i)
                               ? "!bg-[#BF6DFE]"
                               : selectNumber === "5" &&
-                              String( fk?.values?.balance) === String(i) &&
+                                String(fk?.values?.balance) === String(i) &&
                                 "!bg-[#BF6DFE]"
                           }
                        `}

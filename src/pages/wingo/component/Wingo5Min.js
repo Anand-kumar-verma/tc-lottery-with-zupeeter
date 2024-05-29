@@ -278,11 +278,11 @@ function Wingo5Min() {
           </Grid>
         </Box>
         <div className="relative">
-          <BetNumber timing={show_this_three_min_time_sec} gid={"3"} />
+          <BetNumber timing={`${show_this_three_min_time_min}_${show_this_three_min_time_sec}`} gid={"3"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
-                className="flex gap-2 justify-cente !bg-opacity-5"
+               className="flex gap-2 justify-cente !bg-opacity-5 !py-5"
                 sx={{ width: "100%" }}
               >
                 <div
@@ -297,7 +297,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                    className="!bg-[#F48901]  !text-white !h-52 !pb-5"
+                    className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(0, 1)}
                 </div>
@@ -313,7 +313,7 @@ function Wingo5Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                    className="!bg-[#F48901]  !text-white !h-52 !pb-5"
+                    className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_three_min_time_sec?.substring(1, 2)}
                 </div>
