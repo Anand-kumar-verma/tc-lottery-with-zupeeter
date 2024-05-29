@@ -94,6 +94,18 @@ function Login() {
     navigate("/before-login");
     // navigate("/dashboard");
   }, [user_id]);
+
+  useEffect(() => {
+    const handleEnterKeyPress = (event) => {
+      if (event.key === "Enter") {
+        fk.handleSubmit();
+      }
+    };
+    window.addEventListener("keydown", handleEnterKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleEnterKeyPress);
+    };
+  }, [fk]);
   return (
     <Container>
       <Box
@@ -196,7 +208,7 @@ function Login() {
       </Box>
       <Box sx={{ width: "92%", margin: "auto", mt: 3 }}>
         {value === "one" && (
-          <Box component="form">
+          <Box component="form" onSubmit={fk.handleSubmit}>
             <Stack direction="row" alignItems="center">
               <Box
                 component="img"
@@ -288,7 +300,7 @@ function Login() {
           </Box>
         )}
         {value === "two" && (
-          <Box component="form">
+          <Box component="form" onSubmit={fk.handleSubmit}>
             <Box>
               <Stack direction="row" alignItems="center">
                 <Box
@@ -367,7 +379,7 @@ function Login() {
         </Box>
         <Box sx={{ width: "80%", margin: "auto", mt: 3 }}>
           <Button
-            onClick={() => fk.handleSubmit()}
+            onClick={() => fk.handleClickShowPassword()}
             sx={{
               boxShadow: " 0px 3px #b6bad0",
               padding: "10px",
