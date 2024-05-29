@@ -97,10 +97,22 @@ const RegistrationByEmail = () => {
   useEffect(() => {
     getIntroFn();
   }, [fk.values.invite_code]);
+  
+  useEffect(() => {
+    const handleEnterKeyPress = (event) => {
+      if (event.key === "Enter") {
+        fk.handleSubmit();
+      }
+    };
+    window.addEventListener("keydown", handleEnterKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleEnterKeyPress);
+    };
+  }, [fk]);
 
   return (
     <>
-      <Box component="form">
+      <Box component="form" onSubmit={fk.handleSubmit}>
         <Box mt={2}>
           <Stack direction="row" alignItems="center">
             <Box
