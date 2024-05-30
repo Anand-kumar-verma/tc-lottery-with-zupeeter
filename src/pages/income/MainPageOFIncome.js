@@ -19,16 +19,16 @@ function MainPageOFIncome() {
   };
 
   const data_array = [
-    {
-      to: "/account/income-main/registration-bonus",
-      name: "Registration Bonus",
-      logo: (
-        <CurrencyExchangeIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
+    // {
+    //   to: "/account/income-main/registration-bonus",
+    //   name: "Registration Bonus",
+    //   logo: (
+    //     <CurrencyExchangeIcon
+    //       className="!w-[40px] !h-[40px] !text-[#F48901]"
+    //       color="#8f5206"
+    //     />
+    //   ),
+    // },
     {
       to: "/account/income-main/referral-bonus",
       name: "Referral Bonus",

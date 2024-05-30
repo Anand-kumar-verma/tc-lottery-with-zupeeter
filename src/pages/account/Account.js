@@ -104,7 +104,7 @@ function Account() {
                 <img src={vip} alt="" className=" w-10 mt-6" />
               </Typography>
             </Box>
-            <Box className="bg-[#ffd058] w-40 h-6 rounded-full p-1   realtive !left-40 flex gap-3 justify-center">
+            <Box className="bg-gray-600 w-40 h-6 rounded-full p-1   realtive !left-40 flex gap-3 justify-center">
               <Typography className="text-white !text-xs">UID </Typography>
               <Typography className="text-white !text-xs">| </Typography>
               <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
