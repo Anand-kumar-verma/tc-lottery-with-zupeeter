@@ -63,6 +63,20 @@ const BetNumber = ({timing, gid }) => {
     },
   });
 
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 10) setOpen(false);
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
+      }
+    }
+  }, [timing]);
+
   async function betFunctionStart() {
     setLoding(true);
     const reqBody = {
@@ -334,7 +348,8 @@ const BetNumber = ({timing, gid }) => {
       </div>
 
       <Drawer
-        open={Number(timing)>10 &&  open}
+        // open={Number(timing)>10 &&  open}
+        open={open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",

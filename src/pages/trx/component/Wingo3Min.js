@@ -308,7 +308,7 @@ function Wingo3Min() {
           }, [])}
         </Box>
         <div className="relative">
-          <BetNumber timing={show_this_three_min_time_sec} gid={"2"} />
+          <BetNumber timing={`${show_this_three_min_time_min}_${show_this_three_min_time_sec}`} gid={"2"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
@@ -334,6 +334,7 @@ function Wingo3Min() {
                 <div
                   style={{
                     fontSize: 200,
+                    
                     borderRadius: 20,
                     // background: "rgb(73, 57, 193)",
                     fontWeight: 700,
