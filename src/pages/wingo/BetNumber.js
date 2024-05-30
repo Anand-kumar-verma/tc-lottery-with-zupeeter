@@ -49,20 +49,8 @@ const BetNumber = ({ timing, gid }) => {
     qnt: "1",
   };
 
-    
-  useEffect(() => {
-    if (gid === "1") {
-      if (Number(timing) <= 10) setOpen(false);
-    } else if (gid === "2") {
-      if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
-      }
-    } else {
-      if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) setOpen(false);
-      }
-    }
-  }, [timing]);
+
+  
 
 
   useEffect(() => {
@@ -81,6 +69,26 @@ const BetNumber = ({ timing, gid }) => {
       betFunctionStart();
     },
   });
+
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 10) {setOpen(false)
+        fk.handleReset()
+      };
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+          fk.handleReset()
+        };
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+          fk.handleReset()
+        };
+      }
+    }
+  }, [timing]);
 
   async function betFunctionStart() {
     setLoding(true);
@@ -141,7 +149,7 @@ const BetNumber = ({ timing, gid }) => {
   };
 
   if (loding) return <CustomCircularProgress isLoading={loding} />;
-  const generatenumber = () => {
+  const generatenumber = (i) => {
     const randomBitNumber = Math.floor(Math.random() * 9) + 1;
     setLoding(true);
     setTimeout(() => {
@@ -317,17 +325,20 @@ const BetNumber = ({ timing, gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined" onClick={generatenumber}>
+          <Button variant="outlined" onClick={generatenumber}
+         >
             Random
           </Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return (
               <Box
-                className="cursor-pointer"
+               key={i}
+                
                 onClick={() => fk.setFieldValue("qnt", i)}
-                sx={style.bacancebtn3}
+                sx={style.bacancebtn3 }
+                className={`${fk.values.qnt === i?"!bg-green-600" :"!bg-gray-400"}  cursor-pointer`}
               >
-                X{i}
+              X{i} 
               </Box>
             );
           })}
@@ -780,6 +791,10 @@ const style = {
     height: "30px",
     ["@media (max-width:340px)"]: { fontSize: "13px" },
   },
+  bacancebtn3active: {
+    backgroundColorolor: "#45a049", /* Darker green when clicked */
+},
+
   addsumbtn: {
     padding: "4px 13px",
     color: "white",
