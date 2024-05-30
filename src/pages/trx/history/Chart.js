@@ -167,13 +167,14 @@ const Chart = ({ gid }) => {
           </Box>
         </div>
       </Box>
-      <div className="relative !h-[65vh] overflow-auto !w-[95%] no-scrollbar !overflow-x-hidden">
+      <div className="relative !h-[65vh] overflow-auto !w-[98%] no-scrollbar !overflow-x-hidden">
         <div className="absolute !w-[100%]">
           {visibleRows?.map((i, indexi) => {
             return (
               <Box
                 sx={{
-                  padding: "10px",
+                  paddingTop: "10px",
+                  paddingBottom: "10px",
                   borderBottom: "1px solid white",
                 }}
               >
@@ -182,7 +183,7 @@ const Chart = ({ gid }) => {
                     {i?.tr_transaction_id}
                   </span>
                   {/* // main box of chart form 0 to 9 */}
-                  <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
+                  <Box className="flex items-center justify-between gap-1 !w-[60%]  lg:!w-[60%]">
                     {/* /// 0   //// */}
                     <div
                       id={`zero${indexi}`}

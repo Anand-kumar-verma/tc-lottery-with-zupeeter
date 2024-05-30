@@ -153,7 +153,7 @@ const Chart = ({ gid }) => {
   return (
     <Box className="chartTable">
       <Stack direction="row" className="onegotextbox">
-        <Typography variant="body1" color="initial" className="!text-[#F48901]">
+        <Typography variant="body1" color="initial" className="!text-[#F48901] !py-2">
           {/* <Box
             component="img"
             src={history}
@@ -217,9 +217,9 @@ const Chart = ({ gid }) => {
               >
                 <div className="flex justify-between">
                   <span
-                    className={`
+                    className={` text-[14px]
                  !bg-gradient-to-t from-[#FE63FF] to-[#007AFF]
-                  transparentColor font-bold  pr-2
+                  transparentColor font-bold  pr-5
                  `}
                   >
                     {i?.tr_transaction_id}

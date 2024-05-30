@@ -15,7 +15,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { useQueryClient } from "react-query";
+import { hydrate, useQueryClient } from "react-query";
 import { NavLink } from "react-router-dom";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
@@ -208,6 +208,7 @@ const BetNumber = ({ timing, gid }) => {
             borderRadius: "10px",
             mt: 2,
           }}
+  
         >
           <Box
             sx={{ width: "17%", mb: 1 }}
@@ -367,7 +368,6 @@ const BetNumber = ({ timing, gid }) => {
           margin: "auto",
           padding: "10px 0px 0px 0px",
         }}
-        // onClickCapture={handleClose}
       >
         <Box sx={{ position: "relative" }}>
           <Box
@@ -709,7 +709,7 @@ const BetNumber = ({ timing, gid }) => {
                   fk.handleSubmit();
                 }}
               >
-                Total amount ₹{" "}
+                Total amount ₹
                 {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
               </Button>
             </Grid>
