@@ -40,15 +40,51 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
 import Howtoplay from "../5DLotre/component/Howtoplay";
-const BetNumber = ({ gid }) => {
+const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
-  const [random, setRandomNumber] = useState(null)
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
+  const [selectedNumbers, setSelectedNumbers] = useState([]);
+
+  const handleNumberClick = (number) => {
+    setSelectedNumbers((prevSelectedNumbers) => {
+      if (prevSelectedNumbers.includes(number)) {
+        return prevSelectedNumbers.filter((n) => n !== number);
+      } else {
+        return [...prevSelectedNumbers, number];
+      }
+    });
+    handleClickOpen();
+  };
+  
+
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 5) {
+        setOpen(false)
+        fk.handleReset()
+      };
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
+          setOpen(false)
+          fk.handleReset()
+        };
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
+          setOpen(false)
+          fk.handleReset()
+        };
+      }
+    }
+  }, [timing]);
+
   const initialValue = {
     balance: "1",
     qnt: "1",
@@ -125,7 +161,12 @@ const BetNumber = ({ gid }) => {
   const handleClosed = () => {
     setOpend(false);
   };
-
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Box
       sx={{
@@ -153,10 +194,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={three}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("3");
-              }}
+              onClick={() => handleNumberClick("3")}
               className="!items-center !w-14 "
             >
             </Box>
@@ -166,11 +204,8 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={four}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("4");
-              }}
-              className="!items-center !w-[65%]"
+              onClick={() => handleNumberClick("4")}
+              className="!items-center !w-12"
             >
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
@@ -179,10 +214,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={five}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("5");
-              }}
+              onClick={() => handleNumberClick("5")}
               className="!items-center !w-14"
             >
             </Box>
@@ -192,10 +224,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={six}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("6");
-              }}
+              onClick={() => handleNumberClick("6")}
               className="!items-center !w-14"
             >
             </Box>
@@ -205,10 +234,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={seven}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("7");
-              }}
+              onClick={() => handleNumberClick("7")}
               className="!items-center !w-12 ml-1"
             >
             </Box>
@@ -218,10 +244,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={eight}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("8");
-              }}
+              onClick={() => handleNumberClick("8")}
               className="!items-center !w-16"
             >
             </Box>
@@ -231,10 +254,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={nine}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("9");
-              }}
+              onClick={() => handleNumberClick("9")}
               className="!items-center !w-14"
             >
             </Box>
@@ -244,10 +264,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={ten}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("10");
-              }}
+              onClick={() => handleNumberClick("10")}
               className="!items-center !w-16"
             >
             </Box>
@@ -257,10 +274,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={eleven}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("11");
-              }}
+              onClick={() => handleNumberClick("11")}
               className="!items-center !w-16"
             >
             </Box>
@@ -270,10 +284,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={twelve}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("12");
-              }}
+              onClick={() => handleNumberClick("12")}
               className="!items-center !w-14"
             >
             </Box>
@@ -283,10 +294,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={thirteen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("13");
-              }}
+              onClick={() => handleNumberClick("13")}
               className="!items-center !w-14"
             >
             </Box>
@@ -296,10 +304,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={fourteen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("14");
-              }}
+              onClick={() => handleNumberClick("14")}
               className="!items-center !w-14"
             >
             </Box>
@@ -309,10 +314,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={fifteen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("15");
-              }}
+              onClick={() => handleNumberClick("15")}
               className="!items-center !w-16"
             >
             </Box>
@@ -322,10 +324,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={sixteen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("16");
-              }}
+              onClick={() => handleNumberClick("16")}
               className="!items-center !w-14"
             >
             </Box>
@@ -335,10 +334,7 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={seventeen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("17");
-              }}
+              onClick={() => handleNumberClick("17")}
               className="!items-center !w-14"
             >
             </Box>
@@ -348,17 +344,14 @@ const BetNumber = ({ gid }) => {
             <Box
               component="img"
               src={eighteen}
-              onClick={() => {
-                setOpen(true);
-                setSelectNumber("18");
-              }}
+              onClick={() => handleNumberClick("18")}
               className="!items-center !w-14"
             >
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
         </Box>
- <ButtonGroup
+        <ButtonGroup
           disableElevation
           variant="contained"
           sx={{ width: "100%" }}
@@ -366,37 +359,25 @@ const BetNumber = ({ gid }) => {
         >
           <Button
             className="!bg-[#F48901] !text-white !rounded !h-10  !text-sm !mx-1"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("two");
-            }}
+            onClick={() => handleNumberClick("Big")}
           >
             Big 1.92x
           </Button>
           <Button
             className="!bg-[#6da7f4] !text-white !rounded !h-10 !text-sm !mx-1"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("one");
-            }}
+            onClick={() => handleNumberClick("Small")}
           >
             Small 1.92X
           </Button>
           <Button
             className="!bg-[#fa574a] !text-white !rounded !h-10 !text-sm !mx-1"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("Odd");
-            }}
+            onClick={() => handleNumberClick("Odd")}
           >
             Odd 1.92X
           </Button>
           <Button
             className="!bg-[#40ad72] !text-white !rounded !text-sm !h-10 !mx-1"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("Even");
-            }}
+            onClick={() => handleNumberClick("Even")}
           >
             Even 1.92X
           </Button>
@@ -404,410 +385,219 @@ const BetNumber = ({ gid }) => {
 
       </div>
 
-      <Drawer
-        open={open}
-        anchor={"bottom"}
-        sx={{
-          maxWidth: "400px !important",
-          width: "100%",
-          margin: "auto",
-          padding: "10px 0px 0px 0px",
-        }}
-      >
-        <Box sx={{ position: "relative" }}>
-          <Box
-            sx={{
-              position: "absolute",
-              clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)",
-              width: "120%",
-              height: "110px",
-              top: "-16px",
-              left: "-11%",
-              zIndex: "-1",
-            }}
-            className={` !cursor-pointer
-            ${selectNumber === "green" ||
-                selectNumber === "4" ||
-                selectNumber === "8" ||
-                selectNumber === "12" ||
-                selectNumber === "6" ||
-                selectNumber === "10" ||
-                selectNumber === "14" ||
-                selectNumber === "18" ||
-                selectNumber === "16"
-                ? "!bg-[#40AD72]"
-                : selectNumber === "voilet"
-                  ? "!bg-[#B659FE]"
-                  : selectNumber === "red" ||
-                    selectNumber === "3" ||
-                    selectNumber === "7" ||
-                    selectNumber === "11" ||
-                    selectNumber === "15" ||
-                    selectNumber === "5" ||
-                    selectNumber === "9" ||
-                    selectNumber === "13" ||
-                    selectNumber === "17" ||
-                    selectNumber === "8"
-                    ? "!bg-[#FD565C]"
-                    : selectNumber === "two"
-                      ? "!bg-[#F48901]"
-                      : selectNumber === "one"
-                        ? "!bg-[#6da7f4]"
-                        : selectNumber === "Odd"
-                          ? "!bg-[#fa574a]"
-                          : selectNumber === "Even"
-                            ? "!bg-[#40ad72]"
-                            : selectNumber === "0"
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
-              }
-         `}
-          >
-            {" "}
-          </Box>
-          <Box px={1}>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
-            >
-              TRX Win Go {gid == 3 ? 5 : gid == 2 ? 3 : gid}Min
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                textAlign: "center",
-                color: "black",
-                fontWeight: "400 ",
-                background: "#ffffff",
-                mt: 1,
-                borderRadius: "5px",
-              }}
-            >
-              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
+      {open && (
+        <div className={`drawer`} >
+          <Box>
+            <Box
 
-            </Typography>
-          </Box>
-          <Box mt={5} px={2}>
-            <Grid container mt={10}>
-              <Grid item xs={4}>
-                <Typography variant="body1" color="initial">
-                  Balance{" "}
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  {[1, 10, 100, 1000]?.map((i) => {
-                    return (
-                      <Box
-                        onClick={() => fk.setFieldValue("balance", i)}
-                        sx={style.bacancebtn}
-                        className={` !cursor-pointer
-                          ${selectNumber === "green" ||
-                          selectNumber === "4" ||
-                          selectNumber === "8" ||
-                          selectNumber === "12" ||
-                          selectNumber === "6" ||
-                          selectNumber === "10" ||
-                          selectNumber === "14" ||
-                          selectNumber === "18" ||
-                          selectNumber === "16"
-                          ? "!bg-[#40AD72]"
-                          : selectNumber === "voilet"
-                            ? "!bg-[#B659FE]"
-                            : selectNumber === "red" ||
-                              selectNumber === "3" ||
-                              selectNumber === "7" ||
-                              selectNumber === "11" ||
-                              selectNumber === "15" ||
-                              selectNumber === "5" ||
-                              selectNumber === "9" ||
-                              selectNumber === "13" ||
-                              selectNumber === "17" ||
-                              selectNumber === "8"
-                                ? "!bg-[#FD565C]"
-                                : selectNumber === "two"
-                                  ? "!bg-[#F48901]"
-                                  : selectNumber === "one"
-                                    ? "!bg-[#6da7f4]"
-                                    : selectNumber === "Odd"
-                                      ? "!bg-[#fa574a]"
-                                      : selectNumber === "Even"
-                                        ? "!bg-[#40ad72]"
-                                        : selectNumber === "0"
-                                          ? "!bg-[#BF6DFE]"
-                                          : selectNumber === "5" && "!bg-[#BF6DFE]"
-                          }
-                       `}
-                      >
-                        {i}
-                      </Box>
-                    );
-                  })}
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container mt={2}>
-              <Grid item xs={4}>
-                <Typography variant="body1" color="initial">
-                  Quantity{" "}
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  <Box
-                    className={` !cursor-pointer
-                      ${selectNumber === "green" ||
-                      selectNumber === "4" ||
-                      selectNumber === "8" ||
-                      selectNumber === "12" ||
-                      selectNumber === "6" ||
-                      selectNumber === "10" ||
-                      selectNumber === "14" ||
-                      selectNumber === "18" ||
-                      selectNumber === "16"
-                      ? "!bg-[#40AD72]"
-                      : selectNumber === "voilet"
-                        ? "!bg-[#B659FE]"
-                        : selectNumber === "red" ||
-                          selectNumber === "3" ||
-                          selectNumber === "7" ||
-                          selectNumber === "11" ||
-                          selectNumber === "15" ||
-                          selectNumber === "5" ||
-                          selectNumber === "9" ||
-                          selectNumber === "13" ||
-                          selectNumber === "17" ||
-                          selectNumber === "8"
-                            ? "!bg-[#FD565C]"
-                            : selectNumber === "two"
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "one"
-                                ? "!bg-[#6da7f4]"
-                                : selectNumber === "Odd"
-                                  ? "!bg-[#fa574a]"
-                                  : selectNumber === "Even"
-                                    ? "!bg-[#40ad72]"
-                                    : selectNumber === "0"
-                                      ? "!bg-[#BF6DFE]"
-                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
-                      }
-                    `}
-                    sx={style.addsumbtn}
-                    onClick={() =>
-                      fk.setFieldValue(
-                        "qnt",
-                        Number(fk.values.qnt) - 1 < 1
-                          ? 1
-                          : Number(fk.values.qnt) - 1
-                      )
-                    }
-                  >
-                    -
-                  </Box>
-                  <TextField value={fk.values.qnt} className="inputamt" />
-                  <Box
-                    className={` !cursor-pointer
-                     ${selectNumber === "green" ||
-                     selectNumber === "4" ||
-                     selectNumber === "8" ||
-                     selectNumber === "12" ||
-                     selectNumber === "6" ||
-                     selectNumber === "10" ||
-                     selectNumber === "14" ||
-                     selectNumber === "18" ||
-                     selectNumber === "16"
-                     ? "!bg-[#40AD72]"
-                     : selectNumber === "voilet"
-                       ? "!bg-[#B659FE]"
-                       : selectNumber === "red" ||
-                         selectNumber === "3" ||
-                         selectNumber === "7" ||
-                         selectNumber === "11" ||
-                         selectNumber === "15" ||
-                         selectNumber === "5" ||
-                         selectNumber === "9" ||
-                         selectNumber === "13" ||
-                         selectNumber === "17" ||
-                         selectNumber === "8"
-                            ? "!bg-[#FD565C]"
-                            : selectNumber === "two"
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "one"
-                                ? "!bg-[#6da7f4]"
-                                : selectNumber === "Odd"
-                                  ? "!bg-[#fa574a]"
-                                  : selectNumber === "Even"
-                                    ? "!bg-[#40ad72]"
-                                    : selectNumber === "0"
-                                      ? "!bg-[#BF6DFE]"
-                                      : selectNumber === "5" && "!bg-[#BF6DFE]"
-                      }
-                    `}
-                    sx={style.addsumbtn}
-                    onClick={() =>
-                      fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
-                    }
-                  >
-                    +
-                  </Box>
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container mt={2}>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={12}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"end"}
-                >
-                  {[1, 5, 10, 20, 50, 100]?.map((i) => {
-                    return (
-                      <Box
-                        onClick={() => fk.setFieldValue("qnt", i)}
-                        sx={style.bacancebtn2}
-                        className={` !cursor-pointer
-                          ${selectNumber === "green" ||
-                          selectNumber === "4" ||
-                          selectNumber === "8" ||
-                          selectNumber === "12" ||
-                          selectNumber === "6" ||
-                          selectNumber === "10" ||
-                          selectNumber === "14" ||
-                          selectNumber === "18" ||
-                          selectNumber === "16"
-                          ? "!bg-[#40AD72]"
-                          : selectNumber === "voilet"
-                            ? "!bg-[#B659FE]"
-                            : selectNumber === "red" ||
-                              selectNumber === "3" ||
-                              selectNumber === "7" ||
-                              selectNumber === "11" ||
-                              selectNumber === "15" ||
-                              selectNumber === "5" ||
-                              selectNumber === "9" ||
-                              selectNumber === "13" ||
-                              selectNumber === "17" ||
-                              selectNumber === "8"
-                                ? "!bg-[#FD565C]"
-                                : selectNumber === "two"
-                                  ? "!bg-[#F48901]"
-                                  : selectNumber === "one"
-                                    ? "!bg-[#6da7f4]"
-                                    : selectNumber === "Odd"
-                                      ? "!bg-[#fa574a]"
-                                      : selectNumber === "Even"
-                                        ? "!bg-[#40ad72]"
-                                        : selectNumber === "0"
-                                          ? "!bg-[#BF6DFE]"
-                                          : selectNumber === "5" && "!bg-[#BF6DFE]"
-                          }`}
-                      >
-                        X{i}
-                      </Box>
-                    );
-                  })}
-                </Stack>
-              </Grid>
-            </Grid>
-          </Box>
-          <Grid container mt={2}>
-            <Grid item xs={12}>
-              <Stack direction="row" alignItems="center">
-                <Checkbox checked />{" "}
-                <Typography
-                  variant="body1"
-                  color="initial"
-                  sx={{ color: "gray", fontSize: "14px" }}
-                >
-                  I agree
-                </Typography>
-                <NavLink onClick={handleClickOpend}>
-                  <Typography
-                    component="a"
-                    sx={{
-                      color: `${theme.palette.primary.main} !important`,
-                      cursor: "pointer",
-                      fontSize: "14px",
-                    }}
-                  >
-                    《Pre-sale rules》
-                  </Typography>
-                </NavLink>
-              </Stack>
-            </Grid>
-          </Grid>
-          <Grid container mt={2}>
-            <Grid item xs={4}>
-              <Button
-                variant="contained"
-                sx={style.cancelbtn}
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
-            </Grid>
-            <Grid item xs={8}>
-              <Button
-                className={`
-                  ${selectNumber === "green" ||
-                  selectNumber === "4" ||
-                  selectNumber === "8" ||
-                  selectNumber === "12" ||
-                  selectNumber === "6" ||
-                  selectNumber === "10" ||
-                  selectNumber === "14" ||
-                  selectNumber === "18" ||
-                  selectNumber === "16"
-                  ? "!bg-[#40AD72]"
-                  : selectNumber === "voilet"
-                    ? "!bg-[#B659FE]"
-                    : selectNumber === "red" ||
-                      selectNumber === "3" ||
-                      selectNumber === "7" ||
-                      selectNumber === "11" ||
-                      selectNumber === "15" ||
-                      selectNumber === "5" ||
-                      selectNumber === "9" ||
-                      selectNumber === "13" ||
-                      selectNumber === "17" ||
-                      selectNumber === "8"
-                        ? "!bg-[#FD565C]"
-                        : selectNumber === "two"
-                        ? "!bg-[#F48901]"
-                        : selectNumber === "one"
-                          ? "!bg-[#6da7f4]"
-                          : selectNumber === "Odd"
-                          ? "!bg-[#fa574a]"
-                          : selectNumber === "Even"
-                          ? "!bg-[#40ad72]"
-                            : selectNumber === "0"
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" && "!bg-[#BF6DFE]"
-                  } !cursor-pointer`}
-                variant="contained"
-                sx={style.submitbtn}
-                onClick={() => {
-                  fk.handleSubmit();
+            >
+              {" "}
+            </Box>
+            <Box px={1}
+              className="!flex justify-start gap-2">
+              <Typography className="!mt-4">Total</Typography>
+              {selectedNumbers.map((number) => (
+              <Typography
+                variant="body1"
+                color="initial"
+                sx={{
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "400 ",
+                  background: "#ffffff",
+                  mt: 2,
+
                 }}
+                className={` !cursor-pointer !px-2 !w-fit !rounded-full
+                 ${number === "green" ||
+                    number === "4" ||
+                    number === "8" ||
+                    number === "12" ||
+                    number === "6" ||
+                    number === "10" ||
+                    number === "14" ||
+                    number === "18" ||
+                    number === "16"
+                    ? "!bg-[#40AD72]"
+                    : number === "voilet"
+                      ? "!bg-[#B659FE]"
+                      : number === "red" ||
+                        number === "3" ||
+                        number === "7" ||
+                        number === "11" ||
+                        number === "15" ||
+                        number === "5" ||
+                        number === "9" ||
+                        number === "13" ||
+                        number === "17" ||
+                        number === "8"
+                        ? "!bg-[#FD565C]"
+                        : number === "Big"
+                          ? "!bg-[#F48901]"
+                          : number === "Small"
+                            ? "!bg-[#6da7f4]"
+                            : number === "Odd"
+                              ? "!bg-[#fa574a]"
+                              : number === "Even"
+                                ? "!bg-[#40ad72]"
+                                : number === "0"
+                                  ? "!bg-[#BF6DFE]"
+                                  : number === "5" && "!bg-[#BF6DFE]"
+                  }
+    `}
               >
-                Total amount ₹{" "}
-                {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
-              </Button>
+                {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
+              </Typography>
+              ))}
+            </Box>
+            <Box mt={3} px={2}>
+              <Grid container >
+                <Grid item xs={4}>
+                  <Typography variant="body1" color="initial">
+                    Balance{" "}
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    {[1, 10, 100, 1000]?.map((i) => {
+                      return (
+                        <Box
+                          onClick={() => fk.setFieldValue("balance", i)}
+                          sx={style.bacancebtn}
+                          className={`${fk.values.balance === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
+
+                        >
+                          {i}
+                        </Box>
+                      );
+                    })}
+                  </Stack>
+                </Grid>
+              </Grid>
+              <Grid container mt={2}>
+                <Grid item xs={4}>
+                  <Typography variant="body1" color="initial">
+                    Quantity{" "}
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    <Box
+                      sx={style.addsumbtn}
+                      onClick={() =>
+                        fk.setFieldValue(
+                          "qnt",
+                          Number(fk.values.qnt) - 1 < 1
+                            ? 1
+                            : Number(fk.values.qnt) - 1
+                        )
+                      }
+                      className={`!bg-[#F48901]  cursor-pointer `}
+
+                    >
+                      -
+                    </Box>
+                    <TextField value={fk.values.qnt} className="inputamt" />
+                    <Box
+                      sx={style.addsumbtn}
+                      onClick={() =>
+                        fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
+                      }
+                      className={`!bg-[#F48901]  cursor-pointer px-2 text-white`}
+
+                    >
+                      +
+                    </Box>
+                  </Stack>
+                </Grid>
+              </Grid>
+              <Grid container mt={2} mx={1.5}>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={12}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"end"}
+                  >
+                    {[1, 5, 10, 20, 50, 100]?.map((i) => {
+                      return (
+                        <Box
+                          onClick={() => fk.setFieldValue("qnt", i)}
+                          sx={style.bacancebtn2}
+                          className={`${fk.values.qnt === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
+                        >
+                          X{i}
+                        </Box>
+                      );
+                    })}
+                  </Stack>
+                </Grid>
+              </Grid>
+            </Box>
+            <Grid container mt={2}>
+              <Grid item xs={12}>
+                <Stack direction="row" alignItems="center">
+                  <Checkbox checked />{" "}
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={{ color: "gray", fontSize: "14px" }}
+                  >
+                    I agree
+                  </Typography>
+                  <NavLink onClick={handleClickOpend}>
+                    <Typography
+                      component="a"
+                      sx={{
+                        color: `${theme.palette.primary.main} !important`,
+                        cursor: "pointer",
+                        fontSize: "14px",
+                      }}
+                    >
+                      《Pre-sale rules》
+                    </Typography>
+                  </NavLink>
+                </Stack>
+              </Grid>
             </Grid>
-          </Grid>
-        </Box>
-      </Drawer>
+            <Grid container mt={2}>
+              <Grid item xs={4}>
+                <Button
+                  variant="contained"
+                  sx={style.cancelbtn}
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+              <Grid item xs={8}>
+                <Button
+                  className={`!bg-[#F48901]
+           !cursor-pointer`}
+                  variant="contained"
+                  sx={style.submitbtn}
+                  onClick={() => {
+                    fk.handleSubmit();
+                  }}
+                >
+                  Total amount ₹{" "}
+                  {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
+        </div>
+
+      )}
+
       <Dialog
         sx={{
           maxWidth: "400px !important",

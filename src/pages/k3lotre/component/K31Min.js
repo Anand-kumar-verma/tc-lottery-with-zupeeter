@@ -250,14 +250,14 @@ function K31Min() {
 
         </div>
         <div className="relative mx-2 ">
-          {bettype === 1 && <BetNumber gid={"1"} />}
-          {bettype === 2 && <Same2 gid={"1"} />}
-          {bettype === 3 && <Same3 gid={"1"} />}
-          {bettype === 4 && <Different gid={"1"} />}
+          {bettype === 1 && <BetNumber  timing={show_this_one_min_time} gid={"1"}  />}
+          {bettype === 2 && <Same2 timing={show_this_one_min_time} gid={"1"}  />}
+          {bettype === 3 && <Same3  timing={show_this_one_min_time} gid={"1"}  />}
+          {bettype === 4 && <Different timing={show_this_one_min_time} gid={"1"} />}
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
-                className="flex gap-2 justify-cente !bg-opacity-5"
+                className="flex gap-2 justify-cente !bg-opacity-5 !py-5 "
                 sx={{ width: "100%" }}
               >
                 <div
@@ -272,7 +272,7 @@ function K31Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                 className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_one_min_time?.substring(0, 1)}
                 </div>
@@ -288,7 +288,7 @@ function K31Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                 className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_one_min_time?.substring(1, 2)}
                 </div>

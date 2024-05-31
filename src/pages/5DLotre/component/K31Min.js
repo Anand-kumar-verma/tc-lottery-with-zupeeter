@@ -407,8 +407,8 @@ function K31Min() {
                 <Box className=" bg-gray-300  mx-1  py-4  p-2 rounded-full text-center"
                 >{numb[index]}</Box>
                 <Box>{numb[index]}</Box>
-                <Box  >{numb[index]}</Box>
-                <Box  >{numb[index]}</Box>
+                <Box>{numb[index]}</Box>
+                <Box>{numb[index]}</Box>
               </div>
               <div className="flex flex-col bg-black gap-1  justify-start" >
                 <Box
@@ -461,9 +461,9 @@ function K31Min() {
           {bettype === 4 && <Different gid={"1"} />}
           {bettype === 5 && <Sum gid={"1"} />}
           {fk.values.openTimerDialog && (
-        <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
+        <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center ">
               <div
-                className="flex gap-2 justify-cente !bg-opacity-5"
+                className="flex gap-2 justify-cente !bg-opacity-5 !py-5"
                 sx={{ width: "100%" }}
               >
                 <div
@@ -478,7 +478,7 @@ function K31Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                className="!bg-[#F48901]  !text-white !h-56 "
                 >
                   {show_this_one_min_time?.substring(0, 1)}
                 </div>
@@ -494,7 +494,7 @@ function K31Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                  className="!bg-[#F48901]  !text-white"
+                className="!bg-[#F48901]  !text-white !h-56 "
                 >
                   {show_this_one_min_time?.substring(1, 2)}
                 </div>
