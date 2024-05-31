@@ -79,7 +79,7 @@ const BetNumber = ({timing, gid }) => {
         if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
           fk.handleReset()
         };
-      }
+      } 
     }
   }, [timing]);
 

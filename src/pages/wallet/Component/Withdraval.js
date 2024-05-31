@@ -26,6 +26,7 @@ import theme from "../../../utils/theme";
 import {
   BankDetailsFUnction,
   getBalanceFunction,
+  getBetFunction,
   withdrawlHistoryFunction,
 } from "../../../services/apiCallings";
 import { useQuery, useQueryClient } from "react-query";
@@ -44,6 +45,7 @@ function Withdraval() {
   const [isAllValue, setIsAllValue] = useState(false);
   const [visibleData, setvisibleData] = useState([]);
   const [balance, setBalance] = useState("");
+  const [bet, setBet] = useState("");
   const navigate = useNavigate();
   const [loding, setloding] = useState(false);
   const [status, setStatus] = useState({});
@@ -107,6 +109,16 @@ function Withdraval() {
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+
+  const { data: total_bet_amount } = useQuery(
+    ["bet_amount"],
+    () => getBetFunction(setBet),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const total_bet = total_bet_amount?.data?.earning || 0;
 
   const { isLoading, data } = useQuery(
     ["withdrawl_history"],
@@ -447,6 +459,7 @@ function Withdraval() {
               ₹{wallet_amount_data || 0}
             </Typography>
           </Stack>
+       
           <Button
             variant="Outlined"
             color="primary"
@@ -485,6 +498,7 @@ function Withdraval() {
             ₹ 0.00
           </Typography>
         </Stack>
+      
         <Button
           sx={style.wdbtn}
           className={`${
@@ -524,7 +538,7 @@ function Withdraval() {
               }}
             >
               {" "}
-              ₹{wallet_amount_data || 0}{" "}
+              ₹ {total_bet?.total_amt || 0}
             </Typography>
             <Typography
               variant="body1"
@@ -535,6 +549,8 @@ function Withdraval() {
               to be able to withdraw{" "}
             </Typography>
           </Stack>
+      
+        
           <Stack direction="row" alignItems="center" mt={1}>
             <Box
               sx={{

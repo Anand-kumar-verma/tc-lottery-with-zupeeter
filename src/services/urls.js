@@ -20,6 +20,7 @@ export const endpoint = {
   bet_placed: `${baseUrl}/api/betnew_color`,
   my_history: `${baseUrl}/api/one_min_myhistory`,
   get_balance: `${baseUrl}/api/get_balance`,
+  total_withdrawal_bet: `${baseUrl}/api/total_withdrawal_bet`,
   my_team_level: `${baseUrl}/api/my_team`,
   my_team_level_report_indevidual: `${baseUrl}/api/member_report`,
   bank: `${baseUrl}/api/bank`,
