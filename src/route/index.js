@@ -1,4 +1,4 @@
-import D5lotre from "../pages/5DLotre/D5lotre";
+// import D5lotre from "../pages/5DLotre/D5lotre";
 import Contactus from "../pages/Contact/Contactus";
 import ServiceCollections from "../pages/Contact/component/ServiceCollection";
 import SupportPage from "../pages/Contact/component/SupportPage";
@@ -6,7 +6,7 @@ import Account from "../pages/account/Account";
 import RiskDisclosureAgreement from "../pages/auth/Component/RiskDisclosureAgreement";
 import ComingSoon from "../pages/comingsoon/ComingSoon";
 import Dashboard from "../pages/home/Dashboard";
-import K3 from "../pages/k3lotre/K3";
+// import K3 from "../pages/k3lotre/K3";
 import Promotion from "../pages/promotion/Promotion";
 import TRX from "../pages/trx/TRX";
 import AddBankAccount from "../pages/wallet/Component/AddBankAccount";
@@ -105,14 +105,14 @@ export const routes = [
         path:"/trx",
         element:<TRX />
     },
-    {
-        path:"/k3",
-        element:<K3 />
-    },
-    {
-        path:"/D5lotre",
-        element:<D5lotre />
-    },
+    // {
+    //     path:"/k3",
+    //     element:<K3 />
+    // },
+    // {
+    //     path:"/D5lotre",
+    //     element:<D5lotre />
+    // },
     {
         path:"/CustomerService",
         element:<Contactus />
