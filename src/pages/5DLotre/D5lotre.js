@@ -19,6 +19,7 @@ import Wingo10Min from "./component/Wingo10Min";
 import K31Min from "./component/K31Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
+import { orange } from "@mui/material/colors";
 
 function D5lotre() {
   const [musicicon, setmusicicon] = useState(true)
@@ -95,6 +96,7 @@ function D5lotre() {
         </Stack>
       </Box>
       <Box
+      className="!pt-6"
         sx={{
           padding: 1,
           background:
@@ -176,12 +178,11 @@ function D5lotre() {
           >
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
-          <Button
-            sx={{ background: theme.palette.primary.main, color: "white" }}
-            className="detailsbutton"
+          <Typography
+            className="!bg-orange-400 !text-white rounded-2xl px-2 py-1 !flex justify-center"
           >
             <WhatshotIcon /> Details
-          </Button>
+          </Typography>
         </Stack>
       </Box>
       <Box
@@ -190,11 +191,10 @@ function D5lotre() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          margin: "auto",
-          background: "#ededed",
+          background: "white",
           borderRadius: "10PX",
-          mt: 2,
         }}
+        className="shadow-2xl rounded-xl !m-2 !mt-4 "
       >
         <Box sx={{ width: "30%" }}>
           <NavLink
@@ -202,10 +202,10 @@ function D5lotre() {
             onClick={() => handleChange(1)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               1 Min
             </Typography>
           </NavLink>
@@ -216,10 +216,10 @@ function D5lotre() {
             onClick={() => handleChange(2)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               3 Min
             </Typography>
           </NavLink>
@@ -230,10 +230,10 @@ function D5lotre() {
             onClick={() => handleChange(3)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               5 Min
             </Typography>
           </NavLink>
@@ -244,10 +244,10 @@ function D5lotre() {
             onClick={() => handleChange(4)}
           >
             <Box component="img" src={time} width={40}></Box>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
             5D Lotre
             </Typography>
-            <Typography variant="body1" color="initial">
+            <Typography variant="body1" color="initial" className="!text-gray-400">
               10 Min
             </Typography>
           </NavLink>

@@ -10,12 +10,10 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
-import trxbg from "../../../assets/images/trxbg.png";
 import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
@@ -120,7 +118,8 @@ function K31Min() {
   };
 
   return (
-    <Box>
+    <Box
+   >
       {React.useMemo(() => {
         return (
           <>
@@ -133,9 +132,10 @@ function K31Min() {
           </>
         );
       }, [audioRefMusic, audioRefMusiclast])}
-      <Box sx={{ px: 1, mt: 3 }}>
+      <Box sx={{ px: 1, mt: 3 }}
+       >
         <Box
-          className="countdownbgtrx"
+          className="countdownbgtrx !shadow-2xl !bg-white"
 
         >
           <Box
@@ -154,12 +154,12 @@ function K31Min() {
               {React.useMemo(() => {
                 return (
                   <>
-                    <Stack direction="row" alignItems="center">
+                    <Stack direction="row" alignItems="center" >
                       <Typography className="text-gray-500" > Period </Typography>
                       <Typography
                         onClick={handleClickOpen}
                         variant="text"
-                        className="!border  !px-5 !ml-5 !text-sm text-[#F48901] !border-[#F48901] !rounded-xl"
+                        className="!border !cursor-pointer !px-5 !ml-5 !text-sm text-[#F48901] !border-[#F48901] !rounded-xl"
                       >
                         {" "}
                         How To Play
@@ -185,13 +185,13 @@ function K31Min() {
                 );
               }, [next_step])}
             </Box>
-            <Box className="!text-[#00b977] ">
+            <Box className="!text-[#00b977]  ">
               <Typography className="text-gray-500" > Time remaining </Typography>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
                     <Box
-                      className="timer !text-[#00b977] "
+                      className="timer !text-[#00b977] !bg-gray-200 "
                       sx={{
                         backgroundImage: `url(${timerbg1})`,
                         backgroundSize: "100%",
@@ -200,13 +200,13 @@ function K31Min() {
                     >
                       0
                     </Box>
-                    <Box className="timer1 !text-[#00b977] ">0</Box>
-                    <Box className={"timer1 !text-[#00b977] "} >:</Box>
-                    <Box className="timer1 !text-[#00b977] ">
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200 ">0</Box>
+                    <Box className={"timer1 !text-[#00b977] !bg-gray-200"} >:</Box>
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200">
                       {show_this_one_min_time?.substring(0, 1)}
                     </Box>
                     <Box
-                      className="timer2 !text-[#00b977] "
+                      className="timer2 !text-[#00b977] !bg-gray-200"
                       sx={{
                         backgroundImage: `url(${timerbg2})`,
                         backgroundSize: "100%",
@@ -226,7 +226,7 @@ function K31Min() {
         </Box>
         <div>
 
-          <Box className="!flex !justify-center !mx-2 " >
+          <Box className="!flex !justify-center !mx-2 !-mb-2 !mt-5" >
             <Button
               className={bettype === 1 ? " k3active k3" : " k3 "} 
               onClick={() => handleChangebet(1)}
@@ -249,13 +249,13 @@ function K31Min() {
           </Box>
 
         </div>
-        <div className="relative">
+        <div className="relative mx-2 ">
           {bettype === 1 && <BetNumber gid={"1"} />}
           {bettype === 2 && <Same2 gid={"1"} />}
           {bettype === 3 && <Same3 gid={"1"} />}
           {bettype === 4 && <Different gid={"1"} />}
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+            <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}
@@ -296,10 +296,10 @@ function K31Min() {
             </div>
           )}
         </div>
-        <Stack direction="row" justifyContent="space-between" mt={2}>
+        <Stack direction="row" justifyContent="space-between" >
           <Button
             className={
-              value === 1 ? " gametableactive gametable" : " gametable"
+              value === 1 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(1)}
           >
@@ -307,7 +307,7 @@ function K31Min() {
           </Button>
           <Button
             className={
-              value === 2 ? " gametableactive gametable" : " gametable"
+              value === 2 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(2)}
           >
@@ -315,7 +315,7 @@ function K31Min() {
           </Button>
           <Button
             className={
-              value === 3 ? " gametableactive gametable" : " gametable"
+              value === 3 ? " gametableactive gametable" : " gametable !bg-gray-200 !rounded"
             }
             onClick={() => handleChange(3)}
           >

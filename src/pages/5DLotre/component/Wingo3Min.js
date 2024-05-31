@@ -11,15 +11,15 @@ import { useSocket } from "../../../shared/socket/SocketContext";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import ShowImages from "./ShowImages";
 import BetNumber from "../BetNumber";
 import { NavLink } from "react-router-dom";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import Howtoplay from "./Howtoplay";
-import Same2 from "./Same2";
-import Same3 from "./Same3";
-import Different from "./Different";
+import Same2 from "../Same2";
+import Same3 from "../Same3";
+import Different from "../Different";
+import Sum from "../Sum";
 
 
 function Wingo3Min() {
@@ -33,11 +33,11 @@ function Wingo3Min() {
   const next_step = useSelector((state) => state.aviator.next_step);
   const dispatch = useDispatch();
   const [bettype, setbettype] = useState(1);
- 
+
   const handleChangebet = (newValue) => {
     setbettype(newValue);
   };
-  
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -150,9 +150,166 @@ function Wingo3Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const [index, setIndex] = useState(0);
+  const numbers = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  ]; // The number sequence as a string
+  React.useEffect(() => {
+    const handleThreeMin = (threemin) => {
+      if (threemin === 0) Time()
+    };
 
+    socket.on("onemintrx", handleThreeMin);
+
+    return () => {
+      socket.off("onemintrx", handleThreeMin);
+    };
+  }, []);
+  const Time = () => {
+    const intervalId = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % numbers.length);
+    }, 100);
+    const randomStopTime = Math.floor(Math.random() * 5000) + 1000; // Stop between 1 and 6 seconds
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, randomStopTime);
+  }
+  const num = [
+    7, 5, 2, 4, 1, 8, 6, 9, 0
+  ]; // The number sequence as a string
+  React.useEffect(() => {
+    const handleThreeMin = (threemin) => {
+      if (threemin === 0) Timers()
+    };
+
+    socket.on("onemintrx", handleThreeMin);
+
+    return () => {
+      socket.off("onemintrx", handleThreeMin);
+    };
+  }, []);
+  const Timers = () => {
+    const intervalId = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % num.length);
+    }, 100);
+    const randomStopTime = Math.floor(Math.random() * 5000) + 1000; // Stop between 1 and 6 seconds
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, randomStopTime);
+  }
+  const number = [
+    5, 7, 3, 9, 6, 8, 4, 1, 2
+  ]; // The number sequence as a string
+  React.useEffect(() => {
+    const handleThreeMin = (threemin) => {
+      if (threemin === 0) Timer()
+    };
+
+    socket.on("onemintrx", handleThreeMin);
+
+    return () => {
+      socket.off("onemintrx", handleThreeMin);
+    };
+  }, []);
+  const Timer = () => {
+    const intervalId = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % number.length);
+    }, 100);
+    const randomStopTime = Math.floor(Math.random() * 5000) + 1000; // Stop between 1 and 6 seconds
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, randomStopTime);
+  }
+  const numb = [
+    10, 6, 7, 4, 2, 5, 1, 0, 8, 9
+  ]; // The number sequence as a string
+
+  React.useEffect(() => {
+    const handleThreeMin = (threemin) => {
+      if (threemin === 0) Timer1()
+    };
+
+    socket.on("onemintrx", handleThreeMin);
+
+    return () => {
+      socket.off("onemintrx", handleThreeMin);
+    };
+  }, []);
+  const Timer1 = () => {
+    const intervalId = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % numb.length);
+    }, 100);
+    const randomStopTime = Math.floor(Math.random() * 5000) + 1000; // Stop between 1 and 6 seconds
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, randomStopTime);
+  }
+  const no = [
+    6, 4, 2, 1, 5, 7, 9, 8, 3,
+  ];
+  React.useEffect(() => {
+    const handleThreeMin = (threemin) => {
+      if (threemin === 0) Timer2()
+    };
+
+    socket.on("onemintrx", handleThreeMin);
+
+    return () => {
+      socket.off("onemintrx", handleThreeMin);
+    };
+  }, []);
+  const Timer2 = () => {
+    const intervalId = setInterval(() => {
+      setIndex(prevIndex => (prevIndex + 1) % no.length);
+    }, 100);
+    const randomStopTime = Math.floor(Math.random() * 5000) + 1000; // Stop between 1 and 6 seconds
+    setTimeout(() => {
+      clearInterval(intervalId);
+    }, randomStopTime);
+  }
   return (
     <Box>
+      <Box
+
+      >
+        <Box
+          className="flex flex-col justify-center bg-white shadow-2xl m-4 rounded-lg "
+        >
+          <Box className="flex justify-center gap-2 w-full  my-4">
+            <Box className="flex flex-col justify-center  my-2 text-gray-500">
+              <p className="px-2">Lottery</p>
+              <p className="px-2">result</p>
+            </Box>
+            <Box className="flex flex-col justify-center  my-2">
+              <p className="border-black border   bg-gray-100 px-3 py-1 rounded-full ">{numbers[index] ||5}</p>
+              <p className="px-2 text-gray-400 ">A</p>
+            </Box>
+            <Box className="flex flex-col justify-center  my-2">
+              <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{num[index] ||7}</p>
+              <p className="px-2 text-gray-400">B</p>
+            </Box>
+            <Box className="flex flex-col justify-center  my-2">
+              <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{number[index] ||1}</p>
+              <p className="px-2 text-gray-400">C</p>
+            </Box>
+            <Box className="flex flex-col justify-center  my-2">
+              <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{numb[index] ||5}</p>
+              <p className="px-2 text-gray-400">D</p>
+            </Box>
+            <Box className="flex flex-col justify-center  my-2">
+              <p className="border-black border  bg-gray-100 px-3 py-1 rounded-full">{no[index] ||3}</p>
+              <p className="px-2 text-gray-400">E</p>
+            </Box>
+            <Box className="flex flex-col justify-center  mb-7">
+              <p className="">=</p>
+            </Box>
+            <Box className="flex flex-col justify-center  mb-7">
+              <p className="border-orange-300 border my-2  bg-orange-300 px-2 py-1 text-white rounded-full ">{no[index] + number[index] + numb[index] + numbers[index] + num[index] ||21}</p>
+            </Box>
+
+          </Box>
+        </Box>
+      </Box>
       {React.useMemo(() => {
         return (
           <>
@@ -167,8 +324,8 @@ function Wingo3Min() {
       }, [audioRefMusic, audioRefMusiclast])}
       <Box sx={{ px: 1, mt: 3 }}>
         <Box
-          className="countdownbgtrx"
-         
+          className="countdownbgtrx !bg-white !shadow-2xl "
+
         >
           <Box
             sx={{
@@ -183,7 +340,7 @@ function Wingo3Min() {
               }}
               className="win-banner"
             >
-          {React.useMemo(() => {
+              {React.useMemo(() => {
                 return (
                   <>
                     <Stack direction="row" alignItems="center">
@@ -218,22 +375,22 @@ function Wingo3Min() {
               }, [next_step])}
             </Box>
             <Box>
-            <Typography className="text-gray-500" > Time remaining </Typography>
+              <Typography className="text-gray-500" > Time remaining </Typography>
               {React.useMemo(() => {
                 return (
                   <Stack direction="row" mt={1.5}>
-                    <Box className="timer !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer !text-[#00b977] !bg-gray-200" sx={{ backgroundImage: `url(${timerbg1})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_min?.substring(0, 1)}
                     </Box>
-                    <Box className="timer1 !text-[#00b977]">
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200">
                       {" "}
                       {show_this_three_min_time_min?.substring(1, 2)}
                     </Box>
-                    <Box className={"timer1 !text-[#00b977]"}>:</Box>
-                    <Box className="timer1 !text-[#00b977]">
+                    <Box className={"timer1 !text-[#00b977] "}>:</Box>
+                    <Box className="timer1 !text-[#00b977] !bg-gray-200">
                       {show_this_three_min_time_sec?.substring(0, 1)}
                     </Box>
-                    <Box className="timer2 !text-[#00b977]" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
+                    <Box className="timer2 !text-[#00b977] !bg-gray-200" sx={{ backgroundImage: `url(${timerbg2})`, backgroundSize: '100%', backgroundPosition: 'center' }}>
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
@@ -241,39 +398,91 @@ function Wingo3Min() {
               }, [show_this_three_min_time_sec])}
             </Box>
           </Box>
-          {React.useMemo(() => {
-            return <ShowImages />;
-          }, [])}
+          <div className="border-8 border-[#00b977] !h-28 my-4  p-1 rounded-lg !overflow-hidden bg-[#00b977] " >
+            <div className="grid grid-cols-5 " >
+             
+              <div className="flex flex-col bg-black  gap-1  justify-start" >
+                <Box className="  !bg-[#00e065] !text-white !text-2xl !font-extrabold m-1  py-4
+                  p-2 rounded-full text-center">{numbers[index]  || 5}</Box>
+                <Box className=" !bg-[#00e065]  mx-1  py-4 p-2 rounded-full" >{numbers[index]}</Box>
+                <Box>{numbers[index]}</Box>
+                <Box>{numbers[index]}</Box>
+                <Box >{numbers[index]}</Box>
+              </div>
+              <div className="flex flex-col bg-black gap-1  justify-start" >
+                <Box className=" bg-gray-200 m-1 !text-2xl !text-gray-400  !font-extrabold py-4
+             p-2 rounded-full text-center"   >{num[index]  || 7}</Box>
+                <Box className="  bg-gray-300  mx-1  py-4 p-2 rounded-full " >{num[index]}</Box>
+                <Box>{num[index]}</Box>
+                <Box >{num[index]}</Box>
+                <Box >{num[index]}</Box>
+              </div>
+              <div className="flex flex-col bg-black gap-1  justify-start" >
+                <Box className=" bg-gray-200 m-1  py-4 !text-2xl !text-gray-400  !font-extrabold
+             p-2 rounded-full text-center"  >{number[index] ||1}</Box>
+                <Box className=" bg-gray-300  mx-1  py-4 p-2 rounded-full" >{number[index]}</Box>
+                <Box >{number[index]}</Box>
+                <Box>{number[index]}</Box>
+                <Box >{number[index]}</Box>
+              </div>
+              <div className="flex flex-col bg-black gap-1  justify-start" >
+                <Box className=" bg-gray-200 m-1  py-4 !text-2xl !text-gray-400  !font-extrabold
+             p-2 rounded-full text-center">{numb[index] ||5}</Box>
+                <Box className=" bg-gray-300  mx-1  py-4  p-2 rounded-full text-center"
+                >{numb[index]}</Box>
+                <Box>{numb[index]}</Box>
+                <Box  >{numb[index]}</Box>
+                <Box  >{numb[index]}</Box>
+              </div>
+              <div className="flex flex-col bg-black gap-1  justify-start" >
+                <Box
+                  className=" bg-gray-200 m-1  py-4
+             p-2 rounded-full text-center !text-2xl !text-gray-400  !font-extrabold"   >{no[index]||3}</Box>
+                <Box
+                  className=" bg-gray-300  mx-1  py-4
+             p-2 rounded-full text-center"  >{no[index] }</Box>
+                <Box >{no[index]}</Box>
+                <Box  >{no[index]}</Box>
+                <Box >{no[index]}</Box>
+              </div>
+            </div>
+          </div>
+
         </Box>
-        <Stack direction="row" justifyContent="space-between" mt={2}>
-            <Button
-              className={bettype === 1 ? " k3active k3" : " k3"}
-              onClick={() => handleChangebet(1)}
-            >Total </Button>
-         
+        <Stack direction="row" justifyContent="space-evenly" mt={2}>
           <Button
-              className={bettype === 2 ? " k3active k3" : " k3"}
-              onClick={() => handleChangebet(2)}
-            >2same </Button>
+            className={bettype === 1 ? " D5active D5" : " D5 "}
+            onClick={() => handleChangebet(1)}
+          >A </Button>
 
-             <Button
-              className={bettype === 3 ? " k3active k3" : " k3"}
-              onClick={() => handleChangebet(3)}
-            >  3same </Button>
+          <Button
+            className={bettype === 2 ? " D5active D5" : " D5"}
+            onClick={() => handleChangebet(2)}
+          >B </Button>
 
-           <Button
-              className={bettype === 4 ? " k3active k3" : " k3"}
-              onClick={() => handleChangebet(4)}
-            >Differents</Button>
-          </Stack>
-      
+          <Button
+            className={bettype === 3 ? " D5active D5" : " D5"}
+            onClick={() => handleChangebet(3)}
+          >  C </Button>
+
+          <Button
+            className={bettype === 4 ? " D5active D5" : " D5"}
+            onClick={() => handleChangebet(4)}
+          >D</Button>
+          <Button
+            className={bettype === 5 ? " D5active D5" : " D5"}
+            onClick={() => handleChangebet(5)}
+          >SUM</Button>
+        </Stack>
+
         <div className="relative">
           {bettype === 1 && <BetNumber gid={"1"} />}
           {bettype === 2 && <Same2 gid={"1"} />}
           {bettype === 3 && <Same3 gid={"1"} />}
           {bettype === 4 && <Different gid={"1"} />}
+          {bettype === 5 && <Sum gid={"1"} />}
           {fk.values.openTimerDialog && (
-            <div className="!w-full !z-50 top-0 !absolute px-5 flex justify-center items-center">
+          <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div
                 className="flex gap-2 justify-cente !bg-opacity-5"
                 sx={{ width: "100%" }}

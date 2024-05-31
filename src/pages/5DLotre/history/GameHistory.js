@@ -175,13 +175,13 @@ const GameHistory = ({ gid }) => {
                 <TableRow className="!w-[95%] ">
                   <TableCell className="!text-lg"
                     sx={{ verticalAlign: "bottom", textAlign: "center" }} >
-                    <p>{i?.tr_transaction_id}</p>
+                    <p className="my-2">{i?.tr_transaction_id}</p>
                   </TableCell>
                   <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
-                    <div className="flex justify-center gap-2">
-                    <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">1</p> 
-                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">2</p> 
-                <p className="border-black border my-2  bg-gray-200 px-2  rounded-full">3</p> 
+                    <div className="flex justify-center gap-2 mt-2">
+                    <p className="border-black border !my-2  bg-gray-100 px-1 !text-[10px] rounded-full">1</p> 
+                <p className="border-black border !my-2  bg-gray-100 px-1 !text-[10px] rounded-full">2</p> 
+                <p className="border-black border !my-2  bg-gray-100 px-1 !text-[10px] rounded-full">3</p> 
                     </div>
                   </TableCell>
                   <TableCell

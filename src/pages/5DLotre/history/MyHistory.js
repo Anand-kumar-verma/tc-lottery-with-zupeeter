@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { My_All_TRX_HistoryFn } from "../../../services/apiCallings";
 import { rupees, zubgback } from "../../../services/urls";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
+import empty from "../../../assets/images/empty.png"
 
 const MyHistory = ({ gid }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -44,7 +45,8 @@ const MyHistory = ({ gid }) => {
 
   return (
     <Box mt={2}>
-<Typography className="text-center my-10 text-lg">
+<Typography className=" mx-10 text-center text-lg">
+  <img src={empty} alt=""  className="mx-10"/>
 No data
 </Typography>
     </Box >
