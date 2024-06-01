@@ -659,7 +659,7 @@ function Withdraval() {
                   fontWeight: "600",
                 }}
               >
-                {i?.statusn}
+                {i?.call_back_status}
               </Box>
             </Stack>
             <Stack
