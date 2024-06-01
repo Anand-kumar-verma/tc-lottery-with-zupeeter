@@ -11,6 +11,7 @@ import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
 import PageNotFound from "./PageNotFound";
+import Dashboard from "./pages/home/Dashboard";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
@@ -41,7 +42,7 @@ function App() {
       <Route path="/register" element={<Register />}></Route>
       <Route path="/before-login" element={<BeforeLogin />}></Route>
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
-      {/* <Route path="*" element={<PageNotFound/>} /> */}
+      <Route path="dashboard" element={<Dashboard/>} />
       {isAuthenticated ? (
         routes?.map((route, index) => {
           return (
