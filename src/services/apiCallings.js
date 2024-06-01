@@ -63,6 +63,20 @@ export const getBalanceFunction = async (setBalance) => {
   }
 };
 
+export const getBetFunction = async (setBet) => {
+  try {
+    const reqBody = {
+      userid: localStorage.getItem("user_id"),
+    };
+    const response = await axios.post(`${endpoint.total_withdrawal_bet}`, reqBody);
+    setBet(response?.data?.earning);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+
 export const My_All_HistoryFn = async (gid) => {
   try {
     const reqBody = {

@@ -176,12 +176,11 @@ function K3() {
           >
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
-          <Button
-            sx={{ background: theme.palette.primary.main, color: "white" }}
-            className="detailsbutton"
-          >
+          <Typography
+                 className="!bg-orange-400 !text-white rounded-2xl px-2 py-1 !flex justify-center"
+                >
             <WhatshotIcon /> Details
-          </Button>
+          </Typography>
         </Stack>
       </Box>
       <Box

@@ -63,6 +63,26 @@ const BetNumber = ({timing, gid }) => {
     },
   });
 
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 10) {setOpen(false)
+        fk.handleReset()
+      };
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+          fk.handleReset()
+        };
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+          fk.handleReset()
+        };
+      } 
+    }
+  }, [timing]);
+
   async function betFunctionStart() {
     setLoding(true);
     const reqBody = {
@@ -298,9 +318,11 @@ const BetNumber = ({timing, gid }) => {
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return (
               <Box
-                className="cursor-pointer"
+              
                 onClick={() => fk.setFieldValue("qnt", i)}
                 sx={style.bacancebtn3}
+                className={`${fk.values.qnt === i?"!bg-green-600" :"!bg-gray-400"}  cursor-pointer`}
+            
               >
                 X{i}
               </Box>
@@ -334,7 +356,8 @@ const BetNumber = ({timing, gid }) => {
       </div>
 
       <Drawer
-        open={Number(timing)>10 &&  open}
+        // open={Number(timing)>10 &&  open}
+        open={open}
         anchor={"bottom"}
         sx={{
           maxWidth: "400px !important",

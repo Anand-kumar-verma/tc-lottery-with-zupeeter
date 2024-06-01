@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -68,6 +68,7 @@ function Wingo5Min() {
     initialValues: initialValue,
     onSubmit: () => {},
   });
+
 
   React.useEffect(() => {
     const handleFiveMin = (fivemin) => {
@@ -332,7 +333,7 @@ function Wingo5Min() {
           }, [])}
         </Box>
         <div className="relative">
-          <BetNumber timing={show_this_three_min_time_sec} gid={"3"} />
+          <BetNumber timing={`${show_this_three_min_time_min}_${show_this_three_min_time_sec}`} gid={"3"} />
           {fk.values.openTimerDialog && (
             <div className="ti !w-full !z-50 top-0 !absolute rounded p-5 flex justify-center items-center">
               <div

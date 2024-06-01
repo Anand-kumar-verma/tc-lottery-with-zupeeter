@@ -23,9 +23,9 @@ import {
 } from "../../../redux/slices/counterSlice";
 import { endpoint } from "../../../services/urls";
 import theme from "../../../utils/theme";
-import d1 from "../../../assets/images/n5.png"
-import d2 from "../../../assets/images/n2.png"
-import d3 from "../../../assets/images/n3.png"
+import d1 from "../../../assets/images/r6.png"
+import d2 from "../../../assets/images/r5.png"
+import d3 from "../../../assets/images/r2.png"
 
 const GameHistory = ({ gid }) => {
   const dispatch = useDispatch();
@@ -175,10 +175,13 @@ const GameHistory = ({ gid }) => {
                   <TableCell
                     sx={{ verticalAlign: "bottom", textAlign: "center" }}
                   >
-                    <p>{i?.tr_transaction_id}</p>
+                    <p className="my-4 text-black">{i?.tr_transaction_id}</p>
                   </TableCell>
                   <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
-                    <div className="flex justify-center gap-2">
+                    <div className="flex justify-center gap-4 my-4 text-black">
+                    <span>
+                       6
+                      </span>
                       <span>
                         Odd
                       </span>
@@ -191,7 +194,7 @@ const GameHistory = ({ gid }) => {
                   <TableCell
                     sx={{ verticalAlign: "bottom", textAlign: "center" }}
                   >
-                    <div className="flex justify-center gap-2">
+                    <div className="flex justify-center gap-2  my-4">
                       <img src={d1} alt="" className="w-5"/>
                       <img src={d2} alt=""  className="w-5"/>
                       <img src={d3} alt="" className="w-5"/>
