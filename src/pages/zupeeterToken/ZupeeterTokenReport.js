@@ -164,6 +164,12 @@ export default function ZupeeterTokenReport() {
           return;
         }
       }
+      if (fk.values.payment_method === 'Wallet') {
+        if (Number(wallet_amount_data || 0) < Number(amount || 0)) {
+          toast("Insufficient balance");
+          return;
+        }
+      }
       // akash sir ne ye conditon comment kraya hai....
 
       // if (fk.values.payment_method === 'USDT') {
@@ -355,6 +361,7 @@ export default function ZupeeterTokenReport() {
               <>
                 <span className="!text-white !text-sm">Transaction Id*</span>
                 <TextField
+                type="password"
                   id="transaction_id"
                   name="transaction_id"
                   placeholder="Enter Transaction Id"
