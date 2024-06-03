@@ -23,7 +23,8 @@ import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
 import { NavLink } from "react-router-dom";
-import Howtoplay from "../../5DLotre/component/Howtoplay";
+import NumberGrid from "./Number";
+// import Howtoplay from "../../5DLotre/component/Howtoplay";
 const Same2 = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -44,7 +45,12 @@ const Same2 = ({ timing, gid }) => {
     });
     handleClickOpen();
   };
-  
+  useEffect(() => {
+    if (selectedNumbers.length === 0) {
+      setOpen(false);
+    }
+  }, [selectedNumbers]);
+
   useEffect(() => {
     if (gid === "1") {
       if (Number(timing) <= 5) {
@@ -147,8 +153,10 @@ const Same2 = ({ timing, gid }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    setSelectedNumbers([]); 
     setOpen(false);
   };
+
 
   return (
     <Box
@@ -162,93 +170,45 @@ const Same2 = ({ timing, gid }) => {
     >
 
       <div>
-        <p>2 matching Number: odds (13.83)</p>
+        <p className="!text-gray-500">2 matching Number: odds (13.83)</p>
         <div className="flex gap-1  justify-between my-4 m-2 ">
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md"
            onClick={() => handleNumberClick("22")}>22</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md" 
            onClick={() => handleNumberClick("11")}>11</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md" 
             onClick={() => handleNumberClick("52")}>52</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"  
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md"  
           onClick={() => handleNumberClick("14")}>14</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md" 
            onClick={() => handleNumberClick("18")}>18</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
+          <p className="bg-purple-300 px-3 py-2  text-white  rounded-md"
            onClick={() => handleNumberClick("23")}>23</p>
         </div>
-        {/* <p>A pair of unique numbers: odds (16.83)</p>
-        <div className="flex justify-between m-2 my-4">
-          <p className="bg-[#fb9494] px-3 py-2  text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("22");
-          }}>22</p>
-          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("11");
-          }}>11</p>
-          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("52");
-          }}>52</p>
-          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("14");
-          }}>14</p>
-          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("18");
-          }}>18</p>
-          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("23");
-          }}>23</p>
-        </div>
-        <div className="flex justify-between m-2 my-4">
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md"
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("22");
-          }}>22</p>
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md"
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("11");
-          }}>11</p>
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("52");
-          }}>52</p>
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md"
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("14");
-          }}>14</p>
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md"
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("18");
-          }}>18</p>
-          <p className="bg-green-400 p-2 px-4 text-white  rounded-md"
-          onClick={() => {
-            setOpen(true);
-            setSelectNumber("23");
-          }}>23</p>
-        </div> */}
-
+        <NumberGrid
+        className="!bg-[#fa574a]"
+        title="A pair of unique numbers: odds (69.12)"
+        numbers={['22', '11', '52', '14', '18', '23']}
+        onNumberClick={handleNumberClick}
+        selectedNumbers={selectedNumbers}
+      />
+      <NumberGrid
+      className="!bg-[#40AD72]"
+        numbers={['1', '2', '3', '4', '5', '6']}
+        onNumberClick={handleNumberClick}
+        selectedNumbers={selectedNumbers}
+      />
       </div>
 
       {open && (
-        <div className={`drawer`} >
+        <div className={`drawer !h-fit`} >
           <Box>
-            <Box
-
-            >
-              {" "}
+            <Box>
             </Box>
-            <Box px={1}
-              className="!flex justify-start gap-2">
-              <Typography className="!mt-4">Total</Typography>
+            <Typography className="!mx-4 !mt-4 text-gray-500">2 matching number :</Typography>
+            <Box 
+              className="!flex justify-start gap-2 ml-4">
+        
               {selectedNumbers.map((number) => (
               <Typography
                 variant="body1"
@@ -258,17 +218,15 @@ const Same2 = ({ timing, gid }) => {
                   color: "white",
                   fontWeight: "400 ",
                   background: "#ffffff",
-                  mt: 2,
-
                 }}
                 className={` !cursor-pointer !px-2 !w-fit !rounded
                  ${number === "green" ||
                     number === "4" ||
-                    number === "8" ||
-                    number === "12" ||
+                    number === "1" ||
+                    number === "2" ||
                     number === "6" ||
-                    number === "10" ||
-                    number === "16"
+                    number === "3" ||
+                    number === "5"
                     ? "!bg-[#40AD72]"
                     : number === "voilet"
                       ? "!bg-[#B659FE]"
@@ -455,7 +413,7 @@ const Same2 = ({ timing, gid }) => {
         }}
         open={opend}
       >
-        <Howtoplay />
+        {/* <Howtoplay /> */}
         <DialogActions sx={{ margin: "auto", width: "100%" }}>
           <Button
             disableElevation

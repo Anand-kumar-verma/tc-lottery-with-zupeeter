@@ -23,7 +23,7 @@ import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
 import { NavLink } from "react-router-dom";
-import Howtoplay from "../../5DLotre/component/Howtoplay";
+import Howtoplay from "./Howtoplay";
 const Same3 = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -44,7 +44,12 @@ const Same3 = ({ timing, gid }) => {
     });
     handleClickOpen();
   };
+
   
+    useEffect(()=>{
+      if (selectNumber.length===0){
+      }
+    })
   useEffect(() => {
     if (gid === "1") {
       if (Number(timing) <= 5) {
@@ -147,6 +152,7 @@ const Same3 = ({ timing, gid }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    setSelectedNumbers([])
     setOpen(false);
   };
 
@@ -165,37 +171,37 @@ const Same3 = ({ timing, gid }) => {
       <p>3 of same Number: odds (13.83)</p>
       <div className="flex gap-1  justify-between my-4 m-2 ">
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
-           onClick={() => handleNumberClick("22")}>22</p>
+           onClick={() => handleNumberClick("222")}>222</p>
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-           onClick={() => handleNumberClick("11")}>11</p>
+           onClick={() => handleNumberClick("111")}>111</p>
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-            onClick={() => handleNumberClick("52")}>52</p>
+            onClick={() => handleNumberClick("555")}>555</p>
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"  
-          onClick={() => handleNumberClick("14")}>14</p>
+          onClick={() => handleNumberClick("444")}>444</p>
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-           onClick={() => handleNumberClick("18")}>18</p>
+           onClick={() => handleNumberClick("888")}>888</p>
           <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
-           onClick={() => handleNumberClick("23")}>23</p>
+           onClick={() => handleNumberClick("333")}>333</p>
         </div>
         <p>Any 3  numbers: odds (16.83)</p>
    <div className=" m-2 my-4 w-full">
     <p className="bg-[#fb9494] p-2  text-white  rounded-md"
     onClick={() => handleNumberClick("Any of the 3 number same : odd number")}>Any of the 3 number same : odd number</p>
-    
    </div>
 
       </div>
         {open && (
-        <div className={`drawer`} >
+        <div className={`drawer h-fit`} >
           <Box>
             <Box
 
             >
               {" "}
             </Box>
+            <Typography className="!mt-4 ">Any 3 Same numbers</Typography>
             <Box px={1}
-              className="!flex !flex-col justify-start ">
-              <Typography className="!mt-4">Total</Typography>
+              className="!flex  justify-start gap-1">
+             
               {selectedNumbers.map((number) => (
               <Typography
                 variant="body1"
@@ -205,7 +211,7 @@ const Same3 = ({ timing, gid }) => {
                   color: "white",
                   fontWeight: "400 ",
                   background: "#ffffff",
-                  mt: 2,
+                 mt:1,
 
                 }}
                 className={` !cursor-pointer !px-2 !w-fit !rounded
@@ -220,12 +226,12 @@ const Same3 = ({ timing, gid }) => {
                     : number === "voilet"
                       ? "!bg-[#B659FE]"
                       : number === "voilet" ||
-                        number === "22" ||
-                        number === "52" ||
-                        number === "11" ||
-                        number === "18" ||
-                        number === "14" ||
-                        number === "23"
+                        number === "222" ||
+                        number === "555" ||
+                        number === "111" ||
+                        number === "888" ||
+                        number === "444" ||
+                        number === "333"
                         ? "!bg-[#B659FE]" 
                         : number === "Big"
                           ? "!bg-[#F48901]"

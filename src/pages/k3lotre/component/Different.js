@@ -1,4 +1,4 @@
- 
+
 import {
   Box,
   Button,
@@ -23,16 +23,66 @@ import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
 import { NavLink } from "react-router-dom";
-import Howtoplay from "../../5DLotre/component/Howtoplay";
-const Different = ({ gid }) => {
+import Howtoplay from "./Howtoplay";
+const Different = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
-  const [random, setRandomNumber] = useState(null)
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
+  const [selectedNumbers, setSelectedNumbers] = useState([]);
+
+  const handleNumberClick = (number) => {
+    setSelectedNumbers((prevSelectedNumbers) => {
+      if (prevSelectedNumbers.includes(number)) {
+        return prevSelectedNumbers.filter((n) => n !== number);
+      } else {
+        return [...prevSelectedNumbers, number];
+      }
+    });
+    handleClickOpen();
+  };
+
+  // useEffect(() => {
+  //   if (selectedNumbers.length === 3) {
+  //     setOpen(true);
+  //   } else {
+  //     setOpen(false);
+  //   }
+  // }, [selectedNumbers]);
+
+
+  useEffect(() => {
+    if (selectedNumbers.length === 0) {
+      setOpen(false);
+    }
+  }, [selectedNumbers]);
+
+  
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 5) {
+        setOpen(false)
+        fk.handleReset()
+      };
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
+          setOpen(false)
+          fk.handleReset()
+        };
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
+          setOpen(false)
+          fk.handleReset()
+        };
+      }
+    }
+  }, [timing]);
   const initialValue = {
     balance: "1",
     qnt: "1",
@@ -95,7 +145,6 @@ const Different = ({ gid }) => {
       toast(e?.message);
       console.log(e);
     }
-    // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAll_trx_history");
     setLoding(false);
@@ -110,6 +159,14 @@ const Different = ({ gid }) => {
     setOpend(false);
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setSelectedNumbers([]);   
+    setOpen(false);
+  };
+
   return (
     <Box
       sx={{
@@ -122,252 +179,253 @@ const Different = ({ gid }) => {
     >
 
       <div>
-      <p>3 of same Number: odds (13.83)</p>
+        <p>3 of same Number: odds (13.83)</p>
         <div className="flex  justify-between my-4 m-2 ">
           <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("22");
-            }}>22</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("11");
-          }}>11</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("52");
-          }}>52</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("14");
-          }}>14</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("18");
-          }}>18</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("23");
-          }}>23</p>
+            onClick={() => handleNumberClick("22")}>22</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("11")}>11</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("52")}>52</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() =>handleNumberClick("14") }>14</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("18")}>18</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("23")}>23</p>
         </div>
         <p>Any 3  numbers: odds (16.83)</p>
-   <div className=" m-2 my-4 w-full">
-    <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md"
-    onClick={() => {
-      setOpen(true);
-      setSelectNumber("Any of the 3 number same : odd number");
-    }}>Any of the 3 number same : odd number</p>
-    
-   </div>
-   <p>3 of same Number: odds (13.83)</p>
+        <div className=" m-2 my-4 w-full">
+          <p className="bg-[#fb9494] p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("Any of the 3 number same : odd number")}>
+            Any of the 3 number same : odd number</p>
+        </div>
+
+        <p>3 of same Number: odds (13.83)</p>
         <div className="flex  justify-between my-4 m-2 ">
           <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("22");
-            }}>22</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("11");
-          }}>11</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("52");
-          }}>52</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("14");
-          }}>14</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("18");
-          }}>18</p>
-          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md" onClick={() => {
-            setOpen(true);
-            setSelectNumber("23");
-          }}>23</p>
+            onClick={() => handleNumberClick("22")}>22</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("11")}>11</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("52")}>52</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("14")}>14</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("18")}>18</p>
+          <p className="bg-purple-400 p-2 px-4 text-white  rounded-md"
+            onClick={() => handleNumberClick("23")}>23</p>
         </div>
       </div>
+      {open && (
+        <div className={`drawer h-fit`} >
+          <Box>
+            <Box
 
-      <Drawer
-        open={open}
-        anchor={"bottom"}
-        sx={{
-          maxWidth: "400px !important",
-          width: "100%",
-          margin: "auto",
-          padding: "10px 0px 0px 0px",
-        }}
-      >
-        <Box sx={{ position: "relative" }}>
-          <Box
-            sx={{
-              position: "absolute",
-              clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)",
-              width: "120%",
-              height: "110px",
-              top: "-16px",
-              left: "-11%",
-              zIndex: "-1",
-            }}
-            className= "!cursor-pointer !bg-[#F48901]"
-       
-        
-          >
-            {" "}
-          </Box>
-          <Box px={1}>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-              TRX Win Go {gid == 3 ? 5 : gid == 2 ? 3 : gid}Min
-            </Typography>
-            <Typography
-              variant="body1"
-              color="initial"
-              sx={{
-                textAlign: "center",
-                color: "black",
-                fontWeight: "400 ",
-                background: "#ffffff",
-                mt: 1,
-                borderRadius: "5px",
-              }}
-            >
-              Select {random || isNaN(Number(selectNumber)) ? selectNumber?.toString()?.toLocaleUpperCase() : selectNumber}
-
-            </Typography>
-          </Box>
-          <Box mt={5} px={2}>
-            <Grid container mt={10}>
-              <Grid item xs={4}>
-                <Typography variant="body1" color="initial">
-                  Balance{" "}
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  {[1, 10, 100, 1000]?.map((i) => {
-                    return (
-                      <Box
-                        onClick={() => fk.setFieldValue("balance", i)}
-                        sx={style.bacancebtn}
-                        className= "!cursor-pointer !bg-[#F48901]"
-                      >
-                        {i}
-                      </Box>
-                    );
-                  })}
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container mt={2}>
-              <Grid item xs={4}>
-                <Typography variant="body1" color="initial">
-                  Quantity{" "}
-                </Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"space-between"}
-                >
-                  <Box
-                   className= "!cursor-pointer !bg-[#F48901] !text-white"
-                  >
-                    -
-                  </Box>
-                  <TextField value={fk.values.qnt} className="inputamt" />
-                  <Box
-                    className= "!cursor-pointer !bg-[#F48901] !text-white"
-                  >
-                    +
-                  </Box>
-                </Stack>
-              </Grid>
-            </Grid>
-            <Grid container mt={2}>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={12}>
-                <Stack
-                  direction="row"
-                  alignItems={"center"}
-                  justifyContent={"end"}
-                >
-                  {[1, 5, 10, 20, 50, 100]?.map((i) => {
-                    return (
-                      <Box
-                        onClick={() => fk.setFieldValue("qnt", i)}
-                        sx={style.bacancebtn2}
-                        className= "!cursor-pointer !bg-[#F48901]"
-                      >
-                        X{i}
-                      </Box>
-                    );
-                  })}
-                </Stack>
-              </Grid>
-            </Grid>
-          </Box>
-          <Grid container mt={2}>
-            <Grid item xs={12}>
-              <Stack direction="row" alignItems="center">
-                <Checkbox checked />{" "}
+              {" "}
+            </Box>
+            <Typography className="!mt-4 !mx-2 text-gray-500 ">3 of same Number</Typography>
+            <Box px={1}
+              className="!flex  justify-start mx-2 gap-2 ">
+            
+              {selectedNumbers.map((number) => (
                 <Typography
                   variant="body1"
                   color="initial"
-                  sx={{ color: "gray", fontSize: "14px" }}
+                  sx={{
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "400 ",
+                    background: "#ffffff",
+                    mt: 1,
+
+                  }}
+                  className={` !cursor-pointer !px-2 !w-fit !rounded
+                 ${number === "green" ||
+                      number === "4" ||
+                      number === "8" ||
+                      number === "12" ||
+                      number === "6" ||
+                      number === "10" ||
+                      number === "16"
+                      ? "!bg-[#40AD72]"
+                      : number === "voilet"
+                        ? "!bg-[#B659FE]"
+                        : number === "voilet" ||
+                          number === "22" ||
+                          number === "52" ||
+                          number === "11" ||
+                          number === "18" ||
+                          number === "14" ||
+                          number === "23"
+                          ? "!bg-[#B659FE]"
+                          : number === "Big"
+                            ? "!bg-[#F48901]"
+                            : number === "Small"
+                              ? "!bg-[#6da7f4]"
+                              : number === "Any of the 3 number same : odd number"
+                                ? "!bg-[#fb9494]"
+                                : number === "Even"
+                                  ? "!bg-[#40ad72]"
+                                  : number === "0"
+                                    ? "!bg-[#BF6DFE]"
+                                    : number === "5" && "!bg-[#BF6DFE]"
+                    }
+    `}
                 >
-                  I agree
+                  {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
                 </Typography>
-                <NavLink onClick={handleClickOpend}>
-                  <Typography
-                    component="a"
-                    sx={{
-                      color: `${theme.palette.primary.main} !important`,
-                      cursor: "pointer",
-                      fontSize: "14px",
-                    }}
-                  >
-                    《Pre-sale rules》
+              ))}
+            </Box>
+            
+            <Box mt={3} px={2}>
+              <Grid container >
+                <Grid item xs={4}>
+                  <Typography variant="body1" color="initial">
+                    Balance{" "}
                   </Typography>
-                </NavLink>
-              </Stack>
+                </Grid>
+                <Grid item xs={8}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    {[1, 10, 100, 1000]?.map((i) => {
+                      return (
+                        <Box
+                          onClick={() => fk.setFieldValue("balance", i)}
+                          sx={style.bacancebtn}
+                          className={`${fk.values.balance === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
+
+                        >
+                          {i}
+                        </Box>
+                      );
+                    })}
+                  </Stack>
+                </Grid>
+              </Grid>
+              <Grid container mt={2}>
+                <Grid item xs={4}>
+                  <Typography variant="body1" color="initial">
+                    Quantity{" "}
+                  </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"space-between"}
+                  >
+                    <Box
+                      sx={style.addsumbtn}
+                      onClick={() =>
+                        fk.setFieldValue(
+                          "qnt",
+                          Number(fk.values.qnt) - 1 < 1
+                            ? 1
+                            : Number(fk.values.qnt) - 1
+                        )
+                      }
+                      className={`!bg-[#F48901]  cursor-pointer `}
+
+                    >
+                      -
+                    </Box>
+                    <TextField value={fk.values.qnt} className="inputamt" />
+                    <Box
+                      sx={style.addsumbtn}
+                      onClick={() =>
+                        fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
+                      }
+                      className={`!bg-[#F48901]  cursor-pointer px-2 text-white`}
+
+                    >
+                      +
+                    </Box>
+                  </Stack>
+                </Grid>
+              </Grid>
+              <Grid container mt={2} mx={1.5}>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={12}>
+                  <Stack
+                    direction="row"
+                    alignItems={"center"}
+                    justifyContent={"end"}
+                  >
+                    {[1, 5, 10, 20, 50, 100]?.map((i) => {
+                      return (
+                        <Box
+                          onClick={() => fk.setFieldValue("qnt", i)}
+                          sx={style.bacancebtn2}
+                          className={`${fk.values.qnt === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
+                        >
+                          X{i}
+                        </Box>
+                      );
+                    })}
+                  </Stack>
+                </Grid>
+              </Grid>
+            </Box>
+            <Grid container mt={2}>
+              <Grid item xs={12}>
+                <Stack direction="row" alignItems="center">
+                  <Checkbox checked />{" "}
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={{ color: "gray", fontSize: "14px" }}
+                  >
+                    I agree
+                  </Typography>
+                  <NavLink onClick={handleClickOpend}>
+                    <Typography
+                      component="a"
+                      sx={{
+                        color: `${theme.palette.primary.main} !important`,
+                        cursor: "pointer",
+                        fontSize: "14px",
+                      }}
+                    >
+                      《Pre-sale rules》
+                    </Typography>
+                  </NavLink>
+                </Stack>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid container mt={2}>
-            <Grid item xs={4}>
-              <Button
-                variant="contained"
-                sx={style.cancelbtn}
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
+            <Grid container mt={2}>
+              <Grid item xs={4}>
+                <Button
+                  variant="contained"
+                  sx={style.cancelbtn}
+                  onClick={handleClose}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+              <Grid item xs={8}>
+                <Button
+                  className={`!bg-[#F48901]
+           !cursor-pointer`}
+                  variant="contained"
+                  sx={style.submitbtn}
+                  onClick={() => {
+                    fk.handleSubmit();
+                  }}
+                >
+                  Total amount ₹{" "}
+                  {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={8}>
-              <Button
-                 className= "!cursor-pointer !bg-[#F48901]"
-                variant="contained"
-                sx={style.submitbtn}
-                onClick={() => {
-                  fk.handleSubmit();
-                }}
-              >
-                Total amount ₹{" "}
-                {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
-              </Button>
-            </Grid>
-          </Grid>
-        </Box>
-      </Drawer>
+          </Box>
+        </div>
+
+      )}
       <Dialog
         sx={{
           maxWidth: "400px !important",
