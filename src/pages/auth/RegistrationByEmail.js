@@ -28,9 +28,11 @@ import {
 import theme from "../../utils/theme";
 import CryptoJS from "crypto-js";
 import { storeCookies } from "../../services/apiCallings";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 const RegistrationByEmail = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [username, setusername] = useState("");
+  const [isLoading, setisLoding] = useState(false);
   const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -66,6 +68,7 @@ const RegistrationByEmail = () => {
   });
 
   async function signupSubmit(reqBody) {
+    setisLoding(true)
     try {
       const res = await axios.post(endpoint.register_candidate_email, reqBody);
       if (res?.data?.status === true) {
@@ -79,9 +82,9 @@ const RegistrationByEmail = () => {
     } catch (e) {
       console.log(e);
     }
+    setisLoding(false)
   }
   async function getIntroFn() {
-    console.log("Function is hit now");
     const reqBody = {
       userid: fk.values.invite_code,
     };
@@ -113,6 +116,7 @@ const RegistrationByEmail = () => {
   return (
     <>
       <Box component="form" onSubmit={fk.handleSubmit}>
+      <CustomCircularProgress isLoading={isLoading} />
         <Box mt={2}>
           <Stack direction="row" alignItems="center">
             <Box
@@ -332,9 +336,18 @@ const RegistrationByEmail = () => {
             borderRadius: "20px",
             mb: 2,
             fontWeight: "700",
-            "&:hover": { background: "#CACCDB" },
+           
           }}
           disableElevation
+          className={`${
+            !fk.values.password ||
+            !fk.values.confirmed_password ||
+            !fk.values.email ||
+            !fk.values.name ||
+            !fk.values.invite_code
+              ? "!bg-gray-500"
+              : "!bg-[#FC9401]"
+          }`}
         >
           Register
         </Button>

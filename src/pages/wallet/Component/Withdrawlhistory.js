@@ -183,7 +183,7 @@ function Withdrawlhistory() {
                   fontWeight: "600",
                 }}
               >
-                {i?.call_back_response}
+                {i?.call_back_status}
               </Box>
             </Stack>
             <Stack

@@ -131,7 +131,7 @@ const Chart = ({ gid }) => {
           borderBottom: "1px solid white",
         }}
       >
-        <div className="flex justify-between !w-[95%]">
+        <div className="flex justify-between !w-[90%]  !ml-3">
           <span className="!text-sm">Winning Number</span>
           <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
             {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((i) => {
@@ -152,7 +152,7 @@ const Chart = ({ gid }) => {
           paddingTop: "5px",
         }}
       >
-        <div className="flex justify-between !w-[95%]">
+        <div className="flex justify-between !w-[90%]  !ml-3">
           <span className="!text-sm">Missing Number</span>
           <Box className="flex items-center justify-between  !w-[60%]  lg:!w-[60%]">
             {preData?.map((i) => {
@@ -167,7 +167,7 @@ const Chart = ({ gid }) => {
           </Box>
         </div>
       </Box>
-      <div className="relative !h-[65vh] overflow-auto !w-[98%] no-scrollbar !overflow-x-hidden">
+      <div className="relative !h-[65vh] overflow-auto !w-[90%]  !ml-3 no-scrollbar !overflow-x-hidden">
         <div className="absolute !w-[100%]">
           {visibleRows?.map((i, indexi) => {
             return (
@@ -364,8 +364,8 @@ const Chart = ({ gid }) => {
                     </div>
                     <Typography
                       className={`circleNumberbody-number ${(i?.tr41_slot_id - 1)?.toString() <= 4
-                        ? "!bg-[#468ce8] "
-                        : "!bg-[#df4be1]"
+                        ? "!bg-[#F39E2A]"
+                        : "!bg-[#6DA7F4]"
                         }  !h-[20px] !w-[20px] !rounded-full !text-center !text-white `}
                     >
                       {(i?.tr41_slot_id - 1)?.toString() <= 4 ? "S" : "B"}

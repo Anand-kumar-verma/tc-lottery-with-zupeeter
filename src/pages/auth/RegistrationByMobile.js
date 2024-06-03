@@ -27,13 +27,14 @@ import { storeCookies } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import { signupSchemaValidataon } from "../../services/validation";
 import theme from "../../utils/theme";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 const RegistrationByMobile = () => {
   const [username, setusername] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
   const [country, setCountry] = React.useState("");
   const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
+  const [isLoading, setisLoding] = useState(false);
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -43,9 +44,9 @@ const RegistrationByMobile = () => {
   };
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const inviteid = params.get('inviteid');
+  const inviteid = params.get("inviteid");
   const initialValue = {
-    invite_code: inviteid|| "",
+    invite_code: inviteid || "",
     password: "",
     confirmed_password: "",
     mobile: "",
@@ -74,6 +75,7 @@ const RegistrationByMobile = () => {
   });
 
   async function signupSubmit(reqBody) {
+    setisLoding(true);
     try {
       const res = await axios.post(endpoint.register_candidate_mobile, reqBody);
       console.log(res);
@@ -88,6 +90,7 @@ const RegistrationByMobile = () => {
     } catch (e) {
       console.log(e);
     }
+    setisLoding(false);
   }
 
   async function getIntroFn() {
@@ -123,6 +126,7 @@ const RegistrationByMobile = () => {
   return (
     <>
       <Box component="form" onSubmit={fk.handleSubmit}>
+      <CustomCircularProgress isLoading={isLoading} />
         <Stack direction="row" alignItems="center">
           <Box
             component="img"
@@ -361,9 +365,17 @@ const RegistrationByMobile = () => {
             borderRadius: "20px",
             mb: 2,
             fontWeight: "700",
-            "&:hover": { background: "#CACCDB" },
           }}
           disableElevation
+          className={`${
+            !fk.values.password ||
+            !fk.values.confirmed_password ||
+            !fk.values.mobile ||
+            !fk.values.name ||
+            !fk.values.invite_code
+              ? "!bg-gray-500"
+              : "!bg-[#FC9401]"
+          }`}
         >
           Register
         </Button>
