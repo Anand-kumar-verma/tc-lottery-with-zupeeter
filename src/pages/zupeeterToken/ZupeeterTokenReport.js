@@ -24,7 +24,11 @@ import QRCode from "react-qr-code";
 import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
-import { TokenLaunch, getBalanceFunction, zupeeterTOkenHistory } from "../../services/apiCallings";
+import {
+  TokenLaunch,
+  getBalanceFunction,
+  zupeeterTOkenHistory,
+} from "../../services/apiCallings";
 import { endpoint, rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -72,7 +76,7 @@ export default function ZupeeterTokenReport() {
       refetchOnMount: false,
       refetchOnReconnect: true,
     }
-  );//wallet
+  ); //wallet
   const { data: wallet_amount } = useQuery(
     ["wallet_amount_amount"],
     () => getBalanceFunction(setBalance),
@@ -145,37 +149,44 @@ export default function ZupeeterTokenReport() {
     hash_number: "",
   };
 
-  {/* ₹{Number(wallet_amount_data || 0)?.toFixed(2)} */ }
+  {
+    /* ₹{Number(wallet_amount_data || 0)?.toFixed(2)} */
+  }
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
       const fd = new FormData();
+      // condition for checking  receipt in case of usdt and upi
       if (fk.values.payment_method !== "Wallet") {
         if (!receipt) {
-          toast('Please Select a Receipt Before Submitting.');
+          toast("Please Select a Receipt Before Submitting.");
           return;
         }
       }
-      if (fk.values.payment_method === 'USDT') {
-        if (Number(wallet_amount_data || 0) < Number(Number(amount || 0) * Number(status?.doller || 0))) {
-          toast("Insufficient balance")
-          return
-        }
-      } else {
-        if (Number(wallet_amount_data || 0) < Number(amount || 0)) {
-          toast("Insufficient balance")
-          return
-        }
-      }
+      // akash sir ne ye conditon comment kraya hai....
+
+      // if (fk.values.payment_method === 'USDT') {
+      //   if (Number(wallet_amount_data || 0) < Number(Number(amount || 0) * Number(status?.doller || 0))) {
+      //     toast("Insufficient balance")
+      //     return
+      //   }
+      // }
+
+      // else {
+      //   if (Number(wallet_amount_data || 0) < Number(amount || 0)) {
+      //     toast("Insufficient balance")
+      //     return
+      //   }
+      // }
       fd.append("userid", user_id); // userid
       fd.append(
         "txtmethod",
         fk.values.payment_method === "Wallet"
           ? "1"
           : fk.values.payment_method === "UPI"
-            ? "2"
-            : fk.values.payment_method === "USDT" && "3"
+          ? "2"
+          : fk.values.payment_method === "USDT" && "3"
       ); // 1 -- Wallet, 2: upi 3 usdt
       fd.append("txtprice", amount); // price
       fd.append("txtbatchid", fk.values.hash_number); // hash no
@@ -191,9 +202,9 @@ export default function ZupeeterTokenReport() {
     try {
       const res = await axios.post(endpoint?.insert_ico_purchase, fd);
       toast(res?.data?.earning?.msg);
-      setIsLoading(false)
+      setIsLoading(false);
       if ("ICO purchase recorded successfully." === res?.data?.earning?.msg)
-        fk.handleReset()
+        fk.handleReset();
     } catch (e) {
       console.log(e);
     }
@@ -210,11 +221,11 @@ export default function ZupeeterTokenReport() {
     const reqBody =
       fk.values.payment_method === "USDT"
         ? {
-          token_price: fk.values.token_qnt,
-        }
+            token_price: fk.values.token_qnt,
+          }
         : {
-          token: fk.values.token_qnt,
-        };
+            token: fk.values.token_qnt,
+          };
     try {
       const url =
         fk.values.payment_method === "USDT"
@@ -230,8 +241,7 @@ export default function ZupeeterTokenReport() {
   React.useEffect(() => {
     gettokenAmountFn();
   }, [fk.values.token_qnt, fk.values.payment_method]);
-  if (loading) return <CustomCircularProgress isLoading={loading} />
-
+  if (loading) return <CustomCircularProgress isLoading={loading} />;
 
   return (
     <Layout>
@@ -246,13 +256,10 @@ export default function ZupeeterTokenReport() {
       >
         <div className="flex  flex-col  w-full items-center bg-[#F48901] px-2 py-1 rounded-lg mt-3">
           <div className="flex  justify-start w-full items-center -mb-6 mt-3">
-            <span className="text-white">
-              Your Wallet Amount : {rupees}
-              
-            </span>
+            <span className="text-white">Your Wallet Amount : {rupees}</span>
             <span className="!text-green-600 font-bold px-1">
-                {Number(wallet_amount_data || 0)}
-              </span>
+              {Number(wallet_amount_data || 0)}
+            </span>
           </div>
           <div className="flex  justify-between w-full items-center">
             <span className="text-white">
@@ -265,7 +272,6 @@ export default function ZupeeterTokenReport() {
               className="h-20"
               src="https://zupeeter.com/application/libraries/token.png"
             />
-
           </div>
         </div>
 
@@ -360,18 +366,18 @@ export default function ZupeeterTokenReport() {
             )}
             {(fk.values.payment_method === "UPI" ||
               fk.values.payment_method === "USDT") && (
-                <>
-                  <span className="!text-white !text-sm">Receipt*</span>
-                  <input
-                    type="file"
-                    id="myfile"
-                    name="myfile"
-                    className="!text-sm"
-                    onChange={(e) => setReceipt(e.target.files[0])}
-                    required
-                  />
-                </>
-              )}
+              <>
+                <span className="!text-white !text-sm">Receipt*</span>
+                <input
+                  type="file"
+                  id="myfile"
+                  name="myfile"
+                  className="!text-sm"
+                  onChange={(e) => setReceipt(e.target.files[0])}
+                  required
+                />
+              </>
+            )}
             {fk.values.payment_method === "USDT" && (
               <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
                 <div className=" w-1/2">
