@@ -65,9 +65,7 @@ const Same2 = ({ timing, gid }) => {
     }));
     handleClickOpen();
   };
-    const generatePairs = (selectNumber) => {
-   
-
+    const generatePairs = (selectNumber ,) => {
     const pairs = [];
     
     selectNumber.forEach((num1, index) => {
@@ -76,7 +74,7 @@ const Same2 = ({ timing, gid }) => {
           !(
             (num1 === '11' && ['1', '22', '33', '44', '55'].includes(num2)) ||
             (num2 === '11' && ['1', '22', '33', '44', '55'].includes(num1)) ||
-              (num1 === '1' && ['11', '2', '3', '4', '5'].includes(num2)) ||
+            (num1 === '1' && ['11', '2', '3', '4', '5'].includes(num2)) ||
             (num2 === '1' && ['11', '2', '3', '4', '5'].includes(num1)) ||
             (num1 === '22' && ['2', '11', '33', '44', '55'].includes(num2)) ||
             (num2 === '22' && ['2', '11', '33', '44', '55'].includes(num1)) ||
@@ -105,6 +103,23 @@ const Same2 = ({ timing, gid }) => {
   
   
   const pairs = generatePairs(selectNumber);
+
+
+  // const generatePairs = (selectNumber, numbers) =>{
+  //   const pairs = [];
+  //   for (const num of numbers) {
+  //     if (num !== selectNumber) {
+  //       pairs.push([selectNumber, num]);
+  //     }
+  //   }
+  //   return pairs;
+  // }
+  // const numbers = [2, 3, 4, 5];
+  // const pairs = generatePairs(selectNumber, numbers);
+
+  // const formattedPairs = `${selectNumber}&${pairs.map(pair => pair[1]).join(',')}`;
+
+  // {formattedPairs}
 
   useEffect(() => {
     if (selectedNumbers.length === 0) {
@@ -239,8 +254,7 @@ const Same2 = ({ timing, gid }) => {
 
       }}
     >
-
-      <div>
+        <div>
         <p className="text-gray-500">2 matching Number: odds (13.83)</p>
         <div className="flex gap-1 justify-between my-4 m-2 cursor-pointer">
           {[11, 22, 33, 44, 55,].map(number => (
