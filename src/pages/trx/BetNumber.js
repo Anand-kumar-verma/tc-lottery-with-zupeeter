@@ -30,7 +30,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import FalseCheck from "../../shared/check/FalseCheck";
-const BetNumber = ({timing, gid }) => {
+const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
@@ -46,8 +46,6 @@ const BetNumber = ({timing, gid }) => {
   useEffect(() => {
     getBalanceFunction(setBalance);
   }, []);
-
-
 
   const fk = useFormik({
     initialValues: initialValue,
@@ -65,21 +63,24 @@ const BetNumber = ({timing, gid }) => {
 
   useEffect(() => {
     if (gid === "1") {
-      if (Number(timing) <= 10) {setOpen(false)
-        fk.handleReset()
-      };
+      if (Number(timing) <= 10) {
+        setOpen(false);
+        fk.handleReset();
+      }
     } else if (gid === "2") {
       if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
-          fk.handleReset()
-        };
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false);
+          fk.handleReset();
+        }
       }
     } else {
       if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
-          fk.handleReset()
-        };
-      } 
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false);
+          fk.handleReset();
+        }
+      }
     }
   }, [timing]);
 
@@ -131,6 +132,7 @@ const BetNumber = ({timing, gid }) => {
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAll_trx_history");
     fk.setFieldValue("balance", "1");
+    setRandomNumber(null);
     fk.setFieldValue("qnt", "1");
     setLoding(false);
   }
@@ -144,7 +146,7 @@ const BetNumber = ({timing, gid }) => {
       setRandomNumber(randomBitNumber);
       setSelectNumber(`${randomBitNumber}`);
       setOpen(true);
-    }, 2000);
+    }, 1000);
   };
   const handleClose = () => {
     setOpen(false);
@@ -318,11 +320,11 @@ const BetNumber = ({timing, gid }) => {
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return (
               <Box
-              
                 onClick={() => fk.setFieldValue("qnt", i)}
                 sx={style.bacancebtn3}
-                className={`${fk.values.qnt === i?"!bg-green-600" :"!bg-gray-400"}  cursor-pointer`}
-            
+                className={`${
+                  fk.values.qnt === i ? "!bg-green-600" : "!bg-gray-400"
+                }  cursor-pointer`}
               >
                 X{i}
               </Box>
@@ -425,9 +427,15 @@ const BetNumber = ({timing, gid }) => {
               }}
             >
               Select{" "}
-              {random || isNaN(Number(selectNumber))
+              {random
+                ? Number(random) <= 4
+                  ? "Small"
+                  : "Big"
+                : isNaN(Number(selectNumber))
                 ? selectNumber?.toString()?.toLocaleUpperCase()
-                : selectNumber}
+                : Number(selectNumber) <= 4
+                ? "Small"
+                : "Big"}
             </Typography>
           </Box>
           <Box mt={5} px={2}>
@@ -666,6 +674,7 @@ const BetNumber = ({timing, gid }) => {
                 variant="contained"
                 sx={style.cancelbtn}
                 onClick={() => {
+                  setRandomNumber(null);
                   fk.setFieldValue("balance", "1");
                   setOpen(false);
                 }}

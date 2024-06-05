@@ -1,12 +1,14 @@
 import { Button, Container, TextField } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 const TransactionPassword = () => {
+  const [isloding, setisloding] = useState(false);
   const user_id = localStorage.getItem("user_id");
   const initialValue = {
     old_pass: "",
@@ -37,12 +39,14 @@ const TransactionPassword = () => {
   });
 
   async function changePasswordFn(reqBody) {
+    setisloding(true);
     try {
       const res = await axios.post(endpoint?.pin_password, reqBody);
-      toast(res?.data?.message);
+      toast(res?.data?.earning?.msg);
     } catch (e) {
       console.log(e);
     }
+    setisloding(false);
     // client.refetchQueries("bank_details");
   }
 
@@ -57,6 +61,7 @@ const TransactionPassword = () => {
         }}
         className="no-scrollbar"
       >
+        <CustomCircularProgress isLoading={isloding} />
         <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
           <span className="col-span-2 justify-end">
             <div className="flex justify-between">
@@ -68,6 +73,7 @@ const TransactionPassword = () => {
             id="old_pass"
             name="old_pass"
             value={fk.values.old_pass}
+            onChange={fk.handleChange}
             placeholder="Enter Old Password"
             className="!w-[100%]"
           ></TextField>

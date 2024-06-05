@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -44,14 +44,13 @@ function TRX() {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
         setOpenDialogBox(true);
-        setTimeout(() => {
-          setOpenDialogBox(false);
-          localStorage.setItem("betApplied", false);
-        }, 5000);
+        // setTimeout(() => {
+        //   setOpenDialogBox(false);
+        //   localStorage.setItem("betApplied", false);
+        // }, 5000);
       }
     }, 1000);
   }, [dummycounter]);
-
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
@@ -267,7 +266,10 @@ function TRX() {
             },
           }}
         >
-          <WinLossPopup gid={isAppliedbet?.split("_")?.[0]} />
+          <WinLossPopup
+            gid={isAppliedbet?.split("_")?.[0]}
+            setOpenDialogBox={setOpenDialogBox}
+          />
         </Dialog>
       )}
     </Container>

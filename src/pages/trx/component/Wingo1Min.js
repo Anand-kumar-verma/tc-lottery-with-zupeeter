@@ -71,7 +71,7 @@ function Wingo1Min() {
       if (onemin === 59) {
         fk.setFieldValue("openTimerDialog", false);
       }
-      if (onemin === 56) {
+      if (onemin === 58) {
         client.refetchQueries("myAll_trx_history");
         client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
