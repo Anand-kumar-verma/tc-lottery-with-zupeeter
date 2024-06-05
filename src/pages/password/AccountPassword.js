@@ -39,7 +39,7 @@ const AccountPassword = () => {
   async function changePasswordFn(reqBody) {
     try {
       const res = await axios.post(endpoint?.update_password, reqBody);
-      toast(res?.data?.message);
+      toast(res?.data?.earning?.mag);
     } catch (e) {
       console.log(e);
     }
@@ -68,6 +68,7 @@ const AccountPassword = () => {
             id="old_pass"
             name="old_pass"
             value={fk.values.old_pass}
+            onChange={fk.handleChange}
             placeholder="Enter Old Password"
             className="!w-[100%]"
           ></TextField>
