@@ -16,10 +16,11 @@ import ShowImages from "./ShowImages";
 import { NavLink } from "react-router-dom";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
-import Howtoplay from "./Howtoplay";
+// import Howtoplay from "./Howtoplay";
 import Same2 from "./Same2";
 import Same3 from "./Same3";
 import Different from "./Different";
+import Howtoplay from "./Howtoplay";
 
 
 function Wingo5Min() {

@@ -95,8 +95,8 @@ const BetNumber = ({ timing, gid }) => {
         (selectNumber === "green" && 11) ||
         (selectNumber === "voilet" && 12) ||
         (selectNumber === "red" && 13) ||
-        (selectNumber === "two" && 15) || // this is big
-        (selectNumber === "one" && 14) || // this is small
+        (selectNumber === "Big" && 15) || // this is big
+        (selectNumber === "Small" && 14) || // this is small
         Number(selectNumber) + 1
       }`,
       gameid: `${Number(gid)}`,
@@ -340,7 +340,7 @@ const BetNumber = ({ timing, gid }) => {
             sx={style.bigbtn}
             onClick={() => {
               setOpen(true);
-              setSelectNumber("one");
+              setSelectNumber("Small");
             }}
           >
             Small
@@ -349,7 +349,7 @@ const BetNumber = ({ timing, gid }) => {
             sx={style.smlbtn}
             onClick={() => {
               setOpen(true);
-              setSelectNumber("two");
+              setSelectNumber("Big");
             }}
           >
             Big
@@ -395,9 +395,9 @@ const BetNumber = ({ timing, gid }) => {
                   selectNumber === "6" ||
                   selectNumber === "8"
                 ? "!bg-[#FD565C]"
-                : selectNumber === "one"
+                : selectNumber === "Small"
                 ? "!bg-[#F48901]"
-                : selectNumber === "two"
+                : selectNumber === "Big"
                 ? "!bg-[#6DA7F4]"
                 : selectNumber === "0"
                 ? "!bg-[#BF6DFE]"
@@ -475,10 +475,10 @@ const BetNumber = ({ timing, gid }) => {
                                   selectNumber === "8") &&
                                 String(fk?.values?.balance) === String(i)
                               ? "!bg-[#FD565C]"
-                              : selectNumber === "one" &&
+                              : selectNumber === "Small" &&
                                 String(fk?.values?.balance) === String(i)
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two" &&
+                              : selectNumber === "Big" &&
                                 String(fk?.values?.balance) === String(i)
                               ? "!bg-[#6DA7F4]"
                               : selectNumber === "0" &&
@@ -526,9 +526,9 @@ const BetNumber = ({ timing, gid }) => {
                             selectNumber === "6" ||
                             selectNumber === "8"
                           ? "!bg-[#FD565C]"
-                          : selectNumber === "one"
+                          : selectNumber === "Small"
                           ? "!bg-[#F48901]"
-                          : selectNumber === "two"
+                          : selectNumber === "Big"
                           ? "!bg-[#6DA7F4]"
                           : selectNumber === "0"
                           ? "!bg-[#BF6DFE]"
@@ -571,9 +571,9 @@ const BetNumber = ({ timing, gid }) => {
                            selectNumber === "6" ||
                            selectNumber === "8"
                          ? "!bg-[#FD565C]"
-                         : selectNumber === "one"
+                         : selectNumber === "Small"
                          ? "!bg-[#F48901]"
-                         : selectNumber === "two"
+                         : selectNumber === "Big"
                          ? "!bg-[#6DA7F4]"
                          : selectNumber === "0"
                          ? "!bg-[#BF6DFE]"
@@ -622,10 +622,10 @@ const BetNumber = ({ timing, gid }) => {
                                   selectNumber === "8") &&
                                 String(fk.values.qnt) === String(i)
                               ? "!bg-[#FD565C]"
-                              : selectNumber === "one" &&
+                              : selectNumber === "Small" &&
                                 String(fk.values.qnt) === String(i)
                               ? "!bg-[#F48901]"
-                              : selectNumber === "two" &&
+                              : selectNumber === "Big" &&
                                 String(fk.values.qnt) === String(i)
                               ? "!bg-[#6DA7F4]"
                               : selectNumber === "0" &&
@@ -700,9 +700,9 @@ const BetNumber = ({ timing, gid }) => {
                         selectNumber === "6" ||
                         selectNumber === "8"
                       ? "!bg-[#FD565C]"
-                      : selectNumber === "one"
+                      : selectNumber === "Small"
                       ? "!bg-[#F48901]"
-                      : selectNumber === "two"
+                      : selectNumber === "Big"
                       ? "!bg-[#6DA7F4]"
                       : selectNumber === "0"
                       ? "!bg-[#BF6DFE]"

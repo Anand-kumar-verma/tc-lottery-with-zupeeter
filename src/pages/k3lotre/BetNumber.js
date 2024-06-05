@@ -39,7 +39,8 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
-import Howtoplay from "../5DLotre/component/Howtoplay";
+import Howtoplay from "./component/Howtoplay";
+// import Howtoplay from "../5DLotre/component/Howtoplay";
 const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -60,7 +61,13 @@ const BetNumber = ({ timing, gid }) => {
     });
     handleClickOpen();
   };
-  
+
+  useEffect(() => {
+    if (selectedNumbers.length === 0) {
+      setOpen(false);
+    }
+  }, [selectedNumbers]);
+
 
   useEffect(() => {
     if (gid === "1") {
@@ -165,7 +172,9 @@ const BetNumber = ({ timing, gid }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    setSelectedNumbers([]); 
     setOpen(false);
+    
   };
   return (
     <Box
@@ -179,8 +188,7 @@ const BetNumber = ({ timing, gid }) => {
     >
 
       <div>
-
-        <Box
+         <Box
           sx={{
             background: "#",
             padding: "0px 0px 0px 0px",
@@ -188,7 +196,7 @@ const BetNumber = ({ timing, gid }) => {
             borderRadius: "10px",
             mt: 1,
           }}
-          className="grid grid-cols-4 gap-4 justify-center !ml-4 "
+          className="grid grid-cols-4 gap-4 justify-center !ml-4 !cursor-pointer"
         >
           <div className="flex flex-col justify-center  ">
             <Box
@@ -220,7 +228,7 @@ const BetNumber = ({ timing, gid }) => {
             </Box>
             <Box className="!text-xs !text-gray-500 font-bold mx-3 ">65.2X</Box>
           </div>
-          <div className="flex flex-col justify-center ">
+          <div className="flex flex-col justify-center">
             <Box
               component="img"
               src={six}

@@ -20,11 +20,11 @@ import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import Howtoplay from "./Howtoplay";
 import ShowImages from "./ShowImages";
 import Same2 from "./Same2";
 import Same3 from "./Same3";
 import Different from "./Different";
+import Howtoplay from "./Howtoplay";
 ////
 function K31Min() {
   const [open, setOpen] = useState(false);

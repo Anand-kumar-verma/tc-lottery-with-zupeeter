@@ -1,4 +1,4 @@
- 
+
 import {
   Box,
   Button,
@@ -23,16 +23,18 @@ import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
 import { NavLink } from "react-router-dom";
-import Howtoplay from "../../5DLotre/component/Howtoplay";
+import Howtoplay from "./Howtoplay";
 const Same3 = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
-  const [selectNumber, setSelectNumber] = useState("");
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
   const [selectedNumbers, setSelectedNumbers] = useState([]);
+  const [selectNumber, setSelectNumber] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
+  const [Checked, setChecked] = useState(false);
 
   const handleNumberClick = (number) => {
     setSelectedNumbers((prevSelectedNumbers) => {
@@ -42,9 +44,39 @@ const Same3 = ({ timing, gid }) => {
         return [...prevSelectedNumbers, number];
       }
     });
+    // setIsChecked(parseInt(number));
+    setIsChecked((prevSelectedNumbers) => ({
+      ...prevSelectedNumbers,
+      [number]: !prevSelectedNumbers[number]
+    }));
     handleClickOpen();
   };
-  
+  const handleNumberClick1 = (number) => {
+    setSelectNumber((prevSelectedNumbers) => {
+      if (prevSelectedNumbers.includes(number)) {
+        return prevSelectedNumbers.filter((n) => n !== number);
+      } else {
+        return [...prevSelectedNumbers, number];
+      }
+    });
+    setChecked((prevSelectedNumbers) => ({
+      ...prevSelectedNumbers,
+      [number]: !prevSelectedNumbers[number]
+    }));
+    handleClickOpen();
+  };
+  useEffect(() => {
+    if (selectedNumbers.length === 0) {
+      setOpen(false);
+    }
+  }, [selectedNumbers]);
+
+  useEffect(() => {
+    if (selectNumber.length === 0) {
+      setOpen(false);
+    }
+  }, [selectNumber]);
+
   useEffect(() => {
     if (gid === "1") {
       if (Number(timing) <= 5) {
@@ -70,7 +102,7 @@ const Same3 = ({ timing, gid }) => {
   const initialValue = {
     balance: "1",
     qnt: "1",
-  };
+  }
 
   useEffect(() => {
     getBalanceFunction(setBalance);
@@ -147,6 +179,10 @@ const Same3 = ({ timing, gid }) => {
     setOpen(true);
   };
   const handleClose = () => {
+    setSelectedNumbers([])
+    setSelectNumber([])
+    setChecked([])
+    setIsChecked([])
     setOpen(false);
   };
 
@@ -162,89 +198,157 @@ const Same3 = ({ timing, gid }) => {
     >
 
       <div>
-      <p>3 of same Number: odds (13.83)</p>
-      <div className="flex gap-1  justify-between my-4 m-2 ">
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
-           onClick={() => handleNumberClick("22")}>22</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-           onClick={() => handleNumberClick("11")}>11</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-            onClick={() => handleNumberClick("52")}>52</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"  
-          onClick={() => handleNumberClick("14")}>14</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md" 
-           onClick={() => handleNumberClick("18")}>18</p>
-          <p className="bg-purple-400 px-3 py-2  text-white  rounded-md"
-           onClick={() => handleNumberClick("23")}>23</p>
+        <p className="text-gray-500">3 of same Number: odds (13.83)</p>
+        <div className="flex gap-1 justify-between my-4 m-2 cursor-pointer">
+          {[111, 222, 333, 444, 555,].map(number => (
+            <p
+              key={number}
+              className="!bg-purple-300 px-3 py-2 text-white rounded-md relative"
+              onClick={() => handleNumberClick(String(number))}
+            >
+              {number}
+              {isChecked[number] && (
+                <span className="absolute text-[10px] w-4 h-4 border border-purple-600 font-bold right-0 bottom-0 bg-white rounded-full text-center text-purple-600">✔</span>
+              )}
+            </p>
+          ))}
         </div>
-        <p>Any 3  numbers: odds (16.83)</p>
-   <div className=" m-2 my-4 w-full">
-    <p className="bg-[#fb9494] p-2  text-white  rounded-md"
-    onClick={() => handleNumberClick("Any of the 3 number same : odd number")}>Any of the 3 number same : odd number</p>
-    
-   </div>
+        <p className="text-gray-500">Any 3  numbers: odds (16.83)</p>
+        <div className=" m-2 my-4 w-full cursor-pointer">
+          {["Any of the 3 number same : odd number"].map(number => (
+            <p
+              key={number}
+              className="!bg-[#fb9494] px-3 py-2 text-white rounded-md relative"
+              onClick={() => handleNumberClick1((number))}
+            >
+              {number}
+              {Checked[number] && (
+                <span className="absolute text-[10px] w-4 h-4 border font-bold right-0 bottom-0 bg-white rounded-full text-center text-purple-600">✔</span>
+              )}
+            </p>
+          ))}
+
+        </div>
 
       </div>
-        {open && (
-        <div className={`drawer`} >
+      {open && (
+        <div className={`drawer h-fit`} >
           <Box>
-            <Box
+            {isChecked &&
+              <div>
+                <Typography className="!mt-4 !m-2">3 off the Same numbers</Typography>
+                <Box px={1}
+                  className="!flex  justify-start gap-1 !m-1">
 
-            >
-              {" "}
-            </Box>
-            <Box px={1}
-              className="!flex !flex-col justify-start ">
-              <Typography className="!mt-4">Total</Typography>
-              {selectedNumbers.map((number) => (
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "400 ",
-                  background: "#ffffff",
-                  mt: 2,
+                  {selectedNumbers.map((number) => (
+                    <Typography
+                      variant="body1"
+                      color="initial"
+                      sx={{
+                        textAlign: "center",
+                        color: "white",
+                        fontWeight: "400 ",
+                        background: "#ffffff",
+                        mt: 1,
 
-                }}
-                className={` !cursor-pointer !px-2 !w-fit !rounded
-                 ${number === "green" ||
-                    number === "4" ||
-                    number === "8" ||
-                    number === "12" ||
-                    number === "6" ||
-                    number === "10" ||
-                    number === "16"
-                    ? "!bg-[#40AD72]"
-                    : number === "voilet"
-                      ? "!bg-[#B659FE]"
-                      : number === "voilet" ||
-                        number === "22" ||
-                        number === "52" ||
-                        number === "11" ||
-                        number === "18" ||
-                        number === "14" ||
-                        number === "23"
-                        ? "!bg-[#B659FE]" 
-                        : number === "Big"
-                          ? "!bg-[#F48901]"
-                          : number === "Small"
-                            ? "!bg-[#6da7f4]"
-                            : number === "Any of the 3 number same : odd number"
-                              ? "!bg-[#fb9494]"
-                              : number === "Even"
-                                ? "!bg-[#40ad72]"
-                                : number === "0"
-                                  ? "!bg-[#BF6DFE]"
-                                  : number === "5" && "!bg-[#BF6DFE]"
-                  }
+                      }}
+                      className={` !cursor-pointer !px-2 !w-fit !rounded
+                        ${number === "green" ||
+                          number === "4" ||
+                          number === "8" ||
+                          number === "12" ||
+                          number === "6" ||
+                          number === "10" ||
+                          number === "16"
+                          ? "!bg-[#40AD72]"
+                          : number === "voilet"
+                            ? "!bg-[#B659FE]"
+                            : number === "voilet" ||
+                              number === "222" ||
+                              number === "555" ||
+                              number === "111" ||
+                              number === "888" ||
+                              number === "444" ||
+                              number === "333"
+                              ? "!bg-[#B659FE]"
+                              : number === "Big"
+                                ? "!bg-[#F48901]"
+                                : number === "Small"
+                                  ? "!bg-[#6da7f4]"
+                                  : number === "Any of the 3 number same : odd number"
+                                    ? "!bg-[#fb9494]"
+                                    : number === "Even"
+                                      ? "!bg-[#40ad72]"
+                                      : number === "0"
+                                        ? "!bg-[#BF6DFE]"
+                                        : number === "5" && "!bg-[#BF6DFE]"
+                        }
     `}
-              >
-                {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
-              </Typography>
+                    >
+                      {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
+                    </Typography>
+                  ))}
+                </Box>
+              </div>
+            }
+            {Checked &&
+            <div>
+
+            <Box px={1}
+              className="!m-1 !flex flex-col justify-start gap-1">
+              <Typography className="!mt-4 ">Any 3 of the same number: odds</Typography>
+              {selectNumber.map((number) => (
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={{
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "400 ",
+                    background: "#ffffff",
+                    mt: 1,
+
+                  }}
+                  className={` !cursor-pointer !px-2 !w-fit !rounded
+               ${number === "green" ||
+                      number === "4" ||
+                      number === "8" ||
+                      number === "12" ||
+                      number === "6" ||
+                      number === "10" ||
+                      number === "16"
+                      ? "!bg-[#40AD72]"
+                      : number === "voilet"
+                        ? "!bg-[#B659FE]"
+                        : number === "voilet" ||
+                          number === "222" ||
+                          number === "555" ||
+                          number === "111" ||
+                          number === "888" ||
+                          number === "444" ||
+                          number === "333"
+                          ? "!bg-[#B659FE]"
+                          : number === "Big"
+                            ? "!bg-[#F48901]"
+                            : number === "Small"
+                              ? "!bg-[#6da7f4]"
+                              : number === "Any of the 3 number same : odd number"
+                                ? "!bg-[#fb9494]"
+                                : number === "Even"
+                                  ? "!bg-[#40ad72]"
+                                  : number === "0"
+                                    ? "!bg-[#BF6DFE]"
+                                    : number === "5" && "!bg-[#BF6DFE]"
+                    }
+  `}
+                >
+                  {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
+                </Typography>
               ))}
             </Box>
+          </div>
+          }
+
             <Box mt={3} px={2}>
               <Grid container >
                 <Grid item xs={4}>
