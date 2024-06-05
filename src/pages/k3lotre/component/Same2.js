@@ -65,6 +65,47 @@ const Same2 = ({ timing, gid }) => {
     }));
     handleClickOpen();
   };
+    const generatePairs = (selectNumber) => {
+   
+
+    const pairs = [];
+    
+    selectNumber.forEach((num1, index) => {
+      selectNumber.slice(index + 1).forEach((num2) => {
+        if (
+          !(
+            (num1 === '11' && ['1', '22', '33', '44', '55'].includes(num2)) ||
+            (num2 === '11' && ['1', '22', '33', '44', '55'].includes(num1)) ||
+              (num1 === '1' && ['11', '2', '3', '4', '5'].includes(num2)) ||
+            (num2 === '1' && ['11', '2', '3', '4', '5'].includes(num1)) ||
+            (num1 === '22' && ['2', '11', '33', '44', '55'].includes(num2)) ||
+            (num2 === '22' && ['2', '11', '33', '44', '55'].includes(num1)) ||
+            (num1 === '2' && ['22', '1', '3', '4', '5'].includes(num2)) ||
+            (num2 === '2' && ['22', '1', '3', '4', '5'].includes(num1)) ||
+            (num1 === '33' && ['3', '11', '22', '44', '55'].includes(num2)) ||
+            (num2 === '33' && ['3', '11', '22', '44', '55'].includes(num1)) ||
+            (num1 === '3' && ['33', '1', '2', '4', '5'].includes(num2)) ||
+            (num2 === '3' && ['33', '1', '2', '4', '5'].includes(num1)) ||
+            (num1 === '44' && ['4', '11', '22', '33', '55'].includes(num2)) ||
+            (num2 === '44' && ['4', '11', '22', '33', '55'].includes(num1)) ||
+            (num1 === '4' && ['44', '1', '3', '2', '5'].includes(num2)) ||
+            (num2 === '4' && ['44', '1', '3', '2', '5'].includes(num1)) ||
+            (num1 === '55' && ['5', '11', '22', '33', '44'].includes(num2)) ||
+            (num2 === '55' && ['5', '11', '22', '33', '44'].includes(num1)) ||
+            (num1 === '5' && ['55', '1', '3', '2', '4'].includes(num2)) ||
+            (num2 === '5' && ['55', '1', '3', '2', '4'].includes(num1))
+          )
+        ) {
+          pairs.push([num1, num2]);
+        }
+      });
+    });
+    return pairs;
+  };
+  
+  
+  const pairs = generatePairs(selectNumber);
+
   useEffect(() => {
     if (selectedNumbers.length === 0) {
       setOpen(false);
@@ -103,6 +144,7 @@ const Same2 = ({ timing, gid }) => {
     balance: "1",
     qnt: "1",
   }
+ 
 
   useEffect(() => {
     getBalanceFunction(setBalance);
@@ -167,6 +209,7 @@ const Same2 = ({ timing, gid }) => {
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
+  
   const handleClickOpend = () => {
     setOpend(true);
   };
@@ -213,7 +256,7 @@ const Same2 = ({ timing, gid }) => {
             </p>
           ))}
         </div>
-        <p className="text-gray-500">Unique  numbers: odds (16.83)</p>
+        <p className="text-gray-500">pair of Unique  numbers: odds (16.83)</p>
         <div className="flex justify-between px-2  my-4 w-full cursor-pointer">
           {[11, 22, 33, 44, 55,].map(number => (
             <p
@@ -229,6 +272,21 @@ const Same2 = ({ timing, gid }) => {
           ))}
 
         </div>
+        <div className="flex justify-between px-2  my-4 w-full cursor-pointer">
+          {[1, 2, 3, 4, 5,].map(number => (
+            <p
+              key={number}
+              className="!bg-[#40AD72] px-4 py-2 text-white rounded-md relative"
+              onClick={() => handleNumberClick1(String(number))}
+            >
+              {number}
+              {Checked[number] && (
+                <span className="absolute text-[10px] w-4 h-4 border font-bold right-0 bottom-0 bg-white rounded-full text-center text-[#40AD72]">✔</span>
+              )}
+            </p>
+          ))}
+
+        </div>
 
       </div>
       {open && (
@@ -236,7 +294,7 @@ const Same2 = ({ timing, gid }) => {
           <Box>
             {isChecked &&
               <div>
-                <Typography className="!mt-4 !m-2">3 off the Same numbers</Typography>
+                <Typography className="!mt-4 !m-2">2 matching Same numbers</Typography>
                 <Box px={1}
                   className="!flex  justify-start gap-1 !m-1">
 
@@ -254,11 +312,6 @@ const Same2 = ({ timing, gid }) => {
                       }}
                       className={` !cursor-pointer !px-2 !w-fit !rounded
                         ${number === "green" ||
-                          number === "4" ||
-                          number === "8" ||
-                          number === "12" ||
-                          number === "6" ||
-                          number === "10" ||
                           number === "16"
                           ? "!bg-[#40AD72]"
                           : number === "voilet"
@@ -271,16 +324,10 @@ const Same2 = ({ timing, gid }) => {
                               number === "44" ||
                               number === "33"
                               ? "!bg-[#B659FE]"
-                              : number === "Big"
-                                ? "!bg-[#F48901]"
-                                : number === "Small"
-                                  ? "!bg-[#6da7f4]"
-                                  : number === "Any of the 3 number same : odd number"
-                                    ? "!bg-[#fb9494]"
+                             : number === "Small"
+                                 ? "!bg-[#fb9494]"
                                     : number === "Even"
                                       ? "!bg-[#40ad72]"
-                                      : number === "0"
-                                        ? "!bg-[#BF6DFE]"
                                         : number === "5" && "!bg-[#BF6DFE]"
                         }
     `}
@@ -291,64 +338,41 @@ const Same2 = ({ timing, gid }) => {
                 </Box>
               </div>
             }
-            {Checked &&
-              <div>
-                <Typography className="!mt-4 ">Any 3 of the same number: odds</Typography>
-                <Box px={1}
-                  className="!m-1 !flex  justify-start gap-1">
-
-                  {selectNumber.map((number) => (
-                    <Typography
-                      variant="body1"
-                      color="initial"
-                      sx={{
-                        textAlign: "center",
-                        color: "white",
-                        fontWeight: "400 ",
-                        background: "#ffffff",
-                        mt: 1,
-
-                      }}
-                      className={` !cursor-pointer !px-2 !w-fit !rounded
-               ${number === "green" ||
-                          number === "4" ||
-                          number === "8" ||
-                          number === "12" ||
-                          number === "6" ||
-                          number === "10" ||
-                          number === "16"
-                          ? "!bg-[#40AD72]"
-                          : number === "voilet"
-                            ? "!bg-[#B659FE]"
-                            : number === "voilet" ||
-                              number === "22" ||
-                              number === "55" ||
-                              number === "11" ||
-                              number === "66" ||
-                              number === "44" ||
-                              number === "33"
-                              ? "!bg-[#B659FE]"
-                              : number === "Big"
-                                ? "!bg-[#F48901]"
-                                : number === "Small"
-                                  ? "!bg-[#6da7f4]"
-                                  : number === "Any of the 3 number same : odd number"
-                                    ? "!bg-[#fb9494]"
-                                    : number === "Even"
-                                      ? "!bg-[#40ad72]"
-                                      : number === "0"
-                                        ? "!bg-[#BF6DFE]"
-                                        : number === "5" && "!bg-[#BF6DFE]"
-                        }
-  `}
-                    >
-                      {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
-                    </Typography>
-                  ))}
-                </Box>
-              </div>
-            }
-
+        
+        {Checked && pairs.length > 0 && (
+        <div>
+          <Typography className="!mt-4 !mx-2">Pairs of unique numbers: odds</Typography>
+          <Box px={1} className="!m-1 !flex justify-start gap-1">
+            {pairs.map(([num1, num2]) => (
+              <Typography
+                key={`${num1}-${num2}`}
+                variant="body1"
+                color="initial"
+                sx={{
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "400",
+                  background: "#ffffff",
+                  mt: 1,
+                }}
+                className={`!cursor-pointer !px-2 !w-fit !rounded ${
+                  [11, 22, 33, 44, 55].includes(Number(num1)) ||
+                  [11, 22, 33, 44, 55].includes(Number(num2))
+                    ? "!bg-[#fb9494]"
+                    : [1, 2, 3, 4, 5].includes(Number(num1)) ||
+                      [1, 2, 3, 4, 5].includes(Number(num2))
+                    ? "!bg-[#40AD72]"
+                    : ""
+                    
+                }`}
+              >
+                {`${num1} & ${num2}`}
+              </Typography> 
+            ))}
+          </Box>
+        </div>
+      )}
+             
             <Box mt={3} px={2}>
               <Grid container >
                 <Grid item xs={4}>
