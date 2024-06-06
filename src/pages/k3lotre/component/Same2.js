@@ -44,7 +44,7 @@ const Same2 = ({ timing, gid }) => {
         return [...prevSelectedNumbers, number];
       }
     });
-    // setIsChecked(parseInt(number));
+
     setIsChecked((prevSelectedNumbers) => ({
       ...prevSelectedNumbers,
       [number]: !prevSelectedNumbers[number]
@@ -63,7 +63,8 @@ const Same2 = ({ timing, gid }) => {
       ...prevSelectedNumbers,
       [number]: !prevSelectedNumbers[number]
     }));
-   handleClickOpen();
+    handleClickOpen();
+     
   };
 
 
@@ -244,7 +245,7 @@ const Same2 = ({ timing, gid }) => {
           {[11, 22, 33, 44, 55,].map(number => (
             <p
               key={number}
-              className={`!bg-[#fb9494] px-3 py-2 text-white rounded-md relative`}
+              className={`!bg-[#fb9494] px-3 py-2 text-white rounded-md relative `}
               onClick={() => handleNumberClick1(String(number))}
             >
               {number}
@@ -342,8 +343,6 @@ const Same2 = ({ timing, gid }) => {
                           display: "inline-block",
                         }}
                         className="!bg-[#fb9494] !px-2 !text-sm !cursor-pointer !w-fit  rounded-tl rounded-bl"
-
-
                       >
                         {`${parent} `}
                       </Typography>
@@ -364,9 +363,8 @@ const Same2 = ({ timing, gid }) => {
                       >
                         {` ${children.join(', ')}`}
                       </Typography>
-
+                    
                     </div>
-
                   ))}
                 </Box>
               </div>
