@@ -65,9 +65,9 @@ const Same2 = ({ timing, gid }) => {
     }));
     handleClickOpen();
   };
-    const generatePairs = (selectNumber ,) => {
+  const generatePairs = (selectNumber,) => {
     const pairs = [];
-    
+
     selectNumber.forEach((num1, index) => {
       selectNumber.slice(index + 1).forEach((num2) => {
         if (
@@ -100,26 +100,8 @@ const Same2 = ({ timing, gid }) => {
     });
     return pairs;
   };
-  
-  
+
   const pairs = generatePairs(selectNumber);
-
-
-  // const generatePairs = (selectNumber, numbers) =>{
-  //   const pairs = [];
-  //   for (const num of numbers) {
-  //     if (num !== selectNumber) {
-  //       pairs.push([selectNumber, num]);
-  //     }
-  //   }
-  //   return pairs;
-  // }
-  // const numbers = [2, 3, 4, 5];
-  // const pairs = generatePairs(selectNumber, numbers);
-
-  // const formattedPairs = `${selectNumber}&${pairs.map(pair => pair[1]).join(',')}`;
-
-  // {formattedPairs}
 
   useEffect(() => {
     if (selectedNumbers.length === 0) {
@@ -159,7 +141,7 @@ const Same2 = ({ timing, gid }) => {
     balance: "1",
     qnt: "1",
   }
- 
+
 
   useEffect(() => {
     getBalanceFunction(setBalance);
@@ -224,7 +206,7 @@ const Same2 = ({ timing, gid }) => {
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
-  
+
   const handleClickOpend = () => {
     setOpend(true);
   };
@@ -254,7 +236,7 @@ const Same2 = ({ timing, gid }) => {
 
       }}
     >
-        <div>
+      <div>
         <p className="text-gray-500">2 matching Number: odds (13.83)</p>
         <div className="flex gap-1 justify-between my-4 m-2 cursor-pointer">
           {[11, 22, 33, 44, 55,].map(number => (
@@ -338,11 +320,11 @@ const Same2 = ({ timing, gid }) => {
                               number === "44" ||
                               number === "33"
                               ? "!bg-[#B659FE]"
-                             : number === "Small"
-                                 ? "!bg-[#fb9494]"
-                                    : number === "Even"
-                                      ? "!bg-[#40ad72]"
-                                        : number === "5" && "!bg-[#BF6DFE]"
+                              : number === "Small"
+                                ? "!bg-[#fb9494]"
+                                : number === "Even"
+                                  ? "!bg-[#40ad72]"
+                                  : number === "5" && "!bg-[#BF6DFE]"
                         }
     `}
                     >
@@ -352,41 +334,39 @@ const Same2 = ({ timing, gid }) => {
                 </Box>
               </div>
             }
-        
-        {Checked && pairs.length > 0 && (
-        <div>
-          <Typography className="!mt-4 !mx-2">Pairs of unique numbers: odds</Typography>
-          <Box px={1} className="!m-1 !flex justify-start gap-1">
-            {pairs.map(([num1, num2]) => (
-              <Typography
-                key={`${num1}-${num2}`}
-                variant="body1"
-                color="initial"
-                sx={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "400",
-                  background: "#ffffff",
-                  mt: 1,
-                }}
-                className={`!cursor-pointer !px-2 !w-fit !rounded ${
-                  [11, 22, 33, 44, 55].includes(Number(num1)) ||
-                  [11, 22, 33, 44, 55].includes(Number(num2))
-                    ? "!bg-[#fb9494]"
-                    : [1, 2, 3, 4, 5].includes(Number(num1)) ||
-                      [1, 2, 3, 4, 5].includes(Number(num2))
-                    ? "!bg-[#40AD72]"
-                    : ""
-                    
-                }`}
-              >
-                {`${num1} & ${num2}`}
-              </Typography> 
-            ))}
-          </Box>
-        </div>
-      )}
-             
+
+            {Checked && pairs.length > 0 && (
+              <div>
+                <Typography className="!mt-4 !mx-2">Pairs of unique numbers: odds</Typography>
+                <Box px={1} className="!m-1 !flex justify-start gap-1">
+                  {pairs.map(([num1, num2]) => (
+                    <Typography
+                      key={`${num1}-${num2}`}
+                      variant="body1"
+                      color="initial"
+                      sx={{
+                        textAlign: "center",
+                        color: "white",
+                        fontWeight: "400",
+                        background: "#ffffff",
+                        mt: 1,
+                      }}
+                      className={`!cursor-pointer !px-2 !w-fit !rounded ${[11, 22, 33, 44, 55].includes(Number(num1)) ||
+                          [11, 22, 33, 44, 55].includes(Number(num2))
+                          ? "!bg-[#fb9494]"
+                          : [1, 2, 3, 4, 5].includes(Number(num1)) ||
+                            [1, 2, 3, 4, 5].includes(Number(num2))
+                            ? "!bg-[#40AD72]"
+                            : ""
+
+                        }`}
+                    >
+                      {`${num1} & ${num2}`}
+                    </Typography>
+                  ))}
+                </Box>
+              </div>
+            )}
             <Box mt={3} px={2}>
               <Grid container >
                 <Grid item xs={4}>
@@ -437,9 +417,7 @@ const Same2 = ({ timing, gid }) => {
                             : Number(fk.values.qnt) - 1
                         )
                       }
-                      className={`!bg-[#F48901]  cursor-pointer `}
-
-                    >
+                      className={`!bg-[#F48901]  cursor-pointer `}>
                       -
                     </Box>
                     <TextField value={fk.values.qnt} className="inputamt" />
