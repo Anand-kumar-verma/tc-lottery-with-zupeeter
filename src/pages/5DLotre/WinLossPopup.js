@@ -87,19 +87,6 @@ const WinLossPopup = ({ gid }) => {
             {(status?.status === "1" && "Win") ||
               (status?.status === "2" && "Loss")}
           </Typography>
-
-          {/* <Box className="winerpoint">
-        <Typography variant="body1" color="initial">
-          Game Results{" "}
-        </Typography>
-        <Typography variant="body1" color="initial">
-          green
-        </Typography>
-        <Box component="img" src={pr0} width={30} sx={{ mr: "5px" }}></Box>
-        <Typography variant="body1" color="initial">
-          small
-        </Typography>
-      </Box> */}
           <Typography
             variant="body1"
             color="initial"

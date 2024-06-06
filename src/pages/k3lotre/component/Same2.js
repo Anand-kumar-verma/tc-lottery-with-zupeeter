@@ -63,45 +63,32 @@ const Same2 = ({ timing, gid }) => {
       ...prevSelectedNumbers,
       [number]: !prevSelectedNumbers[number]
     }));
-    handleClickOpen();
+   handleClickOpen();
   };
-  const generatePairs = (selectNumber,) => {
-    const pairs = [];
 
-    selectNumber.forEach((num1, index) => {
-      selectNumber.slice(index + 1).forEach((num2) => {
-        if (
-          !(
-            (num1 === '11' && ['1', '22', '33', '44', '55'].includes(num2)) ||
-            (num2 === '11' && ['1', '22', '33', '44', '55'].includes(num1)) ||
-            (num1 === '1' && ['11', '2', '3', '4', '5'].includes(num2)) ||
-            (num2 === '1' && ['11', '2', '3', '4', '5'].includes(num1)) ||
-            (num1 === '22' && ['2', '11', '33', '44', '55'].includes(num2)) ||
-            (num2 === '22' && ['2', '11', '33', '44', '55'].includes(num1)) ||
-            (num1 === '2' && ['22', '1', '3', '4', '5'].includes(num2)) ||
-            (num2 === '2' && ['22', '1', '3', '4', '5'].includes(num1)) ||
-            (num1 === '33' && ['3', '11', '22', '44', '55'].includes(num2)) ||
-            (num2 === '33' && ['3', '11', '22', '44', '55'].includes(num1)) ||
-            (num1 === '3' && ['33', '1', '2', '4', '5'].includes(num2)) ||
-            (num2 === '3' && ['33', '1', '2', '4', '5'].includes(num1)) ||
-            (num1 === '44' && ['4', '11', '22', '33', '55'].includes(num2)) ||
-            (num2 === '44' && ['4', '11', '22', '33', '55'].includes(num1)) ||
-            (num1 === '4' && ['44', '1', '3', '2', '5'].includes(num2)) ||
-            (num2 === '4' && ['44', '1', '3', '2', '5'].includes(num1)) ||
-            (num1 === '55' && ['5', '11', '22', '33', '44'].includes(num2)) ||
-            (num2 === '55' && ['5', '11', '22', '33', '44'].includes(num1)) ||
-            (num1 === '5' && ['55', '1', '3', '2', '4'].includes(num2)) ||
-            (num2 === '5' && ['55', '1', '3', '2', '4'].includes(num1))
-          )
-        ) {
-          pairs.push([num1, num2]);
+
+  const generate = (selectNumber) => {
+    const pairs = {};
+    const parentChildPairs = [
+      ['11', ['2', '3', '4', '5']],
+      ['22', ['1', '3', '4', '5']],
+      ['33', ['1', '2', '4', '5']], ,
+      ['44', ['1', '3', '2', '5']],
+      ['55', ['1', '3', '2', '4']],
+    ];
+
+    parentChildPairs.forEach(([parent, children]) => {
+      if (selectNumber.includes(parent)) {
+        const childPairs = children.filter(num => selectNumber.includes(num));
+        if (childPairs.length > 0) {
+          pairs[parent] = childPairs;
         }
-      });
+      }
     });
+
     return pairs;
   };
-
-  const pairs = generatePairs(selectNumber);
+  const pairs = generate(selectNumber);
 
   useEffect(() => {
     if (selectedNumbers.length === 0) {
@@ -257,7 +244,7 @@ const Same2 = ({ timing, gid }) => {
           {[11, 22, 33, 44, 55,].map(number => (
             <p
               key={number}
-              className="!bg-[#fb9494] px-3 py-2 text-white rounded-md relative"
+              className={`!bg-[#fb9494] px-3 py-2 text-white rounded-md relative`}
               onClick={() => handleNumberClick1(String(number))}
             >
               {number}
@@ -272,7 +259,7 @@ const Same2 = ({ timing, gid }) => {
           {[1, 2, 3, 4, 5,].map(number => (
             <p
               key={number}
-              className="!bg-[#40AD72] px-4 py-2 text-white rounded-md relative"
+              className={`!bg-[#40AD72] px-4 py-2 text-white rounded-md relative `}
               onClick={() => handleNumberClick1(String(number))}
             >
               {number}
@@ -335,34 +322,51 @@ const Same2 = ({ timing, gid }) => {
               </div>
             }
 
-            {Checked && pairs.length > 0 && (
+
+            {Checked && Object.keys(pairs).length > 0 && (
               <div>
                 <Typography className="!mt-4 !mx-2">Pairs of unique numbers: odds</Typography>
-                <Box px={1} className="!m-1 !flex justify-start gap-1">
-                  {pairs.map(([num1, num2]) => (
-                    <Typography
-                      key={`${num1}-${num2}`}
-                      variant="body1"
-                      color="initial"
-                      sx={{
-                        textAlign: "center",
-                        color: "white",
-                        fontWeight: "400",
-                        background: "#ffffff",
-                        mt: 1,
-                      }}
-                      className={`!cursor-pointer !px-2 !w-fit !rounded ${[11, 22, 33, 44, 55].includes(Number(num1)) ||
-                          [11, 22, 33, 44, 55].includes(Number(num2))
-                          ? "!bg-[#fb9494]"
-                          : [1, 2, 3, 4, 5].includes(Number(num1)) ||
-                            [1, 2, 3, 4, 5].includes(Number(num2))
-                            ? "!bg-[#40AD72]"
-                            : ""
+                <Box px={1} className="!m-1 !flex justify-start gap-1 flex-wrap">
+                  {Object.entries(pairs).map(([parent, children]) => (
+                    <div className="!flex justify-start">
+                      <Typography
+                        key={parent}
+                        variant="body1"
+                        color="initial"
+                        sx={{
+                          textAlign: "center",
+                          color: "black",
+                          fontWeight: "400",
+                          background: "#ffffff",
+                          mt: 1,
+                          display: "inline-block",
+                        }}
+                        className="!bg-[#fb9494] !px-2 !text-sm !cursor-pointer !w-fit  rounded-tl rounded-bl"
 
-                        }`}
-                    >
-                      {`${num1} & ${num2}`}
-                    </Typography>
+
+                      >
+                        {`${parent} `}
+                      </Typography>
+                      <div className="border-r border-black !h-fit" />
+                      <Typography
+                        key={parent}
+                        variant="body1"
+                        color="initial"
+                        sx={{
+                          textAlign: "center",
+                          color: "black",
+                          fontWeight: "400",
+                          background: "#ffffff",
+                          mt: 1,
+                          display: "inline-block",
+                        }}
+                        className="!bg-[#40AD72] !px-2 !text-sm !cursor-pointer !w-fit  rounded-tr rounded-br"
+                      >
+                        {` ${children.join(', ')}`}
+                      </Typography>
+
+                    </div>
+
                   ))}
                 </Box>
               </div>
