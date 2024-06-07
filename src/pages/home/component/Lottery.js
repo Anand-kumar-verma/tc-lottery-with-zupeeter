@@ -107,8 +107,8 @@ function Lottery() {
           </Box>
         </Box>
       </NavLink>
-      {/* <NavLink to='/D5lotre'> */}
-      <NavLink to="/comingsoon">
+      <NavLink to='/D5lotre'>
+      {/* <NavLink to="/comingsoon"> */}
         <Box sx={style.winbox}>
           <Box
             component="img"

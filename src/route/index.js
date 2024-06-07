@@ -1,4 +1,4 @@
-// import D5lotre from "../pages/5DLotre/D5lotre";
+import D5lotre from "../pages/5DLotre/D5lotre";
 import Contactus from "../pages/Contact/Contactus";
 import ServiceCollections from "../pages/Contact/component/ServiceCollection";
 import SupportPage from "../pages/Contact/component/SupportPage";
@@ -109,10 +109,10 @@ export const routes = [
         path:"/k3",
         element:<K3 />
     },
-    // {
-    //     path:"/D5lotre",
-    //     element:<D5lotre />
-    // },
+    {
+        path:"/D5lotre",
+        element:<D5lotre />
+    },
     {
         path:"/CustomerService",
         element:<Contactus />

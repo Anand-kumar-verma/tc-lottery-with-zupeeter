@@ -213,6 +213,16 @@ export const TopWinner = async () => {
     console.log(e);
   }
 };
+
+// export const LastTrade = async () => {
+//   try {
+//     const response = await axios.get(endpoint.win_list_last);
+//     return response;
+//   } catch (e) {
+//     toast(e?.message);
+//     console.log(e);
+//   }
+// };
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
@@ -319,6 +329,21 @@ export const ProfileDataFunction = async () => {
     };
     const response = await axios.post(endpoint.profile_function, reqBody);
     return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const Update_ProfileFn = async (selectedImages) => {
+  try {
+   if(selectedImages){
+    const reqBody = {
+      user_id: localStorage.getItem("user_id"),
+      txtprofile_pic: selectedImages?.[0],
+    };
+    const response = await axios.post(`${endpoint.update_profile_pic}`, reqBody);
+    return response;
+   }
   } catch (e) {
     toast(e?.message);
     console.log(e);

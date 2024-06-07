@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { NavLink } from "react-router-dom";
@@ -10,6 +10,7 @@ import withdraw from "../../assets/images/withdraw.png";
 import Layout from "../../component/layout/Layout";
 import theme from "../../utils/theme";
 import {
+  ProfileDataFunction,
   checkTokenValidity,
   depositHistoryFunction,
   getBalanceFunction,
@@ -29,6 +30,16 @@ function Wallet() {
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+
+  const { isLoading: profileLoding, data: user } = useQuery(
+    ["profile"],
+    () => ProfileDataFunction(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const profile = user?.data?.earning || [];
 
   const { isLoading: total_deposit, data } = useQuery(
     ["deposit_history"],
@@ -86,13 +97,20 @@ function Wallet() {
     },
     labels: ["0.40%", "B", "C", "D"],
   });
-
+  const user_id = localStorage.getItem("user_id");
   return (
-    <Layout header={false}>
-      <Box sx={style.header}>
+    <Layout header={false}
+    > <Container
+    sx={{
+        width: "100%",
+        height: "100vh",
+        overflow: "auto",
+
+    }}>
+       <Box sx={style.header}>
         <Typography variant="body1" color="initial"></Typography>
         <Typography variant="body1" color="initial">
-          Wallet
+       
         </Typography>
         <Box component={NavLink} to="/promotion/Subordinate/"></Box>
       </Box>
@@ -102,27 +120,54 @@ function Wallet() {
           background: theme.palette.primary.main,
         }}
       >
-        <Stack
+          <Stack
           direction="row"
           alignItems="center"
-          justifyContent="space-between"
-          sx={{ flexDirection: "column" }}
+          justifyContent="space-start"
+          gap={1}
+          sx={{ flexDirection: "row" }}
+          className="!mx-7"
         >
-          <Box component="img" src={walletsimg} width={50}></Box>
-          <Typography
-            variant="body1"
-            color="initial"
-            sx={{ fontSize: "25px", fontWeight: "600", color: "white" }}
-          >
-            ₹{Number(wallet_amount_data || 0)?.toFixed(2)}
-          </Typography>
+         
           <Typography
             variant="body1"
             color="initial"
             sx={{ fontSize: "14px", fontWeight: "400", color: "white" }}
           >
-            Total balance
+           UserId:
           </Typography>
+          <Typography
+            variant="body1"
+            color="initial"
+            sx={{ fontSize: "18px", fontWeight: "500", color: "white" }}
+          >
+           {profile?.rec?.Login_Id}
+          </Typography>
+        
+        </Stack>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-start"
+          gap={1}
+          sx={{ flexDirection: "row" }}
+          className="!mx-7"
+        >
+          <Typography
+            variant="body1"
+            color="initial"
+            sx={{ fontSize: "14px", fontWeight: "400", color: "white" }}
+          >
+           Wallet:
+          </Typography>
+          <Typography
+            variant="body1"
+            color="initial"
+            sx={{ fontSize: "18px", fontWeight: "500", color: "white" }}
+          >
+            ₹{Number(wallet_amount_data || 0)?.toFixed(2)}
+          </Typography>
+        
         </Stack>
       </Box>
       <CustomCircularProgress isLoading={isLoading || total_deposit} />
@@ -313,6 +358,8 @@ function Wallet() {
           </Stack>
         </Box>
       </Box>
+    </Container>
+     
    
     </Layout>
   );
