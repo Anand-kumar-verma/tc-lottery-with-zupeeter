@@ -35,7 +35,7 @@ import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
 import Layout from "../../component/layout/Layout";
-import {checkTokenValidity } from "../../services/apiCallings";
+import {LastTrade, ProfileDataFunction, checkTokenValidity } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
@@ -49,8 +49,12 @@ import Sports from "./component/Sports";
 import axios from "axios";
 import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+
 
 function Dashboard() {
+
+  const dispatch = useDispatch();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -69,6 +73,14 @@ function Dashboard() {
 
   const res = data?.data?.earning || [];
 
+  // const {  data :Trade } = useQuery(["trade_winner"], () => LastTrade(), {
+  //   refetchOnMount: false,
+  //   refetchOnReconnect: true,
+  // });
+  // const trade = Trade?. data ?.data || [];
+  // console.log(trade)
+
+  
    const TopWinner = async () => {
     try {
       const response = await axios.get(endpoint.win_list_top);
@@ -86,6 +98,16 @@ function Dashboard() {
       window.location.href = "/"; // Redirect to login page
     }
   }, []);
+
+  const { isLoading: profileLoding, data: user } = useQuery(
+    ["profile"],
+    () => ProfileDataFunction(),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: true,
+    }
+  );
+  const profile = user?.data?.earning || [];
 
   return (
     <Layout>
@@ -348,13 +370,7 @@ function Dashboard() {
                     color="initial"
                     sx={style.winnername}
                   >
-                    {i?.or_m_email
-                      ? i.or_m_email.split("@")[0].substring(0, 2) +
-                      "**" +
-                      (i.or_m_email.split("@")[0].length > 2
-                        ? i.or_m_email.split("@")[0].substring(2, 4)
-                        : "")
-                      : "**"}
+                {profile?.rec?.Login_Id}
                   </Typography>
                   <Box sx={style.winnerbannerouter}>
                     <Box
@@ -379,6 +395,8 @@ function Dashboard() {
                     >
                       Winning amount
                     </Typography>
+                    
+                   
                   </Box>
                 </Stack>
               );
@@ -562,13 +580,7 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {i?.or_m_email
-                    ? i.or_m_email.split("@")[0].substring(0, 2) +
-                    "**" +
-                    (i.or_m_email.split("@")[0].length > 2
-                      ? i.or_m_email.split("@")[0].substring(2, 4)
-                      : "")
-                    : "**"}
+                 {profile?.rec?.Login_Id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -598,6 +610,53 @@ function Dashboard() {
             );
           })}
         </Box>
+        {/* <Box sx={{ mt: 5 }}>
+         
+          {trade?.map((i, index) => {
+            return (
+              <Stack key={index} direction="row" sx={style.winnerslider}>
+                <Box
+                  width={45}
+                  height={45}
+                  component={"img"}
+                  src={profile1}
+                  sx={style.winnerprofile}
+                ></Box>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={style.winnername}
+                >
+                 kkk
+                </Typography>
+                <Box sx={style.winnerbannerouter}>
+                  <Box
+                    height={45}
+                    component={"img"}
+                    src={winerbanner1}
+                    sx={style.winnerbannerinner}
+                  ></Box>
+                </Box>
+                <Box>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winneramout || 0}
+                  >
+                    Receive ₹{i?.max_tr_pv}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winnertitle}
+                  >
+                    Winning amount
+                  </Typography>
+                </Box>
+              </Stack>
+            );
+          })}
+        </Box> */}
       </Box>
     </Layout>
   );

@@ -53,8 +53,12 @@ function Promotion() {
     }
   );
   const profile = user?.data?.earning || [];
-  const [copied, setCopied] = useState(false);
+  const profilerec = user?.data?.earning?.rec || []; 
 
+
+
+  const [copied, setCopied] = useState(false);
+  const user_id = localStorage.getItem("user_id");
   const functionTOCopy = (value) => {
     copy(value);
     toast.success("Copied to clipboard!");
@@ -93,24 +97,21 @@ function Promotion() {
               <Typography
                 variant="body1"
                 color="initial"
-                className="!text-white"
+                className="!text-white !text-sm !py-2"
               >
-                0
+                User ID :{profile?.rec?.Login_Id}
               </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                className="!text-white"
-              >
-                Yesterday's total commission
-              </Typography>
-              <Typography
-                variant="body1"
-                color="initial"
-                className="!text-white"
-              >
-                Upgrade the level to increase turnover
-              </Typography>
+              {profile?.rec?.Club !==0 && 
+             <Typography
+             variant="body1"
+             color="initial"
+             className="!text-white"
+           >
+            Rank : {profilerec?.Club}
+            
+           </Typography>
+            }
+             
             </Box>
           </Box>
           <Box sx={style.subcordinateBox}>
