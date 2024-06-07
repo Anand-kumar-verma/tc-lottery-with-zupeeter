@@ -70,7 +70,7 @@ function Account() {
 
   const { data: update_pic } = useQuery(
     ["Update_pic", selectedImages],
-    () => Update_ProfileFn(selectedImages),
+    () => Update_ProfileFn(selectedImages , client),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,

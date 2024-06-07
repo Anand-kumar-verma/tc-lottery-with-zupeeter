@@ -334,7 +334,7 @@ export const ProfileDataFunction = async () => {
     console.log(e);
   }
 };
-export const Update_ProfileFn = async (selectedImages) => {
+export const Update_ProfileFn = async (selectedImages ,client) => {
   try {
    if(selectedImages){
     const reqBody = {
@@ -342,6 +342,7 @@ export const Update_ProfileFn = async (selectedImages) => {
       txtprofile_pic: selectedImages?.[0],
     };
     const response = await axios.post(`${endpoint.update_profile_pic}`, reqBody);
+    client.refetchQueries("profile");
     return response;
    }
   } catch (e) {
