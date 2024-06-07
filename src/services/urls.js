@@ -62,4 +62,6 @@ export const endpoint = {
   profile_function:`${baseUrl}/api/profile`,
   team_data:`${baseUrl}/api/get_all`,
   view_paying_api: `${baseUrl}/api/view_paying_api`,
+  update_profile_pic: `${baseUrl}/api/update_profile_pic`,
+  // win_list_last: `${baseUrl}/api/win_list_last`,
 };

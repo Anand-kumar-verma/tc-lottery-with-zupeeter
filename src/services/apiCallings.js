@@ -216,6 +216,16 @@ export const TopWinner = async () => {
     console.log(e);
   }
 };
+
+// export const LastTrade = async () => {
+//   try {
+//     const response = await axios.get(endpoint.win_list_last);
+//     return response;
+//   } catch (e) {
+//     toast(e?.message);
+//     console.log(e);
+//   }
+// };
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
@@ -361,4 +371,20 @@ export const returnWinningAmount = async (number, amount, result) => {
      return Number(amount_after_3_percent*2.5)?.toFixed(2)
     // agar small par means 14 lgaya hai to  
   return null;
+}
+export const Update_ProfileFn = async (selectedImages ,client) => {
+  try {
+   if(selectedImages){
+    const reqBody = {
+      user_id: localStorage.getItem("user_id"),
+      txtprofile_pic: selectedImages?.[0],
+    };
+    const response = await axios.post(`${endpoint.update_profile_pic}`, reqBody);
+    client.refetchQueries("profile");
+    return response;
+   }
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
 };
