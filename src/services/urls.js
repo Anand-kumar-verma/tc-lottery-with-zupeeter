@@ -49,10 +49,10 @@ export const endpoint = {
   
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis
-  trx_game_history: `${baseUrl}/api/trx_result`,
-  trx_bet_placed: `${baseUrl}/api/Trx_bet`,
-  trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`,
-  registration_bonus: `${baseUrl}/api/view_direct_referral_income`,
+  trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js
+  trx_bet_placed: `${baseUrl}/api/Trx_bet`, //////////// done in node js
+  trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`, /// done  in node js
+  registration_bonus: `${baseUrl}/api/view_direct_referral_income`,  
   view_bank_details: `${baseUrl}/api/view_bank_details_new`,
   view_upi_details: `${baseUrl}/api/view_upi_details`,
   token_launch: `${baseUrl}/api/token_launch`,

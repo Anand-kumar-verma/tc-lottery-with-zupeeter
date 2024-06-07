@@ -19,7 +19,7 @@ import music from "../../assets/images/music.png";
 import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
-import { getBalanceFunction } from "../../services/apiCallings";
+import { getBalanceFunction, returnWinningAmount } from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import WinLossPopup from "./WinLossPopup";
 import Wingo10Min from "./component/Wingo10Min";
@@ -36,6 +36,10 @@ function TRX() {
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
 
+  useEffect(() => {
+   const res =  returnWinningAmount(9,10,9);
+   console.log(res);
+  }, []);
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);

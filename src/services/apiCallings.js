@@ -38,7 +38,7 @@ export const logOutFunction = async () => {
 };
 
 export const MyHistoryFn = async (gid) => {
-  const id = localStorage.getItem("user_id")
+  const id = localStorage.getItem("user_id");
   try {
     const response = await axios.get(
       `${endpoint.my_history}?userid=${id}&limit=0&gameid=${gid}`
@@ -68,7 +68,10 @@ export const getBetFunction = async (setBet) => {
     const reqBody = {
       userid: localStorage.getItem("user_id"),
     };
-    const response = await axios.post(`${endpoint.total_withdrawal_bet}`, reqBody);
+    const response = await axios.post(
+      `${endpoint.total_withdrawal_bet}`,
+      reqBody
+    );
     setBet(response?.data?.earning);
     return response;
   } catch (e) {
@@ -134,7 +137,7 @@ export const registrationBonusFn = async (type) => {
 export const BankDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id:  localStorage.getItem("user_id")
+      user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.view_bank_details, reqBody);
     return response;
@@ -269,10 +272,10 @@ export const upiListFuncton = async () => {
 };
 export const Promotionfunction = async () => {
   const reqBody = {
-    userid:localStorage.getItem("user_id"),
-  }
+    userid: localStorage.getItem("user_id"),
+  };
   try {
-    const response = await axios.post(endpoint.info_promotion,reqBody);
+    const response = await axios.post(endpoint.info_promotion, reqBody);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -281,10 +284,10 @@ export const Promotionfunction = async () => {
 };
 export const TeamsubFunction = async () => {
   const reqBody = {
-    userid:localStorage.getItem("user_id"),
-  }
+    userid: localStorage.getItem("user_id"),
+  };
   try {
-    const response = await axios.post(endpoint.team_info,reqBody);
+    const response = await axios.post(endpoint.team_info, reqBody);
     return response;
   } catch (e) {
     toast(e?.message);
@@ -294,7 +297,7 @@ export const TeamsubFunction = async () => {
 export const TeamFunction = async () => {
   try {
     const reqBody = {
-      user_id:localStorage.getItem("user_id"),
+      user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.team_report, reqBody);
     return response;
@@ -323,4 +326,39 @@ export const ProfileDataFunction = async () => {
     toast(e?.message);
     console.log(e);
   }
+};
+
+export const returnWinningAmount = async (number, amount, result) => {
+  let percent = 3;
+  const amount_after_3_percent = amount * (100 - percent / 100);
+
+  // means number par bet lgi hai aur number hi result show huaa hai
+  if (
+    result &&
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(result) &&
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(number)
+  )
+    return Number(amount_after_3_percent * 9).toFixed(2);
+  // means green bet result is 1,3,7,9 ===> green aa gya
+  if (result && number === 11 && [1, 3, 7, 9]?.includes(result))
+    return Number(amount_after_3_percent * 2)?.toFixed(2);
+  // means green lgaya aur result 5 return huaa to as it is amount return kra dena hai..
+  if (result && number === 11 && [5]?.includes(result))
+    return Number(amount_after_3_percent)?.toFixed(2);
+
+  // means red lgaya aur result 2,4,6,8 ==> red aa gya
+  if (result && number === 13 && [2, 4, 6, 8]?.includes(result))
+    return Number(amount_after_3_percent * 2)?.toFixed(2);
+  // means green lgaya aur result 5 return huaa to as it is amount return kra dena hai..
+  if (result && number === 13 && [0]?.includes(result))
+    return Number(amount_after_3_percent)?.toFixed(2);
+
+  // suppose that voilet ==> 12 par lgaya aur result 0,5 me se koi aaya joki dono voilet se match kar rhe hai
+  if (result && number === 12 && [0, 5]?.includes(result))
+    return Number(amount_after_3_percent * 2.5)?.toFixed(2);
+  // agar big par lgata means 15 and result comes form 5,6,7,8
+  if(result && number === 15 && [5,6,7,8]?.includes(result))
+     return Number(amount_after_3_percent*2.5)?.toFixed(2)
+    // agar small par means 14 lgaya hai to  
+  return null;
 };
