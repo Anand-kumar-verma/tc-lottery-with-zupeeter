@@ -647,7 +647,7 @@ function Dashboard() {
           >
             Last Trade Top Winner
           </Typography>
-          {trade?.map((i, index) => {
+          {trade?.slice(0, 5)?.map((i, index) => {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
 
