@@ -419,7 +419,7 @@ const BetNumber = ({ timing, gid }) => {
               color="initial"
               sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-              TRX Win Go {gid == 3 ? 5 : gid == 2 ? 3 : gid}Min
+              TRX {gid == 3 ? 5 : gid == 2 ? 3 : gid} Min
             </Typography>
             <Typography
               variant="body1"
@@ -433,16 +433,17 @@ const BetNumber = ({ timing, gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select{" "}
+              Select {" "}
               {random
                 ? Number(random) <= 4
-                  ? "Small"
-                  : "Big"
+                  ? `:  ${selectNumber} Small`
+                  : ` : ${selectNumber} Big`
                 : isNaN(Number(selectNumber))
                 ? selectNumber?.toString()?.toLocaleUpperCase()
                 : Number(selectNumber) <= 4
-                ? "Small"
-                : "Big"}
+                ? `: ${selectNumber} Small`
+                : ` : ${selectNumber} Big`
+                } 
             </Typography>
           </Box>
           <Box mt={5} px={2}>

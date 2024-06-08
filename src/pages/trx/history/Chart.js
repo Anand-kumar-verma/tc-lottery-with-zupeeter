@@ -179,7 +179,7 @@ const Chart = ({ gid }) => {
                 }}
               >
                 <div className="flex ">
-                  <span className={` pr-5`}>
+                  <span className={` pr-1`}>
                     {i?.tr_transaction_id}
                   </span>
                   {/* // main box of chart form 0 to 9 */}
