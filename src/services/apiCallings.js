@@ -365,13 +365,14 @@ export const returnWinningAmount = (number, amount, result) => {
   if (number === 12 && [0, 5]?.includes(result))
     return Number(amount_after_3_percent * 2.5)?.toFixed(2);
   // agar big par lgata means 15 and result comes form 5,6,7,8
-  if (number === 15 && [5, 6, 7, 8]?.includes(result))
+  if (number === 15 && [5, 6, 7, 8, 9]?.includes(result))
     return Number(amount_after_3_percent * 2)?.toFixed(2);
   // agar small par means 14 lgaya hai to
   if (number === 14 && [0, 1, 2, 3, 4]?.includes(result))
     return Number(amount_after_3_percent * 2)?.toFixed(2);
   return null;
 };
+
 export const Update_ProfileFn = async (selectedImages, client) => {
   try {
     if (selectedImages) {

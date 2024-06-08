@@ -32,8 +32,6 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   const MyHistoryFn = async () => {
     setloding(true);
     try {
-     
-
       const winAmnt = returnWinningAmount(
         Number(number),
         Number(amount),
@@ -54,7 +52,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
       setTimeout(() => {
         setOpenDialogBox(false);
         localStorage.setItem("betApplied", false);
-        localStorage.setItem("anand_re", false);
+        localStorage.removeItem("anand_re");
       }, 3000);
     } catch (e) {
       toast(e?.message);

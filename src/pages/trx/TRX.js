@@ -32,6 +32,7 @@ import Wingo5Min from "./component/Wingo5Min";
 import toast from "react-hot-toast";
 
 function TRX() {
+  const res = localStorage.getItem("anand_re");
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
@@ -46,16 +47,15 @@ function TRX() {
   React.useEffect(() => {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
-        setOpenDialogBox(true);
-        const res = localStorage.getItem("anand_re");
-        console.log(res);
+      
+        res && setOpenDialogBox(true);
         // setTimeout(() => {
         //   setOpenDialogBox(false);
         //   localStorage.setItem("betApplied", false);
         // }, 5000);
       }
     }, 1000);
-  }, [dummycounter]);
+  }, [dummycounter,res]);
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
@@ -67,9 +67,7 @@ function TRX() {
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
-  useEffect(() => {
-    console.log(returnWinningAmount(14,26,9))
-  }, []); 
+
   return (
     <Container>
       <Box

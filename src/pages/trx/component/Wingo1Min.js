@@ -80,11 +80,10 @@ function Wingo1Min() {
         client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
         client.refetchQueries("trx_gamehistory");
-       
       }
     };
     const handleOneMinResult = (result) => {
-      localStorage.setItem("anand_re",result)
+      localStorage.setItem("anand_re", result);
       dispatch(dummycounterFun());
     };
     socket.on("onemintrx", handleOneMin);
