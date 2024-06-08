@@ -73,12 +73,12 @@ function Dashboard() {
 
   const res = data?.data?.earning || [];
 
-  // const {  data :Trade } = useQuery(["trade_winner"], () => LastTrade(), {
-  //   refetchOnMount: false,
-  //   refetchOnReconnect: true,
-  // });
-  // const trade = Trade?. data ?.data || [];
-  // console.log(trade)
+  const {  data :Trade } = useQuery(["last_trade"], () => LastTrade(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const trade = Trade?.data?.earning || [];
+  console.log(trade)
 
   
    const TopWinner = async () => {
@@ -358,13 +358,29 @@ function Dashboard() {
             {res?.slice(2)?.map((i, index) => {
               return (
                 <Stack key={index} direction="row" sx={style.winnerslider} className="">
-                  <Box
+                  {/* <Box
                     width={45}
                     height={45}
                     component={"img"}
                     src={profile1}
-                    sx={style.winnerprofile}
-                  ></Box>
+                   
+                  ></Box> */}
+                    <div className="-mt-5">
+                    <Box
+                       width={20}
+                       height={20}
+                  component={"img"}
+                  src={crown2}
+                  className="!relative top-3 right-2"
+               ></Box>
+                <Box
+                  component={"img"}
+                  src={profile2}
+                  width={30}
+                  height={30}
+                  sx={style.winnerprofile}   
+                ></Box>
+                    </div>
                   <Typography
                     variant="body1"
                     color="initial"
@@ -568,13 +584,22 @@ function Dashboard() {
           {res?.slice(0, 2)?.map((i, index) => {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
+                <div className="-mt-5">
+                    <Box
+                       width={20}
+                       height={20}
+                  component={"img"}
+                  src={crown1}
+                  className="!relative top-3 right-2"
+               ></Box>
                 <Box
-                  width={45}
-                  height={45}
                   component={"img"}
                   src={profile1}
-                  sx={style.winnerprofile}
+                  width={30}
+                  height={30}
+                  sx={style.winnerprofile}   
                 ></Box>
+                    </div>
                 <Typography
                   variant="body1"
                   color="initial"
@@ -610,24 +635,40 @@ function Dashboard() {
             );
           })}
         </Box>
-        {/* <Box sx={{ mt: 5 }}>
-         
+        <Box sx={{ mt: 5 }}>
+        <Typography
+            variant="body1"
+            color="initial"
+            sx={{ fontSize: "18px", fontWeight: 700, ml: 1 }}
+          >
+           Last Trade Top Winner
+          </Typography>
           {trade?.map((i, index) => {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
-                <Box
-                  width={45}
-                  height={45}
+              
+                 <div className="-mt-5">
+                    <Box
+                       width={20}
+                       height={20}
                   component={"img"}
-                  src={profile1}
-                  sx={style.winnerprofile}
+                  src={crown3}
+                  className="!relative top-3 right-2"
+               ></Box>
+                <Box
+                  component={"img"}
+                  src={profile3}
+                  width={30}
+                  height={30}
+                  sx={style.winnerprofile}   
                 ></Box>
+                    </div>
                 <Typography
                   variant="body1"
                   color="initial"
                   sx={style.winnername}
                 >
-                 kkk
+               {i?.or_m_user_id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -656,7 +697,7 @@ function Dashboard() {
               </Stack>
             );
           })}
-        </Box> */}
+        </Box>
       </Box>
     </Layout>
   );

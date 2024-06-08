@@ -217,15 +217,15 @@ export const TopWinner = async () => {
   }
 };
 
-// export const LastTrade = async () => {
-//   try {
-//     const response = await axios.get(endpoint.win_list_last);
-//     return response;
-//   } catch (e) {
-//     toast(e?.message);
-//     console.log(e);
-//   }
-// };
+export const LastTrade = async () => {
+  try {
+    const response = await axios.get(endpoint.win_list_last);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
