@@ -1,16 +1,14 @@
 import { Box, Container, Typography } from "@mui/material";
-import React from "react"
-import Layout from "../../component/layout/Layout";
-import theme from "../../utils/theme";
-import load from "../../assets/images/loader.png"
-import Casino from "../../assets/images/casino.png"
+import PropTypes from 'prop-types';
+import React from "react";
 import { NavLink } from "react-router-dom";
 import backbtn from "../../assets/images/backBtn.png";
-import sport from "../../assets/images/sport.png";
+import Casino from "../../assets/images/casino.png";
+import load from "../../assets/images/loader.png";
 import point from "../../assets/images/point.png";
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import sport from "../../assets/images/sport.png";
+import Layout from "../../component/layout/Layout";
+import theme from "../../utils/theme";
 
 const RebateRatio = () => {
     function CustomTabPanel(props) {
@@ -39,17 +37,9 @@ const RebateRatio = () => {
         value: PropTypes.number.isRequired,
     };
 
-    function a11yProps(index) {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`,
-        };
-    }
+
     const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
     return <>
         <Layout header={false}>
             <Container >

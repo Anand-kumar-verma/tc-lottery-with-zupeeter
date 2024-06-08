@@ -45,7 +45,7 @@ function App() {
       <Route path="dashboard" element={<Dashboard/>} />
       {isAuthenticated ? (
         routes?.map((route, index) => {
-          return (
+          return (                                                                                                
             <Route key={index} path={route?.path} element={route?.element} />
           );
         })
