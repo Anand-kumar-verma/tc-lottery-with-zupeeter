@@ -35,7 +35,7 @@ import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
 import Layout from "../../component/layout/Layout";
-import {LastTrade, ProfileDataFunction, checkTokenValidity } from "../../services/apiCallings";
+import { LastTrade, ProfileDataFunction, checkTokenValidity } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
@@ -73,15 +73,15 @@ function Dashboard() {
 
   const res = data?.data?.earning || [];
 
-  const {  data :Trade } = useQuery(["last_trade"], () => LastTrade(), {
+  const { data: Trade } = useQuery(["last_trade"], () => LastTrade(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
   const trade = Trade?.data?.earning || [];
   console.log(trade)
 
-  
-   const TopWinner = async () => {
+
+  const TopWinner = async () => {
     try {
       const response = await axios.get(endpoint.win_list_top);
       return response;
@@ -108,6 +108,16 @@ function Dashboard() {
     }
   );
   const profile = user?.data?.earning || [];
+  const imageSources = [ 
+    "https://mui.com/static/images/avatar/2.jpg",
+    "https://mui.com/static/images/avatar/3.jpg",
+    profile3,
+    "https://mui.com/static/images/avatar/4.jpg",
+    profile1,
+    "https://mui.com/static/images/avatar/1.jpg",
+    profile2
+    , "https://mui.com/static/images/avatar/5.jpg"
+  ]
 
   return (
     <Layout>
@@ -177,10 +187,10 @@ function Dashboard() {
           1.All recharge methods only available in RECHARGE menu on OFFICIAL
         </Typography>
         <Typography
-                 className="!bg-orange-400 !text-white !text-xs  !font-bold rounded-2xl px-2 !flex justify-center"
-                >
-            <WhatshotIcon fontSize="small"/> <span className="my-1">Details</span>
-          </Typography>
+          className="!bg-orange-400 !text-white !text-xs  !font-bold rounded-2xl px-2 !flex justify-center"
+        >
+          <WhatshotIcon fontSize="small" /> <span className="my-1">Details</span>
+        </Typography>
       </Stack>
       <Stack
         direction="row"
@@ -191,7 +201,7 @@ function Dashboard() {
           mt: 1,
         }}
       >
-         <NavLink onClick={() => handleChange(1)}>
+        <NavLink onClick={() => handleChange(1)}>
           <Box
             className="gamecategory "
             sx={{
@@ -355,68 +365,62 @@ function Dashboard() {
           </Typography>
         </Stack>
         <Box className="">
-            {res?.slice(2)?.map((i, index) => {
-              return (
-                <Stack key={index} direction="row" sx={style.winnerslider} className="">
-                  {/* <Box
-                    width={45}
+          {res?.slice(2)?.map((i, index) => {
+            return (
+              <Stack key={index} direction="row" sx={style.winnerslider} className="">
+              
+                <div className="-mt-5">
+                  <Box
+                    width={20}
+                    height={20}
+                    component={"img"}
+                    src={crown2}
+                    className="!relative top-3 right-2"
+                  ></Box>
+                  <Box
+                    component={"img"}
+                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    width={30}
+                    height={30}
+                    sx={style.winnerprofile}
+                  ></Box>
+                </div>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={style.winnername}
+                >
+                  {profile?.rec?.Login_Id}
+                </Typography>
+                <Box sx={style.winnerbannerouter}>
+                  <Box
                     height={45}
                     component={"img"}
-                    src={profile1}
-                   
-                  ></Box> */}
-                    <div className="-mt-5">
-                    <Box
-                       width={20}
-                       height={20}
-                  component={"img"}
-                  src={crown2}
-                  className="!relative top-3 right-2"
-               ></Box>
-                <Box
-                  component={"img"}
-                  src={profile2}
-                  width={30}
-                  height={30}
-                  sx={style.winnerprofile}   
-                ></Box>
-                    </div>
+                    src={winerbanner1}
+                    sx={style.winnerbannerinner}
+                  ></Box>
+                </Box>
+                <Box>
                   <Typography
                     variant="body1"
                     color="initial"
-                    sx={style.winnername}
+                    sx={style.winneramout || 0}
                   >
-                {profile?.rec?.Login_Id}
+                    Receive ₹{i?.max_tr_pv}
                   </Typography>
-                  <Box sx={style.winnerbannerouter}>
-                    <Box
-                      height={45}
-                      component={"img"}
-                      src={winerbanner1}
-                      sx={style.winnerbannerinner}
-                    ></Box>
-                  </Box>
-                  <Box>
-                    <Typography
-                      variant="body1"
-                      color="initial"
-                      sx={style.winneramout || 0}
-                    >
-                      Receive ₹{i?.max_tr_pv}
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      color="initial"
-                      sx={style.winnertitle}
-                    >
-                      Winning amount
-                    </Typography>
-                    
-                   
-                  </Box>
-                </Stack>
-              );
-            })}
+                  <Typography
+                    variant="body1"
+                    color="initial"
+                    sx={style.winnertitle}
+                  >
+                    Winning amount
+                  </Typography>
+
+
+                </Box>
+              </Stack>
+            );
+          })}
         </Box>
       </Box>
       <Box sx={{ px: 2, py: 3 }} >
@@ -585,27 +589,27 @@ function Dashboard() {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
                 <div className="-mt-5">
-                    <Box
-                       width={20}
-                       height={20}
-                  component={"img"}
-                  src={crown1}
-                  className="!relative top-3 right-2"
-               ></Box>
-                <Box
-                  component={"img"}
-                  src={profile1}
-                  width={30}
-                  height={30}
-                  sx={style.winnerprofile}   
-                ></Box>
-                    </div>
+                  <Box
+                    width={20}
+                    height={20}
+                    component={"img"}
+                    src={crown1}
+                    className="!relative top-3 right-2"
+                  ></Box>
+                  <Box
+                    component={"img"}
+                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    width={30}
+                    height={30}
+                    sx={style.winnerprofile}
+                  ></Box>
+                </div>
                 <Typography
                   variant="body1"
                   color="initial"
                   sx={style.winnername}
                 >
-                 {profile?.rec?.Login_Id}
+                  {profile?.rec?.Login_Id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -636,39 +640,39 @@ function Dashboard() {
           })}
         </Box>
         <Box sx={{ mt: 5 }}>
-        <Typography
+          <Typography
             variant="body1"
             color="initial"
             sx={{ fontSize: "18px", fontWeight: 700, ml: 1 }}
           >
-           Last Trade Top Winner
+            Last Trade Top Winner
           </Typography>
           {trade?.map((i, index) => {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
-              
-                 <div className="-mt-5">
-                    <Box
-                       width={20}
-                       height={20}
-                  component={"img"}
-                  src={crown3}
-                  className="!relative top-3 right-2"
-               ></Box>
-                <Box
-                  component={"img"}
-                  src={profile3}
-                  width={30}
-                  height={30}
-                  sx={style.winnerprofile}   
-                ></Box>
-                    </div>
+
+                <div className="-mt-5">
+                  <Box
+                    width={20}
+                    height={20}
+                    component={"img"}
+                    src={crown3}
+                    className="!relative top-3 right-2"
+                  ></Box>
+                  <Box
+                    component={"img"}
+                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    width={30}
+                    height={30}
+                    sx={style.winnerprofile}
+                  ></Box>
+                </div>
                 <Typography
                   variant="body1"
                   color="initial"
                   sx={style.winnername}
                 >
-               {i?.or_m_user_id}
+                  {i?.or_m_user_id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box

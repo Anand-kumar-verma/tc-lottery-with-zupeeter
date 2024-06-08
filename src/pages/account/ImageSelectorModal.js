@@ -7,10 +7,8 @@ const ImageSelectorModal = ({ setOpend, setselectedImages, open, onClose, images
     setselectedImages([image]);
     setOpend(false)
   };
-
   return (
     
-
       <Dialog
       open={open}
         className="!w-fit !m-1 !mt-2">
