@@ -116,7 +116,7 @@ function Account() {
             <Typography className=" !mt-10 !mr-1"
               onClick={() => setOpend(true)}>
               <img src={profile?.rec?.User_image} alt="" className='!rounded-full  w-[72px] h-[72px]' />
-              <BorderColor fontSize="small" className="!text-white !-mt-10 !rounded-full !bg-gray-400  " />
+              <BorderColor fontSize="small" className="!text-white !-mt-10 !ml-10 !rounded-full !bg-gray-400  " />
             </Typography>
             <ImageSelectorModal
               setOpend={setOpend}

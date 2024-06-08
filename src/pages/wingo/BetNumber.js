@@ -438,15 +438,16 @@ const BetNumber = ({ timing, gid }) => {
               }}
             >
              Select{" "}
-              {random
+             {random
                 ? Number(random) <= 4
-                  ? "Small"
-                  : "Big"
+                  ? `:  ${selectNumber} Small`
+                  : ` : ${selectNumber} Big`
                 : isNaN(Number(selectNumber))
                 ? selectNumber?.toString()?.toLocaleUpperCase()
                 : Number(selectNumber) <= 4
-                ? "Small"
-                : "Big"}
+                ? `: ${selectNumber} Small`
+                : ` : ${selectNumber} Big`
+                } 
             </Typography>
           </Box>
           <Box mt={5} px={2}>
