@@ -31,6 +31,7 @@ import toast from "react-hot-toast";
 function TRX() {
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
+    // eslint-disable-next-line
   const [getBalance, setBalance] = useState(0);
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
@@ -48,14 +49,11 @@ function TRX() {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
         setOpenDialogBox(true);
-        // setTimeout(() => {
-        //   setOpenDialogBox(false);
-        //   localStorage.setItem("betApplied", false);
-        // }, 5000);
       }
     }, 1000);
+      // eslint-disable-next-line
   }, [dummycounter]);
-  const { isLoading, data: wallet_amount } = useQuery(
+  const {  data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
     {

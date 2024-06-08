@@ -83,8 +83,9 @@ function Wingo1Min() {
     return () => {
       socket.off("onemintrx", handleOneMin);
     };
+     // eslint-disable-next-line
   }, []);
-
+ // eslint-disable-next-line
   const { isLoading, data: game_history } = useQuery(
     ["trx_gamehistory", 1],
     () => GameHistoryFn("1"),
@@ -136,6 +137,7 @@ function Wingo1Min() {
       }
     }
     dispatch(trx_game_image_index_function(array));
+     // eslint-disable-next-line
   }, [game_history?.data?.data]);
 
 
@@ -399,12 +401,3 @@ function Wingo1Min() {
 }
 
 export default Wingo1Min;
-
-const style = {
-  pilwal: {
-    color: "#686868",
-    fontSize: "13px",
-    fontWeight: 600,
-    fontFamily: "sans-serif !important",
-  },
-};

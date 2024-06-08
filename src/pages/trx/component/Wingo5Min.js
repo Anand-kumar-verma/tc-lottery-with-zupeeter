@@ -1,4 +1,4 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
+
 import {
   Box,
   Button,
@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
@@ -123,8 +123,9 @@ function Wingo5Min() {
     return () => {
       socket.off("fivemintrx", handleFiveMin);
     };
+    // eslint-disable-next-line
   }, []);
-
+// eslint-disable-next-line
   const { isLoading, data: game_history } = useQuery(
     ["trx_gamehistory_5"],
     () => GameHistoryFn("3"),
@@ -175,6 +176,7 @@ function Wingo5Min() {
       }
     }
     dispatch(trx_game_image_index_function(array));
+    // eslint-disable-next-line
   }, [game_history?.data?.data]);
 
   const handlePlaySoundLast = async () => {
@@ -324,7 +326,7 @@ function Wingo5Min() {
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
-                );
+                );// eslint-disable-next-line
               }, [show_this_three_min_time_sec])}
             </Box>
           </Box>

@@ -1,5 +1,5 @@
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Box, Stack, TablePagination, Typography } from "@mui/material";
+import { Box, Stack, TablePagination } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -38,7 +38,7 @@ const MyHistory = ({ gid }) => {
       my_history_data_all?.slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
-      ),
+      ), // eslint-disable-next-line
     [page, rowsPerPage, my_history_all?.data?.earning]
   );
 

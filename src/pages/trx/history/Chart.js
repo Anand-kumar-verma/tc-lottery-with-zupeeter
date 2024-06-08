@@ -48,6 +48,7 @@ const Chart = ({ gid }) => {
       array.push(res < 0 ? 100 : res);
     }
     setPreData(array);
+      // eslint-disable-next-line
   }, [game_history?.data?.data]);
 
   const handleChangePage = (event, newPage) => {
@@ -70,7 +71,7 @@ const Chart = ({ gid }) => {
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       )
-    );
+    );  // eslint-disable-next-line
   }, [page, rowsPerPage, game_history?.data?.data]);
 
   React.useEffect(() => {
@@ -110,7 +111,7 @@ const Chart = ({ gid }) => {
           return { x: centerX, y: centerY };
         });
       setcor(newCor || []);
-    }
+    }  // eslint-disable-next-line
   }, [visibleRows]);
 
   return (

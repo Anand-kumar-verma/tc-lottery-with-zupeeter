@@ -82,6 +82,7 @@ const BetNumber = ({ timing, gid }) => {
         }
       }
     }
+      // eslint-disable-next-line
   }, [timing]);
 
   async function betFunctionStart() {
@@ -148,9 +149,7 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 1000);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   return (
     <Box
       sx={{
@@ -411,8 +410,8 @@ const BetNumber = ({ timing, gid }) => {
               variant="body1"
               color="initial"
               sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
-            >
-              TRX {gid == 3 ? 5 : gid == 2 ? 3 : gid} Min
+            > 
+              TRX {gid === 3 ? 5 : gid === 2 ? 3 : gid} Min
             </Typography>
             <Typography
               variant="body1"
@@ -756,7 +755,7 @@ const style = {
     display: "flex",
     alignItems: "center",
     height: "30px",
-    ["@media (max-width:340px)"]: { fontSize: "13px" },
+    // ["@media (max-width:340px)"]: { fontSize: "13px" },
     cursor: "pointer",
   },
   addsumbtn: {

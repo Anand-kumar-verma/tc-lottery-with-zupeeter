@@ -1,4 +1,3 @@
-import StickyNote2OutlinedIcon from "@mui/icons-material/StickyNote2Outlined";
 import { Box, Button, Dialog, DialogActions, Stack, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -117,9 +116,9 @@ function Wingo3Min() {
 
     return () => {
       socket.off("threemintrx", handleThreeMin);
-    };
+    };// eslint-disable-next-line
   }, []);
-
+// eslint-disable-next-line
   const { isLoading, data: game_history } = useQuery(
     ["trx_gamehistory_3"],
     () => GameHistoryFn("2"),
@@ -171,6 +170,7 @@ function Wingo3Min() {
       }
     }
     dispatch(trx_game_image_index_function(array));
+    // eslint-disable-next-line
   }, [game_history?.data?.data]);
 
 
@@ -299,12 +299,13 @@ function Wingo3Min() {
                       {show_this_three_min_time_sec?.substring(1, 2)}
                     </Box>
                   </Stack>
-                );
+                );// eslint-disable-next-line
               }, [show_this_three_min_time_sec])}
             </Box>
           </Box>
           {React.useMemo(() => {
             return <ShowImages />;
+            
           }, [])}
         </Box>
         <div className="relative">
