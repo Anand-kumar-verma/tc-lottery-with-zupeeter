@@ -41,7 +41,7 @@ function Account() {
   const client = useQueryClient();
   const user_id = localStorage.getItem("user_id");
   const navigate = useNavigate();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [opend, setOpend] = useState(false);
   const [selectedImages, setselectedImages] = useState("");
   console.log(selectedImages)
   const images = [
@@ -70,7 +70,7 @@ function Account() {
 
   const { data: update_pic } = useQuery(
     ["Update_pic", selectedImages],
-    () => Update_ProfileFn(selectedImages , client),
+    () => Update_ProfileFn(selectedImages, client),
     {
       refetchOnMount: false,
       refetchOnReconnect: true,
@@ -100,8 +100,6 @@ function Account() {
     }
   }, []);
 
-  // client.refetchQueries("profile");
-
   return (
     <Layout header={false}>
       <Container>
@@ -116,7 +114,7 @@ function Account() {
         >
           <Box className="flex justify-start items-center gap-1 ">
             <Typography className=" !mt-10 !mr-1"
-              onClick={() => setModalIsOpen(true)}>
+              onClick={() => setOpend(true)}>
               <img src={profile?.rec?.User_image} alt="" className='!rounded-full  w-[72px] h-[72px]' />
 
               <BorderColor fontSize="small" className="!text-white !absolute !rounded-full !bg-gray-400  !top-24 left-20" />
@@ -124,10 +122,10 @@ function Account() {
 
 
             <ImageSelectorModal
-              selectedImages={selectedImages}
+              setOpend={setOpend}
               setselectedImages={setselectedImages}
-              isOpen={modalIsOpen}
-              onClose={() => setModalIsOpen(false)}
+              open={opend}
+              onClose={() => setOpend(false)}
               images={images} />
             <Box className="flex flex-col gap-1">
               <Box className="flex justify-start items-center">
@@ -141,7 +139,7 @@ function Account() {
                 <Typography className="text-white !text-xs">| </Typography>
                 <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
               </Box>
-              {profile?.rec?.Club !==0 && <Box className="  realtive !left-40 flex gap-3 justify-center">
+              {profile?.rec?.Club !== 0 && <Box className="  realtive !left-40 flex gap-3 justify-center">
                 <Typography className="text-white !text-xs">Rank: </Typography>
                 <Typography className="text-white !text-xs">{profile?.rec?.Club}</Typography>
               </Box>}
