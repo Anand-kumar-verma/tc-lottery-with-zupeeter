@@ -412,7 +412,7 @@ const BetNumber = ({ timing, gid }) => {
               color="initial"
               sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-              TRX Win Go {gid == 3 ? 5 : gid == 2 ? 3 : gid}Min
+              TRX {gid == 3 ? 5 : gid == 2 ? 3 : gid} Min
             </Typography>
             <Typography
               variant="body1"
