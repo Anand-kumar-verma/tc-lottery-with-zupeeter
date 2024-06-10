@@ -64,8 +64,8 @@ const WinLossPopup = ({ gid }) => {
   return (
     <Box
       sx={{
-        width: "300px",
-        height: "400px",
+        // width: "300px",
+        // height: "400px",
         margin: "auto",
         backgroundImage: `url(${
           (status?.status === "1" && Loss) || (status?.status === "2" && win)
@@ -76,17 +76,23 @@ const WinLossPopup = ({ gid }) => {
         backgroundRepeat: "no-repeat",
         position: "relative",
       }}
+       className="!w-fit !h-fit !p-2"
     >
       {!loding && newstatus && (
         <>
           <Typography
             variant="body1"
             color="initial"
-            className="crlg !text-center"
+            className={`crlgg ${status?.status === "1" ? "" : " "
+            }
+          !mr-0 !text-center 
+          `}
+           
           >
             {(status?.status === "1" && "Win") ||
               (status?.status === "2" && "Loss")}
           </Typography>
+          
 
           {/* <Box className="winerpoint">
         <Typography variant="body1" color="initial">
@@ -103,9 +109,10 @@ const WinLossPopup = ({ gid }) => {
           <Typography
             variant="body1"
             color="initial"
-            className={`bonustext ${
-              status?.status === "1" ? "!text-white" : "!text-white"
-            }`}
+            className={` ${status?.status === "1" ? "!text-white !pb-14" : "!text-white  !text-xl"
+            }
+          !mr-0 !text-center 
+          `}
           >
             {(status?.status === "1" && "Bonus") ||
               (status?.status === "2" && "Loss Amount")}
@@ -114,16 +121,17 @@ const WinLossPopup = ({ gid }) => {
             variant="body1"
             color="initial"
             className={`bonusamt  ${
-              status?.status === "1" ? "!text-white" : "!text-white"
+              status?.status === "1" ? "!text-green-600" : "!text-white "
             }`}
+            
           >
             ₹ {Number(status?.amount || 0)?.toFixed(2) || 0}
           </Typography>
           <Typography
             variant="body1"
             color="initial"
-            className={`bonuspr ${
-              status?.status === "1" ? "!text-pink-500" : "!text-white"
+            className={`bonuspr !py-2 ${
+              status?.status === "1" ? "!text-pink-500 !pt-5 !px-5" : "!text-white !px-8"
             }`}
           >
             Period{" "}
@@ -132,7 +140,7 @@ const WinLossPopup = ({ gid }) => {
               (status?.gameid === "5" && "Five")}{" "}
             minute
           </Typography>
-          <Typography variant="body1" color="initial" className="bonuscl">
+          <Typography variant="body1" color="initial" className="bonuscl !px-5">
             Auto Close in 5 sec{" "}
           </Typography>
         </>

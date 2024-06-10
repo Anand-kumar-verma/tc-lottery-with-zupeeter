@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> a55f7a65999096255c8289bf934c4648f3242b02
 import {
   Box,
   Button,
@@ -13,10 +9,7 @@ import {
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-<<<<<<< HEAD
-=======
 import toast from "react-hot-toast";
->>>>>>> a55f7a65999096255c8289bf934c4648f3242b02
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";

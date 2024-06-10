@@ -68,7 +68,13 @@
   font-size: 10px !important;
 }
 .crlg {
-  padding-top: 123px !important;
+  padding-top: 100px !important;
+  font-size: 25px !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+.crlgg {
+  padding-top: 70px !important;
   font-size: 25px !important;
   font-weight: 600 !important;
   color: white !important;
@@ -89,7 +95,7 @@
 
 .bonuspr {
   text-align: center !important;
-  margin-top: 8px !important;
+  /* margin-top: 8px !important; */
   color: white !important;
   font-size: 15px !important;
   font-weight: 600 !important;
@@ -97,7 +103,7 @@
 
 .bonuscl {
   text-align: center !important;
-  margin-top: 10px !important;
+  margin-top: -10px !important;
   color: white !important;
   font-size: 15px !important;
   font-weight: 600 !important;

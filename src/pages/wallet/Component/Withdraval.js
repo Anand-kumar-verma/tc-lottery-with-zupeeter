@@ -44,7 +44,9 @@ function Withdraval() {
   const audioRefMusic = React.useRef(null);
   const [isAllValue, setIsAllValue] = useState(false);
   const [visibleData, setvisibleData] = useState([]);
+   // eslint-disable-next-line
   const [balance, setBalance] = useState("");
+   // eslint-disable-next-line
   const [bet, setBet] = useState("");
   const navigate = useNavigate();
   const [loding, setloding] = useState(false);
@@ -129,10 +131,10 @@ function Withdraval() {
       refetchOnReconnect: true,
     }
   );
-
+ // eslint-disable-next-line
   const res = data?.data?.earning?.info || [];
 
-  const { isLoading: bankList, data: game_history } = useQuery(
+  const { data: game_history } = useQuery(
     ["bank_details"],
     () => BankDetailsFUnction(),
     {
@@ -859,7 +861,6 @@ const style = {
     fontWeight: "700",
     fontSize: "15px",
     height: "0.93333rem",
-    width: "100%",
     // background:
     //   "linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%), linear-gradient(180deg, #cfd1de 0%, #c7c9d9 100%)",
     backgroundSize: "100% 100%, 100% 100%",

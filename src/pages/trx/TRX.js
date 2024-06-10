@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -21,7 +21,6 @@ import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
 import {
   getBalanceFunction,
-  returnWinningAmount,
 } from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import WinLossPopup from "./WinLossPopup";
@@ -56,8 +55,9 @@ function TRX() {
         // }, 5000);
       }
     }, 1000);
+     // eslint-disable-next-line
   }, [dummycounter,res]);
-  const { isLoading, data: wallet_amount } = useQuery(
+  const { data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
     {

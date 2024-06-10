@@ -23,7 +23,6 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   const number = localStorage.getItem("betApplied")?.split("_")?.[2];
   const result = localStorage.getItem("anand_re");
   const amount = localStorage.getItem("betApplied")?.split("_")?.[3];
-  const user_id = localStorage.getItem("user_id");
   console.log(localStorage.getItem("betApplied"));
   const [loding, setloding] = useState(false);
   const [status, setstatus] = useState("");
@@ -63,6 +62,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
 
   useEffect(() => {
     MyHistoryFn();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -73,19 +73,19 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   return (
     <Box
       sx={{
-        width: "300px",
-        height: "400px",
+        // width: "300px",
+        // height: "400px",
         margin: "auto",
-        backgroundImage: `url(${
-          (status?.status === "1" && Loss) || (status?.status === "2" && win)
-        })`,
+        backgroundImage: `url(${(status?.status === "1" && Loss) || (status?.status === "2" && win)
+          })`,
         // backgroundImage: `url(${win})`,
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         position: "relative",
       }}
-    >
+       className="!w-fit !h-fit !p-2"
+       >
       {!loding && newstatus && (
         <>
           <Typography
@@ -97,7 +97,8 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
               (status?.status === "2" && "Loss")}
           </Typography>
 
-          {/* <Box className="winerpoint">
+        {/*
+         <Box className="winerpoint">
         <Typography variant="body1" color="initial">
           Game Results{" "}
         </Typography>
@@ -108,63 +109,58 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
         <Typography variant="body1" color="initial">
           small
         </Typography>
-      </Box> */}
-          <Typography
+      </Box> 
+      */}
+         <Typography
             variant="body1"
             color="initial"
-            className={`bonustext ${
-              status?.status === "1" ? "!text-white" : "!text-white"
-            }
-            !mr-0
+            className={` ${status?.status === "1" ? "!text-white" : "!text-white !pb-5 !text-2xl"
+              }
+            !mr-0 !text-center 
             `}
           >
             {(status?.status === "1" && (
               <>
-                <div className="!text-sm !ml-7 !flex !items-center !gap-2">
+                <div className="!text-sm !ml-4 !flex !items-center !gap-2">
                   <span>Game Results: </span>
                   <span
-                    className={`${
-                      [1, 3, 7, 9]?.includes(Number(result) - 1)
+                    className={`${[1, 3, 7, 9]?.includes(Number(result) - 1)
                         ? "!bg-green-500"
                         : "!bg-red-500"
-                    }
-                  ${
-                    String(Number(result) - 1) === String(0) &&
-                    "!bg-gradient-to-r from-red-500 to-purple-500"
-                  }
-                  ${
-                    String(Number(result) - 1) === String(5) &&
-                    "!bg-gradient-to-r from-green-500 to-purple-500"
-                  }
+                      }
+                  ${String(Number(result) - 1) === String(0) &&
+                      "!bg-gradient-to-r from-red-500 to-purple-500"
+                      }
+                  ${String(Number(result) - 1) === String(5) &&
+                      "!bg-gradient-to-r from-green-500 to-purple-500"
+                      }
                   !text-center !p-2 !rounded-md
                   `}
                   >
                     {(String(Number(result) - 1) === String(0) &&
                       "Red Purple") ||
-                    (String(Number(result) - 1) === String(5) &&
-                      "Green Purple") ||
-                    [1, 3, 7, 9]?.includes(Number(result) - 1)
+                      (String(Number(result) - 1) === String(5) &&
+                        "Green Purple") ||
+                      [1, 3, 7, 9]?.includes(Number(result) - 1)
                       ? "Green"
                       : "Red"}
                   </span>
                   <img
                     className="!h-[10%] !w-[10%]"
                     src={array[Number(result) - 1]}
+                    alt=""
                   />
                   <span
-                    className={`${
-                      [1, 3, 7, 9]?.includes(Number(result) - 1)
+                    className={`${[1, 3, 7, 9]?.includes(Number(result) - 1)
                         ? "!bg-green-500"
                         : "!bg-red-500"
-                    }
-                  ${
-                    String(Number(result) - 1) === String(0) &&
-                    "!bg-gradient-to-r from-red-500 to-purple-500"
-                  }
-                  ${
-                    String(Number(result) - 1) === String(5) &&
-                    "!bg-gradient-to-r from-green-500 to-purple-500"
-                  }
+                      }
+                  ${String(Number(result) - 1) === String(0) &&
+                      "!bg-gradient-to-r from-red-500 to-purple-500"
+                      }
+                  ${String(Number(result) - 1) === String(5) &&
+                      "!bg-gradient-to-r from-green-500 to-purple-500"
+                      }
                   !text-center !p-2 !rounded-md
                   `}
                   >
@@ -179,22 +175,20 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
           <Typography
             variant="body1"
             color="initial"
-            className={`bonusamt  ${
-              status?.status === "1" ? "!text-green-500" : "!text-red-300"
-            }`}
+            className={`bonusamt  ${status?.status === "1" ? "!text-green-500 !pb-5" : "!text-red-300 !pb-5"
+              }`}
           >
             ₹ {Number(status?.amount || 0)?.toFixed(2) || 0}
           </Typography>
           <Typography
             variant="body1"
             color="initial"
-            className={`bonuspr ${
-              status?.status === "1" ? "!text-pink-500" : "!text-red-300"
-            } !text-sm`}
+            className={`bonuspr ${status?.status === "1" ? "!text-pink-500 " : "!text-red-300  !text-xs !px-5 !pb-5"
+              }`}
           >
-            Period Minute: {Number(next_step) - 1}
+            Period Min: {Number(next_step) - 1}
           </Typography>
-          <Typography variant="body1" color="initial" className="bonuscl">
+          <Typography variant="body1" color="initial" className="bonuscl ">
             Auto Close in 3 sec{" "}
           </Typography>
         </>
