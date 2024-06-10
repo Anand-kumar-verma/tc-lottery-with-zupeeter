@@ -19,7 +19,10 @@ import music from "../../assets/images/music.png";
 import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
-import { getBalanceFunction, returnWinningAmount } from "../../services/apiCallings";
+import {
+  getBalanceFunction,
+  returnWinningAmount,
+} from "../../services/apiCallings";
 import theme from "../../utils/theme";
 import WinLossPopup from "./WinLossPopup";
 import Wingo10Min from "./component/Wingo10Min";
@@ -29,6 +32,7 @@ import Wingo5Min from "./component/Wingo5Min";
 import toast from "react-hot-toast";
 
 function TRX() {
+  const res = localStorage.getItem("anand_re");
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
     // eslint-disable-next-line
@@ -37,10 +41,6 @@ function TRX() {
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
 
-  useEffect(() => {
-   const res =  returnWinningAmount(9,10,9);
-   console.log(res);
-  }, []);
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -48,12 +48,16 @@ function TRX() {
   React.useEffect(() => {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
-        setOpenDialogBox(true);
+      
+        res && setOpenDialogBox(true);
+        // setTimeout(() => {
+        //   setOpenDialogBox(false);
+        //   localStorage.setItem("betApplied", false);
+        // }, 5000);
       }
     }, 1000);
-      // eslint-disable-next-line
-  }, [dummycounter]);
-  const {  data: wallet_amount } = useQuery(
+  }, [dummycounter,res]);
+  const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
     {
@@ -63,6 +67,7 @@ function TRX() {
   );
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
+
 
   return (
     <Container>

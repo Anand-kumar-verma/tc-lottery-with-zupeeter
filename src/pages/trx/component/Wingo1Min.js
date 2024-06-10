@@ -4,7 +4,7 @@ import {
   Dialog,
   DialogActions,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
@@ -16,7 +16,11 @@ import countdownlast from "../../../assets/images/countdownlast.mp3";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import trxbg from "../../../assets/images/trxbg.png";
-import { dummycounterFun, trx_game_image_index_function, updateNextCounter } from "../../../redux/slices/counterSlice";
+import {
+  dummycounterFun,
+  trx_game_image_index_function,
+  updateNextCounter,
+} from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
@@ -76,12 +80,17 @@ function Wingo1Min() {
         client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
         client.refetchQueries("trx_gamehistory");
-        dispatch(dummycounterFun());
       }
     };
+    const handleOneMinResult = (result) => {
+      localStorage.setItem("anand_re", result);
+      dispatch(dummycounterFun());
+    };
     socket.on("onemintrx", handleOneMin);
+    socket.on("result", handleOneMinResult);
     return () => {
       socket.off("onemintrx", handleOneMin);
+      socket.off("result", handleOneMinResult);
     };
      // eslint-disable-next-line
   }, []);
@@ -112,7 +121,6 @@ function Wingo1Min() {
     }
   };
 
-  
   React.useEffect(() => {
     console.log(
       game_history?.data?.data
@@ -139,9 +147,6 @@ function Wingo1Min() {
     dispatch(trx_game_image_index_function(array));
      // eslint-disable-next-line
   }, [game_history?.data?.data]);
-
-
-
 
   const handlePlaySoundLast = async () => {
     try {
@@ -210,8 +215,10 @@ function Wingo1Min() {
                 return (
                   <>
                     <Stack direction="row" alignItems="center">
-                    <Typography className="border border-white text-white px-1 !text-sm rounded" >Period</Typography>
-                   
+                      <Typography className="border border-white text-white px-1 !text-sm rounded">
+                        Period
+                      </Typography>
+
                       <Button
                         onClick={handleClickOpen}
                         variant="text"
@@ -314,7 +321,7 @@ function Wingo1Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                    className="!bg-[#F48901]  !text-white !h-56 !pb-5"
+                  className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_one_min_time?.substring(0, 1)}
                 </div>
@@ -330,7 +337,7 @@ function Wingo1Min() {
                     justifyContent: "center",
                     // color: "white",
                   }}
-                    className="!bg-[#F48901]  !text-white !h-56 !pb-5"
+                  className="!bg-[#F48901]  !text-white !h-56 !pb-5"
                 >
                   {show_this_one_min_time?.substring(1, 2)}
                 </div>

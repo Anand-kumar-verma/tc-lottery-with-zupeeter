@@ -90,7 +90,8 @@ function Withdraval() {
       client.refetchQueries("withdrawl_history");
       client.refetchQueries("wallet_amount_amount");
       client.refetchQueries("profile");
-      navigate("/account");
+      // navigate("/account");
+      console.log(res);
     } catch (e) {
       console.log(e);
     }

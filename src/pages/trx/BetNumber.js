@@ -113,7 +113,14 @@ const BetNumber = ({ timing, gid }) => {
             />
           );
           fk.setFieldValue("isSuccessPlaceBet", true);
-          localStorage.setItem("betApplied", `${gid}_true`);
+          localStorage.setItem(
+            "betApplied",
+            `${gid}_true_${
+              Number(reqBody.number) <= 10
+                ? Number(reqBody.number) - 1
+                : reqBody.number
+            }_${reqBody.amount}`
+          );
         } else {
           toast(
             <FalseCheck

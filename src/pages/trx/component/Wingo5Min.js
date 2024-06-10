@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> a55f7a65999096255c8289bf934c4648f3242b02
 import {
   Box,
   Button,
@@ -7,30 +10,33 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import { useFormik } from "formik";
 import React, { useState } from "react";
+<<<<<<< HEAD
+=======
+import toast from "react-hot-toast";
+>>>>>>> a55f7a65999096255c8289bf934c4648f3242b02
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
+import timerbg1 from "../../../assets/images/timerbg.png";
+import timerbg2 from "../../../assets/images/timerbg2.png";
 import {
   dummycounterFun,
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
+import { endpoint } from "../../../services/urls";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
-import ShowImages from "./ShowImages";
-import { NavLink } from "react-router-dom";
-import timerbg1 from "../../../assets/images/timerbg.png";
-import timerbg2 from "../../../assets/images/timerbg2.png";
 import Howtoplay from "./Howtoplay";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { endpoint } from "../../../services/urls";
+import ShowImages from "./ShowImages";
 
 function Wingo5Min() {
   const [open, setOpen] = useState(false);
