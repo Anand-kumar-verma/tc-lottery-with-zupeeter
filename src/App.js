@@ -17,6 +17,8 @@ function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
   const isAuthenticated = localStorage.getItem("user_id");
 
+  
+
   useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
