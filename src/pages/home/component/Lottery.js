@@ -44,7 +44,7 @@ function Lottery() {
           Lottery
         </Typography>
       </Stack>
-      <NavLink to={status?.trx_status !== "0" && "/wingo"}>
+      <NavLink to={status?.wingo_status !== "0" && "/wingo"}>
           <Box sx={style.winbox}>
             <Box
               component="img"

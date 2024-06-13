@@ -30,6 +30,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import FalseCheck from "../../shared/check/FalseCheck";
+
 const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
@@ -136,7 +137,8 @@ const BetNumber = ({ timing, gid }) => {
       toast(e?.message);
       console.log(e);
     }
-    // client.refetchQueries("walletamount");
+    
+    client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
     client.refetchQueries("myAll_trx_history");
     fk.setFieldValue("balance", "1");
@@ -156,6 +158,7 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 1000);
   };
+
 
   return (
     <Box

@@ -68,18 +68,21 @@ const BetNumber = ({ timing, gid }) => {
 
   useEffect(() => {
     if (gid === "1") {
-      if (Number(timing) <= 10) {setOpen(false)
+      if (Number(timing) <= 10) {
+        setOpen(false)
         fk.handleReset()
       };
     } else if (gid === "2") {
       if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false)
           fk.handleReset()
         };
       }
     } else {
       if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 10) {setOpen(false)
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false)
           fk.handleReset()
         };
       }
@@ -112,12 +115,23 @@ const BetNumber = ({ timing, gid }) => {
           );
           fk.setFieldValue("isSuccessPlaceBet", true);
           localStorage.setItem("betApplied", `${gid}_true`);
+          // const betAppliedItems = JSON.parse(localStorage.getItem("betAppliedItems")) || [];
+          // betAppliedItems.push(`${gid}_true`); 
+          // localStorage.setItem("betAppliedItems", JSON.stringify(betAppliedItems));
+          // if (betAppliedItems.length >= 3) {
+          //   localStorage.setItem("bet", "false");
+          // } else {
+          //   localStorage.setItem("bet", "true");
+          // }
         } else {
           toast(
             <FalseCheck
               message={<span className="!text-sm">{response?.data?.msg}</span>}
             />
           );
+
+        
+         
         }
 
         setOpen(false);
@@ -212,7 +226,7 @@ const BetNumber = ({ timing, gid }) => {
             borderRadius: "10px",
             mt: 2,
           }}
-  
+
         >
           <Box
             sx={{ width: "17%", mb: 1 }}
@@ -322,19 +336,19 @@ const BetNumber = ({ timing, gid }) => {
           justifyContent="space-between"
         >
           <Button variant="outlined" onClick={generatenumber}
-         >
+          >
             Random
           </Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return (
               <Box
-               key={i}
-                
+                key={i}
+
                 onClick={() => fk.setFieldValue("qnt", i)}
-                sx={style.bacancebtn3 }
-                className={`${fk.values.qnt === i?"!bg-green-600" :"!bg-gray-400"}  cursor-pointer`}
+                sx={style.bacancebtn3}
+                className={`${fk.values.qnt === i ? "!bg-green-600" : "!bg-gray-400"}  cursor-pointer`}
               >
-              X{i} 
+                X{i}
               </Box>
             );
           })}
@@ -389,26 +403,26 @@ const BetNumber = ({ timing, gid }) => {
             }}
             className={
               selectNumber === "green" ||
-              selectNumber === "1" ||
-              selectNumber === "3" ||
-              selectNumber === "7" ||
-              selectNumber === "9"
+                selectNumber === "1" ||
+                selectNumber === "3" ||
+                selectNumber === "7" ||
+                selectNumber === "9"
                 ? "!bg-[#40AD72]"
                 : selectNumber === "voilet"
-                ? "!bg-[#B659FE]"
-                : selectNumber === "red" ||
-                  selectNumber === "2" ||
-                  selectNumber === "4" ||
-                  selectNumber === "6" ||
-                  selectNumber === "8"
-                ? "!bg-[#FD565C]"
-                : selectNumber === "Small"
-                ? "!bg-[#F48901]"
-                : selectNumber === "Big"
-                ? "!bg-[#6DA7F4]"
-                : selectNumber === "0"
-                ? "!bg-[#BF6DFE]"
-                : selectNumber === "5" && "!bg-[#BF6DFE]"
+                  ? "!bg-[#B659FE]"
+                  : selectNumber === "red" ||
+                    selectNumber === "2" ||
+                    selectNumber === "4" ||
+                    selectNumber === "6" ||
+                    selectNumber === "8"
+                    ? "!bg-[#FD565C]"
+                    : selectNumber === "Small"
+                      ? "!bg-[#F48901]"
+                      : selectNumber === "Big"
+                        ? "!bg-[#6DA7F4]"
+                        : selectNumber === "0"
+                          ? "!bg-[#BF6DFE]"
+                          : selectNumber === "5" && "!bg-[#BF6DFE]"
             }
           >
             {" "}
@@ -433,17 +447,17 @@ const BetNumber = ({ timing, gid }) => {
                 borderRadius: "5px",
               }}
             >
-             Select{" "}
-             {random
+              Select{" "}
+              {random
                 ? Number(random) <= 4
                   ? `:  ${selectNumber} Small`
                   : ` : ${selectNumber} Big`
                 : isNaN(Number(selectNumber))
-                ? selectNumber?.toString()?.toLocaleUpperCase()
-                : Number(selectNumber) <= 4
-                ? `: ${selectNumber} Small`
-                : ` : ${selectNumber} Big`
-                } 
+                  ? selectNumber?.toString()?.toLocaleUpperCase()
+                  : Number(selectNumber) <= 4
+                    ? `: ${selectNumber} Small`
+                    : ` : ${selectNumber} Big`
+              }
             </Typography>
           </Box>
           <Box mt={5} px={2}>
@@ -465,36 +479,35 @@ const BetNumber = ({ timing, gid }) => {
                         onClick={() => fk.setFieldValue("balance", i)}
                         sx={style.bacancebtn}
                         className={` !cursor-pointer !text-black bg-gray-200
-                          ${
-                            (selectNumber === "green" ||
-                              selectNumber === "1" ||
-                              selectNumber === "3" ||
-                              selectNumber === "7" ||
-                              selectNumber === "9") &&
+                          ${(selectNumber === "green" ||
+                            selectNumber === "1" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "9") &&
                             String(fk?.values?.balance) === String(i)
-                              ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet" &&
-                                String(fk?.values?.balance) === String(i)
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "voilet" &&
+                              String(fk?.values?.balance) === String(i)
                               ? "!bg-[#B659FE]"
                               : (selectNumber === "red" ||
-                                  selectNumber === "2" ||
-                                  selectNumber === "4" ||
-                                  selectNumber === "6" ||
-                                  selectNumber === "8") &&
+                                selectNumber === "2" ||
+                                selectNumber === "4" ||
+                                selectNumber === "6" ||
+                                selectNumber === "8") &&
                                 String(fk?.values?.balance) === String(i)
-                              ? "!bg-[#FD565C]"
-                              : selectNumber === "Small" &&
-                                String(fk?.values?.balance) === String(i)
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "Big" &&
-                                String(fk?.values?.balance) === String(i)
-                              ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0" &&
-                                String(fk?.values?.balance) === String(i)
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" &&
-                                String(fk?.values?.balance) === String(i) &&
-                                "!bg-[#BF6DFE]"
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "Small" &&
+                                  String(fk?.values?.balance) === String(i)
+                                  ? "!bg-[#F48901]"
+                                  : selectNumber === "Big" &&
+                                    String(fk?.values?.balance) === String(i)
+                                    ? "!bg-[#6DA7F4]"
+                                    : selectNumber === "0" &&
+                                      String(fk?.values?.balance) === String(i)
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" &&
+                                      String(fk?.values?.balance) === String(i) &&
+                                      "!bg-[#BF6DFE]"
                           }
                        `}
                       >
@@ -519,28 +532,27 @@ const BetNumber = ({ timing, gid }) => {
                 >
                   <Box
                     className={` !cursor-pointer
-                      ${
-                        selectNumber === "green" ||
+                      ${selectNumber === "green" ||
                         selectNumber === "1" ||
                         selectNumber === "3" ||
                         selectNumber === "7" ||
                         selectNumber === "9"
-                          ? "!bg-[#40AD72]"
-                          : selectNumber === "voilet"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
                           ? "!bg-[#B659FE]"
                           : selectNumber === "red" ||
                             selectNumber === "2" ||
                             selectNumber === "4" ||
                             selectNumber === "6" ||
                             selectNumber === "8"
-                          ? "!bg-[#FD565C]"
-                          : selectNumber === "Small"
-                          ? "!bg-[#F48901]"
-                          : selectNumber === "Big"
-                          ? "!bg-[#6DA7F4]"
-                          : selectNumber === "0"
-                          ? "!bg-[#BF6DFE]"
-                          : selectNumber === "5" && "!bg-[#BF6DFE]"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "Small"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "Big"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "0"
+                                  ? "!bg-[#BF6DFE]"
+                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
                       }
                     `}
                     sx={style.addsumbtn}
@@ -564,29 +576,28 @@ const BetNumber = ({ timing, gid }) => {
                   />
                   <Box
                     className={` !cursor-pointer
-                     ${
-                       selectNumber === "green" ||
-                       selectNumber === "1" ||
-                       selectNumber === "3" ||
-                       selectNumber === "7" ||
-                       selectNumber === "9"
-                         ? "!bg-[#40AD72]"
-                         : selectNumber === "voilet"
-                         ? "!bg-[#B659FE]"
-                         : selectNumber === "red" ||
-                           selectNumber === "2" ||
-                           selectNumber === "4" ||
-                           selectNumber === "6" ||
-                           selectNumber === "8"
-                         ? "!bg-[#FD565C]"
-                         : selectNumber === "Small"
-                         ? "!bg-[#F48901]"
-                         : selectNumber === "Big"
-                         ? "!bg-[#6DA7F4]"
-                         : selectNumber === "0"
-                         ? "!bg-[#BF6DFE]"
-                         : selectNumber === "5" && "!bg-[#BF6DFE]"
-                     }
+                     ${selectNumber === "green" ||
+                        selectNumber === "1" ||
+                        selectNumber === "3" ||
+                        selectNumber === "7" ||
+                        selectNumber === "9"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
+                          ? "!bg-[#B659FE]"
+                          : selectNumber === "red" ||
+                            selectNumber === "2" ||
+                            selectNumber === "4" ||
+                            selectNumber === "6" ||
+                            selectNumber === "8"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "Small"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "Big"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "0"
+                                  ? "!bg-[#BF6DFE]"
+                                  : selectNumber === "5" && "!bg-[#BF6DFE]"
+                      }
                     `}
                     sx={style.addsumbtn}
                     onClick={() =>
@@ -612,36 +623,35 @@ const BetNumber = ({ timing, gid }) => {
                         onClick={() => fk.setFieldValue("qnt", i)}
                         sx={style.bacancebtn2}
                         className={` !cursor-pointer bg-gray-400
-                          ${
-                            (selectNumber === "green" ||
-                              selectNumber === "1" ||
-                              selectNumber === "3" ||
-                              selectNumber === "7" ||
-                              selectNumber === "9") &&
+                          ${(selectNumber === "green" ||
+                            selectNumber === "1" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "9") &&
                             String(fk.values.qnt) === String(i)
-                              ? "!bg-[#40AD72]"
-                              : selectNumber === "voilet" &&
-                                String(fk.values.qnt) === String(i)
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "voilet" &&
+                              String(fk.values.qnt) === String(i)
                               ? "!bg-[#B659FE]"
                               : (selectNumber === "red" ||
-                                  selectNumber === "2" ||
-                                  selectNumber === "4" ||
-                                  selectNumber === "6" ||
-                                  selectNumber === "8") &&
+                                selectNumber === "2" ||
+                                selectNumber === "4" ||
+                                selectNumber === "6" ||
+                                selectNumber === "8") &&
                                 String(fk.values.qnt) === String(i)
-                              ? "!bg-[#FD565C]"
-                              : selectNumber === "Small" &&
-                                String(fk.values.qnt) === String(i)
-                              ? "!bg-[#F48901]"
-                              : selectNumber === "Big" &&
-                                String(fk.values.qnt) === String(i)
-                              ? "!bg-[#6DA7F4]"
-                              : selectNumber === "0" &&
-                                String(fk.values.qnt) === String(i)
-                              ? "!bg-[#BF6DFE]"
-                              : selectNumber === "5" &&
-                                String(fk.values.qnt) === String(i) &&
-                                "!bg-[#BF6DFE]"
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "Small" &&
+                                  String(fk.values.qnt) === String(i)
+                                  ? "!bg-[#F48901]"
+                                  : selectNumber === "Big" &&
+                                    String(fk.values.qnt) === String(i)
+                                    ? "!bg-[#6DA7F4]"
+                                    : selectNumber === "0" &&
+                                      String(fk.values.qnt) === String(i)
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "5" &&
+                                      String(fk.values.qnt) === String(i) &&
+                                      "!bg-[#BF6DFE]"
                           }`}
                       >
                         X{i}
@@ -694,28 +704,27 @@ const BetNumber = ({ timing, gid }) => {
             <Grid item xs={8}>
               <Button
                 className={`
-                  ${
-                    selectNumber === "green" ||
+                  ${selectNumber === "green" ||
                     selectNumber === "1" ||
                     selectNumber === "3" ||
                     selectNumber === "7" ||
                     selectNumber === "9"
-                      ? "!bg-[#40AD72]"
-                      : selectNumber === "voilet"
+                    ? "!bg-[#40AD72]"
+                    : selectNumber === "voilet"
                       ? "!bg-[#B659FE]"
                       : selectNumber === "red" ||
                         selectNumber === "2" ||
                         selectNumber === "4" ||
                         selectNumber === "6" ||
                         selectNumber === "8"
-                      ? "!bg-[#FD565C]"
-                      : selectNumber === "Small"
-                      ? "!bg-[#F48901]"
-                      : selectNumber === "Big"
-                      ? "!bg-[#6DA7F4]"
-                      : selectNumber === "0"
-                      ? "!bg-[#BF6DFE]"
-                      : selectNumber === "5" && "!bg-[#BF6DFE]"
+                        ? "!bg-[#FD565C]"
+                        : selectNumber === "Small"
+                          ? "!bg-[#F48901]"
+                          : selectNumber === "Big"
+                            ? "!bg-[#6DA7F4]"
+                            : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "5" && "!bg-[#BF6DFE]"
                   } !cursor-pointer`}
                 variant="contained"
                 sx={style.submitbtn}
@@ -796,7 +805,7 @@ const style = {
   },
   bacancebtn3active: {
     backgroundColorolor: "#45a049", /* Darker green when clicked */
-},
+  },
 
   addsumbtn: {
     padding: "4px 13px",
