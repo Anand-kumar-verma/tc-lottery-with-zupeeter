@@ -36,6 +36,7 @@ import axios from "axios";
 import moment from "moment";
 
 import { endpoint, usdt_base_url } from "../../../services/urls";
+import QRScreen from "./QRScreen";
 function Deposite() {
   const user_id = localStorage.getItem("user_id");
   const [isAllValue, setIsAllValue] = useState(false);
@@ -43,6 +44,8 @@ function Deposite() {
   const [balance, setBalance] = useState("");
   const audioRefMusic = React.useRef(null);
   const [loding, setloding] = useState(false);
+  const [show_time, set_show_time] = React.useState("0_0");
+  const [deposit_req_data, setDeposit_req_data] = React.useState();
   const { isLoading: history, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -82,9 +85,25 @@ function Deposite() {
         txtamount: fk.values.amount,
       };
       if (!reqBody.txtamount) return toast("Plese enter all data");
-      WalletDipositFun(reqBody);
+
+      // WalletDipositFun(reqBody);
+      getStatusOfApi(reqBody);
     },
   });
+
+  async function getStatusOfApi(reqBody) {
+    try {
+      const res = await axios.get(endpoint?.payin_status);
+      console.log(res);
+
+      const result = res?.data?.earning?.api_type;
+
+      if (result === "SWNL") WalletDipositFunSWNL(reqBody);
+      else if (result === "Indian Pay") WalletDipositFun(reqBody);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async function WalletDipositFun(reqBody) {
     setloding(true);
@@ -101,6 +120,19 @@ function Deposite() {
     setloding(false);
     // client.refetchQueries("bank_details");
   }
+  async function WalletDipositFunSWNL(reqBody) {
+    setloding(true);
+    try {
+      const res = await axios.post(endpoint?.swnl_pay_in_api, reqBody);
+      console.log(res);
+      const qr = res?.data?.earning?.msg;
+      qr && setDeposit_req_data(qr);
+    } catch (e) {
+      console.log(e);
+    }
+    setloding(false);
+    // client.refetchQueries("bank_details");
+  }
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -110,6 +142,32 @@ function Deposite() {
   React.useEffect(() => {
     handlePlaySound();
   }, []);
+
+  React.useEffect(() => {
+    if (deposit_req_data) {
+      let min = 0;
+      let sec = 59;
+      const interval = setInterval(() => {
+        set_show_time(`${min}_${sec}`);
+
+        sec--;
+
+        if (sec < 0) {
+          sec = 59;
+          min--;
+
+          if (min < 0) {
+            sec = 59;
+            min = 0;
+            clearInterval(interval);
+            setDeposit_req_data();
+            set_show_time("0_0");
+            setloding(false);
+          }
+        }
+      }, 1000);
+    }
+  }, [deposit_req_data]);
 
   const handlePlaySound = async () => {
     try {
@@ -131,6 +189,12 @@ function Deposite() {
       </audio>
     );
   }, []);
+
+  if (deposit_req_data) {
+    return (
+      <QRScreen deposit_req_data={deposit_req_data} show_time={show_time} />
+    );
+  }
 
   return (
     <Container sx={{ background: "#F7F8FF" }}>
@@ -556,9 +620,7 @@ function Deposite() {
               }}
             >
               <Box>
-                <Typography
-                 className="!bg-orange-400 !text-white rounded px-2 py-1 !flex justify-center"
-                >
+                <Typography className="!bg-orange-400 !text-white rounded px-2 py-1 !flex justify-center">
                   Deposit
                 </Typography>
               </Box>

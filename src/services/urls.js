@@ -64,4 +64,7 @@ export const endpoint = {
   view_paying_api: `${baseUrl}/api/view_paying_api`,
   update_profile_pic: `${baseUrl}/api/update_profile_pic`,
   win_list_last: `${baseUrl}/api/win_list_last`,
+
+  payin_status:`${baseUrl}/api/payin_api`,
+  swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`
 };

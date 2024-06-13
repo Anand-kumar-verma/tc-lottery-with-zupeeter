@@ -1,24 +1,23 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import toast from "react-hot-toast";
+import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import depositeimg from "../../assets/images/deposite.png";
 import dhistory from "../../assets/images/dhistory.png";
-import walletsimg from "../../assets/images/walletsimg.png";
 import whistory from "../../assets/images/whistory.png";
 import withdraw from "../../assets/images/withdraw.png";
 import Layout from "../../component/layout/Layout";
-import theme from "../../utils/theme";
 import {
   ProfileDataFunction,
   checkTokenValidity,
   depositHistoryFunction,
   getBalanceFunction,
 } from "../../services/apiCallings";
-import { useQuery } from "react-query";
 import { rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
-import toast from "react-hot-toast";
+import theme from "../../utils/theme";
 
 function Wallet() {
   const [balance, setBalance] = useState("");
