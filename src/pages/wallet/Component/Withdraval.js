@@ -429,6 +429,7 @@ function Withdraval() {
           <InputBase
             id="t_password"
             name="t_password"
+            type="password"
             onChange={fk.handleChange}
             value={fk.values.t_password}
             sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}

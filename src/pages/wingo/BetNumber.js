@@ -49,10 +49,6 @@ const BetNumber = ({ timing, gid }) => {
     qnt: "1",
   };
 
-
-  
-
-
   useEffect(() => {
     getBalanceFunction(setBalance);
   }, []);

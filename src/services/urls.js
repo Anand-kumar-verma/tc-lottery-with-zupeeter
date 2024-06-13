@@ -64,4 +64,6 @@ export const endpoint = {
   view_paying_api: `${baseUrl}/api/view_paying_api`,
   update_profile_pic: `${baseUrl}/api/update_profile_pic`,
   win_list_last: `${baseUrl}/api/win_list_last`,
+
+
 };

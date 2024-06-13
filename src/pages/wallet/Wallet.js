@@ -18,9 +18,12 @@ import {
 import { useQuery } from "react-query";
 import { rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import toast from "react-hot-toast";
 
 function Wallet() {
   const [balance, setBalance] = useState("");
+  const or_m_user_type = localStorage.getItem("or_m_user_type");
+
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount_amount"],
     () => getBalanceFunction(setBalance),
@@ -306,7 +309,61 @@ function Wallet() {
             </Box>
           </Stack>
           <Button sx={style.mainwallettrbutton}>Main wallet transfer</Button>
+          {or_m_user_type === "Dummy User" ? 
+          <Stack direction="row" sx={style.stack}
+          >
+        <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+              <Box sx={style.innerBox}>
+                <Box
+                  component="img"
+                  src={depositeimg}
+                  sx={style.innerBoximg}
+                ></Box>
+              </Box>
+              <Typography variant="body1" color="initial" sx={style.typography}>
+                Deposit
+              </Typography>
+            </Box>
+
+            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+              <Box sx={style.innerBox}>
+                <Box
+                  component="img"
+                  src={withdraw}
+                  sx={style.innerBoximg}
+                ></Box>
+              </Box>
+              <Typography variant="body1" color="initial" sx={style.typography}>
+                Withdraw
+              </Typography>
+            </Box>
+            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+              <Box sx={style.innerBox}>
+                <Box
+                  component="img"
+                  src={dhistory}
+                  sx={style.innerBoximg}
+                ></Box>
+              </Box>
+              <Typography variant="body1" color="initial" sx={style.typography}>
+                Deposit history
+              </Typography>
+            </Box>
+            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+              <Box sx={style.innerBox}>
+                <Box
+                  component="img"
+                  src={whistory}
+                  sx={style.innerBoximg}
+                ></Box>
+              </Box>
+              <Typography variant="body1" color="initial" sx={style.typography}>
+                Withdrawal history
+              </Typography>
+            </Box>
+          </Stack> : (
           <Stack direction="row" sx={style.stack}>
+      
             <Box sx={style.box} component={NavLink} to="/deposit">
               <Box sx={style.innerBox}>
                 <Box
@@ -356,7 +413,8 @@ function Wallet() {
               </Typography>
             </Box>
           </Stack>
-        </Box>
+            )}
+     </Box>
       </Box>
     </Container>
      

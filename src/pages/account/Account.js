@@ -32,9 +32,10 @@ import { useEffect, useState } from "react";
 import { endpoint, front_end_domain } from "../../services/urls";
 import axios from "axios";
 import ImageSelectorModal from "./ImageSelectorModal";
+import toast from "react-hot-toast";
 
 function Account() {
-
+  const or_m_user_type = localStorage.getItem("or_m_user_type");
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const transactionId = searchParams?.get("orderid");
@@ -153,18 +154,35 @@ function Account() {
                   <Typography>Wallet</Typography>
                 </Box>
               </NavLink>
-              <NavLink to="/deposit">
+              {or_m_user_type === "Dummy User" ? 
+             
+                <Box className="flex flex-col justify-center items-center"
+                onClick={() => toast(" Dummy User")}>
+                  <Typography><img src={dep} alt="" className="w-8" /></Typography>
+                  <Typography>Deposit</Typography>
+                </Box>:(  
+                <NavLink to="/deposit">
                 <Box className="flex flex-col justify-center items-center">
                   <Typography><img src={dep} alt="" className="w-8" /></Typography>
                   <Typography>Deposit</Typography>
                 </Box>
-              </NavLink>
-              <NavLink to="/withdraw">
-                <Box className="flex flex-col justify-center items-center">
+              </NavLink>)}
+             
+              {or_m_user_type === "Dummy User" ? 
+                <Box className="flex flex-col justify-center items-center"
+                onClick={() => toast(" Dummy User")}>
                   <Typography><img src={wih} alt="" className="w-8" /></Typography>
                   <Typography>Withdraw</Typography>
-                </Box>
-              </NavLink>
+                </Box> :(
+                  <NavLink to="/withdraw">
+                  <Box className="flex flex-col justify-center items-center">
+                    <Typography><img src={wih} alt="" className="w-8" /></Typography>
+                    <Typography>Withdraw</Typography>
+                  </Box>
+                </NavLink>
+                )}
+             
+              
               <Box className="flex flex-col justify-center cursor-pointer items-center"
                 onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
               >
@@ -190,7 +208,25 @@ function Account() {
             <Typography><img src={trans} alt="" className="w-10" /></Typography>
             <Typography>Transaction <br /><span className="!text-xs !text-gray-500"> My Transaction history</span></Typography>
           </Box>
-          <NavLink to="/depositehistory">
+          {or_m_user_type === "Dummy User" ? 
+          <>
+          <NavLink>
+            <Box className="flex gap-1 p-1 py-4 justify-center items-center shadow-xl bg-white rounded-lg"
+            onClick={() => toast(" Dummy User")}>
+              <Typography><img src={depo} alt="" className="w-10" /></Typography>
+              <Typography>Deposit <br /><span className="!text-xs !text-gray-500"> My Deposit history</span></Typography>
+            </Box>
+          </NavLink>
+          <NavLink >
+            <Box className="flex gap-1 p-1 py-4 justify-center items-center shadow-xl bg-white rounded-lg"
+            onClick={() => toast(" Dummy User")}>
+              <Typography><img src={wit} alt="" className="w-10" /></Typography>
+              <Typography>Withdraw <br /><span className="!text-xs !text-gray-500"> My Withdraw history</span></Typography>
+            </Box>
+          </NavLink></>
+          :(
+           <>
+            <NavLink to="/depositehistory">
             <Box className="flex gap-1 p-1 py-4 justify-center items-center shadow-xl bg-white rounded-lg">
               <Typography><img src={depo} alt="" className="w-10" /></Typography>
               <Typography>Deposit <br /><span className="!text-xs !text-gray-500"> My Deposit history</span></Typography>
@@ -201,7 +237,8 @@ function Account() {
               <Typography><img src={wit} alt="" className="w-10" /></Typography>
               <Typography>Withdraw <br /><span className="!text-xs !text-gray-500"> My Withdraw history</span></Typography>
             </Box>
-          </NavLink>
+          </NavLink></>
+          )}
 
         </Box>
         <Box className="flex justify-center gap-2 border-b-2 p-2 m-3 py-5 bg-white shadow rounded-lg "

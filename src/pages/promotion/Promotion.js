@@ -31,7 +31,7 @@ function Promotion() {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
-
+  const or_m_user_type = localStorage.getItem("or_m_user_type");
   const prim = data?.data?.earning || [];
 
   const { isLoading, data: count } = useQuery(
@@ -247,6 +247,25 @@ function Promotion() {
                 </Box>
               </Box>
             </Box>
+            {or_m_user_type === "Dummy User" ? 
+            <Box sx={style.invitebtn}>
+              <NavLink>
+              <Typography
+                    sx={{}}
+                    // onMouseLeave={() => setCopied(false)}
+                    onClick={() => {
+                      toast("Dummy User")
+                      // setCopied(true);
+                    }}
+                  >
+                    {" "}
+                    INVITATION LINK{" "}
+                  </Typography>
+              </NavLink>
+             
+              
+              
+            </Box>:(
             <Box sx={style.invitebtn}>
               <NavLink>
                 {copied ? (
@@ -270,9 +289,31 @@ function Promotion() {
                 )}{" "}
               </NavLink>
             </Box>
+            )} 
           </Box>
           <Box sx={style.invitebutton} className="invitebutton">
+          {or_m_user_type === "Dummy User" ? 
             <Box sx={style.invitbox}>
+              <Stack direction="row">
+                <Box component="img" src={copyinvitationcode}></Box>
+               <Typography variant="body1" color="initial">
+                    Copy invitation code
+                  </Typography>
+                {" "}
+              </Stack>
+              <Stack
+                direction="row"
+                onClick={() => {
+                 toast("Dummy User")
+                }}
+              >
+                <Typography variant="body1" color="initial">
+                  {profile?.rec?.Login_Id}
+                </Typography>
+                <ArrowForwardIosOutlinedIcon />
+              </Stack>
+            </Box> :(
+              <Box sx={style.invitbox}>
               <Stack direction="row">
                 <Box component="img" src={copyinvitationcode}></Box>
                 {copied ? (
@@ -299,6 +340,8 @@ function Promotion() {
                 <ArrowForwardIosOutlinedIcon />
               </Stack>
             </Box>
+            )}
+            
             <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
