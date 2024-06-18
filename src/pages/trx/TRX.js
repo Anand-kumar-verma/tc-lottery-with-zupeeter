@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import asistant from "../../assets/images/asistant.png";
@@ -30,6 +30,7 @@ import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
 import toast from "react-hot-toast";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function TRX() {
   const res = localStorage.getItem("anand_re");
@@ -39,7 +40,7 @@ function TRX() {
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
-
+  const client = useQueryClient();
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -64,9 +65,32 @@ function TRX() {
       refetchOnReconnect: true,
     }
   );
+  const handleClick = () => {
+    window.location.href ="/trx"
+   };
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
+  function refreshFunctionForRotation() {
+    client.refetchQueries("wallet_amount")
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+
+    const element = document.getElementById("refresh_button");
+    if (!item) {
+      element.classList.add("rotate_refresh_image");
+    }
+    setTimeout(() => {
+      element.classList.remove("rotate_refresh_image")
+    }, 2000);
+
+  }
+  useEffect(() => {
+    const element = document.getElementById("refresh_button");
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    if (item) {
+      element.classList.remove("rotate_refresh_image");
+    }
+  }, [])
 
   return (
     <Container>
@@ -78,6 +102,7 @@ function TRX() {
           px: 2,
         }}
       >
+        <CustomCircularProgress isLoading={isLoading}/>
         <Stack
           direction="row"
           sx={{ alignItems: "center", justifyContent: "space-between" }}
@@ -129,8 +154,10 @@ function TRX() {
             >
               ₹ {wallet_amount_data}{" "}
             </Typography>
-            <Box component="img" src={refresh} width={25} ml={2}></Box>
-          </Stack>
+            <div className="mx-1 rotate_refresh_image" id="refresh_button">
+              <img src={refresh} width={25} ml={2} onClick={() => {
+                refreshFunctionForRotation()
+              }} /></div>  </Stack>
           <Stack direction="row" alignItems="center" justifyContent="center">
             <Box component="img" src={balance} width={25} mr={2}></Box>
             <Typography

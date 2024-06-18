@@ -2,19 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-.blinking{
-  animation:blinker is linear infinite
+.rotate_refresh_image {
+  animation: rotate_image 1s linear infinite;
 }
-@keyframes blinker{
+
+@keyframes rotate_image {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.blinking {
+  animation: blinker is linear infinite
+}
+
+@keyframes blinker {
   50% {
     opacity: 0;
   }
 }
+
 .error {
   color: red;
   font-size: 0.8rem;
   margin-top: 0.2rem;
 }
+
 .transparentColor {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -23,6 +40,7 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .countdownbgtrx {
   background-size: 100% 100%;
   background-position: center;
@@ -31,6 +49,7 @@
   width: 100%;
   border-radius: 10px;
 }
+
 .winTextone {
   font-size: 15px !important;
   font-weight: 500 !important;
@@ -41,14 +60,17 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 /* //////////////aviator css */
 .hide::-webkit-scrollbar {
   display: none;
 }
+
 .circleNumberbody {
   width: 15px !important;
   height: 15px !important;
@@ -58,6 +80,7 @@
   justify-content: center !important;
   font-size: 13px !important;
 }
+
 .circleNumberbody-number {
   width: 15px !important;
   height: 15px !important;
@@ -67,12 +90,14 @@
   justify-content: center !important;
   font-size: 10px !important;
 }
+
 .crlg {
   padding-top: 123px !important;
   font-size: 25px !important;
   font-weight: 600 !important;
   color: white !important;
 }
+
 .bonustext {
   text-align: center !important;
   font-size: 35px !important;
@@ -102,6 +127,7 @@
   font-size: 15px !important;
   font-weight: 600 !important;
 }
+
 .svgclass {
   width: 100px;
   display: block;
@@ -111,15 +137,18 @@
 .path {
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
+
   &.circle {
     -webkit-animation: dash 0.9s ease-in-out;
     animation: dash 0.9s ease-in-out;
   }
+
   &.line {
     stroke-dashoffset: 1000;
     -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
     animation: dash 0.9s 0.35s ease-in-out forwards;
   }
+
   &.check {
     stroke-dashoffset: -100;
     -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
@@ -131,9 +160,11 @@
   text-align: center;
   margin: 20px 0 60px;
   font-size: 1.25em;
+
   &.success {
     color: #73af55;
   }
+
   &.error {
     color: #d06079;
   }
@@ -143,6 +174,7 @@
   0% {
     stroke-dashoffset: 1000;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -152,6 +184,7 @@
   0% {
     stroke-dashoffset: 1000;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -161,6 +194,7 @@
   0% {
     stroke-dashoffset: -100;
   }
+
   100% {
     stroke-dashoffset: 900;
   }
@@ -170,6 +204,7 @@
   0% {
     stroke-dashoffset: -100;
   }
+
   100% {
     stroke-dashoffset: 900;
   }
@@ -235,11 +270,13 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 .loader {
   width: 150px;
   height: 150px;
@@ -247,6 +284,7 @@
   position: relative;
   animation: rotate 1s linear infinite;
 }
+
 .loader::before {
   content: "";
   box-sizing: border-box;
@@ -267,15 +305,19 @@
   0% {
     clip-path: polygon (50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
   }
+
   25% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
   }
+
   50% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
   }
+
   75% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
   }
+
   100% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
