@@ -103,6 +103,54 @@ const BetNumber = ({ timing, gid }) => {
     };
 
     try {
+      const total_bet = localStorage.getItem("total_bet");
+      const arrayLength =
+        total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+      console.log(arrayLength?.length, "array");
+      if (
+        arrayLength &&
+        arrayLength?.length > 2 &&
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
+          Number(reqBody.number) <= 10
+            ? Number(reqBody.number) - 1
+            : reqBody.number
+        )
+      ) {
+        setLoding(false);
+        return toast("You can't apply more than 3 bet.");
+      } else {
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
+          Number(reqBody.number) <= 10
+            ? Number(reqBody.number) - 1
+            : reqBody.number
+        ) &&
+          localStorage.setItem(
+            "total_bet",
+            JSON.stringify(
+              total_bet !== "undefined" && total_bet
+                ? [
+                    ...arrayLength,
+                    {
+                      data: `${gid}_true_${
+                        Number(reqBody.number) <= 10
+                          ? Number(reqBody.number) - 1
+                          : reqBody.number
+                      }_${reqBody.amount}`,
+                    },
+                  ]
+                : [
+                    {
+                      data: `${gid}_true_${
+                        Number(reqBody.number) <= 10
+                          ? Number(reqBody.number) - 1
+                          : reqBody.number
+                      }_${reqBody.amount}`,
+                    },
+                  ]
+            )
+          );
+      }
+
       const response = await axios.post(`${endpoint.trx_bet_placed}`, reqBody);
       if (response?.data?.error === "200") {
         if (response?.data?.msg === "Bid Placed Successfully.") {
@@ -111,6 +159,7 @@ const BetNumber = ({ timing, gid }) => {
               message={<span className="!text-sm">{response?.data?.msg}</span>}
             />
           );
+
           fk.setFieldValue("isSuccessPlaceBet", true);
           localStorage.setItem(
             "betApplied",
@@ -433,7 +482,7 @@ const BetNumber = ({ timing, gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select {" "}
+              Select{" "}
               {random
                 ? Number(random) <= 4
                   ? `:  ${selectNumber} Small`
@@ -442,8 +491,7 @@ const BetNumber = ({ timing, gid }) => {
                 ? selectNumber?.toString()?.toLocaleUpperCase()
                 : Number(selectNumber) <= 4
                 ? `: ${selectNumber} Small`
-                : ` : ${selectNumber} Big`
-                } 
+                : ` : ${selectNumber} Big`}
             </Typography>
           </Box>
           <Box mt={5} px={2}>

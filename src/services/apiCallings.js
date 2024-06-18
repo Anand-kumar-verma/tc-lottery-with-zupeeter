@@ -341,7 +341,6 @@ export const ProfileDataFunction = async () => {
 export const returnWinningAmount = (number, amount, result) => {
   let percent = 3;
   const amount_after_3_percent = amount * ((100 - percent) / 100);
-  console.log(number, amount, result);
   // means number par bet lgi hai aur number hi result show huaa hai
   if (
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(result) &&
