@@ -1,7 +1,7 @@
 
 import { Box, Container, Dialog, IconButton, Typography } from "@mui/material";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ProfileDataFunction, Update_ProfileFn, getBalanceFunction, logOutFunction } from "../../services/apiCallings";
+import { ProfileDataFunction, Update_ProfileFn, getBalanceFunction, logOutFunction, showRank } from "../../services/apiCallings";
 import pr from "../../assets/images/pr.png";
 import vip from "../../assets/images/vip.png";
 import w1 from "../../assets/images/w1.png";
@@ -137,9 +137,10 @@ function Account() {
                 <Typography className="text-white !text-xs">| </Typography>
                 <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
               </Box>
-              {profile?.rec?.Club !== 0 && <Box className="  realtive !left-40 flex gap-3 justify-center">
-                <Typography className="text-white !text-xs">Rank: </Typography>
-                <Typography className="text-white !text-xs">{profile?.rec?.Club}</Typography>
+              {profile?.rec?.Club !== 0 && 
+              <Box className="  realtive !left-36 flex gap-3 justify-center">
+                <Typography className="text-white !text-sm">Rank: </Typography>
+                <Typography className="text-white !text-sm">{showRank(profile?.rec?.Club)}</Typography>
               </Box>}
             </Box>
           </Box>

@@ -19,6 +19,7 @@ import {
   Promotionfunction,
   TeamsubFunction,
   checkTokenValidity,
+  showRank,
 } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -107,7 +108,7 @@ function Promotion() {
              color="initial"
              className="!text-white"
            >
-            Rank : {profilerec?.Club}
+            Rank : {showRank(profilerec?.Club)}
             
            </Typography>
             }

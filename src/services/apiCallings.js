@@ -391,3 +391,16 @@ export const Update_ProfileFn = async (selectedImages, client) => {
     console.log(e);
   }
 };
+
+export const showRank =  (num) => {
+  if(Number(num) === 1) 
+    return "Gold Club";
+  else if(Number(num)===2)
+    return "Diamond Club"
+   else if(Number(num)===3)
+    return "Crown Club"
+   else if(Number(num)===4)
+    return "Ambassador Club"
+   else if(Number(num)===5)
+    return "Director Club"
+}
