@@ -11,7 +11,7 @@ import {
   InputAdornment,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -21,14 +21,11 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import invite from "../../assets/images/invite.png";
 import logemaildeactive from "../../assets/images/logemaildeactive.png";
 import password from "../../assets/images/password.png";
-import { endpoint } from "../../services/urls";
-import {
-  signupSchemaValidataonEmail
-} from "../../services/validation";
-import theme from "../../utils/theme";
-import CryptoJS from "crypto-js";
 import { storeCookies } from "../../services/apiCallings";
+import { endpoint } from "../../services/urls";
+import { signupSchemaValidataonEmail } from "../../services/validation";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import theme from "../../utils/theme";
 const RegistrationByEmail = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [username, setusername] = useState("");
@@ -40,12 +37,12 @@ const RegistrationByEmail = () => {
   };
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const inviteid = params.get('inviteid');
+  const inviteid = params.get("inviteid");
   const initialValue = {
     email: "",
     password: "",
     confirmed_password: "",
-    invite_code: inviteid|| "",
+    invite_code: inviteid || "",
     name: "",
   };
   const fk = useFormik({
@@ -68,7 +65,7 @@ const RegistrationByEmail = () => {
   });
 
   async function signupSubmit(reqBody) {
-    setisLoding(true)
+    setisLoding(true);
     try {
       const res = await axios.post(endpoint.register_candidate_email, reqBody);
       if (res?.data?.status === true) {
@@ -82,7 +79,7 @@ const RegistrationByEmail = () => {
     } catch (e) {
       console.log(e);
     }
-    setisLoding(false)
+    setisLoding(false);
   }
   async function getIntroFn() {
     const reqBody = {
@@ -100,7 +97,7 @@ const RegistrationByEmail = () => {
   useEffect(() => {
     getIntroFn();
   }, [fk.values.invite_code]);
-  
+
   useEffect(() => {
     const handleEnterKeyPress = (event) => {
       if (event.key === "Enter") {
@@ -116,7 +113,7 @@ const RegistrationByEmail = () => {
   return (
     <>
       <Box component="form" onSubmit={fk.handleSubmit}>
-      <CustomCircularProgress isLoading={isLoading} />
+        <CustomCircularProgress isLoading={isLoading} />
         <Box mt={2}>
           <Stack direction="row" alignItems="center">
             <Box
@@ -336,7 +333,6 @@ const RegistrationByEmail = () => {
             borderRadius: "20px",
             mb: 2,
             fontWeight: "700",
-           
           }}
           disableElevation
           className={`${
