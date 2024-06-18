@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -20,17 +21,15 @@ import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
 import {
-  getBalanceFunction,
-  returnWinningAmount,
+  getBalanceFunction
 } from "../../services/apiCallings";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import WinLossPopup from "./WinLossPopup";
 import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
-import toast from "react-hot-toast";
-import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function TRX() {
   const res = localStorage.getItem("anand_re");

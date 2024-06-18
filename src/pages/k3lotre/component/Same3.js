@@ -2,27 +2,25 @@
 import {
   Box,
   Button,
-  ButtonGroup,
   Checkbox,
   Dialog,
   DialogActions,
-  Drawer,
   Grid,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import { NavLink } from "react-router-dom";
 import { getBalanceFunction } from "../../../services/apiCallings";
 import { endpoint } from "../../../services/urls";
 import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
-import { NavLink } from "react-router-dom";
 import Howtoplay from "./Howtoplay";
 const Same3 = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");

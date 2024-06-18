@@ -1,4 +1,3 @@
-import LiveHelpIcon from "@mui/icons-material/LiveHelp";
 import {
   Box,
   CircularProgress,
@@ -16,22 +15,19 @@ import React from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
 import { endpoint } from "../../../services/urls";
 import theme from "../../../utils/theme";
-import d1 from "../../../assets/images/n5.png"
-import d2 from "../../../assets/images/n2.png"
-import d3 from "../../../assets/images/n3.png"
 
 const GameHistory = ({ gid }) => {
   const dispatch = useDispatch();
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { isLoading, data: game_history } = useQuery(
     ["trx_gamehistory", gid],
     () => GameHistoryFn(gid),
