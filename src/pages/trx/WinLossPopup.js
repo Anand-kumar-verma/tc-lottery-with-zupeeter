@@ -20,10 +20,10 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   //   const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null;
   //   const user_id = login_data && JSON.parse(login_data).UserID;
   let array = [zero, one, two, three, four, five, six, seven, eight, nine];
-  const number = localStorage.getItem("betApplied")?.split("_")?.[2];
+  // const number = localStorage.getItem("betApplied")?.split("_")?.[2];
   const result = localStorage.getItem("anand_re");
-  const amount = localStorage.getItem("betApplied")?.split("_")?.[3];
-  const user_id = localStorage.getItem("user_id");
+  // const amount = localStorage.getItem("betApplied")?.split("_")?.[3];
+  // const user_id = localStorage.getItem("user_id");
   console.log(localStorage.getItem("betApplied"));
   const [loding, setloding] = useState(false);
   const [status, setstatus] = useState("");
@@ -32,11 +32,25 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   const MyHistoryFn = async () => {
     setloding(true);
     try {
-      const winAmnt = returnWinningAmount(
-        Number(number),
-        Number(amount),
-        Number(result) - 1
-      );
+      let winAmnt = 0;
+      let totalBet_amount = 0;
+      const total_bet = localStorage.getItem("total_bet");
+      const arrayLength =
+        total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+      arrayLength?.forEach((i) => {
+        let win = returnWinningAmount(
+          Number(i?.data?.split("_")?.[2]),
+          Number(i?.data?.split("_")?.[3]),
+          Number(result) - 1
+        );
+        totalBet_amount += Number(i?.data?.split("_")?.[3]) * ((100 - 3) / 100);
+        if (win) winAmnt += Number(win);
+      });
+      // const winAmnt = returnWinningAmount(
+      //   Number(number),
+      //   Number(amount),
+      //   Number(result) - 1
+      // );
 
       if (winAmnt) {
         setstatus({
@@ -46,7 +60,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
       } else {
         setstatus({
           status: "2",
-          amount: amount * ((100 - 3) / 100),
+          amount: totalBet_amount,
         });
       }
       setTimeout(() => {
