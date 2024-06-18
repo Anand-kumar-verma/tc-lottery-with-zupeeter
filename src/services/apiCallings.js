@@ -49,7 +49,7 @@ export const MyHistoryFn = async (gid) => {
     console.log(e);
   }
 };
-export const getBalanceFunction = async (setBalance) => {
+export const getBalanceFunction = async (setBalance ) => {
   try {
     const reqBody = {
       userid: localStorage.getItem("user_id"),

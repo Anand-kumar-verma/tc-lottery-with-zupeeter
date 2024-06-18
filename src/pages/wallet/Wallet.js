@@ -134,16 +134,16 @@ function Wallet() {
           <Typography
             variant="body1"
             color="initial"
-            sx={{ fontSize: "14px", fontWeight: "400", color: "white" }}
+            sx={{ fontSize: "12px", fontWeight: "400", color: "white" }}
           >
-           UserId:
+           UserId/Name :
           </Typography>
           <Typography
             variant="body1"
             color="initial"
-            sx={{ fontSize: "18px", fontWeight: "500", color: "white" }}
+            sx={{ fontSize: "14px", fontWeight: "500", color: "white" }}
           >
-           {profile?.rec?.Login_Id}
+           {profile?.rec?.Login_Id} / {profile?.rec?.Associate_Name}  
           </Typography>
         
         </Stack>
@@ -169,7 +169,16 @@ function Wallet() {
           >
             ₹{Number(wallet_amount_data || 0)?.toFixed(2)}
           </Typography>
-        
+          {profile?.rec?.Club !==0 && 
+             <Typography
+             variant="body1"
+             color="initial"
+             className="!text-white"
+           >
+            Rank : {profile?.rec?.Club}
+            
+           </Typography>
+            }
         </Stack>
       </Box>
       <CustomCircularProgress isLoading={isLoading || total_deposit} />
@@ -231,33 +240,18 @@ function Wallet() {
           }}
         >
           <Stack
+        
             direction="row"
             sx={{
+              my:5,
               width: "100%",
               alignItems: "center",
               justifyContent: "space-between",
             }}
           >
             <Box sx={{ width: "50%", position: "relative" }}>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  position: "absolute",
-                  left: "39%",
-                  top: "32%",
-                  fontSize: "15px",
-                  fontWeight: "700",
-                }}
-              >
-                {series}%
-              </Typography>
-              <ReactApexChart
-                options={options}
-                series={series}
-                type="radialBar"
-                height={150}
-              />
+           
+             
               <Box
                 sx={{
                   textAlign: "center",
@@ -265,7 +259,7 @@ function Wallet() {
                 }}
               >
                 <Typography variant="body1" color="initial">
-                  {wallet_amount_data}%
+                ₹ {wallet_amount_data}
                 </Typography>
                 <Typography variant="body1" color="initial">
                   Main wallet
@@ -273,25 +267,7 @@ function Wallet() {
               </Box>
             </Box>
             <Box sx={{ width: "50%", position: "relative" }}>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  position: "absolute",
-                  left: "39%",
-                  top: "32%",
-                  fontSize: "15px",
-                  fontWeight: "700",
-                }}
-              >
-               00.0%
-              </Typography>
-              <ReactApexChart
-                options={options}
-                series={series3rrparty}
-                type="radialBar"
-                height={150}
-              />
+             
               <Box
                 sx={{
                   textAlign: "center",
@@ -299,10 +275,10 @@ function Wallet() {
                 }}
               >
                 <Typography variant="body1" color="initial">
-                  00.00%
+                ₹ {wallet_amount?.data?.total_withdrawal}
                 </Typography>
                 <Typography variant="body1" color="initial">
-                  3rd party wallet
+                  Total Withdrawl
                 </Typography>
               </Box>
             </Box>

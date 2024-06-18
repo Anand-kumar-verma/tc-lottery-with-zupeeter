@@ -1,8 +1,8 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Box, Button, Container, Dialog, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useQuery } from "react-query";
+import React, { useEffect, useState } from "react";
+import { useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import asistant from "../../assets/images/asistant.png";
@@ -19,6 +19,7 @@ import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import musicoff from "../../assets/images/musicoff.png";
 import Wingo5Min from "./component/Wingo5Min";
+import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function Wingo() {
   const [musicicon, setmusicicon] = useState(true)
@@ -27,7 +28,7 @@ function Wingo() {
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
-
+  const client = useQueryClient();
   const navigate = useNavigate()
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -46,6 +47,8 @@ function Wingo() {
 
 
 
+
+
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
@@ -57,7 +60,26 @@ function Wingo() {
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
+  function refreshFunctionForRotation() {
+    client.refetchQueries("wallet_amount")
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
 
+    const element = document.getElementById("refresh_button");
+    if (!item) {
+      element.classList.add("rotate_refresh_image");
+    }
+    setTimeout(() => {
+      element.classList.remove("rotate_refresh_image")
+    }, 2000);
+
+  }
+  useEffect(() => {
+    const element = document.getElementById("refresh_button");
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    if (item) {
+      element.classList.remove("rotate_refresh_image");
+    }
+  }, [])
   return (
     <Container>
       <Box
@@ -68,6 +90,7 @@ function Wingo() {
           px: 2,
         }}
       >
+        <CustomCircularProgress isLoading={isLoading}/>
         <Stack
           direction="row"
           sx={{ alignItems: "center", justifyContent: "space-between" }}
@@ -119,7 +142,10 @@ function Wingo() {
             >
               ₹ {wallet_amount_data}{" "}
             </Typography>
-            <Box component="img" src={refresh} width={25} ml={2}></Box>
+            <div className="mx-1 rotate_refresh_image" id="refresh_button">
+              <img src={refresh} width={25} ml={2} onClick={() => {
+                refreshFunctionForRotation()
+              }} /></div>
           </Stack>
           <Stack direction="row" alignItems="center" justifyContent="center">
             <Box component="img" src={balance} width={25} mr={2}></Box>
@@ -133,23 +159,23 @@ function Wingo() {
             </Typography>
           </Stack>
           <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          mt={2}
-        >
-          <Button
-            onClick={() => navigate("/withdraw")}
-            sx={style.withdrawalbtn}
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mt={2}
           >
-            Withdraw
-          </Button>
-          <Button onClick={() => navigate("/deposit")} sx={style.depositebtn}>
-            Deposit
-          </Button>
-        </Stack>
-        
-          
+            <Button
+              onClick={() => navigate("/withdraw")}
+              sx={style.withdrawalbtn}
+            >
+              Withdraw
+            </Button>
+            <Button onClick={() => navigate("/deposit")} sx={style.depositebtn}>
+              Deposit
+            </Button>
+          </Stack>
+
+
         </Box>
         <Stack
           direction="row"
@@ -179,9 +205,9 @@ function Wingo() {
             1.All recharge methods only available in RECHARGE menu on OFFICIAL
           </Typography>
           <Typography
-                 className="!bg-orange-400 !text-white !text-xs rounded-2xl px-2 py-1 !flex justify-center"
-                >
-            <WhatshotIcon fontSize="small"/> Details
+            className="!bg-orange-400 !text-white !text-xs rounded-2xl px-2 py-1 !flex justify-center"
+          >
+            <WhatshotIcon fontSize="small" /> Details
           </Typography>
 
         </Stack>

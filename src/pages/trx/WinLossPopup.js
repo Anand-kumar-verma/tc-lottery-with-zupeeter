@@ -207,7 +207,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
               status?.status === "1" ? "!text-pink-500" : "!text-red-300"
             } !text-sm`}
           >
-            Period Minute: {Number(next_step) - 1}
+            Period Minute: {Number(next_step) }
           </Typography>
           <Typography variant="body1" color="initial" className="bonuscl">
             Auto Close in 3 sec{" "}
