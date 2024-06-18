@@ -1,6 +1,5 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import ReactApexChart from "react-apexcharts";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
@@ -58,9 +57,6 @@ function Wallet() {
       ?.reduce((a, b) => a + Number(b?.tr15_amt || 0), 0);
   }, [data]);
 
-  const series = [Number(wallet_amount_data % 100)?.toFixed(1) || 0];
-  const series3rrparty = [0.0];
-
 
   useEffect(() => {
     if (!checkTokenValidity()) {
@@ -71,35 +67,6 @@ function Wallet() {
   }, []);
 
 
-  const [options] = React.useState({
-    colors: ["#F48901", "red", "green"],
-    chart: {
-      height: 150,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        dataLabels: {
-          name: {
-            fontSize: "11px",
-          },
-          value: {
-            fontSize: "16px",
-          },
-        },
-        stroke: {
-          colors: ["#F02257"],
-        },
-      },
-      radialBar: {
-        dataLabels: {
-          show: false,
-        },
-      },
-    },
-    labels: ["0.40%", "B", "C", "D"],
-  });
-  const user_id = localStorage.getItem("user_id");
   return (
     <Layout header={false}
     > <Container
