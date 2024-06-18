@@ -14,6 +14,7 @@ import {
   checkTokenValidity,
   depositHistoryFunction,
   getBalanceFunction,
+  showRank,
 } from "../../services/apiCallings";
 import { rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
@@ -175,7 +176,7 @@ function Wallet() {
              color="initial"
              className="!text-white"
            >
-            Rank : {profile?.rec?.Club}
+            Rank : {showRank(profile?.rec?.Club)}
             
            </Typography>
             }
