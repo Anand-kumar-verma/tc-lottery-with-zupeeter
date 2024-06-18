@@ -192,19 +192,19 @@ const BetNumber = ({ timing, gid }) => {
                       ...arrayLength,
                       {
                         data: `${gid}_true_${
-                          Number(reqBody.number) <= 10
-                            ? Number(reqBody.number) - 1
-                            : reqBody.number
-                        }_${reqBody.amount}`,
+                          Number(reqBody?.number) <= 10
+                            ? Number(reqBody?.number) - 1
+                            : reqBody?.number
+                        }_${reqBody?.amount}`,
                       },
                     ]
                   : [
                       {
                         data: `${gid}_true_${
-                          Number(reqBody.number) <= 10
-                            ? Number(reqBody.number) - 1
-                            : reqBody.number
-                        }_${reqBody.amount}`,
+                          Number(reqBody?.number) <= 10
+                            ? Number(reqBody?.number) - 1
+                            : reqBody?.number
+                        }_${reqBody?.amount}`,
                       },
                     ]
               )
@@ -251,9 +251,7 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 1000);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   return (
     <Box
       sx={{

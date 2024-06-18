@@ -1,16 +1,24 @@
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { Box, Stack, TablePagination, Typography } from "@mui/material";
+import { Box, Stack, TablePagination } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import moment from "moment";
 import * as React from "react";
 import { useQuery } from "react-query";
-import { My_All_TRX_HistoryFn } from "../../../services/apiCallings";
+import {
+  My_All_TRX_HistoryFn,
+  returnWinningAmount,
+} from "../../../services/apiCallings";
 import { rupees, zubgback } from "../../../services/urls";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 
-const MyHistory = ({ gid }) => {
+const MyHistory = ({ gid, show_this_one_min_time }) => {
+  const total_bet = localStorage.getItem("total_bet");
+  const arrayLength =
+    total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+  const result = localStorage.getItem("anand_re");
+
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
   const handleChangePage = (event, newPage) => {
@@ -30,52 +38,88 @@ const MyHistory = ({ gid }) => {
     }
   );
 
-
   const my_history_data_all = my_history_all?.data?.earning || [];
 
-  const visibleRows = React.useMemo(
-    () =>
-      my_history_data_all?.slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [page, rowsPerPage, my_history_all?.data?.earning]
-  );
+  const visibleRows = React.useMemo(() => {
+    const overAllArray = my_history_data_all?.slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    );
+
+    if (
+      (show_this_one_min_time === 0 || show_this_one_min_time >= 56) &&
+      result &&
+      arrayLength?.length >= 0
+    ) {
+      const peinding_array = overAllArray?.filter(
+        (i) => i?.tr_status === "Pending"
+      );
+      const not_peinding_array = overAllArray?.filter(
+        (i) => i?.tr_status !== "Pending"
+      );
+      let newPending_array = peinding_array?.map((i, index) => {
+        let win = returnWinningAmount(
+          Number(arrayLength?.[index]?.data?.split("_")?.[2]),
+          Number(arrayLength?.[index]?.data?.split("_")?.[3]),
+          Number(result) - 1
+        );
+        return {
+          ...i,
+          tr_status: win ? "Win" : "Loss",
+          tr_win_slot: result,
+        };
+      });
+      return [...newPending_array, ...not_peinding_array];
+    }
+    return overAllArray;
+  }, [
+    page,
+    rowsPerPage,
+    my_history_all?.data?.earning,
+    show_this_one_min_time,
+  ]);
+  // console.log(visibleRows);
 
   return (
     <Box mt={2}>
-      <Stack direction="row" className="onegotextbox">
-      </Stack>
+      <Stack direction="row" className="onegotextbox"></Stack>
       <div className="flex flex-col gap-[2px]">
         {visibleRows?.map((i) => {
           return (
             <div style={{ mb: 2 }}>
-              <Accordion className="!rounded-lg" >
+              <Accordion className="!rounded-lg">
                 <AccordionSummary
-                  expandIcon={<ArrowDownwardIcon sx={{ color: 'black', fontSize: '15px' }} />}
+                  expandIcon={
+                    <ArrowDownwardIcon
+                      sx={{ color: "black", fontSize: "15px" }}
+                    />
+                  }
                   aria-controls="panel1-content"
                   id="panel1-header"
-                  sx={{ color: "white", }}
+                  sx={{ color: "white" }}
                 >
                   <div className="!w-full !flex !justify-between">
                     <p className="!text-black ">{i?.tr_transid}</p>
                     <p
-                      className={`${i?.tr_status === "Loss"
-                        ? "!text-red-600"
-                        : i?.tr_status === "Win"
+                      className={`${
+                        i?.tr_status === "Loss"
+                          ? "!text-red-600"
+                          : i?.tr_status === "Win"
                           ? "!text-green-600"
                           : "!text-red-600"
-                        } !font-bold`}
+                      } !font-bold`}
                     >
                       {i?.tr_status}
                     </p>
-                    <span style={{ mr: 1 }}
-                      className={`${i?.tr_status === "Loss"
-                        ? "!text-red-600"
-                        : i?.tr_status === "Win"
+                    <span
+                      style={{ mr: 1 }}
+                      className={`${
+                        i?.tr_status === "Loss"
+                          ? "!text-red-600"
+                          : i?.tr_status === "Win"
                           ? "!text-green-600"
                           : "!text-red-600"
-                        }`}
+                      }`}
                     >
                       {" "}
                       {rupees}{" "}
@@ -83,7 +127,7 @@ const MyHistory = ({ gid }) => {
                     </span>
                   </div>
                 </AccordionSummary>
-                <AccordionDetails >
+                <AccordionDetails>
                   <p className={`!text-green-400 !font-semibold !text-lg`}>
                     Period Detail
                   </p>
@@ -135,46 +179,47 @@ const MyHistory = ({ gid }) => {
                         <span>{`${i?.tr_win_slot - 1}`}</span>
                         <span
                           className={`
-  ${((i?.tr_win_slot - 1).toString() === "0" &&
-                              "bg-gradient-to-t from-red-400 to-violet-400") ||
-                            ((i?.tr_win_slot - 1).toString() === "5" &&
-                              "bg-gradient-to-t from-violet-400 to-green-400") ||
-                            (((i?.tr_win_slot - 1).toString() === "1" ||
-                              (i?.tr_win_slot - 1).toString() === "3" ||
-                              (i?.tr_win_slot - 1).toString() === "7" ||
-                              (i?.tr_win_slot - 1).toString() === "9" ||
-                              (i?.tr_win_slot - 1).toString() === "11") &&
-                              "bg-gradient-to-t from-green-400 to-green-900") ||
-                            (((i?.tr_win_slot - 1).toString() === "2" ||
-                              (i?.tr_win_slot - 1).toString() === "4" ||
-                              (i?.tr_win_slot - 1).toString() === "6" ||
-                              (i?.tr_win_slot - 1).toString() === "8" ||
-                              (i?.tr_win_slot - 1).toString() === "13") &&
-                              "bg-gradient-to-tl from-red-400 to-red-900") ||
-                            ((i?.tr_win_slot - 1).toString() === "15" && "bg-[#6DA7F4]") ||
-                            ((i?.tr_win_slot - 1).toString() === "14" && "bg-[#F48901]") ||
-                            ((i?.tr_win_slot - 1).toString() === "12" && "bg-[#eb2feb]")
-                            }
+  ${
+    ((i?.tr_win_slot - 1)?.toString() === "0" &&
+      "bg-gradient-to-t from-red-400 to-violet-400") ||
+    ((i?.tr_win_slot - 1)?.toString() === "5" &&
+      "bg-gradient-to-t from-violet-400 to-green-400") ||
+    (((i?.tr_win_slot - 1)?.toString() === "1" ||
+      (i?.tr_win_slot - 1)?.toString() === "3" ||
+      (i?.tr_win_slot - 1)?.toString() === "7" ||
+      (i?.tr_win_slot - 1)?.toString() === "9" ||
+      (i?.tr_win_slot - 1)?.toString() === "11") &&
+      "bg-gradient-to-t from-green-400 to-green-900") ||
+    (((i?.tr_win_slot - 1)?.toString() === "2" ||
+      (i?.tr_win_slot - 1)?.toString() === "4" ||
+      (i?.tr_win_slot - 1)?.toString() === "6" ||
+      (i?.tr_win_slot - 1)?.toString() === "8" ||
+      (i?.tr_win_slot - 1)?.toString() === "13") &&
+      "bg-gradient-to-tl from-red-400 to-red-900") ||
+    ((i?.tr_win_slot - 1)?.toString() === "15" && "bg-[#6DA7F4]") ||
+    ((i?.tr_win_slot - 1)?.toString() === "14" && "bg-[#F48901]") ||
+    ((i?.tr_win_slot - 1)?.toString() === "12" && "bg-[#eb2feb]")
+  }
   transparentColor font-bold text-xl
 `}
                         >
-                          {((i?.tr_win_slot - 1).toString() === "0" &&
+                          {((i?.tr_win_slot - 1)?.toString() === "0" &&
                             "Red Voilet") ||
-                            ((i?.tr_win_slot - 1).toString() === "5" &&
+                            ((i?.tr_win_slot - 1)?.toString() === "5" &&
                               "Green Voilet") ||
-                            (((i?.tr_win_slot - 1).toString() === "1" ||
-                              (i?.tr_win_slot - 1).toString() === "3" ||
-                              (i?.tr_win_slot - 1).toString() === "7" ||
-                              (i?.tr_win_slot - 1).toString() === "9" ||
-                              (i?.tr_win_slot).toString() === "11") &&
+                            (((i?.tr_win_slot - 1)?.toString() === "1" ||
+                              (i?.tr_win_slot - 1)?.toString() === "3" ||
+                              (i?.tr_win_slot - 1)?.toString() === "7" ||
+                              (i?.tr_win_slot - 1)?.toString() === "9" ||
+                              i?.tr_win_slot?.toString() === "11") &&
                               "Green") ||
-                            (((i?.tr_win_slot - 1).toString() === "2" ||
-                              (i?.tr_win_slot - 1).toString() === "4" ||
-                              (i?.tr_win_slot - 1).toString() === "6" ||
-                              (i?.tr_win_slot - 1).toString() === "8" ||
-                              (i?.tr_win_slot).toString() === "13") &&
+                            (((i?.tr_win_slot - 1)?.toString() === "2" ||
+                              (i?.tr_win_slot - 1)?.toString() === "4" ||
+                              (i?.tr_win_slot - 1)?.toString() === "6" ||
+                              (i?.tr_win_slot - 1)?.toString() === "8" ||
+                              i?.tr_win_slot?.toString() === "13") &&
                               "Red") ||
-                            ((i?.tr_win_slot).toString() === "12" && "Red")}
+                            (i?.tr_win_slot?.toString() === "12" && "Red")}
                         </span>
                         <span>{i?.tr_win_slot - 1 <= 4 ? "Small" : "Big"}</span>
                       </div>
@@ -187,53 +232,55 @@ const MyHistory = ({ gid }) => {
                     <div className="!bg-white !bg-opacity-10 py-1 px-2">
                       <span
                         className={`
-                  ${((i?.tr_package - 1).toString() === "0" &&
-                            "!bg-gradient-to-t from-red-400 to-violet-400") ||
-                          ((i?.tr_package - 1).toString() === "5" &&
-                            "!bg-gradient-to-t from-violet-400 to-green-400") ||
-                          (((i?.tr_package - 1).toString() === "1" ||
-                            (i?.tr_package - 1).toString() === "3" ||
-                            (i?.tr_package - 1).toString() === "7" ||
-                            (i?.tr_package - 1).toString() === "9" ||
-                            (i?.tr_package).toString() === "11") &&
-                            "bg-gradient-to-t from-green-400 to-green-900") ||
-                          (((i?.tr_package - 1).toString() === "2" ||
-                            (i?.tr_package - 1).toString() === "4" ||
-                            (i?.tr_package - 1).toString() === "6" ||
-                            (i?.tr_package - 1).toString() === "8" ||
-                            (i?.tr_package).toString() === "13") &&
-                            "bg-gradient-to-tl from-red-400 to-red-900") ||
-                          ((i?.tr_package).toString() === "15" && "bg-[#6DA7F4]") ||
-                          ((i?.tr_package).toString() === "14" && "bg-[#F48901]") ||
-                          ((i?.tr_package).toString() === "12" && "bg-[#eb2feb]")
-                          }
+                  ${
+                    ((i?.tr_package - 1)?.toString() === "0" &&
+                      "!bg-gradient-to-t from-red-400 to-violet-400") ||
+                    ((i?.tr_package - 1)?.toString() === "5" &&
+                      "!bg-gradient-to-t from-violet-400 to-green-400") ||
+                    (((i?.tr_package - 1)?.toString() === "1" ||
+                      (i?.tr_package - 1)?.toString() === "3" ||
+                      (i?.tr_package - 1)?.toString() === "7" ||
+                      (i?.tr_package - 1)?.toString() === "9" ||
+                      i?.tr_package?.toString() === "11") &&
+                      "bg-gradient-to-t from-green-400 to-green-900") ||
+                    (((i?.tr_package - 1)?.toString() === "2" ||
+                      (i?.tr_package - 1)?.toString() === "4" ||
+                      (i?.tr_package - 1)?.toString() === "6" ||
+                      (i?.tr_package - 1)?.toString() === "8" ||
+                      i?.tr_package?.toString() === "13") &&
+                      "bg-gradient-to-tl from-red-400 to-red-900") ||
+                    (i?.tr_package?.toString() === "15" && "bg-[#6DA7F4]") ||
+                    (i?.tr_package?.toString() === "14" && "bg-[#F48901]") ||
+                    (i?.tr_package?.toString() === "12" && "bg-[#eb2feb]")
+                  }
                   transparentColor font-bold text-xl 
 
                   `}
                       >
-                        {i?.tr_package.toString() === "11"
+                        {i?.tr_package?.toString() === "11"
                           ? "Green"
-                          : i?.tr_package.toString() === "14"
-                            ? "Small"
-                            : i?.tr_package.toString() === "15"
-                              ? "Big"
-                              : i?.tr_package.toString() === "13"
-                                ? "Red"
-                                : i?.tr_package.toString() === "12"
-                                  ? "Voilet"
-                                  : i?.tr_package - 1}
+                          : i?.tr_package?.toString() === "14"
+                          ? "Small"
+                          : i?.tr_package?.toString() === "15"
+                          ? "Big"
+                          : i?.tr_package?.toString() === "13"
+                          ? "Red"
+                          : i?.tr_package?.toString() === "12"
+                          ? "Voilet"
+                          : i?.tr_package - 1}
                       </span>
                     </div>
                     <span className="bg-white !bg-opacity-10 py-1 px-2">
                       Status
                     </span>
                     <span
-                      className={`${i?.tr_status === "Loss"
-                        ? "!text-red-400"
-                        : i?.tr_status === "Win"
+                      className={`${
+                        i?.tr_status === "Loss"
+                          ? "!text-red-400"
+                          : i?.tr_status === "Win"
                           ? "!text-green-400"
                           : "!text-red-400"
-                        } bg-white !bg-opacity-10 py-1 px-2`}
+                      } bg-white !bg-opacity-10 py-1 px-2`}
                     >
                       {i?.tr_status}
                     </span>
@@ -279,7 +326,7 @@ const MyHistory = ({ gid }) => {
         />
       </Box>
       <CustomCircularProgress isLoading={myhistory_loding_all} />
-    </Box >
+    </Box>
   );
 };
 

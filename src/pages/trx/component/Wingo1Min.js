@@ -75,10 +75,10 @@ function Wingo1Min() {
       if (onemin === 59) {
         fk.setFieldValue("openTimerDialog", false);
       }
+        
       if (onemin === 58) {
         client.refetchQueries("wallet_amount");
         client.refetchQueries("myAll_trx_history");
-        // client.refetchQueries("trx_gamehistory");
       }
       if (onemin === 0) {
         client.refetchQueries("trx_gamehistory_chart");
@@ -369,7 +369,7 @@ function Wingo1Min() {
         </Stack>
         {value === 1 && <GameHistory gid="1" />}
         {value === 2 && <Chart gid="1" />}
-        {value === 3 && <MyHistory gid="1" />}
+        {value === 3 && <MyHistory gid="1" show_this_one_min_time={show_this_one_min_time}/>}
       </Box>
       <Dialog
         sx={{

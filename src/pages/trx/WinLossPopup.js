@@ -68,7 +68,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
         localStorage.setItem("betApplied", false);
         localStorage.removeItem("total_bet");
         localStorage.removeItem("anand_re");
-      }, 3000);
+      }, 5000);
     } catch (e) {
       toast(e?.message);
       console.log(e);
