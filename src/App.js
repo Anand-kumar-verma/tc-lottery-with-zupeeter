@@ -12,47 +12,49 @@ import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
 import PageNotFound from "./PageNotFound";
 import Dashboard from "./pages/home/Dashboard";
+import Home from "./website/Home";
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
   const isAuthenticated = localStorage.getItem("user_id");
 
-  
+
 
   useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: true,
   });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsOpenSplash(false);
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsOpenSplash(false);
+  //   }, 1000);
+  // }, []);
 
-  if (isOpenSplash)
-    return (
-      <Layout header={false} footer={false}>
-        <SplashScreen />
-      </Layout>
-    );
+  // if (isOpenSplash)
+  //   return (
+  //     <Layout header={false} footer={false}>
+  //       <SplashScreen />
+  //     </Layout>
+  //   );
 
   return (
     <Routes>
-      <Route path="/" element={<Login />}></Route>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/login" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/before-login" element={<BeforeLogin />}></Route>
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
-      <Route path="dashboard" element={<Dashboard/>} />
+      <Route path="dashboard" element={<Dashboard />} />
       {isAuthenticated ? (
         routes?.map((route, index) => {
-          return (                                                                                                
+          return (
             <Route key={index} path={route?.path} element={route?.element} />
           );
         })
       ) : (
-        <Route path="/" element=<Login /> />
+        <Route path="/" element={<Home />}></Route>
       )}
 
       <Route path="/splash" element={<SplashScreen />}></Route>
