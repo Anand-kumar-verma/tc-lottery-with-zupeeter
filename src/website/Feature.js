@@ -9,7 +9,7 @@ import four from "../assets/images/4.webp"
 const Feature = () => {
     return (
         <section className=" bg-gray-100 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-5  lg:mx-5 px-4">  
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 gap-5  lg:mx-5 px-4 animate__animated animate__fadeInUp">  
                    <div className='flex flex-col justify-start p-2'>
                      <p className="text-purple-800 text-lg">Games</p>
                    <h2 className="text-4xl  font-bold">Our Games</h2></div>

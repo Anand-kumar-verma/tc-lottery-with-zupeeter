@@ -34,7 +34,15 @@ function Header(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
- 
+  const handleDownload = (path ,event) => {
+    event.preventDefault(); 
+    const link = document.createElement('a');
+    link.href = path;
+    link.target = '_blank'; 
+    link.rel = 'noopener noreferrer'; 
+    link.click();
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'left' }}>
       <Typography variant="h6" sx={{ my: 2 }} className='!flex !justify-between'>
@@ -50,9 +58,8 @@ function Header(props) {
         disablePadding 
         onClick={(e) => {
           if (item.text === 'Download') {
-            // handleDownload(item.path ,e);
-            window.location.href=item.path
-            // handleDrawerToggle();
+            handleDownload(item.path ,e);
+            handleDrawerToggle();
           }
           else
           {
