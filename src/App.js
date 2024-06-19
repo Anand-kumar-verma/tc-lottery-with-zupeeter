@@ -8,6 +8,7 @@ import Layout from "./component/layout/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Test from "./pages/test";
+import Home from "./website/Home";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
 import PageNotFound from "./PageNotFound";
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <Routes>
+       <Route path="/Zupeeter" element={<Home />}></Route>
       <Route path="/" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
