@@ -75,10 +75,13 @@ function Wingo1Min() {
       if (onemin === 59) {
         fk.setFieldValue("openTimerDialog", false);
       }
+        
       if (onemin === 58) {
-        client.refetchQueries("myAll_trx_history");
-        client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("wallet_amount");
+        client.refetchQueries("myAll_trx_history");
+      }
+      if (onemin === 0) {
+        client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("trx_gamehistory");
       }
     };
@@ -122,11 +125,6 @@ function Wingo1Min() {
   };
 
   React.useEffect(() => {
-    console.log(
-      game_history?.data?.data
-        ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
-        : 1
-    );
     dispatch(
       updateNextCounter(
         game_history?.data?.data
@@ -373,7 +371,7 @@ function Wingo1Min() {
         </Stack>
         {value === 1 && <GameHistory gid="1" />}
         {value === 2 && <Chart gid="1" />}
-        {value === 3 && <MyHistory gid="1" />}
+        {value === 3 && <MyHistory gid="1" show_this_one_min_time={show_this_one_min_time}/>}
       </Box>
       <Dialog
         sx={{

@@ -49,7 +49,7 @@ export const MyHistoryFn = async (gid) => {
     console.log(e);
   }
 };
-export const getBalanceFunction = async (setBalance) => {
+export const getBalanceFunction = async (setBalance ) => {
   try {
     const reqBody = {
       userid: localStorage.getItem("user_id"),
@@ -342,7 +342,6 @@ export const ProfileDataFunction = async () => {
 export const returnWinningAmount = (number, amount, result) => {
   let percent = 3;
   const amount_after_3_percent = amount * ((100 - percent) / 100);
-  console.log(number, amount, result);
   // means number par bet lgi hai aur number hi result show huaa hai
   if (
     [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(result) &&
@@ -393,3 +392,16 @@ export const Update_ProfileFn = async (selectedImages, client) => {
     console.log(e);
   }
 };
+
+export const showRank =  (num) => {
+  if(Number(num) === 1) 
+    return "Gold Club";
+  else if(Number(num)===2)
+    return "Diamond Club"
+   else if(Number(num)===3)
+    return "Crown Club"
+   else if(Number(num)===4)
+    return "Ambassador Club"
+   else if(Number(num)===5)
+    return "Director Club"
+}

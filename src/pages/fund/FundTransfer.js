@@ -3,18 +3,15 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { endpoint } from "../../services/urls";
+import { useQuery, useQueryClient } from "react-query";
 import Layout from "../../component/layout/Layout";
 import {
   ProfileDataFunction,
   getBalanceFunction,
 } from "../../services/apiCallings";
-import { useQuery, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { endpoint } from "../../services/urls";
 
 const FundTransfer = () => {
-  const user_id = localStorage.getItem("user_id");
-  const navigate = useNavigate();
   const [username, setusername] = useState("");
   const [balance, setsetBalance] = useState("");
   const client = useQueryClient();
@@ -60,7 +57,7 @@ const FundTransfer = () => {
     },
   });
 
-  const fees = Number(fk.values.transfer_amount || 0) * 0.05;
+  const fees = Number(fk.values.transfer_amount || 0) * 0.03;
   const payableAmount = fees + Number(fk.values.transfer_amount || 0);
 
   async function insertFundFn(reqBody) {

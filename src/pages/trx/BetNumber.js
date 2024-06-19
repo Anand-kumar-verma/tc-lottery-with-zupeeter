@@ -105,35 +105,131 @@ const BetNumber = ({ timing, gid }) => {
     };
 
     try {
-      const response = await axios.post(`${endpoint.trx_bet_placed}`, reqBody);
-      if (response?.data?.error === "200") {
-        if (response?.data?.msg === "Bid Placed Successfully.") {
-          toast(
-            <SuccessCheck
-              message={<span className="!text-sm">{response?.data?.msg}</span>}
-            />
-          );
-          fk.setFieldValue("isSuccessPlaceBet", true);
-          localStorage.setItem(
-            "betApplied",
-            `${gid}_true_${
-              Number(reqBody.number) <= 10
-                ? Number(reqBody.number) - 1
-                : reqBody.number
-            }_${reqBody.amount}`
-          );
-        } else {
-          toast(
-            <FalseCheck
-              message={<span className="!text-sm">{response?.data?.msg}</span>}
-            />
-          );
-        }
-        setOpen(false);
+      const total_bet = localStorage.getItem("total_bet");
+      const arrayLength =
+        total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+      if (
+        arrayLength &&
+        [11, 12, 13]?.includes(
+          Number(reqBody.number) <= 10
+            ? Number(reqBody.number) - 1
+            : Number(reqBody.number)
+        ) &&
+        arrayLength?.filter(
+          (i) =>
+            Number(i?.data?.split("_")?.[2]) > 10 &&
+            Number(i?.data?.split("_")?.[2]) <= 13
+        )?.length
+      ) {
+        setLoding(false);
+        return toast(
+          <FalseCheck
+            message={
+              <span className="!text-sm">
+                You have already applied bet on color
+              </span>
+            }
+          />
+        );
+      } else if (
+        arrayLength &&
+        [14, 15]?.includes(
+          Number(reqBody.number) <= 10
+            ? Number(reqBody.number) - 1
+            : Number(reqBody.number)
+        ) &&
+        arrayLength?.filter(
+          (i) =>
+            Number(i?.data?.split("_")?.[2]) >= 14 &&
+            Number(i?.data?.split("_")?.[2]) <= 15
+        )?.length
+      ) {
+        setLoding(false);
+        return toast(
+          <FalseCheck
+            message={
+              <span className="!text-sm">
+                You have already applied bet on big/small
+              </span>
+            }
+          />
+        );
+      } else if (
+        arrayLength &&
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
+          Number(reqBody.number) <= 10
+            ? Number(reqBody.number) - 1
+            : Number(reqBody.number)
+        ) &&
+        arrayLength?.filter((i) => Number(i?.data?.split("_")?.[2]) <= 9)
+          ?.length > 2
+      ) {
+        setLoding(false);
+        return toast(
+          <FalseCheck
+            message={
+              <span className="!text-sm">You can't apply more than 3 bet.</span>
+            }
+          />
+        );
       } else {
-        toast(response?.data?.msg);
+        const response = await axios.post(
+          `${endpoint.trx_bet_placed}`,
+          reqBody
+        );
+        if (response?.data?.error === "200") {
+          if (response?.data?.msg === "Bid Placed Successfully.") {
+            toast(
+              <SuccessCheck
+                message={
+                  <span className="!text-sm">{response?.data?.msg}</span>
+                }
+              />
+            );
+            localStorage.setItem(
+              "total_bet",
+              JSON.stringify(
+                total_bet !== "undefined" && total_bet
+                  ? [
+                      ...arrayLength,
+                      {
+                        data: `${gid}_true_${
+                          Number(reqBody?.number) <= 10
+                            ? Number(reqBody?.number) - 1
+                            : reqBody?.number
+                        }_${reqBody?.amount}`,
+                      },
+                    ]
+                  : [
+                      {
+                        data: `${gid}_true_${
+                          Number(reqBody?.number) <= 10
+                            ? Number(reqBody?.number) - 1
+                            : reqBody?.number
+                        }_${reqBody?.amount}`,
+                      },
+                    ]
+              )
+            );
+
+            fk.setFieldValue("isSuccessPlaceBet", true);
+            localStorage.setItem(
+              "betApplied",
+              `${gid}_true_${
+                Number(reqBody.number) <= 10
+                  ? Number(reqBody.number) - 1
+                  : reqBody.number
+              }_${reqBody.amount}`
+            );
+          }
+          setOpen(false);
+        } else {
+          setOpen(false);
+          toast(response?.data?.msg);
+        }
       }
     } catch (e) {
+      setOpen(false);
       toast(e?.message);
       console.log(e);
     }
@@ -158,7 +254,6 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 1000);
   };
-
 
   return (
     <Box
@@ -435,7 +530,7 @@ const BetNumber = ({ timing, gid }) => {
                 borderRadius: "5px",
               }}
             >
-              Select {" "}
+              Select{" "}
               {random
                 ? Number(random) <= 4
                   ? `:  ${selectNumber} Small`
@@ -444,8 +539,7 @@ const BetNumber = ({ timing, gid }) => {
                 ? selectNumber?.toString()?.toLocaleUpperCase()
                 : Number(selectNumber) <= 4
                 ? `: ${selectNumber} Small`
-                : ` : ${selectNumber} Big`
-                } 
+                : ` : ${selectNumber} Big`}
             </Typography>
           </Box>
           <Box mt={5} px={2}>

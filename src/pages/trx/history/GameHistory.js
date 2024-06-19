@@ -64,11 +64,6 @@ const GameHistory = ({ gid }) => {
 
   
   React.useEffect(() => {
-    console.log(
-      game_history?.data?.data
-        ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
-        : 1
-    );
     dispatch(
       updateNextCounter(
         game_history?.data?.data
