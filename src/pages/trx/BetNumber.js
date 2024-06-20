@@ -52,6 +52,7 @@ const BetNumber = ({ timing, gid }) => {
     enableReinitialize: true,
     isSuccessPlaceBet: true,
     onSubmit: () => {
+      console.log(getBalance,"balance")
       if (
         Number(getBalance || 0) <
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)
