@@ -66,9 +66,6 @@ function TRX() {
       refetchOnReconnect: true,
     }
   );
-  const handleClick = () => {
-    window.location.href ="/trx"
-   };
 
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 

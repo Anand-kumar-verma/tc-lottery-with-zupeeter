@@ -6,11 +6,12 @@ import About from './About';
 import Feature from './Feature';
 import Speaker from './Speaker';
 import Footer from './Footer';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const Carousel = ({ images, autoplayInterval = 3000 }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-
+    const navigate = useNavigate()
     const nextSlide = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
@@ -25,22 +26,26 @@ function Home() {
       return () => clearInterval(intervalId);
     }, [currentIndex]);
     return (
+
       <div className="carousel relative " >
         <div className='absolute  z-50 h-full w-full bg-black opacity-65 flex justify-center  items-center'>
-        <p className='flex gap-2 flex-col justify-center  text-center lg:text-[25px]'>
-        <p className='!text-yellow-600 font-bold lg:text-[20px] text-center'>January 20 ,2024</p>
-        <p className='!text-white font-bold lg:text-[45px] text-center'> Online Cash Games </p>
-        <p className='!text-white font-bold lg:text-[45px] text-center'> on Zupeeter Game </p>
-        <p className='!text-white font-bold lg:text-center'> 50 game Coming Soon  12 Game Live  5 Game In Pipe Line</p>
-        <button className='bg-orange-500 text-white items-center hover:bg-white mx-20 hover:text-orange-500 w-28 rounded-xl  text-sm p-2'>Play Now </button>
-        </p>
+          <p className='flex gap-2 flex-col justify-center  text-center lg:text-[25px] animate__animated animate__fadeInUp'>
+            <p className='!text-yellow-600 font-bold lg:text-[20px] text-center'>January 20 ,2024</p>
+            <p className='!text-white font-bold lg:text-[45px] text-center'> Online Cash Games </p>
+            <p className='!text-white font-bold lg:text-[45px] text-center'> on Zupeeter Game </p>
+            <p className='!text-white font-bold lg:text-center'> 50 game Coming Soon  12 Game Live  5 Game In Pipe Line</p>
+            <div className='flex justify-center'>
+              <button className='bg-orange-500 text-white items-center 
+            hover:bg-white  hover:text-orange-500 w-28 rounded-xl 
+             text-sm p-2 my-2' onClick={() => { navigate('/login') }}>Play Now</button>
+            </div>
+          </p>
         </div>
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
           className="slide w-[1400px] lg:h-[550px] h-[300px] -mt-12"
         />
-
       </div>
     );
   };
@@ -54,11 +59,11 @@ function Home() {
       <div className="content-container">
         <Carousel images={images} />
       </div>
-      <About/>
-      <Feature/>
-      <Speaker/>
-      <Footer/>
-      </>
+      <About />
+      <Feature />
+      <Speaker />
+      <Footer />
+    </>
 
   )
 }

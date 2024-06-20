@@ -16,19 +16,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import logo from "../assets/images/zupee.png"
 import CloseIcon from '@mui/icons-material/Close';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import down from "../assets/ZUPEETER.pdf";
 
 const drawerWidth = 260;
 const navItems = [
-  { text: 'Games', path: '/zupeeter' },
+  { text: 'Games', path: '/' },
   { text: 'Download', path: down },
-  { text: 'Sign In', path: 'https://zupeeter.com/' },
-  { text: 'Register', path: 'https://zupeeter.com/register' }
+  { text: 'Sign In', path: '/login' },
+  { text: 'Register', path: '/register' }
 ];
 function Header(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -52,15 +53,17 @@ function Header(props) {
       <List>
         {navItems.map((item) => (
         <ListItem
-        component={item.path.startsWith('http') ? 'a' : Link} 
-        href={item.path.startsWith('http') ? item.path : undefined} 
-        to={!item.path.startsWith('http') ? item.path : undefined} 
+      
         key={item.text}
         disablePadding 
         onClick={(e) => {
           if (item.text === 'Download') {
             handleDownload(item.path ,e);
             handleDrawerToggle();
+          }
+          else
+          {
+            navigate(item.path)
           }
         }}>
             <ListItemButton sx={{ textAlign: 'left' }}>
