@@ -30,8 +30,10 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import FalseCheck from "../../shared/check/FalseCheck";
+import { useSelector } from "react-redux";
 
 const BetNumber = ({ timing, gid }) => {
+  const next_step = useSelector((state) => state.aviator.next_step);
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
@@ -89,11 +91,11 @@ const BetNumber = ({ timing, gid }) => {
   async function betFunctionStart() {
     setLoding(true);
     const reqBody = {
-      userid: user_id?.toString(),
+      user_id: user_id?.toString(),
       amount: (
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
       )?.toString(),
-      number: `${
+      bet_number: `${
         (selectNumber === "green" && 11) ||
         (selectNumber === "voilet" && 12) ||
         (selectNumber === "red" && 13) ||
@@ -101,8 +103,10 @@ const BetNumber = ({ timing, gid }) => {
         (selectNumber === "Small" && 14) || // this is small
         Number(selectNumber) + 1
       }`,
-      gameid: `${Number(gid)}`,
-    };
+      type: `${Number(gid)}`,
+      round_no:next_step,
+      description: `${(Number(selectNumber) >= 1 && Number(selectNumber) <= 4) ? "Small" : "Big"}`
+     };
 
     try {
       const total_bet = localStorage.getItem("total_bet");
@@ -174,9 +178,10 @@ const BetNumber = ({ timing, gid }) => {
         );
       } else {
         const response = await axios.post(
-          `${endpoint.trx_bet_placed}`,
+          `${endpoint.trx_bet_placed_node}`,
           reqBody
         );
+        console.log(reqBody , "kkk")
         if (response?.data?.error === "200") {
           if (response?.data?.msg === "Bid Placed Successfully.") {
             toast(
@@ -242,6 +247,168 @@ const BetNumber = ({ timing, gid }) => {
     fk.setFieldValue("qnt", "1");
     setLoding(false);
   }
+
+
+  // async function betFunctionStart() {
+  //   setLoding(true);
+  //   const reqBody = {
+  //     userid: user_id?.toString(),
+  //     amount: (
+  //       Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
+  //     )?.toString(),
+  //     number: `${
+  //       (selectNumber === "green" && 11) ||
+  //       (selectNumber === "voilet" && 12) ||
+  //       (selectNumber === "red" && 13) ||
+  //       (selectNumber === "Big" && 15) || // this is big
+  //       (selectNumber === "Small" && 14) || // this is small
+  //       Number(selectNumber) + 1
+  //     }`,
+  //     gameid: `${Number(gid)}`,
+      
+  //   };
+
+  //   try {
+  //     const total_bet = localStorage.getItem("total_bet");
+  //     const arrayLength =
+  //       total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+  //     if (
+  //       arrayLength &&
+  //       [11, 12, 13]?.includes(
+  //         Number(reqBody.number) <= 10
+  //           ? Number(reqBody.number) - 1
+  //           : Number(reqBody.number)
+  //       ) &&
+  //       arrayLength?.filter(
+  //         (i) =>
+  //           Number(i?.data?.split("_")?.[2]) > 10 &&
+  //           Number(i?.data?.split("_")?.[2]) <= 13
+  //       )?.length
+  //     ) {
+  //       setLoding(false);
+  //       return toast(
+  //         <FalseCheck
+  //           message={
+  //             <span className="!text-sm">
+  //               You have already applied bet on color
+  //             </span>
+  //           }
+  //         />
+  //       );
+  //     } else if (
+  //       arrayLength &&
+  //       [14, 15]?.includes(
+  //         Number(reqBody.number) <= 10
+  //           ? Number(reqBody.number) - 1
+  //           : Number(reqBody.number)
+  //       ) &&
+  //       arrayLength?.filter(
+  //         (i) =>
+  //           Number(i?.data?.split("_")?.[2]) >= 14 &&
+  //           Number(i?.data?.split("_")?.[2]) <= 15
+  //       )?.length
+  //     ) {
+  //       setLoding(false);
+  //       return toast(
+  //         <FalseCheck
+  //           message={
+  //             <span className="!text-sm">
+  //               You have already applied bet on big/small
+  //             </span>
+  //           }
+  //         />
+  //       );
+  //     } else if (
+  //       arrayLength &&
+  //       [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
+  //         Number(reqBody.number) <= 10
+  //           ? Number(reqBody.number) - 1
+  //           : Number(reqBody.number)
+  //       ) &&
+  //       arrayLength?.filter((i) => Number(i?.data?.split("_")?.[2]) <= 9)
+  //         ?.length > 2
+  //     ) {
+  //       setLoding(false);
+  //       return toast(
+  //         <FalseCheck
+  //           message={
+  //             <span className="!text-sm">You can't apply more than 3 bet.</span>
+  //           }
+  //         />
+  //       );
+  //     } else {
+  //       const response = await axios.post(
+  //         `${endpoint.trx_bet_placed}`,
+  //         reqBody
+  //       );
+  //       if (response?.data?.error === "200") {
+  //         if (response?.data?.msg === "Bid Placed Successfully.") {
+  //           toast(
+  //             <SuccessCheck
+  //               message={
+  //                 <span className="!text-sm">{response?.data?.msg}</span>
+  //               }
+  //             />
+  //           );
+  //           localStorage.setItem(
+  //             "total_bet",
+  //             JSON.stringify(
+  //               total_bet !== "undefined" && total_bet
+  //                 ? [
+  //                     ...arrayLength,
+  //                     {
+  //                       data: `${gid}_true_${
+  //                         Number(reqBody?.number) <= 10
+  //                           ? Number(reqBody?.number) - 1
+  //                           : reqBody?.number
+  //                       }_${reqBody?.amount}`,
+  //                     },
+  //                   ]
+  //                 : [
+  //                     {
+  //                       data: `${gid}_true_${
+  //                         Number(reqBody?.number) <= 10
+  //                           ? Number(reqBody?.number) - 1
+  //                           : reqBody?.number
+  //                       }_${reqBody?.amount}`,
+  //                     },
+  //                   ]
+  //             )
+  //           );
+
+  //           fk.setFieldValue("isSuccessPlaceBet", true);
+  //           localStorage.setItem(
+  //             "betApplied",
+  //             `${gid}_true_${
+  //               Number(reqBody.number) <= 10
+  //                 ? Number(reqBody.number) - 1
+  //                 : reqBody.number
+  //             }_${reqBody.amount}`
+  //           );
+  //         }
+  //         setOpen(false);
+  //       } else {
+  //         setOpen(false);
+  //         toast(response?.data?.msg);
+  //       }
+  //     }
+  //   } catch (e) {
+  //     setOpen(false);
+  //     toast(e?.message);
+  //     console.log(e);
+  //   }
+    
+  //   client.refetchQueries("walletamount");
+  //   client.refetchQueries("wallet_amount");
+  //   client.refetchQueries("myAll_trx_history");
+  //   fk.setFieldValue("balance", "1");
+  //   setRandomNumber(null);
+  //   fk.setFieldValue("qnt", "1");
+  //   setLoding(false);
+  // }
+
+
+  
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
   const generatenumber = () => {

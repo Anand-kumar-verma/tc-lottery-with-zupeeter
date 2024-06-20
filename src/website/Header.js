@@ -17,12 +17,12 @@ import Button from '@mui/material/Button';
 import logo from "../assets/images/zupee.png"
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useNavigate } from 'react-router-dom';
-import down from "../assets/ZUPEETER.pdf";
+import { download_app_url } from '../services/urls';
 
 const drawerWidth = 260;
 const navItems = [
   { text: 'Games', path: '/' },
-  { text: 'Download', path: down },
+  { text: 'Download'},
   { text: 'Sign In', path: '/login' },
   { text: 'Register', path: '/register' }
 ];
@@ -34,15 +34,9 @@ function Header(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  const handleDownload = (path ,event) => {
-    event.preventDefault(); 
-    const link = document.createElement('a');
-    link.href = path;
-    link.target = '_blank'; 
-    link.rel = 'noopener noreferrer'; 
-    link.click();
-  };
-
+  
+  
+ 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'left' }}>
       <Typography variant="h6" sx={{ my: 2 }} className='!flex !justify-between'>
@@ -58,8 +52,7 @@ function Header(props) {
         disablePadding 
         onClick={(e) => {
           if (item.text === 'Download') {
-            handleDownload(item.path ,e);
-            handleDrawerToggle();
+            document.location.href = `${download_app_url}`
           }
           else
           {
@@ -102,7 +95,19 @@ function Header(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-               <Button className='  !mx-5' component={item.path.startsWith('http') ? 'a' : Link} to={!item.path.startsWith('http') ? item.path : undefined} href={item.path.startsWith('http') ? item.path : undefined} key={item.text} sx={{ color: '#4611a7' }}>
+               <Button className='  !mx-5' 
+               key={item.text} 
+               onClick={(e) => {
+                if (item.text === 'Download') {
+                  document.location.href = `${download_app_url}`
+                 
+                }
+                else
+                {
+                  navigate(item.path)
+                }
+              }}
+               sx={{ color: '#4611a7' }}>
                {item.text}
               </Button>
             ))}
@@ -116,8 +121,7 @@ function Header(props) {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+            keepMounted: true,}}
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
@@ -135,10 +139,6 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 

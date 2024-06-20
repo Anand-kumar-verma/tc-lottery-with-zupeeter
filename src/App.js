@@ -13,7 +13,7 @@ import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
 import PageNotFound from "./PageNotFound";
 import Dashboard from "./pages/home/Dashboard";
-import Home from "./website/Home";
+
 
 function App() {
   const [isOpenSplash, setIsOpenSplash] = useState(true);
