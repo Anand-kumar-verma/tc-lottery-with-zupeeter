@@ -1,10 +1,10 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import './style.css'
 import './animate.min.css'
 import './aos.css'
 import './bootstrap.min.css'
 import './default.css'
+import './style.css'
 // import './fontawesome-all.min.css'
 import './magnific-popup.css'
 import './meanmenu.css'
@@ -14,22 +14,20 @@ import './responsive.css'
 import './slick.css'
 // import './style'
 
-import logo from '../assets/images/logo.png'
-import slider_img01 from './img/bg/1 (3).92ba2f71f9464e5ba3e7.png'
-import slider_img02 from './img/slider/slider_img02.png'
-import released_game_img01 from './img/images/released_game_img01.jpg'
-import slider_circle from './img/slider/slider_circle.png'
-import wingo from './img/wingo.jpg'
-import k3 from './img/DD6E84771ADB7D4058491095BA8A5229.png'
-import trx from './img/download.png'
-import aviater from './img/41aeqyY7vML._SL500_.jpg'
-import ludo from './img/download.jpg'
-import casino from './img/casino-logo-on-a-green-background-flying-gold-coins-free-vector.jpg'
-import facebook from './img/facebook (5).png'
-import telegram from './img/telegram.png'
-import instagram from './img/instagram.png'
-import twitter from './img/twitter.png'
 import { NavLink } from 'react-router-dom'
+import logo from '../assets/images/logo.png'
+import aviater from './img/41aeqyY7vML._SL500_.jpg'
+import k3 from './img/DD6E84771ADB7D4058491095BA8A5229.png'
+import slider_img01 from './img/bg/1 (3).92ba2f71f9464e5ba3e7.png'
+import casino from './img/casino-logo-on-a-green-background-flying-gold-coins-free-vector.jpg'
+import ludo from './img/download.jpg'
+import trx from './img/download.png'
+import facebook from './img/facebook (5).png'
+import instagram from './img/instagram.png'
+import slider_circle from './img/slider/slider_circle.png'
+import telegram from './img/telegram.png'
+import twitter from './img/twitter.png'
+import wingo from './img/wingo.jpg'
 
 
 
@@ -294,7 +292,7 @@ function Home() {
           </div>
         </div>
       </footer>
-    </Box >
+    </Box>
   )
 }
 export default Home

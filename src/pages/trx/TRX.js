@@ -64,6 +64,14 @@ function TRX() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
+
+  useEffect(()=>{
+    setOpenDialogBox(false);
+    localStorage.setItem("betApplied", false);
+    localStorage.removeItem("total_bet");
+    localStorage.removeItem("anand_re");
+  },[])
+  
   React.useEffect(() => {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
