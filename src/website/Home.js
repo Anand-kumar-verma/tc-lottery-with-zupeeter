@@ -13,7 +13,6 @@ import './odometer.css'
 import './responsive.css'
 import './slick.css'
 // import './style'
-
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 import aviater from './img/41aeqyY7vML._SL500_.jpg'
@@ -28,10 +27,7 @@ import slider_circle from './img/slider/slider_circle.png'
 import telegram from './img/telegram.png'
 import twitter from './img/twitter.png'
 import wingo from './img/wingo.jpg'
-
-
-
-
+import { download_app_url } from '../services/urls';
 
 
 function Home() {
@@ -48,7 +44,8 @@ function Home() {
                   </div>
                   <div id="mobile-menu" className="navbar-wrap  d-lg-flex media440" >
                     <ul>
-                      <li className="show"><a href="#">Download</a> </li>
+                      <li className="show"><a href="#"  
+                      onClick={() => (document.location.href = `${download_app_url}`)}>Download</a> </li>
                       <li><a href="/login">Sign in</a></li>
                       <li><a href="/register">Register</a></li>
                     </ul>
