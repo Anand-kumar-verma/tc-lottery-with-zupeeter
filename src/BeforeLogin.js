@@ -7,7 +7,6 @@ const BeforeLogin = () => {
   useEffect(() => {
     setTimeout(() => {
       navigate("/dashboard");
-      window.location.reload();
     }, 1000);
   }, []);
 
