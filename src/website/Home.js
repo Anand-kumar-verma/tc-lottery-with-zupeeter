@@ -47,7 +47,7 @@ function Home() {
             </Grid>
             <Grid item xs={12} sm={9} md={4} sx={{ mt: { xs: 1.2, sm: 0 } }}>
               <Stack direction='row' alignItems='center' justifyContent='space-evenly'>
-                <NavLink >
+                <NavLink to='https://zupeeter.com/ZUPEETER.pdf'>
                   <Button sx={{ background: '#e4a101', padding: '5px 20px', color: 'black', borderRadius: '0', transform: 'skewX(-16deg)', fontSize: '15px', fontWeight: '500' }}> Download</Button>
                 </NavLink>
                 <NavLink to='/login' >
@@ -178,7 +178,7 @@ function Home() {
                 Quick Links
               </Typography>
               <Link
-                href="#"
+                href="https://zupeeter.com/ZUPEETER.pdf"
                 sx={{
                   color: '#fff',
                   display: 'block',
