@@ -14,7 +14,13 @@ import k3 from './img/DD6E84771ADB7D4058491095BA8A5229.png'
 import ludo from './img/download.jpg'
 import trx from './img/download.png'
 import wingo from './img/wingo.jpg'
-import { Facebook, Twitter, Instagram, Telegram } from '@mui/icons-material';
+
+import facebookimg from './img/facebook (5).png'
+import instagram from './img/instagram.png'
+import telegram from './img/telegram.png'
+import twitter from './img/twitter.png'
+
+
 // import TelegramIcon from '@mui/icons-material/Telegram';
 
 
@@ -227,16 +233,16 @@ function Home() {
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'center', gap: '15px' }}>
                 <IconButton href="https://www.facebook.com/people/Zupeeter-Token/61559027016227/?mibextid=ZbWKwL" sx={{ color: '#fff' }} target='_blank'>
-                  <Facebook />
+                  <Box component='img' src={facebookimg} width={35}></Box>
                 </IconButton>
                 <IconButton href="https://x.com/i/flow/login?redirect_after_login=%2Fzupeetertoken" sx={{ color: '#fff' }} target='_blank'>
-                  <Twitter />
+                  <Box component='img' src={twitter} width={35}></Box>
                 </IconButton>
                 <IconButton href="https://www.instagram.com/zupeetertoken/?igsh=NGt3MzViNnZzMXcx" sx={{ color: '#fff' }} target='_blank'>
-                  <Instagram />
+                  <Box component='img' src={instagram} width={35}></Box>
                 </IconButton>
                 <IconButton href="https://t.me/zupeeter" sx={{ color: '#fff' }} target='_blank'>
-                  <Telegram />
+                  <Box component='img' src={telegram} width={35}></Box>
                 </IconButton>
               </Box>
             </Grid>
