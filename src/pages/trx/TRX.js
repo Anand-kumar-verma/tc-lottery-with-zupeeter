@@ -129,7 +129,7 @@ function TRX() {
           direction="row"
           sx={{ alignItems: "center", justifyContent: "space-between" }}
         >
-          <NavLink to="/">
+          <NavLink to="/dashboard">
             <Box component="img" src={backbtn} width={25}></Box>
           </NavLink>
           <Stack direction="row">
