@@ -20,9 +20,7 @@ import music from "../../assets/images/music.png";
 import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
-import {
-  getBalanceFunction
-} from "../../services/apiCallings";
+import { getBalanceFunction } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import WinLossPopup from "./WinLossPopup";
@@ -45,10 +43,39 @@ function TRX() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+
+  const [isPageVisible, setIsPageVisible] = useState(true);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsPageVisible(false);
+      } else {
+        setIsPageVisible(true);
+        setOpenDialogBox(false);
+        localStorage.setItem("betApplied", false);
+        localStorage.removeItem("total_bet");
+        localStorage.removeItem("anand_re");
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(()=>{
+    setOpenDialogBox(false);
+    localStorage.setItem("betApplied", false);
+    localStorage.removeItem("total_bet");
+    localStorage.removeItem("anand_re");
+  },[])
+  
   React.useEffect(() => {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
-      
         res && setOpenDialogBox(true);
         // setTimeout(() => {
         //   setOpenDialogBox(false);
@@ -56,9 +83,8 @@ function TRX() {
         // }, 5000);
       }
     }, 1000);
-     // eslint-disable-next-line
-  }, [dummycounter,res]);
-  const {isLoading, data: wallet_amount } = useQuery(
+  }, [dummycounter, res]);
+  const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
     {
@@ -70,25 +96,24 @@ function TRX() {
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   function refreshFunctionForRotation() {
-    client.refetchQueries("wallet_amount")
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    client.refetchQueries("wallet_amount");
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
 
     const element = document.getElementById("refresh_button");
     if (!item) {
       element.classList.add("rotate_refresh_image");
     }
     setTimeout(() => {
-      element.classList.remove("rotate_refresh_image")
+      element.classList.remove("rotate_refresh_image");
     }, 2000);
-
   }
   useEffect(() => {
     const element = document.getElementById("refresh_button");
-    const item = document.getElementsByClassName("rotate_refresh_image")?.[0]
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
     if (item) {
       element.classList.remove("rotate_refresh_image");
     }
-  }, [])
+  }, []);
 
   return (
     <Container>
@@ -100,7 +125,7 @@ function TRX() {
           px: 2,
         }}
       >
-        <CustomCircularProgress isLoading={isLoading}/>
+        <CustomCircularProgress isLoading={isLoading} />
         <Stack
           direction="row"
           sx={{ alignItems: "center", justifyContent: "space-between" }}
@@ -153,9 +178,16 @@ function TRX() {
               ₹ {wallet_amount_data}{" "}
             </Typography>
             <div className="mx-1 rotate_refresh_image" id="refresh_button">
-              <img src={refresh} width={25} ml={2} onClick={() => {
-                refreshFunctionForRotation()
-              }} /></div>  </Stack>
+              <img
+                src={refresh}
+                width={25}
+                ml={2}
+                onClick={() => {
+                  refreshFunctionForRotation();
+                }}
+              />
+            </div>{" "}
+          </Stack>
           <Stack direction="row" alignItems="center" justifyContent="center">
             <Box component="img" src={balance} width={25} mr={2}></Box>
             <Typography

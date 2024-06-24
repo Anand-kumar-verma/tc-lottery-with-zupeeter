@@ -81,6 +81,7 @@ function Login() {
         localStorage.setItem("user_id", res?.data?.data?.or_user_id);
         localStorage.setItem("or_m_user_type", res?.data?.data?.or_m_user_type);
         // navigate("/dashboard");
+        window.location.reload();
         navigate("/before-login");
       } else {
         toast(res?.data?.msg);
