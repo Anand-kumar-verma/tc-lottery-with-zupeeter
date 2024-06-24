@@ -67,5 +67,6 @@ export const endpoint = {
   win_list_last: `${baseUrl}/api/win_list_last`,
 
   payin_status:`${baseUrl}/api/payin_api`,
-  swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`
+  swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`,
+  trx_bet_placed_node:` http://192.168.18.183:9000/bid-placed-node`
 };
