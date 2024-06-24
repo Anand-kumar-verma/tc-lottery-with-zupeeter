@@ -13,7 +13,7 @@ import vendorlogo4 from '../../../assets/images/vendorlogo4.png';
 import vendorlogo5 from '../../../assets/images/vendorlogo5.png';
 import vendorlogo6 from '../../../assets/images/vendorlogo6.png';
 import vendorlogo7 from '../../../assets/images/vendorlogo7.png';
-
+import aviator_game_image from "../../../assets/images/aviator_game_image.png";
 
 function Slots() {
 
@@ -34,6 +34,13 @@ function Slots() {
                     Slots                </Typography>
             </Stack>
             <Grid container spacing={2}>
+            <Grid item xs={6}>
+                    <NavLink to='/comingsoon'>
+                        <Box sx={style.winbox}>
+                            <Box component='img' src={aviator_game_image} sx={{ width: '100%', height: '100%' }}></Box>
+                        </Box>
+                    </NavLink>
+                </Grid>
                 <Grid item xs={6}>
                     <NavLink to='/comingsoon'>
                         <Box sx={style.winbox}>
