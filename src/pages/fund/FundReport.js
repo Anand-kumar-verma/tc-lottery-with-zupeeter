@@ -201,7 +201,7 @@ export default function FundReport() {
                         {Number(i?.tr11_fund_amt || 0)?.toFixed()}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {(Number(i?.tr11_fund_amt || 0)*5/100)?.toFixed(2)}
+                        {(Number(i?.tr11_fund_amt || 0)*3/100)?.toFixed(2)}
                       </TableCell>
                     </TableRow>
                   );
