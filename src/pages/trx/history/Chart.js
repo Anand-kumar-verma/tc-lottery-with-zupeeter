@@ -13,7 +13,7 @@ const Chart = ({ gid }) => {
   const [visibleRows, setVisibleRows] = React.useState([]);
 
   const { isLoading, data: game_history } = useQuery(
-    ["trx_gamehistory_chart", gid],
+    ["trx_gamehistory", gid],
     () => GameHistoryFn(gid),
     {
       refetchOnMount: false,

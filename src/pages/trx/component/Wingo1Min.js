@@ -81,7 +81,7 @@ function Wingo1Min() {
         client.refetchQueries("myAll_trx_history");
       }
       if (onemin === 0) {
-        client.refetchQueries("trx_gamehistory_chart");
+        // client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("trx_gamehistory");
       }
     };

@@ -50,7 +50,8 @@ export const endpoint = {
   
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis
-  trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js
+  // trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js
+  
   trx_bet_placed: `${baseUrl}/api/Trx_bet`, //////////// done in node js
   trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`, /// done  in node js
   registration_bonus: `${baseUrl}/api/view_direct_referral_income`,  
@@ -68,5 +69,7 @@ export const endpoint = {
 
   payin_status:`${baseUrl}/api/payin_api`,
   swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`,
-  trx_bet_placed_node:`${domain}bid-placed-node`
+  trx_bet_placed_node:`${domain}bid-placed-node`,
+  trx_game_history: `${domain}trx_result-node`, //////// done in node js
+
 };
