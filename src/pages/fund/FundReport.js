@@ -186,7 +186,7 @@ export default function FundReport() {
                         {i?.tr11_fund_transaid}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.tr11_fund_transfer_id}
+                        {i?.or_m_user_id ? i?.or_m_user_id:"----" }
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {moment(i?.tr11_fund_date)?.format("DD-MM-YYYY")}
