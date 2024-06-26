@@ -7,8 +7,8 @@ import toast from "react-hot-toast";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import { get_user_data_fn, walletamount } from "../services/apicalling";
-import { dummy_aviator, endpoint, rupees } from "../services/urls";
+import { get_user_data_fn, walletamount } from "../../services/apiCallings";
+import { dummy_aviator, endpoint, rupees } from "../../services/urls";
 import { gray } from "./color";
 import CryptoJS from "crypto-js";
 

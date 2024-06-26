@@ -11,7 +11,8 @@ export const baseUrl = "https://admin.zupeeter.com";
 export const front_end_domain = "https://zupeeter.com";
 export const usdt_base_url = "https://zupeegame.info"
 export const download_app_url = "https://zupeeter.com/ZUPEETER.pdf"
-
+export const dummy_aviator = "https://aviator-complete-backend-with-sunlottery.onrender.com"
+export const domain1 = "https://aviator-complete-backend-with-sunlottery.onrender.com";
 
 export const endpoint = {
   newlogin: `${baseUrl}/api/newlogin`,
@@ -77,39 +78,7 @@ export const endpoint = {
     aviator_main:`${domain}/aviator-to-main-wallet`,
   },
 
-  //  avaitorapi
-  userwallet: `${baseUrl}/api/userwallet`,
-  // top11winner: `https://game-zone-sql.onrender.com/api/v1/topw11winningInformation`,
-  top11winner: `${baseUrl}/api/winning-list`,
-  openbannerUrl: `${baseUrl}/popup`,
-  profiledata: `${baseUrl}/api/profileapi`,
-  applybet: `${baseUrl}/api/bet`,
-  game_history: `${baseUrl}/api/colour_result`,
-  my_history: `${baseUrl}/api/getbet`,
-  my_history_all: `${baseUrl}/api/getbet-game-results`,
-  check_result: `${baseUrl}/api/checkresult`,
-  color_winning: `${baseUrl}/api/colour_winning`,
-  cash_deposit: `${baseUrl}/api/deposit`,
-  payment_url: "https://vpayout.com/Upi_controller/insert_fund_request_online",
-  withdraw_payment: `${baseUrl}/api/payout-request`,
-  get_name_by_referral_code: `${baseUrl}/api/get-user-reffral-name`,
-  payment_request: `${baseUrl}/api/deposit-request`,
-  registration_bonus: `${baseUrl}/api/welcom-bonus`,
-  deposit_history: `${baseUrl}/api/deposit-history`,
-  withdrawl_history: `${baseUrl}/api/withdrawl-history`,
-  deposit_bonus: `${baseUrl}/api/deposit-bonus`,
-  referral_bonus: `${baseUrl}/api/refral-bonus`,
-  daily_self_bet_income: `${baseUrl}/api/daily-self-bet-income`,
-  daily_wallet_income: `${baseUrl}/api/daily-wallet-income`,
-  daily_salary_income: `${baseUrl}/api/daily-salay-income`,
-  team_reward_bonus: `${baseUrl}/api/team-reward-bonus`,
-  team_trading_bonus: `${baseUrl}/api/team-trading-bonus`,
-  add_bank_details: `${baseUrl}/api/bank-add`,
-  get_bank_list: `${baseUrl}/api/user-bank-details`,
-  promotion_data: `https://game-zone-sql-0lr4.onrender.com/api/v1/promotiondata`,
-  all_withdrawl_user_list: `${baseUrl}/api/widthrol-user-list`,
-  recharge_call_bakc: `${baseUrl}/api/deposits-user-request`,
-  cricket_get_url_id_pass: `${baseUrl}/api/cricket-details`,
+
   
   // aviator api's
   aviator_login: `${baseUrl}/api/aviator/login`,

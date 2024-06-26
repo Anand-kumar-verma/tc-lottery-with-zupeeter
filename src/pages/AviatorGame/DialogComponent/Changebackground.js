@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { backgroundImageFun } from "../../redux/slices/counterSlice";
+import { backgroundImageFun } from "../../../redux/slices/counterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
-import air from "../../assets/air.png";
+import air from "../../../assets/air.png";
 import { useMediaQuery } from "react-responsive";
 
 const Changebackground = ({ setOpenCustomDialogBox,handleClose }) => {

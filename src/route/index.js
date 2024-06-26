@@ -51,9 +51,8 @@ import PromotionRule from "../pages/promotion/PromotionRule";
 import ChangePassword from "../pages/password/ChangePassword";
 import AccountPassword from "../pages/password/AccountPassword";
 import TransactionPassword from "../pages/password/TransactionPassword";
-// import MainPage from "../pages/AviatorGame/MainPage";
-// import LayoutAviator from "../pages/AviatorGame/Layout";
-// import PlayGame from "../pages/AvaitorGame/PlayGame";
+import LayoutAviator from "../pages/AviatorGame/Layout";
+import PlayGame from "../pages/AviatorGame/PlayGame";
 
 export const routes = [
     {
@@ -272,12 +271,5 @@ export const routes = [
         path:"/password/account",
         element:<AccountPassword />
     },
-    // {
-    //     path: "/aviator-login",
-    //     component: <MainPage />
-    // },
-    // {
-    //     path: "/playgame",
-    //     component: <LayoutAviator component={<PlayGame />} />
-    // },
+   
 ]

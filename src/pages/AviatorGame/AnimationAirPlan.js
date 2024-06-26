@@ -1,4 +1,4 @@
-import { byTimeIsEnableSound } from "../redux/slices/counterSlice";
+import { byTimeIsEnableSound } from "../../redux/slices/counterSlice";
 
 export const demomobile = `
 @keyframes slidein {

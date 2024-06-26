@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
+import CryptoJS from "crypto-js";
+import { useState } from "react";
 import { useQuery } from "react-query";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import BeforeLogin from "./BeforeLogin";
 import SplashScreen from "./SplashScreen";
 import "./assets/style/main.css";
-import Layout from "./component/layout/Layout";
+import LayoutAviator from "./pages/AviatorGame/Layout";
+import PlayGame from "./pages/AviatorGame/PlayGame";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Dashboard from "./pages/home/Dashboard";
 import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
-import PageNotFound from "./PageNotFound";
-import Dashboard from "./pages/home/Dashboard";
 import Home from "./website/Home";
-
 function App() {
+
+  const isAuthenticatedd =
+    (localStorage.getItem("logindataen") &&
+      CryptoJS.AES.decrypt(
+        localStorage.getItem("logindataen"),
+        "anand"
+      )?.toString(CryptoJS.enc.Utf8)) ||
+    null; // Check if the user is authenticated
   const [isOpenSplash, setIsOpenSplash] = useState(true);
   const isAuthenticated = localStorage.getItem("user_id");
 
@@ -40,6 +48,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="/playgame" element={<LayoutAviator component={<PlayGame />} />}></Route> 
       <Route path="/" element={<Home />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>

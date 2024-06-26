@@ -1,6 +1,16 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { endpoint } from "./urls";
+import { dummy_aviator,endpoint } from "./urls";
+import { aviator_login_data_fn } from "../redux/slices/counterSlice";
+import CryptoJS from "crypto-js";
+const value =
+  (localStorage.getItem("logindataen") &&
+    CryptoJS.AES.decrypt(
+      localStorage.getItem("logindataen"),
+      "anand"
+    )?.toString(CryptoJS.enc.Utf8)) ||
+  null;
+const user_id = value && JSON.parse(value)?.UserID;
 
 export const storeCookies = () => {
   let expirationDate = new Date();
@@ -404,3 +414,51 @@ export const showRank =  (num) => {
    else if(Number(num)===5)
     return "Director Club"
 }
+// avaitorfunction
+export const get_user_data_fn = async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${endpoint.get_data_by_user_id}?id=${user_id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    console.log(response, "This is response");
+    if (response?.data?.error === "200") {
+      dispatch(aviator_login_data_fn(JSON.stringify(response?.data?.data)));
+      // localStorage.setItem(
+      //   "aviator_data",
+      //   JSON.stringify(response?.data?.data)
+      // );
+    }
+    sessionStorage.setItem("isAvailableUser", true);
+  } catch (e) {
+    toast(e?.message);
+    console.error(e);
+  }
+};
+export const walletamount = async () => {
+  // try {
+  //   const response = await axios.get(
+  //     `${endpoint.userwallet}?userid=${user_id}`
+  //   );
+  //   return response;
+  try {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+    const reqbody = {
+      id:user?._id
+    }
+    const response = await axios.post(
+      `${dummy_aviator}/api/v1/get-wallet-amount-by-id`,
+      reqbody
+    );
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};

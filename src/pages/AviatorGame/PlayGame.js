@@ -7,12 +7,12 @@ import { CgDetailsMore } from "react-icons/cg";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { useSocket } from "../Shared/SocketContext";
-import aviatorimage from "../assets/aviatorimage.png";
-import crashmusic from "../assets/crashmusic.mp3";
-import howtoplay from "../assets/howtoplay.PNG";
-import { get_user_data_fn, walletamount } from "../services/apicalling";
-import { dummy_aviator, endpoint, rupees } from "../services/urls";
+import { useSocket } from "../../shared/SocketContext";
+import aviatorimage from "../../assets/aviatorimage.png";
+import crashmusic from "../../assets/crashmusic.mp3";
+import howtoplay from "../../assets/images/howtoplay.PNG";
+import { get_user_data_fn, walletamount } from "../../services/apiCallings";
+import { dummy_aviator, rupees } from "../../services/urls";
 import AirPlane from "./AirPlane";
 import AllBets from "./AllBets";
 import AccountMenu from "./MenuItems";
@@ -25,6 +25,7 @@ const PlayGame = () => {
   const aviator_login_data = useSelector(
     (state) => state.aviator.aviator_login_data
   );
+  
   const isMediumScreen = useMediaQuery({ minWidth: 800 });
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -57,11 +58,11 @@ const PlayGame = () => {
   const resultFunction = async () => {
     const headers = {
       "Content-Type": "application/json",
-      Accept: "application/json", // Add the 'Accept' header
-      // Add any other headers you need for CORS here
+      Accept: "application/json", 
     };
     try {
       const response = await axios.get(
+     
         `${dummy_aviator}/api/v1/get-game-history`,
         {
           headers,
@@ -96,8 +97,6 @@ const PlayGame = () => {
       console.log(formik.values);
     },
   });
-
-  ///////////////////////  for airplane data
   const initialValues = {
     country: "India",
     currency: "INR",
@@ -179,7 +178,6 @@ const PlayGame = () => {
         await audioRefSound?.current?.pause();
       }
     } catch (error) {
-      // Handle any errors during play
       console.error("Error during play:", error);
     }
   };
@@ -210,48 +208,6 @@ const PlayGame = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (fk.values.setcolorofdigit) {
-  //     dispatch(waitingAviatorFun(false));
-  //     setTimeout(() => {
-  //       dispatch(just_start_after_waitingFun(false));
-  //     }, 2000);
-  //   }
-  // }, [fk.values.setcolorofdigit]);
-
-  // useEffect(() => {
-  //   if (!waiting_aviator) {
-  //     let sec = 10;
-  //     const interval = setInterval(() => {
-  //       setWaitingSec(--sec);
-  //       if (sec === 0) clearInterval(interval);
-  //     }, 200);
-  //   }
-  // }, [waiting_aviator]);
-
-  // useEffect(() => {
-  //   const handleBeforeUnload = (event) => {
-  //     const confirmationMessage =
-  //       "You are about to leave the dashboard. Are you sure you want to do this?";
-  //     event.returnValue = confirmationMessage; // Standard for most browsers
-  //     return confirmationMessage; // For some older browsers
-  //   };
-
-  //   const handleVisibilityChange = () => {
-  //     if (document.visibilityState === "hidden") {
-  //       setTimeout(() => {
-  //         dispatch(please_reconnect_the_serverFun(true));
-  //       }, 60 * 1000);
-  //     }
-  //   };
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-  //   document.addEventListener("visibilitychange", handleVisibilityChange);
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
-  //   };
-  // }, []);
-
   const airPlaneComponent = useMemo(() => {
     return <AirPlane formik={formik} fk={fk} />;
   }, [formik, fk]);
@@ -268,7 +224,7 @@ const PlayGame = () => {
     return (
       <div
         className={`no-scrollbar px-1 py-1 flex gap-1 flex-wrap h-[24px] overflow-x-scroll overflow-y-hidden rounded-full`}
-        style={{ flexDirection: "row-reverse" }} // Scroll from right to left
+        style={{ flexDirection: "row-reverse" }} 
       >
         {result
           ?.slice()
@@ -360,7 +316,7 @@ const PlayGame = () => {
             </p>
           </div>
           <div className="flex lg:flex-col lg:justify-between ">
-            {/* <RxCross2 className="text-lg cursor-pointer" /> */}
+          
             <CgDetailsMore
               className="text-lg cursor-pointer"
               onClick={(e) => handleClick(e)}
@@ -390,81 +346,6 @@ const PlayGame = () => {
         <CircularProgress />
       </div>
     );
-
-  // if (waiting_aviator)
-  //   return (
-  //     <>
-  //       <LinearProgress />
-  //       <div
-  //         className="h-full !bg-black w-full flex flex-col justify-center items-center overflow-y-hidden no-scrollbar
-  //     "
-  //       >
-  //         <CircularProgress />
-  //         <span className="!text-white">Connecting...</span>
-  //       </div>
-  //     </>
-  //   );
-
-  // if (just_start_after_waiting)
-  //   return (
-  //     <>
-  //       <div className="h-full w-full flex flex-col justify-center items-center overflow-y-hidden no-scrollbar">
-  //         <img src={plane1} className="lg:w-[30%] lg:h-[30%] w-[70%] h-[20%]" />
-  //         <p className="transparentColor bg-gradient-to-l from-[#ff013c] to-[#C3384E] text-[5rem] font-semibold">
-  //           Aviator
-  //         </p>
-  //         <div className="flex gap-2 items-center">
-  //           <div className="lg:h-[20px] h-[15px] w-[150px] lg:w-[500px] rounded-r-full rounded-l-full relative  bg-gradient-to-l from-[#ff013c] to-[#C3384E] ">
-  //             <div className="loder-waiting-for-next-round-start !rounded-full"></div>
-  //           </div>
-  //           <p className="!text-[#C3384E] !text-2xl">
-  //             {String(waiting_sec) + "0"}%
-  //           </p>
-  //         </div>
-
-  //         <p className="!text-[#C3384E] !text-2xl">
-  //           00:{String(waiting_sec).padStart(2, "0")}
-  //         </p>
-  //       </div>
-  //     </>
-  //   );
-  // if (please_reconnect_the_server)
-  //   return (
-  //     <>
-  //       <div className="!w-[screen] !h-screen flex justify-center items-center no-scrollbar ">
-  //         <Card className="!bg-white !bg-opacity-5 !rounded-lg !p-4">
-  //           <p className="flex justify-end">
-  //             <IconButton
-  //               onClick={() => {
-  //                 navigate("/dashboard");
-  //               }}
-  //             >
-  //               <ClearIcon className="!text-white" />
-  //             </IconButton>
-  //           </p>
-  //           <div className="!flex justify-center">
-  //             <ClearIcon className="!text-[#C3384E] !text-8xl border-[1px] border-[#C3384E] rounded-full" />
-  //           </div>
-  //           <p className="!text-white mt-10 text-center">
-  //             <span className="!font-bold text-xl">Sorry !</span> Server
-  //             Reconnection Failed
-  //           </p>
-  //           <p className="text-center !text-white">
-  //             Plese refresh the page for continue playing..
-  //           </p>
-  //           <div className="flex justify-center mt-5 ">
-  //             <Button
-  //               variant="contained"
-  //               className="!bg-[#C3384E]"
-  //               onClick={() => window.location.reload()}
-  //             >
-  //               OK
-  //             </Button>
-  //           </div>
-  //         </Card>
-  //       </div>
-  //     </>
-  //   );
 
   return (
     <div className=" h-full">

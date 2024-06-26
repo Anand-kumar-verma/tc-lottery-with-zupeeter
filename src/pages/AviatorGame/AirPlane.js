@@ -4,16 +4,16 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { useSocket } from "../Shared/SocketContext";
-import loderImage from "../assets/loderimage.png";
-import plane1 from "../assets/plan1.svg";
-import plane2 from "../assets/plan2.svg";
-import win from "../assets/win.png";
+import { useSocket } from "../../shared/SocketContext";
+import loderImage from "../../assets/images/loderimage.png";
+import plane1 from "../../assets/images/plan1.svg";
+import plane2 from "../../assets/images/plan2.svg";
+import win from "../../assets/win.png";
 import {
   byTimeIsEnableMusic,
   byTimeIsEnableSound,
-} from "../redux/slices/counterSlice";
-import { endpoint } from "../services/urls";
+} from "../../redux/slices/counterSlice";
+import { endpoint } from "../../services/urls";
 import {
   demomobile,
   demomobilesec,

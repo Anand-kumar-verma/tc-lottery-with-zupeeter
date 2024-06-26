@@ -6,8 +6,8 @@ import toast from 'react-hot-toast';
 import { BiMessageRounded } from 'react-icons/bi';
 import { BsSignTurnRight } from 'react-icons/bs';
 import { useQuery } from 'react-query';
-import { endpoint } from '../services/urls';
-import { get_user_data_fn } from '../services/apicalling';
+import { endpoint } from '../../services/urls';
+import { get_user_data_fn } from '../../services/apiCallings';
 import { useDispatch,useSelector } from "react-redux";
 const MyBets = () => {
   const dispatch = useDispatch()

@@ -3,7 +3,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import { Button, IconButton } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { backgroundMusicFun } from "../../redux/slices/counterSlice";
+import { backgroundMusicFun } from "../../../redux/slices/counterSlice";
 
 const ChangebackgroundMusic = ({setOpenCustomDialogBox,handleClose}) => {
   const audioRefMusic = useRef(null);

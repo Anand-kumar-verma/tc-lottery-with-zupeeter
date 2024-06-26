@@ -13,7 +13,7 @@ import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { endpoint } from "../../services/urls";
+import { endpoint } from "../../../services/urls";
 const Login = () => {
   const logindata = localStorage.getItem("aviator_data");
   const [value, setValue] = React.useState(0);

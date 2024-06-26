@@ -6,12 +6,12 @@ import toast from "react-hot-toast";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useQuery, useQueryClient } from "react-query";
 import { gray } from "./color";
-import { dummy_aviator, endpoint, rupees } from "../services/urls";
+import { dummy_aviator, endpoint, rupees } from "../../services/urls";
 import { useDispatch, useSelector } from "react-redux";
-import { get_user_data_fn, walletamount } from "../services/apicalling";
+import { get_user_data_fn, walletamount } from "../../services/apiCallings";
 import CryptoJS from "crypto-js";
 
-const SpentBetRight = ({ milliseconds, seconds, fk, formik }) => {
+const SpentBetRight = ({ milliseconds, seconds, fk }) => {
   const value =
   (localStorage.getItem("logindataen") &&
     CryptoJS.AES.decrypt(

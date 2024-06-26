@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useMediaQuery } from 'react-responsive';
 
-const LayoutAviator = ({ component }) => {
+const LayoutAviator = ({component}) => {
   const isMediumScreen = useMediaQuery({ minWidth: 800 })
   useEffect(()=>{
     window.scrollTo(0, 0);

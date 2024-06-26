@@ -1,6 +1,6 @@
 import { Radio } from '@mui/material'
 import React from 'react'
-import noactivebets from "../../assets/noactivebets.PNG";
+import noactivebets from "../../../assets/images/noactivebets.PNG";
 
 const FreeBets = () => {
   return (

@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Slot from '../../../assets/images/slot.png';
-import win from '../../../assets/images/win.png';
 import vendorlogo1 from '../../../assets/images/vendorlogo1.png';
 import vendorlogo2 from '../../../assets/images/vendorlogo2.png';
 import vendorlogo3 from '../../../assets/images/vendorlogo3.png';
@@ -35,7 +34,7 @@ function Slots() {
             </Stack>
             <Grid container spacing={2}>
             <Grid item xs={6}>
-                    <NavLink to='/comingsoon'>
+                    <NavLink to='/playgame'>
                         <Box sx={style.winbox}>
                             <Box component='img' src={aviator_game_image} sx={{ width: '100%', height: '100%' }}></Box>
                         </Box>
