@@ -54,6 +54,7 @@ export const endpoint = {
   
   trx_bet_placed: `${baseUrl}/api/Trx_bet`, //////////// done in node js
   trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`, /// done  in node js
+  // trx_my_history: `http://192.168.18.183:9000/trx-my-history-node`, /// done  in node js
   registration_bonus: `${baseUrl}/api/view_direct_referral_income`,  
   view_bank_details: `${baseUrl}/api/view_bank_details_new`,
   view_upi_details: `${baseUrl}/api/view_upi_details`,
