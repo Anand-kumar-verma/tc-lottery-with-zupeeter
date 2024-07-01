@@ -185,61 +185,68 @@ const BetNumber = ({ timing, gid }) => {
       //     />
       //   );
       // } else {
-        const response = await axios.post(
-          `${endpoint.trx_bet_placed_node}`,
-          reqBody
+      const response = await axios.post(
+        `${endpoint.trx_bet_placed_node}`,
+        reqBody
+      );
+      if (response?.data?.msg === "Bid placed Successfully") {
+        toast(
+          <SuccessCheck
+            message={<span className="!text-sm">{response?.data?.msg}</span>}
+          />
         );
-        if (response?.data?.msg === "Bid placed Successfully") {
-          toast(
-            <SuccessCheck
-              message={<span className="!text-sm">{response?.data?.msg}</span>}
-            />
-          );
-          localStorage.setItem(
-            "total_bet",
-            JSON.stringify(
-              total_bet !== "undefined" && total_bet
-                ? [
-                    ...arrayLength,
-                    {
-                      data: `${gid}_true_${
-                        Number(reqBody?.bet_number) <= 10
-                          ? Number(reqBody?.bet_number) - 1
-                          : reqBody?.bet_number
-                      }_${reqBody?.amount}`,
-                    },
-                  ]
-                : [
-                    {
-                      data: `${gid}_true_${
-                        Number(reqBody?.bet_number) <= 10
-                          ? Number(reqBody?.bet_number) - 1
-                          : reqBody?.bet_number
-                      }_${reqBody?.amount}`,
-                    },
-                  ]
-            )
-          );
+        localStorage.setItem(
+          "total_bet",
+          JSON.stringify(
+            total_bet !== "undefined" && total_bet
+              ? [
+                  ...arrayLength,
+                  {
+                    data: `${gid}_true_${
+                      Number(reqBody?.bet_number) <= 10
+                        ? Number(reqBody?.bet_number) - 1
+                        : reqBody?.bet_number
+                    }_${reqBody?.amount}`,
+                  },
+                ]
+              : [
+                  {
+                    data: `${gid}_true_${
+                      Number(reqBody?.bet_number) <= 10
+                        ? Number(reqBody?.bet_number) - 1
+                        : reqBody?.bet_number
+                    }_${reqBody?.amount}`,
+                  },
+                ]
+          )
+        );
 
-          fk.setFieldValue("isSuccessPlaceBet", true);
-          localStorage.setItem(
-            "betApplied",
-            `${gid}_true_${
-              Number(reqBody.bet_number) <= 10
-                ? Number(reqBody.bet_number) - 1
-                : reqBody.bet_number
-            }_${reqBody.amount}`
-          );
-          setOpen(false);
-        } else {
-          setOpen(false);
-          toast(response?.data?.msg);
-        }
+        fk.setFieldValue("isSuccessPlaceBet", true);
+        localStorage.setItem(
+          "betApplied",
+          `${gid}_true_${
+            Number(reqBody.bet_number) <= 10
+              ? Number(reqBody.bet_number) - 1
+              : reqBody.bet_number
+          }_${reqBody.amount}`
+        );
+        setOpen(false);
+      } else {
+        setOpen(false);
+        // toast(response?.data?.msg);
+        return toast(
+          <FalseCheck
+            message={<span className="!text-sm">{response?.data?.msg}</span>}
+          />
+        );
+      }
       // }
     } catch (e) {
       setOpen(false);
-      toast(e?.message);
-      console.log(e);
+      // toast(e?.message);
+      <FalseCheck
+      message={<span className="!text-sm">{e?.message}</span>}
+    />
     }
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
@@ -261,12 +268,6 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 1000);
   };
-
-
-
-
-
-
 
   return (
     <Box
