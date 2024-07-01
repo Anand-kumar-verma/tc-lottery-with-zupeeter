@@ -66,7 +66,7 @@ function Activity() {
     <Layout header={false}>
       <Box sx={style.root}>
         <Typography variant="body1" color="initial">
-          Activity
+          Special
         </Typography>
         <Typography variant="body1" color="initial">
           Please remember to follow the event page
@@ -75,27 +75,27 @@ function Activity() {
           We will launch user feedback activities from time to time
         </Typography>
       </Box>
-      <Stack direction="row" sx={style.act}>
-        <Box sx={style.actimg}>
+      {/* <Stack direction="row" sx={style.act}>
+       <Box sx={style.actimg}>
           <Box component="img" sx={{ width: "100%" }} src={banner1}></Box>
-          {/* <Typography variant="body1" color="initial">
+          <Typography variant="body1" color="initial">
             Gifts
-          </Typography> */}
+          </Typography>
           <Typography variant="body1" color="initial">
             Enter the redemption code to receive gift rewards
           </Typography>
-        </Box>
+        </Box> 
         <Box sx={style.actimg}>
           <Box component="img" sx={{ width: "100%" }} src={banner2}></Box>
-          {/* <Typography variant="body1" color="initial">
+         <Typography variant="body1" color="initial">
             FIRST DEPOSIT BONUS
-          </Typography> */}
+          </Typography> 
           <Typography variant="body1" color="initial">
             The more consecutive days you sign in, the higher the reward will
             be.
           </Typography>
         </Box>
-      </Stack>
+      </Stack> */}
       <Stack sx={style.act2}>
         {/* <Box sx={style.actimg2}>
           <Box
