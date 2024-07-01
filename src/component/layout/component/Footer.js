@@ -84,7 +84,7 @@ function Footer() {
               color: nav === 2 ? theme.palette.primary.main : "black",
             }}
           >
-            Activity
+            Special
           </Typography>
         </Box>
         <Box

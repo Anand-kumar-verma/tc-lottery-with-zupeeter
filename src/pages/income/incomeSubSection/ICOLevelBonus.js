@@ -76,11 +76,11 @@ function ICOLevelBonus() {
             return (
               <div className="!w-full !flex !flex-col  !bg-[#F48901]  !p-2 !rounded-lg !mt-2">
                 <div className="!w-full !flex !justify-between">
-                  <span className="!text-white">{i?.LEDGER_DESC}</span>
+                  <span className="!text-white">{i?.LEDGER_DESC} / {i?.LEDGER_NAME}</span>
                   <span className="!text-green-400 !text-lg">
                     {i?.LEDGER_CR}
                   </span>
-                </div>
+                   </div>
                 <div className="!w-full !flex !justify-between">
                   <span className="!text-white">{i?.LEDGER_TRANSID}</span>
                   <span className="!text-white  !text-[12px]">

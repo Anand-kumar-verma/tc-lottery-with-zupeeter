@@ -369,7 +369,7 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink>
-            <NavLink to="/promotion/MyCommission">
+            {/* <NavLink to="/promotion/MyCommission">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
                   <Box component="img" src={comitiondetails}></Box>
@@ -394,7 +394,7 @@ function Promotion() {
                   <ArrowForwardIosOutlinedIcon />
                 </Stack>
               </Box>
-            </NavLink>
+            </NavLink> */}
             {/* <NavLink to="/promotion/PromotionRule">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
