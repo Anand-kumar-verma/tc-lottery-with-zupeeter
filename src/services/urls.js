@@ -1,6 +1,6 @@
-// export const domain = "https://demo2.ferryinfotech.in/";
-// export const domain = "https://aviator-backend-pyup.onrender.com/";
-export const domain = "https://trx-timer-zupeeter.onrender.com/";
+export const domain = "https://trx-timer-zupeeter-7o9k.onrender.com/";
+
+export const domain_plesk_node = "https://api.zupeeter.com/"
 
 export const rupees = "₹";
 export const zubgback = "#F48901";
@@ -11,7 +11,6 @@ export const baseUrl = "https://admin.zupeeter.com";
 export const front_end_domain = "https://zupeeter.com";
 export const usdt_base_url = "https://zupeegame.info"
 export const download_app_url = "https://zupeeter.com/ZUPEETER.pdf"
-
 
 export const endpoint = {
   newlogin: `${baseUrl}/api/newlogin`,
@@ -70,7 +69,8 @@ export const endpoint = {
 
   payin_status:`${baseUrl}/api/payin_api`,
   swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`,
-  trx_bet_placed_node:`${domain}bid-placed-node`,
-  trx_game_history: `${domain}trx_result-node`, //////// done in node js
+  trx_bet_placed_node:`${domain_plesk_node}bid-placed-node`,
+  // trx_bet_placed_node:`http://192.168.18.183:9000/bid-placed-node`,
+  trx_game_history: `${domain_plesk_node}trx_result-node`, //////// done in node js
 
 };

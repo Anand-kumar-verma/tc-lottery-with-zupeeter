@@ -120,71 +120,71 @@ const BetNumber = ({ timing, gid }) => {
       const total_bet = localStorage.getItem("total_bet");
       const arrayLength =
         total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
-      if (
-        arrayLength &&
-        [11, 12, 13]?.includes(
-          Number(reqBody.bet_number) <= 10
-            ? Number(reqBody.bet_number) - 1
-            : Number(reqBody.bet_number)
-        ) &&
-        arrayLength?.filter(
-          (i) =>
-            Number(i?.data?.split("_")?.[2]) > 10 &&
-            Number(i?.data?.split("_")?.[2]) <= 13
-        )?.length
-      ) {
-        setLoding(false);
-        return toast(
-          <FalseCheck
-            message={
-              <span className="!text-sm">
-                You have already applied bet on color
-              </span>
-            }
-          />
-        );
-      } else if (
-        arrayLength &&
-        [14, 15]?.includes(
-          Number(reqBody.bet_number) <= 10
-            ? Number(reqBody.bet_number) - 1
-            : Number(reqBody.bet_number)
-        ) &&
-        arrayLength?.filter(
-          (i) =>
-            Number(i?.data?.split("_")?.[2]) >= 14 &&
-            Number(i?.data?.split("_")?.[2]) <= 15
-        )?.length
-      ) {
-        setLoding(false);
-        return toast(
-          <FalseCheck
-            message={
-              <span className="!text-sm">
-                You have already applied bet on big/small
-              </span>
-            }
-          />
-        );
-      } else if (
-        arrayLength &&
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
-          Number(reqBody.bet_number) <= 10
-            ? Number(reqBody.bet_number) - 1
-            : Number(reqBody.bet_number)
-        ) &&
-        arrayLength?.filter((i) => Number(i?.data?.split("_")?.[2]) <= 9)
-          ?.length > 2
-      ) {
-        setLoding(false);
-        return toast(
-          <FalseCheck
-            message={
-              <span className="!text-sm">You can't apply more than 3 bet.</span>
-            }
-          />
-        );
-      } else {
+      // if (
+      //   arrayLength &&
+      //   [11, 12, 13]?.includes(
+      //     Number(reqBody.bet_number) <= 10
+      //       ? Number(reqBody.bet_number) - 1
+      //       : Number(reqBody.bet_number)
+      //   ) &&
+      //   arrayLength?.filter(
+      //     (i) =>
+      //       Number(i?.data?.split("_")?.[2]) > 10 &&
+      //       Number(i?.data?.split("_")?.[2]) <= 13
+      //   )?.length
+      // ) {
+      //   setLoding(false);
+      //   return toast(
+      //     <FalseCheck
+      //       message={
+      //         <span className="!text-sm">
+      //           You have already applied bet on color
+      //         </span>
+      //       }
+      //     />
+      //   );
+      // } else if (
+      //   arrayLength &&
+      //   [14, 15]?.includes(
+      //     Number(reqBody.bet_number) <= 10
+      //       ? Number(reqBody.bet_number) - 1
+      //       : Number(reqBody.bet_number)
+      //   ) &&
+      //   arrayLength?.filter(
+      //     (i) =>
+      //       Number(i?.data?.split("_")?.[2]) >= 14 &&
+      //       Number(i?.data?.split("_")?.[2]) <= 15
+      //   )?.length
+      // ) {
+      //   setLoding(false);
+      //   return toast(
+      //     <FalseCheck
+      //       message={
+      //         <span className="!text-sm">
+      //           You have already applied bet on big/small
+      //         </span>
+      //       }
+      //     />
+      //   );
+      // } else if (
+      //   arrayLength &&
+      //   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]?.includes(
+      //     Number(reqBody.bet_number) <= 10
+      //       ? Number(reqBody.bet_number) - 1
+      //       : Number(reqBody.bet_number)
+      //   ) &&
+      //   arrayLength?.filter((i) => Number(i?.data?.split("_")?.[2]) <= 9)
+      //     ?.length > 2
+      // ) {
+      //   setLoding(false);
+      //   return toast(
+      //     <FalseCheck
+      //       message={
+      //         <span className="!text-sm">You can't apply more than 3 bet.</span>
+      //       }
+      //     />
+      //   );
+      // } else {
         const response = await axios.post(
           `${endpoint.trx_bet_placed_node}`,
           reqBody
@@ -235,7 +235,7 @@ const BetNumber = ({ timing, gid }) => {
           setOpen(false);
           toast(response?.data?.msg);
         }
-      }
+      // }
     } catch (e) {
       setOpen(false);
       toast(e?.message);

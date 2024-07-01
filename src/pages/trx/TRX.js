@@ -75,14 +75,14 @@ function TRX() {
   React.useEffect(() => {
     setTimeout(() => {
       if (isAppliedbet?.split("_")?.[1] === String(true)) {
-        res && setOpenDialogBox(true);
+       setOpenDialogBox(true);
         // setTimeout(() => {
         //   setOpenDialogBox(false);
         //   localStorage.setItem("betApplied", false);
         // }, 5000);
       }
     }, 1000);
-  }, [dummycounter, res]);
+  }, [dummycounter]);
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),

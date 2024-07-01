@@ -141,6 +141,7 @@ const FundTransfer = () => {
           />
           <span>Transaction Password*</span>
           <TextField
+            type="password"
             id="transaction_password"
             name="transaction_password"
             placeholder="Enter password"
