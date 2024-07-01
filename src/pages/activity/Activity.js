@@ -66,7 +66,7 @@ function Activity() {
     <Layout header={false}>
       <Box sx={style.root}>
         <Typography variant="body1" color="initial">
-          Activity
+          Special
         </Typography>
         <Typography variant="body1" color="initial">
           Please remember to follow the event page
@@ -75,8 +75,8 @@ function Activity() {
           We will launch user feedback activities from time to time
         </Typography>
       </Box>
-      <Stack direction="row" sx={style.act}>
-        <Box sx={style.actimg}>
+      {/* <Stack direction="row" sx={style.act}>
+       <Box sx={style.actimg}>
           <Box component="img" sx={{ width: "100%" }} src={banner1}></Box>
           <Typography variant="body1" color="initial">
             Gifts
@@ -84,20 +84,20 @@ function Activity() {
           <Typography variant="body1" color="initial">
             Enter the redemption code to receive gift rewards
           </Typography>
-        </Box>
+        </Box> 
         <Box sx={style.actimg}>
           <Box component="img" sx={{ width: "100%" }} src={banner2}></Box>
-          <Typography variant="body1" color="initial">
+         <Typography variant="body1" color="initial">
             FIRST DEPOSIT BONUS
-          </Typography>
+          </Typography> 
           <Typography variant="body1" color="initial">
             The more consecutive days you sign in, the higher the reward will
             be.
           </Typography>
         </Box>
-      </Stack>
+      </Stack> */}
       <Stack sx={style.act2}>
-        <Box sx={style.actimg2}>
+        {/* <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
@@ -106,18 +106,18 @@ function Activity() {
           <Typography variant="body1" color="initial">
             FIRST DEPOSIT BONUS
           </Typography>
-        </Box>
+        </Box> */}
         <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
             src={actbanner2}
           ></Box>
-          <Typography variant="body1" color="initial">
+          {/* <Typography variant="body1" color="initial">
             ZUPEETER CREATIVE VIDEO CONTEST
-          </Typography>
+          </Typography> */}
         </Box>
-        <Box sx={style.actimg2}>
+        {/* <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
@@ -126,8 +126,8 @@ function Activity() {
           <Typography variant="body1" color="initial">
             WINSTREAK 2X PRIZE HAPPY HOUR
           </Typography>
-        </Box>
-        <Box sx={style.actimg2}>
+        </Box> */}
+        {/* <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
@@ -136,7 +136,7 @@ function Activity() {
           <Typography variant="body1" color="initial">
             DAILY BONUS UNTIL 1 CRORE
           </Typography>
-        </Box>
+        </Box> */}
         <Box sx={style.actimg2}>
           <Box
             component="img"
@@ -147,7 +147,7 @@ function Activity() {
             BEST PILOT Zupeeter AIRLINES
           </Typography>
         </Box>
-        <Box sx={style.actimg2}>
+        {/* <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
@@ -156,8 +156,8 @@ function Activity() {
           <Typography variant="body1" color="initial">
             MONTHLY VIP BONUS
           </Typography>
-        </Box>
-        <Box sx={style.actimg2}>
+        </Box> */}
+        {/* <Box sx={style.actimg2}>
           <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
@@ -166,7 +166,7 @@ function Activity() {
           <Typography variant="body1" color="initial">
             ZUPEETER SUPPORT FUNDS
           </Typography>
-        </Box>
+        </Box> */}
       </Stack>
     </Layout>
   );

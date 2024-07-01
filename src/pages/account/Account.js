@@ -193,22 +193,22 @@ function Account() {
             </Box>
           </Box>
         </Box>
-        <Box className="flex justify-center  m-5 !mt-10 !p-5 rounded-lg bg-orange-400 shadow-xl">
+        {/* <Box className="flex justify-center  m-5 !mt-10 !p-5 rounded-lg bg-orange-400 shadow-xl">
           <img src={w1} alt="" className="mt-5 h-10 m-1" />
           <Typography className="!text-white !font-bold !mt-2  !ml-2 ">SAFE</Typography>
           <Typography className="text-white !font-bold !text-sm !-ml-10 !mt-8">
             Daily interest rate 0.1%  + VIP extra income safe, calculated every 1 minute
           </Typography>
-        </Box>
+        </Box> */}
         <Box className="grid grid-cols-2 gap-3 m-4  !my-8">
-          <Box className="flex gap-1 justify-center p-1 py-4 items-center  shadow-xl bg-white rounded-lg">
+          {/* <Box className="flex gap-1 justify-center p-1 py-4 items-center  shadow-xl bg-white rounded-lg">
             <Typography><img src={game} alt="" className="w-10" /></Typography>
             <Typography className="">Game History <br /><span className="!text-xs !text-gray-500"> My game history</span></Typography>
           </Box>
           <Box className="flex gap-1 p-1 justify-center items-center py-4 shadow-xl bg-white rounded-lg">
             <Typography><img src={trans} alt="" className="w-10" /></Typography>
             <Typography>Transaction <br /><span className="!text-xs !text-gray-500"> My Transaction history</span></Typography>
-          </Box>
+          </Box> */}
           {or_m_user_type === "Dummy User" ? 
           <>
           <NavLink>
@@ -248,7 +248,7 @@ function Account() {
           <Typography> <GroupAddRounded className="text-[#F48901] !mt-1" /></Typography>
           <Typography className="!mt-1 !text-lg text-gray-700 cursor-pointer"> Team/Income</Typography>
         </Box>
-        <Box className="bg-white shadow rounded-lg flex flex-col justify-start p-1 m-3 !my-8">
+        {/* <Box className="bg-white shadow rounded-lg flex flex-col justify-start p-1 m-3 !my-8">
           <Box className="flex justify-between gap-1 border-b-2 p-2">
             <Box className="flex items-center gap-2">
               <Typography> <img src={not} alt="" className="w-6" /></Typography>
@@ -279,7 +279,7 @@ function Account() {
             </Box>
             <IconButton><ArrowForwardIos className="text-gray-500  " fontSize="small" /></IconButton>
           </Box>
-        </Box>
+        </Box> */}
         <Box className="bg-white shadow-xl rounded-lg !m-3 py-5">
           <Typography className=" px-3">Service Center</Typography>
           <Box className="grid grid-cols-3 m-5 justify-center gap-5">
