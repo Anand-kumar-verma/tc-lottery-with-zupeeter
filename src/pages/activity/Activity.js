@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
-import Layout from "../../component/layout/Layout";
-import Typography from "@mui/material/Typography";
 import { Box, Stack } from "@mui/material";
-import theme from "../../utils/theme";
-import banner1 from "../../assets/images/signInBanner.png";
-import banner2 from "../../assets/images/giftRedeem.png";
-import actbanner1 from "../../assets/images/actbanner1.jpg";
+import Typography from "@mui/material/Typography";
+import React, { useEffect } from "react";
 import actbanner2 from "../../assets/images/actbanner2.jpg";
-import actbanner3 from "../../assets/images/actbanner3.jpg";
-import actbanner4 from "../../assets/images/actbanner4.jpg";
 import actbanner5 from "../../assets/images/actbanner5.jpg";
-import actbanner6 from "../../assets/images/actbanner6.jpg";
-import actbanner7 from "../../assets/images/actbanner7.jpg";
+import Layout from "../../component/layout/Layout";
 import { checkTokenValidity } from "../../services/apiCallings";
+import theme from "../../utils/theme";
 
 const style = {
   root: {

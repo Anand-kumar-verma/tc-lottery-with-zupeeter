@@ -3,14 +3,13 @@ import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutl
 import EmojiPeopleOutlinedIcon from "@mui/icons-material/EmojiPeopleOutlined";
 import Groups2OutlinedIcon from "@mui/icons-material/Groups2Outlined";
 import { Box, Container, Stack, Typography } from "@mui/material";
+import copy from "clipboard-copy";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
-import { useCopyToClipboard } from "usehooks-ts";
 import cardbg from "../../assets/images/cardbg.png";
-import comitiondetails from "../../assets/images/commissiondetails.png";
 import copyinvitationcode from "../../assets/images/copyinvitationcode.png";
-import newsubordinatedata from "../../assets/images/newsubordinatedata.png";
 import promotiondata from "../../assets/images/promotiondata.png";
 import subcordinatedata from "../../assets/images/subcordinatedata.png";
 import Layout from "../../component/layout/Layout";
@@ -21,11 +20,9 @@ import {
   checkTokenValidity,
   showRank,
 } from "../../services/apiCallings";
+import { front_end_domain } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-import { front_end_domain } from "../../services/urls";
-import copy from "clipboard-copy";
-import toast from "react-hot-toast";
 
 function Promotion() {
   const { data } = useQuery(["get_info"], () => Promotionfunction(), {
@@ -54,12 +51,9 @@ function Promotion() {
     }
   );
   const profile = user?.data?.earning || [];
-  const profilerec = user?.data?.earning?.rec || []; 
-
-
+  const profilerec = user?.data?.earning?.rec || [];
 
   const [copied, setCopied] = useState(false);
-  const user_id = localStorage.getItem("user_id");
   const functionTOCopy = (value) => {
     copy(value);
     toast.success("Copied to clipboard!");
@@ -102,17 +96,15 @@ function Promotion() {
               >
                 User ID :{profile?.rec?.Login_Id}
               </Typography>
-              {profile?.rec?.Club !==0 && 
-             <Typography
-             variant="body1"
-             color="initial"
-             className="!text-white"
-           >
-            Rank : {showRank(profilerec?.Club)}
-            
-           </Typography>
-            }
-             
+              {profile?.rec?.Club !== 0 && (
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  className="!text-white"
+                >
+                  Rank : {showRank(profilerec?.Club)}
+                </Typography>
+              )}
             </Box>
           </Box>
           <Box sx={style.subcordinateBox}>
@@ -248,101 +240,99 @@ function Promotion() {
                 </Box>
               </Box>
             </Box>
-            {or_m_user_type === "Dummy User" ? 
-            <Box sx={style.invitebtn}>
-              <NavLink>
-              <Typography
-                    sx={{}}
-                    // onMouseLeave={() => setCopied(false)}
-                    onClick={() => {
-                      toast("Dummy User")
-                      // setCopied(true);
-                    }}
-                  >
-                    {" "}
-                    INVITATION LINK{" "}
-                  </Typography>
-              </NavLink>
-             
-              
-              
-            </Box>:(
-            <Box sx={style.invitebtn}>
-              <NavLink>
-                {copied ? (
-                  <Typography variant="body1" color="initial">
-                    Successfully Copied
-                  </Typography>
-                ) : (
+            {or_m_user_type === "Dummy User" ? (
+              <Box sx={style.invitebtn}>
+                <NavLink>
                   <Typography
                     sx={{}}
                     // onMouseLeave={() => setCopied(false)}
                     onClick={() => {
-                      functionTOCopy(
-                        `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
-                      );
+                      toast("Dummy User");
                       // setCopied(true);
                     }}
                   >
                     {" "}
                     INVITATION LINK{" "}
                   </Typography>
-                )}{" "}
-              </NavLink>
-            </Box>
-            )} 
+                </NavLink>
+              </Box>
+            ) : (
+              <Box sx={style.invitebtn}>
+                <NavLink>
+                  {copied ? (
+                    <Typography variant="body1" color="initial">
+                      Successfully Copied
+                    </Typography>
+                  ) : (
+                    <Typography
+                      sx={{}}
+                      // onMouseLeave={() => setCopied(false)}
+                      onClick={() => {
+                        functionTOCopy(
+                          `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
+                        );
+                        // setCopied(true);
+                      }}
+                    >
+                      {" "}
+                      INVITATION LINK{" "}
+                    </Typography>
+                  )}{" "}
+                </NavLink>
+              </Box>
+            )}
           </Box>
           <Box sx={style.invitebutton} className="invitebutton">
-          {or_m_user_type === "Dummy User" ? 
-            <Box sx={style.invitbox}>
-              <Stack direction="row">
-                <Box component="img" src={copyinvitationcode}></Box>
-               <Typography variant="body1" color="initial">
-                    Copy invitation code
-                  </Typography>
-                {" "}
-              </Stack>
-              <Stack
-                direction="row"
-                onClick={() => {
-                 toast("Dummy User")
-                }}
-              >
-                <Typography variant="body1" color="initial">
-                  {profile?.rec?.Login_Id}
-                </Typography>
-                <ArrowForwardIosOutlinedIcon />
-              </Stack>
-            </Box> :(
+            {or_m_user_type === "Dummy User" ? (
               <Box sx={style.invitbox}>
-              <Stack direction="row">
-                <Box component="img" src={copyinvitationcode}></Box>
-                {copied ? (
-                  <Typography variant="body1" color="initial">
-                    Copied <Check className="!text-blue-700" />
-                  </Typography>
-                ) : (
+                <Stack direction="row">
+                  <Box component="img" src={copyinvitationcode}></Box>
                   <Typography variant="body1" color="initial">
                     Copy invitation code
+                  </Typography>{" "}
+                </Stack>
+                <Stack
+                  direction="row"
+                  onClick={() => {
+                    toast("Dummy User");
+                  }}
+                >
+                  <Typography variant="body1" color="initial">
+                    {profile?.rec?.Login_Id}
                   </Typography>
-                )}{" "}
-              </Stack>
-              <Stack
-                direction="row"
-                onClick={() => {
-                  functionTOCopy(
-                        `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
-                      );
-                }}
-              >
-                <Typography variant="body1" color="initial">
-                  {profile?.rec?.Login_Id}
-                </Typography>
-                <ArrowForwardIosOutlinedIcon />
-              </Stack>
-            </Box>
+                  <ArrowForwardIosOutlinedIcon />
+                </Stack>
+              </Box>
+            ) : (
+              <Box sx={style.invitbox}>
+                <Stack direction="row">
+                  <Box component="img" src={copyinvitationcode}></Box>
+                  {copied ? (
+                    <Typography variant="body1" color="initial">
+                      Copied <Check className="!text-blue-700" />
+                    </Typography>
+                  ) : (
+                    <Typography variant="body1" color="initial">
+                      Copy invitation code
+                    </Typography>
+                  )}{" "}
+                </Stack>
+                <Stack
+                  direction="row"
+                  onClick={() => {
+                    functionTOCopy(
+                      `${front_end_domain}/register/?inviteid=${profile?.rec?.Login_Id}`
+                    );
+                  }}
+                >
+                  <Typography variant="body1" color="initial">
+                    {profile?.rec?.Login_Id}
+                  </Typography>
+                  <ArrowForwardIosOutlinedIcon />
+                </Stack>
+              </Box>
             )}
-            
+
             <NavLink to="/account/income-main/my-team">
               <Box sx={style.invitbox}>
                 <Stack direction="row">
