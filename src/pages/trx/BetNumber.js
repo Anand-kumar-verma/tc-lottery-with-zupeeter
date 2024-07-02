@@ -825,7 +825,7 @@ const BetNumber = ({ timing, gid }) => {
                       : selectNumber === "0"
                       ? "!bg-[#BF6DFE]"
                       : selectNumber === "5" && "!bg-[#BF6DFE]"
-                  } !cursor-pointer`}
+                  } !cursor-pointer !font-extrabold`}
                 variant="contained"
                 sx={style.submitbtn}
                 onClick={() => {

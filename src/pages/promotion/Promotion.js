@@ -10,7 +10,6 @@ import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
 import cardbg from "../../assets/images/cardbg.png";
 import copyinvitationcode from "../../assets/images/copyinvitationcode.png";
-import promotiondata from "../../assets/images/promotiondata.png";
 import subcordinatedata from "../../assets/images/subcordinatedata.png";
 import Layout from "../../component/layout/Layout";
 import {
@@ -424,11 +423,11 @@ function Promotion() {
                 </Stack>
               </Box>
             </NavLink> */}
-            <Box sx={style.promotionBoxOuter}>
+            {/* <Box sx={style.promotionBoxOuter}>
               <Box sx={style.promotionBox}>
                 <Stack direction="row">
                   <Box component="img" src={promotiondata}></Box>
-                  {/* <Box component="img" src={data}></Box> */}
+               
                   <Typography variant="body1" color="initial">
                     promotion data
                   </Typography>
@@ -469,7 +468,7 @@ function Promotion() {
                   </Typography>
                 </Box>
               </Stack>
-            </Box>
+            </Box> */}
             <Box sx={style.promotionBoxOutertwo}></Box>
           </Box>
         </Box>
