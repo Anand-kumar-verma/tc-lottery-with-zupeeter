@@ -15,7 +15,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useQuery, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
@@ -27,14 +28,12 @@ import six from "../../assets/images/n6-a56e0b9a.png";
 import seven from "../../assets/images/n7-5961a17f.png";
 import eight from "../../assets/images/n8-d4d951a4.png";
 import nine from "../../assets/images/n9-a20f6f42 (1).png";
-import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import FalseCheck from "../../shared/check/FalseCheck";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
-import { useSelector } from "react-redux";
 
 const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
@@ -157,8 +156,6 @@ const BetNumber = ({ timing, gid }) => {
   const handleClosed = () => {
     setOpend(false);
   };
-
-  if (loding) return <CustomCircularProgress isLoading={loding} />;
   const generatenumber = (i) => {
     const randomBitNumber = Math.floor(Math.random() * 9) + 1;
     setLoding(true);
@@ -169,8 +166,9 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(true);
     }, 2000);
   };
+  
 
-
+  if (loding) return <CustomCircularProgress isLoading={loding} />;
   return (
     <Box
       sx={{
