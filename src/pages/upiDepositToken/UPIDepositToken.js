@@ -23,7 +23,10 @@ const tableRef = React.useRef(null);
     () => upiTOkenHistory(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 

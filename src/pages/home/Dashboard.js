@@ -65,16 +65,22 @@ function Dashboard() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  const { isLoading, data } = useQuery(["top_winner"], () => TopWinner(), {
+  const { isLoading, data } = useQuery(["top_winner"], () => TopWinner(),  {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
 
   const res = data?.data?.earning || [];
 
-  const { data: Trade } = useQuery(["last_trade"], () => LastTrade(), {
+  const { data: Trade } = useQuery(["last_trade"], () => LastTrade(),  {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
   const trade = Trade?.data?.earning || [];
   console.log(trade)
@@ -103,7 +109,10 @@ function Dashboard() {
     () => ProfileDataFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const profile = user?.data?.earning || [];

@@ -44,9 +44,12 @@ function Account() {
     "https://mui.com/static/images/avatar/1.jpg",
     "https://mui.com/static/images/avatar/5.jpg"
   ];
-  const { isLoading, data } = useQuery(["profile"], () => ProfileDataFunction(), {
+  const { isLoading, data } = useQuery(["profile"], () => ProfileDataFunction(),   {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
   const profile = data?.data?.earning || [];
 
@@ -69,7 +72,10 @@ function Account() {
     () => Update_ProfileFn(selectedImages, client),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 

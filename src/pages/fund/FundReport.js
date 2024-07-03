@@ -15,7 +15,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import moment from "moment";
 import * as React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
 import {
@@ -28,13 +28,15 @@ export default function FundReport() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const tableRef = React.useRef(null);
-  const client = useQueryClient();
   const { isLoading, data: game_history } = useQuery(
     ["fund_transfer_history_details"],
     () => FundTransferHistoryFn(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 

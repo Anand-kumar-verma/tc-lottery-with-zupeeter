@@ -106,7 +106,10 @@ function Withdraval() {
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
@@ -116,7 +119,10 @@ function Withdraval() {
     () => getBetFunction(setBet),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const total_bet = total_bet_amount?.data?.earning || 0;
@@ -126,7 +132,10 @@ function Withdraval() {
     () => withdrawlHistoryFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 
@@ -137,7 +146,10 @@ function Withdraval() {
     () => BankDetailsFUnction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const game_history_data = React.useMemo(

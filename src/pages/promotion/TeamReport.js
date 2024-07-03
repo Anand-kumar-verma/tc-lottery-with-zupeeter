@@ -22,23 +22,32 @@ function TeamReport() {
   const [value, copy] = useCopyToClipboard();
   const [copied, setCopied] = useState(false);
 
-  const { data:history } = useQuery(["get_info"], () => Promotionfunction(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { data:history } = useQuery(["get_info"], () => Promotionfunction(),   {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
+    });
   const prim = history?.data?.earning || [];
 
-  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { data:count } = useQuery(["team_count"], () => TeamsubFunction(),   {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
+    });
   const Counting = count?.data?.earning || [];
 
 
-  const { isLoading,data} = useQuery(["TeamReport"], () => TeamFunction(), {
-    refetchOnMount: false,
-    refetchOnReconnect: true,
-  });
+  const { isLoading,data} = useQuery(["TeamReport"], () => TeamFunction(),   {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
+    });
 const team =data?.data?.earning || [];
 
   const [open, setOpen] = useState(false);

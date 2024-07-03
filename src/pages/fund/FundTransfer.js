@@ -16,12 +16,15 @@ const FundTransfer = () => {
   const [balance, setsetBalance] = useState("");
   const client = useQueryClient();
 
-  const { isLoading, data } = useQuery(
+  const {  data } = useQuery(
     ["profile"],
     () => ProfileDataFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const profile = data?.data?.earning || [];

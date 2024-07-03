@@ -15,9 +15,12 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 
 function TeamData() {
 
-  const { isLoading,data} = useQuery(["get_all"], () => TeamDatafunction(), {
+  const { isLoading,data} = useQuery(["get_all"], () => TeamDatafunction(),   {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
 const team =data?.data ?.earning|| [];
 

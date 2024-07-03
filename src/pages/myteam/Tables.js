@@ -30,7 +30,10 @@ export default function Tables() {
     () => TeamLevelData(member_id),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const TeamLevelData = async (member_id) => {
