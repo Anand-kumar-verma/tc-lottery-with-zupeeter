@@ -2,7 +2,7 @@ import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import depositeimg from "../../assets/images/deposite.png";
 import dhistory from "../../assets/images/dhistory.png";
 import whistory from "../../assets/images/whistory.png";
@@ -31,6 +31,7 @@ function Wallet() {
       refetchOnReconnect: true,
     }
   );
+  const navigate = useNavigate();
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   const { isLoading: profileLoding, data: user } = useQuery(
@@ -252,10 +253,17 @@ function Wallet() {
             </Box>
           </Stack>
           <Button sx={style.mainwallettrbutton}>Main wallet transfer</Button>
-          {or_m_user_type === "Dummy User" ? 
+        
           <Stack direction="row" sx={style.stack}
           >
-        <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+        <Box sx={style.box}   
+        onClick={() => {
+              if (or_m_user_type === "Dummy User") {
+                toast("Dummy User");
+              } else {
+                navigate('/deposit');
+              }
+            }}>
               <Box sx={style.innerBox}>
                 <Box
                   component="img"
@@ -268,7 +276,14 @@ function Wallet() {
               </Typography>
             </Box>
 
-            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+            <Box sx={style.box} 
+              onClick={() => {
+                if (or_m_user_type === "Dummy User") {
+                  toast("Dummy User");
+                } else {
+                  navigate('/withdraw');
+                }
+              }}>
               <Box sx={style.innerBox}>
                 <Box
                   component="img"
@@ -280,7 +295,14 @@ function Wallet() {
                 Withdraw
               </Typography>
             </Box>
-            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+            <Box sx={style.box} 
+              onClick={() => {
+                if (or_m_user_type === "Dummy User") {
+                  toast("Dummy User");
+                } else {
+                  navigate('/depositehistory');
+                }
+              }}>
               <Box sx={style.innerBox}>
                 <Box
                   component="img"
@@ -292,7 +314,14 @@ function Wallet() {
                 Deposit history
               </Typography>
             </Box>
-            <Box sx={style.box} onClick={() => toast(" Dummy User")}>
+            <Box sx={style.box} 
+            onClick={() => {
+              if (or_m_user_type === "Dummy User") {
+                toast("Dummy User");
+              } else {
+                navigate('/withdrawlhistory');
+              }
+            }}>
               <Box sx={style.innerBox}>
                 <Box
                   component="img"
@@ -304,59 +333,8 @@ function Wallet() {
                 Withdrawal history
               </Typography>
             </Box>
-          </Stack> : (
-          <Stack direction="row" sx={style.stack}>
-      
-            <Box sx={style.box} component={NavLink} to="/deposit">
-              <Box sx={style.innerBox}>
-                <Box
-                  component="img"
-                  src={depositeimg}
-                  sx={style.innerBoximg}
-                ></Box>
-              </Box>
-              <Typography variant="body1" color="initial" sx={style.typography}>
-                Deposit
-              </Typography>
-            </Box>
-            <Box sx={style.box} component={NavLink} to="/withdraw">
-              <Box sx={style.innerBox}>
-                <Box
-                  component="img"
-                  src={withdraw}
-                  sx={style.innerBoximg}
-                ></Box>
-              </Box>
-              <Typography variant="body1" color="initial" sx={style.typography}>
-                Withdraw
-              </Typography>
-            </Box>
-            <Box sx={style.box} component={NavLink} to="/depositehistory">
-              <Box sx={style.innerBox}>
-                <Box
-                  component="img"
-                  src={dhistory}
-                  sx={style.innerBoximg}
-                ></Box>
-              </Box>
-              <Typography variant="body1" color="initial" sx={style.typography}>
-                Deposit history
-              </Typography>
-            </Box>
-            <Box sx={style.box} component={NavLink} to="/withdrawlhistory">
-              <Box sx={style.innerBox}>
-                <Box
-                  component="img"
-                  src={whistory}
-                  sx={style.innerBoximg}
-                ></Box>
-              </Box>
-              <Typography variant="body1" color="initial" sx={style.typography}>
-                Withdrawal history
-              </Typography>
-            </Box>
-          </Stack>
-            )}
+          </Stack> 
+          
      </Box>
       </Box>
     </Container>

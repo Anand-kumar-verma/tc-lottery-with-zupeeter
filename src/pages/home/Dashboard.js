@@ -1,6 +1,6 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { NavLink } from "react-router-dom";
@@ -49,12 +49,11 @@ import Sports from "./component/Sports";
 import axios from "axios";
 import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import ava from "../../assets/images/aviator.jpg";
 
 
 function Dashboard() {
 
-  const dispatch = useDispatch();
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -154,6 +153,9 @@ function Dashboard() {
         </SwiperSlide>
         <SwiperSlide>
           <Box component="img" src={banner7} sx={style.banner}></Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box component="img" src={ava} sx={style.banner}></Box>
         </SwiperSlide>
         <div className="autoplay-progress" slot="container-end">
           <svg viewBox="0 0 48 48" ref={progressCircle}>
@@ -390,7 +392,7 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {profile?.rec?.Login_Id}
+                  {i?.or_m_user_id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -609,7 +611,7 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {profile?.rec?.Login_Id}
+                  {i?.or_m_user_id}
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
