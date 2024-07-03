@@ -63,7 +63,10 @@ export default function ZupeeterTokenReport() {
     () => TokenLaunch(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 
@@ -74,7 +77,10 @@ export default function ZupeeterTokenReport() {
     () => zupeeterTOkenHistory(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   ); //wallet
   const { data: wallet_amount } = useQuery(
@@ -82,7 +88,10 @@ export default function ZupeeterTokenReport() {
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;

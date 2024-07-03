@@ -28,7 +28,10 @@ function Wallet() {
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const navigate = useNavigate();
@@ -39,7 +42,10 @@ function Wallet() {
     () => ProfileDataFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const profile = user?.data?.earning || [];
@@ -49,7 +55,10 @@ function Wallet() {
     () => depositHistoryFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const res = data?.data?.earning?.rid || [];

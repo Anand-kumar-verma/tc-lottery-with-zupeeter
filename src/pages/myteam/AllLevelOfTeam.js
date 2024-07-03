@@ -18,9 +18,12 @@ function AllLevelOfTeam() {
     navigate(-1);
   };
 
-  const { isLoading, data } = useQuery(["team_level"], () => MyTeamLevel(), {
+  const { isLoading, data } = useQuery(["team_level"], () => MyTeamLevel(),   {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
   const res = data?.data?.earning?.rec;
 

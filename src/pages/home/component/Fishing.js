@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Slot from '../../../assets/images/fishing.png';
-import win from '../../../assets/images/win.png';
 import vendorlogo17 from '../../../assets/images/vendorlogo17.png';
 import vendorlogo18 from '../../../assets/images/vendorlogo18.png';
 import vendorlogo19 from '../../../assets/images/vendorlogo19.png';

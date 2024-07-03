@@ -23,9 +23,12 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 
 function Promotion() {
-  const { data } = useQuery(["get_info"], () => Promotionfunction(), {
+  const { data } = useQuery(["get_info"], () => Promotionfunction(),  {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
   const or_m_user_type = localStorage.getItem("or_m_user_type");
   const prim = data?.data?.earning || [];
@@ -35,7 +38,10 @@ function Promotion() {
     () => TeamsubFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const Counting = count?.data?.earning || [];
@@ -45,7 +51,10 @@ function Promotion() {
     () => ProfileDataFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   const profile = user?.data?.earning || [];

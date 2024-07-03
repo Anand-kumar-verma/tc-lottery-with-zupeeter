@@ -9,7 +9,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import moment from "moment";
 import * as React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
 import { ViewSalaryIncomeFunction } from "../../services/apiCallings";
@@ -19,13 +19,15 @@ export default function ViewSalaryIncome() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const tableRef = React.useRef(null);
-  const client = useQueryClient();
   const { isLoading, data: game_history } = useQuery(
     ["view_salary_income_fn"],
     () => ViewSalaryIncomeFunction(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 

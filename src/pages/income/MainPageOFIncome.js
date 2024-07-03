@@ -1,6 +1,5 @@
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import LocalConvenienceStoreIcon from "@mui/icons-material/LocalConvenienceStore";
 import RedeemIcon from "@mui/icons-material/Redeem";

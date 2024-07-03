@@ -32,6 +32,7 @@ import theme from "../../utils/theme";
 import axios from "axios";
 import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
+
 export default function Banks() {
   const user_id = localStorage.getItem("user_id");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -43,18 +44,24 @@ export default function Banks() {
   const { isLoading, data: game_history } = useQuery(
     ["bank_details"],
     () => BankDetailsFUnction(),
-    {
+      {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
   
   const { isLoading: bank_list, data: bankList } = useQuery(
     ["bank_list"],
     () => bankListFuncton(),
-    {
+      {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 
