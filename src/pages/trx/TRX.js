@@ -11,7 +11,7 @@ import {
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import asistant from "../../assets/images/asistant.png";
 import backbtn from "../../assets/images/backBtn.png";
@@ -28,29 +28,29 @@ import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
+import { wallet_real_balanceFn } from "../../redux/slices/counterSlice";
 
 function TRX() {
-  const res = localStorage.getItem("anand_re");
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
+  const dispatch = useDispatch()
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
   const client = useQueryClient();
+  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-  const [isPageVisible, setIsPageVisible] = useState(true);
 
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        setIsPageVisible(false);
-      } else {
-        setIsPageVisible(true);
+        console.log("hidden")
+       } else {
         setOpenDialogBox(false);
         localStorage.setItem("betApplied", false);
         localStorage.removeItem("total_bet");
@@ -88,11 +88,17 @@ function TRX() {
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 
-  const wallet_amount_data = wallet_amount?.data?.earning || 0;
+  React.useEffect(() => {
+    dispatch(wallet_real_balanceFn(wallet_amount?.data?.earning || 0));
+  }, [wallet_amount?.data?.earning]);
+
 
   function refreshFunctionForRotation() {
     client.refetchQueries("wallet_amount");

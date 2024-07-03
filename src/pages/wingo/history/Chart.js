@@ -1,86 +1,58 @@
 import { Box, Stack, TablePagination, Typography } from "@mui/material";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useQuery } from "react-query";
-import { endpoint } from "../../../services/urls";
+import { useSelector } from "react-redux";
 
 const Chart = ({ gid }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const [cor, setcor] = React.useState([]);
   const [preData, setPreData] = useState([]);
-  const { isLoading, data: game_history } = useQuery(
-    ["gamehistory", gid],
-    () => GameHistoryFn(gid),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
+  const game_history = useSelector((state) => state.aviator.gameHistory_trx_one_min);
 
-  const GameHistoryFn = async (gid) => {
-    try {
-      const reqBody = {
-        gameid: gid,
-        limit: 200,
-      };
-      const response = await axios.post(`${endpoint.game_history}`, reqBody);
-      return response;
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-  };
-
-  const game_history_data = game_history?.data?.data;
-
-  // console.log(game_history_data);
 
   useEffect(() => {
     setPreData([]);
     const array = [];
     let get0 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 0
       );
     let get1 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 1
       );
     let get2 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 2
       );
     let get3 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 3
       );
     let get4 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 4
       );
     let get5 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 5
       );
     let get6 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 6
       );
     let get7 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 7
       );
     let get8 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 8
       );
     let get9 =
-      game_history_data?.findIndex(
+      game_history?.findIndex(
         (element) => element.tr41_slot_id - 1 === 9
       );
-      console.log(game_history_data,get3)
     array.push(
       get0 < 0 ? 100 : get0,
       get1 < 0 ? 100 : get1,
@@ -94,7 +66,7 @@ const Chart = ({ gid }) => {
       get9 < 0 ? 100 : get9
     );
     setPreData(array);
-  }, [game_history?.data?.data]);
+  }, [game_history]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -107,11 +79,11 @@ const Chart = ({ gid }) => {
 
   const visibleRows = React.useMemo(
     () =>
-      game_history_data?.slice(
+      game_history?.slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [page, rowsPerPage, game_history_data]
+    [page, rowsPerPage, game_history]
   );
   React.useEffect(() => {
     if (visibleRows) {
@@ -474,7 +446,7 @@ const Chart = ({ gid }) => {
             sx={{ background: "#FBA343", color: "white" }}
             rowsPerPageOptions={[10]}
             component="div"
-            count={game_history_data?.length}
+            count={game_history?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

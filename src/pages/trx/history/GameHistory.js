@@ -11,82 +11,72 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import axios from "axios";
 import React from "react";
-import toast from "react-hot-toast";
-import { useQuery } from "react-query";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  trx_game_image_index_function,
-  updateNextCounter,
-} from "../../../redux/slices/counterSlice";
-import { endpoint } from "../../../services/urls";
 import theme from "../../../utils/theme";
 
 const GameHistory = ({ gid }) => {
-  const dispatch = useDispatch();
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const navigate = useNavigate();
-  const { isLoading, data: game_history } = useQuery(
-    ["trx_gamehistory", gid],
-    () => GameHistoryFn(gid),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
+  const game_history = useSelector((state) => state.aviator.gameHistory_trx_one_min);
 
-  const GameHistoryFn = async (gid) => {
-    try {
-      const reqBody = {
-        gameid: gid,
-        limit: 100,
-      };
-      const response = await axios.post(
-        `${endpoint.trx_game_history}`,
-        reqBody
-      );
-      return response;
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-  };
+  // const { isLoading, data: game_history } = useQuery(
+  //   ["trx_gamehistory", gid],
+  //   () => GameHistoryFn(gid),
+  //   {
+  //     refetchOnMount: false,
+  //     refetchOnReconnect: true,
+  //   }
+  // );
 
-  // const game_history_data = game_history?.data?.data;
-  const game_history_data = React.useMemo(
-    () => game_history?.data?.data,
-    [game_history?.data?.data]
-  );
+  // const GameHistoryFn = async (gid) => {
+  //   try {
+  //     const reqBody = {
+  //       gameid: gid,
+  //       limit: 100,
+  //     };
+  //     const response = await axios.post(
+  //       `${endpoint.trx_game_history}`,
+  //       reqBody
+  //     );
+  //     return response;
+  //   } catch (e) {
+  //     toast(e?.message);
+  //     console.log(e);
+  //   }
+  // };
+  // const game_histor y = []
+  const isLoading = false;
+  // const game_history_data = game_history;
+  // const game_history_data = React.useMemo(
+  //   () => game_history,
+  //   [game_history]
+  // );
 
 
   
-  React.useEffect(() => {
-    dispatch(
-      updateNextCounter(
-        game_history?.data?.data
-          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
-          : 1
-      )
-    );
-    const tr_digit =
-      game_history?.data?.data && game_history?.data?.data?.[0]?.tr_digits;
-    let array = [];
-    for (let i = 0; i < tr_digit?.length; i++) {
-      if (/[a-zA-Z]/.test(tr_digit[i])) {
-        array.push(tr_digit[i].toUpperCase());
-      } else {
-        array.push(tr_digit[i]);
-      }
-    }
-    dispatch(trx_game_image_index_function(array));
-  }, [game_history?.data?.data]);
-
-
-
-
+  // React.useEffect(() => {
+  //   dispatch(
+  //     updateNextCounter(
+  //       game_history
+  //         ? Number(game_history?.[0]?.tr_transaction_id) + 1
+  //         : 1
+  //     )
+  //   );
+  //   const tr_digit =
+  //     game_history && game_history?.[0]?.tr_digits;
+  //   let array = [];
+  //   for (let i = 0; i < tr_digit?.length; i++) {
+  //     if (/[a-zA-Z]/.test(tr_digit[i])) {
+  //       array.push(tr_digit[i].toUpperCase());
+  //     } else {
+  //       array.push(tr_digit[i]);
+  //     }
+  //   }
+  //   dispatch(trx_game_image_index_function(array));
+  // }, [game_history]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -99,11 +89,11 @@ const GameHistory = ({ gid }) => {
 
   const visibleRows = React.useMemo(
     () =>
-      game_history_data?.slice(
+      game_history?.slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
-    [page, rowsPerPage, game_history_data]
+    [page, rowsPerPage, game_history]
   );
   if (isLoading)
     return (
@@ -270,7 +260,7 @@ const GameHistory = ({ gid }) => {
             sx={{ background: "#FBA343", color: "white" }}
             rowsPerPageOptions={[10, 15, 20]}
             component="div"
-            count={game_history_data?.length}
+            count={game_history?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

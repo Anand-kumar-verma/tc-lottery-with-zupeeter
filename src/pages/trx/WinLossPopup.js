@@ -241,7 +241,6 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   const [loding, setloding] = useState(false);
   const [status, setstatus] = useState("");
   const [newstatus, setstatusNew] = useState("");
-  const next_step = useSelector((state) => state.aviator.next_step);
   const [all_result, setall_result] = useState();
   const MyHistoryFn = async () => {
     setloding(true);

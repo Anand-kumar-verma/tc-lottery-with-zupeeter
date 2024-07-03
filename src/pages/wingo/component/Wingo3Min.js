@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
@@ -27,7 +27,7 @@ import nine from "../../../assets/images/n9-a20f6f42 (1).png";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import backbanner from "../../../assets/images/winbackbanner.png";
-import { dummycounterFun } from "../../../redux/slices/counterSlice";
+import { dummycounterFun, gameHistory_trx_one_minFn, updateNextCounter } from "../../../redux/slices/counterSlice";
 import { changeImages } from "../../../shared/nodeSchedular";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
@@ -35,6 +35,9 @@ import Chart from "../history/Chart";
 import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
 import Howtoplay from "./Howtoplay";
+import { endpoint } from "../../../services/urls";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function Wingo3Min() {
   const socket = useSocket();
@@ -124,7 +127,7 @@ function Wingo3Min() {
         threemin?.split("_")?.[1] === "0" &&
         threemin?.split("_")?.[0] === "0"
       ) {
-        client.refetchQueries("gamehistory");
+        client.refetchQueries("gamehistory_2min");
         client.refetchQueries("wallet_amount");
         // client.refetchQueries("gamehistory_chart");
         client.refetchQueries("myAllhistory");
@@ -139,6 +142,44 @@ function Wingo3Min() {
       socket.off("threemin", handleThreeMin);
     };
   }, []);
+
+  const { isLoading, data: game_history } = useQuery(
+    ["gamehistory_2min"],
+    () => GameHistoryFn("2"),
+    { 
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
+    }
+  );
+
+  const GameHistoryFn = async (gid) => {
+    try {
+      const reqBody = {
+        gameid: gid,
+        limit: 100,
+      };
+      const response = await axios.post(`${endpoint.game_history}`, reqBody);
+      return response;
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+  };
+
+  React.useEffect(() => {
+    dispatch(
+      updateNextCounter(
+        game_history?.data?.data
+          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+          : 1
+      )
+    );
+    dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
+  }, [game_history?.data?.data]);
+
 
   const handlePlaySoundLast = async () => {
     try {
