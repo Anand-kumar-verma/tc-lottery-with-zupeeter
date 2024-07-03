@@ -6,6 +6,7 @@ import actbanner5 from "../../assets/images/actbanner5.jpg";
 import Layout from "../../component/layout/Layout";
 import { checkTokenValidity } from "../../services/apiCallings";
 import theme from "../../utils/theme";
+import ava from "../../assets/images/aviator.jpg";
 
 const style = {
   root: {
@@ -140,6 +141,12 @@ function Activity() {
             BEST PILOT Zupeeter AIRLINES
           </Typography>
         </Box>
+        <Box sx={style.actimg2}>
+        <Box
+            component="img"
+            sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
+            src={ava}
+          ></Box></Box>
         {/* <Box sx={style.actimg2}>
           <Box
             component="img"
