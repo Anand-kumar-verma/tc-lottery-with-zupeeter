@@ -1,28 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import BeforeLogin from "./BeforeLogin";
 import SplashScreen from "./SplashScreen";
 import "./assets/style/main.css";
-import Layout from "./component/layout/Layout";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Dashboard from "./pages/home/Dashboard";
 import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
-import PageNotFound from "./PageNotFound";
-import Dashboard from "./pages/home/Dashboard";
 import Home from "./website/Home";
 
 function App() {
-  const [isOpenSplash, setIsOpenSplash] = useState(true);
   const isAuthenticated = localStorage.getItem("user_id");
-
-
-
   useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
-    refetchOnReconnect: true,
+    refetchOnReconnect: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry:false,
+    retryOnMount:false,
+    refetchOnWindowFocus:false
   });
 
   // useEffect(() => {

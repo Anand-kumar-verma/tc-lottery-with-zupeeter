@@ -11,55 +11,15 @@ import {
   TableRow,
   Typography
 } from "@mui/material";
-import axios from "axios";
 import React from "react";
-import toast from "react-hot-toast";
-import { useQuery } from "react-query";
-import { useDispatch } from "react-redux";
-import { updateNextCounter } from "../../../redux/slices/counterSlice";
-import { endpoint } from "../../../services/urls";
+import { useSelector } from "react-redux";
 import theme from "../../../utils/theme";
 
 const GameHistory = ({ gid }) => {
- 
-  const dispatch = useDispatch()
+  const isLoading = false
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
-
-  const { isLoading, data: game_history } = useQuery(
-    ["gamehistory", gid],
-    () => GameHistoryFn(gid),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-
-  const GameHistoryFn = async (gid) => {
-    try {
-      const reqBody = {
-        gameid: gid,
-        limit: 100,
-      };
-      const response = await axios.post(`${endpoint.game_history}`, reqBody);
-      return response;
-    } catch (e) {
-       toast(e?.message);
-      console.log(e);
-    }
-  };
-
-  const game_history_data = game_history?.data?.data;
-
-  React.useEffect(() => {
-    dispatch(
-      updateNextCounter(
-        game_history?.data?.data
-          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
-          : 1
-      )
-    );
-  }, [game_history?.data?.data]);
+  const game_history_data = useSelector((state) => state.aviator.gameHistory_trx_one_min);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

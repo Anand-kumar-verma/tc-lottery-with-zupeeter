@@ -15,7 +15,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { NavLink } from "react-router-dom";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
@@ -34,6 +34,7 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
+import { useSelector } from "react-redux";
 
 const BetNumber = ({ timing, gid }) => {
   const user_id = localStorage.getItem("user_id");
@@ -41,28 +42,37 @@ const BetNumber = ({ timing, gid }) => {
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [random, setRandomNumber] = useState(null);
-  const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const client = useQueryClient();
+  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
   const initialValue = {
     balance: "1",
     qnt: "1",
   };
+  // useEffect(() => {
+  //   getBalanceFunction(setBalance);
+  // }, []);
 
-
-  
-
-
-  useEffect(() => {
-    getBalanceFunction(setBalance);
-  }, []);
+  // const { data: wallet_amount } = useQuery(
+  //   ["wallet_amount_amount"],
+  //   () => getBalanceFunction(setBalance),
+  //   {
+      
+  //     refetchOnMount: false,
+  //     refetchOnReconnect: false,
+  //     retry:false,
+  //     retryOnMount:false,
+  //     refetchOnWindowFocus:false
+  //   }
+  // );
+  // const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
   const fk = useFormik({
     initialValues: initialValue,
     isSuccessPlaceBet: true,
     onSubmit: () => {
       if (
-        Number(getBalance || 0) <
+        Number(wallet_amount_data || 0) <
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)
       )
         return toast("Your bid amount is more than wallet amount");

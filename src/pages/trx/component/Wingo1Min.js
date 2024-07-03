@@ -18,6 +18,7 @@ import timerbg2 from "../../../assets/images/timerbg2.png";
 import trxbg from "../../../assets/images/trxbg.png";
 import {
   dummycounterFun,
+  gameHistory_trx_one_minFn,
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
@@ -97,12 +98,16 @@ function Wingo1Min() {
     };
   }, []);
 
+
   const { isLoading, data: game_history } = useQuery(
-    ["trx_gamehistory", 1],
+    ["trx_gamehistory"],
     () => GameHistoryFn("1"),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry:false,
+      retryOnMount:false,
+      refetchOnWindowFocus:false
     }
   );
 
@@ -123,6 +128,8 @@ function Wingo1Min() {
     }
   };
 
+  // const game_history = []
+     
   React.useEffect(() => {
     dispatch(
       updateNextCounter(
@@ -142,6 +149,7 @@ function Wingo1Min() {
       }
     }
     dispatch(trx_game_image_index_function(array));
+    dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
   }, [game_history?.data?.data]);
 
   const handlePlaySoundLast = async () => {

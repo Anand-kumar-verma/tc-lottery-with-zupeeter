@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import { useSelector } from "react-redux";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
 import two from "../../assets/images/n2-c2913607.png";
@@ -24,13 +25,11 @@ import six from "../../assets/images/n6-a56e0b9a.png";
 import seven from "../../assets/images/n7-5961a17f.png";
 import eight from "../../assets/images/n8-d4d951a4.png";
 import nine from "../../assets/images/n9-a20f6f42 (1).png";
-import { getBalanceFunction } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
+import FalseCheck from "../../shared/check/FalseCheck";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
-import FalseCheck from "../../shared/check/FalseCheck";
-import { useSelector } from "react-redux";
 
 const BetNumber = ({ timing, gid }) => {
   const next_step = useSelector((state) => state.aviator.next_step);
@@ -38,26 +37,21 @@ const BetNumber = ({ timing, gid }) => {
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [random, setRandomNumber] = useState(null);
-  const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const client = useQueryClient();
+  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
+
   const initialValue = {
     balance: "1",
     qnt: "1",
   };
-
-  useEffect(() => {
-    getBalanceFunction(setBalance);
-  }, []);
-
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     isSuccessPlaceBet: true,
     onSubmit: () => {
-      console.log(getBalance, "balance");
       if (
-        Number(getBalance || 0) <
+        Number(wallet_amount_data || 0) <
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)
       )
         return toast("Your bid amount is more than wallet amount");
@@ -115,7 +109,7 @@ const BetNumber = ({ timing, gid }) => {
             }`
       }`,
     };
-
+    
     try {
       const total_bet = localStorage.getItem("total_bet");
       const arrayLength =
