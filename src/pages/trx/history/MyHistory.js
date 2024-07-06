@@ -5,20 +5,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import moment from "moment";
 import * as React from "react";
-import { useQuery } from "react-query";
-import {
-  My_All_TRX_HistoryFn,
-  returnWinningAmount,
-} from "../../../services/apiCallings";
+import { useSelector } from "react-redux";
 import { rupees, zubgback } from "../../../services/urls";
-import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 
-const MyHistory = ({ gid, show_this_one_min_time }) => {
-  const total_bet = localStorage.getItem("total_bet");
-  const arrayLength =
-    total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
-  const result = localStorage.getItem("anand_re");
-
+const MyHistory = ({ gid}) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(0);
   const handleChangePage = (event, newPage) => {
@@ -29,57 +19,22 @@ const MyHistory = ({ gid, show_this_one_min_time }) => {
     setPage(0);
   };
 
-  const { isLoading: myhistory_loding_all, data: my_history_all } = useQuery(
-    ["myAll_trx_history", gid],
-    () => My_All_TRX_HistoryFn(gid),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
+  const my_history = useSelector((state) => state.aviator.myHistory_trx_one_min);
 
-  const my_history_data_all = my_history_all?.data?.earning || [];
 
   const visibleRows = React.useMemo(() => {
-    const overAllArray = my_history_data_all?.slice(
+    const overAllArray = my_history?.slice(
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
     );
-
-    if (
-      (show_this_one_min_time === 0 || show_this_one_min_time >= 56) &&
-      result &&
-      arrayLength?.length >= 0
-    ) {
-      const peinding_array = overAllArray?.filter(
-        (i) => i?.tr_status === "Pending"
-      );
-      const not_peinding_array = overAllArray?.filter(
-        (i) => i?.tr_status !== "Pending"
-      );
-      let newPending_array = peinding_array?.map((i, index) => {
-        let win = returnWinningAmount(
-          Number(arrayLength?.[index]?.data?.split("_")?.[2]),
-          Number(arrayLength?.[index]?.data?.split("_")?.[3]),
-          Number(result) - 1
-        );
-        return {
-          ...i,
-          tr_status: win ? "Win" : "Loss",
-          tr_win_slot: result,
-        };
-      });
-      return [...newPending_array, ...not_peinding_array];
-    }
     return overAllArray;
   }, [
     page,
     rowsPerPage,
-    my_history_all?.data?.earning,
-    show_this_one_min_time,
-  ]);
+    my_history
+    ]);
   // console.log(visibleRows);
-
+   
   return (
     <Box mt={2}>
       <Stack direction="row" className="onegotextbox"></Stack>
@@ -318,14 +273,14 @@ const MyHistory = ({ gid, show_this_one_min_time }) => {
           }}
           rowsPerPageOptions={[2, 5, 10, 15]}
           component="div"
-          count={my_history_data_all?.length}
+          count={my_history?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Box>
-      <CustomCircularProgress isLoading={myhistory_loding_all} />
+      {/* <CustomCircularProgress isLoading={myhistory_loding_all} /> */}
     </Box>
   );
 };

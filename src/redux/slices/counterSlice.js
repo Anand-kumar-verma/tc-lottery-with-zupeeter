@@ -26,6 +26,7 @@ export const slice = createSlice({
     aviator_login_data:null,
     trx_game_image_index:["A","B","C","D","E"],
     gameHistory_trx_one_min:[],
+    myHistory_trx_one_min:[],
     wallet_real_balance:0.0
 
   },
@@ -82,6 +83,9 @@ export const slice = createSlice({
     gameHistory_trx_one_minFn: (state,actions) => {
       state.gameHistory_trx_one_min = actions.payload;
     },
+    myHistory_trx_one_minFn: (state,actions) => {
+      state.myHistory_trx_one_min = actions.payload;
+    },
     wallet_real_balanceFn: (state,actions) => {
       state.wallet_real_balance = actions.payload;
     },
@@ -105,7 +109,8 @@ export const {
   trx_game_image_index_function,
   getUserIdFn,
   gameHistory_trx_one_minFn,
-  wallet_real_balanceFn
+  wallet_real_balanceFn,
+  myHistory_trx_one_minFn
 } = slice.actions;
 
 // export const incrementAsync = amount => dispatch => {

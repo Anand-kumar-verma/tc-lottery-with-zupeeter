@@ -222,11 +222,12 @@ const BetNumber = ({ timing, gid }) => {
             Number(reqBody.bet_number) <= 10
               ? Number(reqBody.bet_number) - 1
               : reqBody.bet_number
-          }_${reqBody.amount}`
+          }_${reqBody.amount}_${reqBody.round_no}`
         );
         setOpen(false);
       } else {
         setOpen(false);
+        setLoding(false);
         // toast(response?.data?.msg);
         return toast(
           <FalseCheck
@@ -234,9 +235,11 @@ const BetNumber = ({ timing, gid }) => {
           />
         );
       }
+      setLoding(false);
       // }
     } catch (e) {
       setOpen(false);
+      setLoding(false);
       // toast(e?.message);
       <FalseCheck
       message={<span className="!text-sm">{e?.message}</span>}

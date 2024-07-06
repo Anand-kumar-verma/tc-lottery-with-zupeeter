@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -19,6 +19,7 @@ import trxbg from "../../../assets/images/trxbg.png";
 import {
   dummycounterFun,
   gameHistory_trx_one_minFn,
+  myHistory_trx_one_minFn,
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
@@ -32,6 +33,7 @@ import ShowImages from "./ShowImages";
 import { endpoint } from "../../../services/urls";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { My_All_TRX_HistoryFn } from "../../../services/apiCallings";
 ////
 function Wingo1Min() {
   const [open, setOpen] = useState(false);
@@ -74,9 +76,10 @@ function Wingo1Min() {
         fk.setFieldValue("openTimerDialog", true);
       }
       if (onemin === 59) {
+        dispatch(dummycounterFun());
         fk.setFieldValue("openTimerDialog", false);
       }
-        
+
       if (onemin === 58) {
         client.refetchQueries("wallet_amount");
         client.refetchQueries("myAll_trx_history");
@@ -88,7 +91,7 @@ function Wingo1Min() {
     };
     const handleOneMinResult = (result) => {
       localStorage.setItem("anand_re", result);
-      dispatch(dummycounterFun());
+      // dispatch(dummycounterFun());
     };
     socket.on("onemintrx", handleOneMin);
     socket.on("result", handleOneMinResult);
@@ -98,16 +101,15 @@ function Wingo1Min() {
     };
   }, []);
 
-
   const { isLoading, data: game_history } = useQuery(
     ["trx_gamehistory"],
     () => GameHistoryFn("1"),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -129,7 +131,7 @@ function Wingo1Min() {
   };
 
   // const game_history = []
-     
+
   React.useEffect(() => {
     dispatch(
       updateNextCounter(
@@ -164,6 +166,23 @@ function Wingo1Min() {
       console.error("Error during play:", error);
     }
   };
+
+  const { isLoading: myhistory_loding_all, data: my_history_all } = useQuery(
+    ["myAll_trx_history"],
+    () => My_All_TRX_HistoryFn("1"),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      // retry: false,
+      // retryOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  React.useEffect(() => {
+    dispatch(myHistory_trx_one_minFn(my_history_all?.data?.earning));
+  }, [my_history_all?.data?.earning]);
+
   const handlePlaySound = async () => {
     try {
       if (audioRefMusic?.current?.pause) {
@@ -377,7 +396,9 @@ function Wingo1Min() {
         </Stack>
         {value === 1 && <GameHistory gid="1" />}
         {value === 2 && <Chart gid="1" />}
-        {value === 3 && <MyHistory gid="1" show_this_one_min_time={show_this_one_min_time}/>}
+        {value === 3 && (
+          <MyHistory gid="1" show_this_one_min_time={show_this_one_min_time} />
+        )}
       </Box>
       <Dialog
         sx={{

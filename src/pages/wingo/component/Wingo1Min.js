@@ -27,7 +27,10 @@ import nine from "../../../assets/images/n9-a20f6f42 (1).png";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
 import backbanner from "../../../assets/images/winbackbanner.png";
-import { dummycounterFun,updateNextCounter } from "../../../redux/slices/counterSlice";
+import {
+  dummycounterFun,
+  updateNextCounter,
+} from "../../../redux/slices/counterSlice";
 import { changeImages } from "../../../shared/nodeSchedular";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
@@ -114,12 +117,12 @@ function Wingo1Min() {
   const { isLoading, data: game_history } = useQuery(
     ["gamehistory"],
     () => GameHistoryFn("1"),
-    { 
+    {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -147,8 +150,6 @@ function Wingo1Min() {
     );
     dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
   }, [game_history?.data?.data]);
-
-
 
   const handlePlaySoundLast = async () => {
     try {

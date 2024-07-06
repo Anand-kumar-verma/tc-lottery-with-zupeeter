@@ -250,8 +250,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
         gameid: gid,
       };
       const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
-      const firstId = response?.data?.earning?.[0]?.tr_transid;
-      console.log(response,"Response");
+      const firstId = localStorage.getItem("betApplied")?.split("_")?.[4];
       const winAmnt =
         response?.data?.earning
           ?.filter((i) => i?.tr_transid === firstId)
