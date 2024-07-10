@@ -103,6 +103,7 @@ export default function Banks() {
       visibleRows?.find((i) => i?.regid === openDialogBox)?.account_number ||
       "",
   };
+
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
@@ -111,9 +112,10 @@ export default function Banks() {
         user_id: user_id,
         txtbank: fk.values.bank_name,
         txtholdername: fk.values.holder,
-        txtifscnew: fk.values.ifsc,
-        txtacno: fk.values.account,
+        txtifscnew: capitalizedIFSC,
+         txtacno: fk.values.account,
       };
+      
       if (
         !reqBody.user_id ||
         !reqBody.txtacno ||
@@ -125,7 +127,9 @@ export default function Banks() {
       updateBankDetails(reqBody);
     },
   });
-
+ 
+  const capitalizedIFSC = fk.values.ifsc.toUpperCase();
+  
   async function updateBankDetails(reqBody) {
     try {
       const res = await axios.post(endpoint?.update_bank_details, reqBody);
