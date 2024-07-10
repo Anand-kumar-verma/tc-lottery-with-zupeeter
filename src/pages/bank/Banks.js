@@ -40,7 +40,7 @@ export default function Banks() {
   const tableRef = React.useRef(null);
   const client = useQueryClient()
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
-
+ 
   const { isLoading, data: game_history } = useQuery(
     ["bank_details"],
     () => BankDetailsFUnction(),
@@ -92,6 +92,8 @@ export default function Banks() {
 
   console.log(visibleRows);
 
+
+  
   const initialValue = {
     bank_name: openDialogBox,
     holder:
@@ -103,11 +105,12 @@ export default function Banks() {
       visibleRows?.find((i) => i?.regid === openDialogBox)?.account_number ||
       "",
   };
-
+ 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
+      const capitalizedIFSC = fk.values.ifsc.toUpperCase();
       const reqBody = {
         user_id: user_id,
         txtbank: fk.values.bank_name,
@@ -128,8 +131,6 @@ export default function Banks() {
     },
   });
  
-  const capitalizedIFSC = fk.values.ifsc.toUpperCase();
-  
   async function updateBankDetails(reqBody) {
     try {
       const res = await axios.post(endpoint?.update_bank_details, reqBody);
