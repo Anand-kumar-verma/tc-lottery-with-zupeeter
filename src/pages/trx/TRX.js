@@ -34,23 +34,24 @@ function TRX() {
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
   const client = useQueryClient();
-  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
+  const wallet_amount_data = useSelector(
+    (state) => state.aviator.wallet_real_balance
+  );
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
-
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        console.log("hidden")
-       } else {
+        console.log("hidden");
+      } else {
         setOpenDialogBox(false);
         localStorage.setItem("betApplied", false);
         localStorage.removeItem("total_bet");
@@ -65,23 +66,28 @@ function TRX() {
     };
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setOpenDialogBox(false);
     localStorage.setItem("betApplied", false);
     localStorage.removeItem("total_bet");
     localStorage.removeItem("anand_re");
-  },[])
-  
+  }, []);
+
+  // React.useEffect(() => {
+  //   setTimeout(() => {
+  //     if (isAppliedbet?.split("_")?.[1] === String(true)) {
+  //      setOpenDialogBox(true);
+  //       // setTimeout(() => {
+  //       //   setOpenDialogBox(false);
+  //       //   localStorage.setItem("betApplied", false);
+  //       // }, 5000);
+  //     }
+  //   }, 1000);
+  // }, [dummycounter]);
   React.useEffect(() => {
-    setTimeout(() => {
-      if (isAppliedbet?.split("_")?.[1] === String(true)) {
-       setOpenDialogBox(true);
-        // setTimeout(() => {
-        //   setOpenDialogBox(false);
-        //   localStorage.setItem("betApplied", false);
-        // }, 5000);
-      }
-    }, 1000);
+    if (isAppliedbet?.split("_")?.[1] === String(true)) {
+      setOpenDialogBox(true);
+    }
   }, [dummycounter]);
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
@@ -89,16 +95,15 @@ function TRX() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
   React.useEffect(() => {
     dispatch(wallet_real_balanceFn(wallet_amount?.data?.earning || 0));
   }, [wallet_amount?.data?.earning]);
-
 
   function refreshFunctionForRotation() {
     client.refetchQueries("wallet_amount");

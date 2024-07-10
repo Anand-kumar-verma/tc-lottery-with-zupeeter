@@ -218,7 +218,6 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import Loss from "../../assets/images/loss.png";
 import zero from "../../assets/images/n0-30bd92d1.png";
 import one from "../../assets/images/n1-dfccbff5.png";
@@ -237,6 +236,7 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
   //   const login_data = localStorage.getItem("logindataen") && CryptoJS.AES.decrypt(localStorage.getItem("logindataen"), "anand")?.toString(CryptoJS.enc.Utf8) || null;
   //   const user_id = login_data && JSON.parse(login_data).UserID;
   let array = [zero, one, two, three, four, five, six, seven, eight, nine];
+  // const my_history = useSelector((state) => state.aviator.myHistory_trx_one_min);
   const user_id = localStorage.getItem("user_id");
   const [loding, setloding] = useState(false);
   const [status, setstatus] = useState("");
@@ -249,17 +249,18 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
         userid: user_id,
         gameid: gid,
       };
-      const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
+      const response =  await axios.post(`${endpoint.trx_my_history_new}`, reqBody);
       const firstId = localStorage.getItem("betApplied")?.split("_")?.[4];
+      const total_data = response?.data?.earning;
       const winAmnt =
-        response?.data?.earning
+        total_data
           ?.filter((i) => i?.tr_transid === firstId)
           ?.reduce((a, b) => a + Number(b?.tr_income || 0), 0) || 0;
       const amntAmnt =
-        response?.data?.earning
+        total_data
           ?.filter((i) => i?.tr_transid === firstId)
           ?.reduce((a, b) => a + Number(b?.tr_final_amt || 0), 0) || 0;
-      setall_result(response?.data?.earning?.[0]);
+      setall_result(total_data?.[0]);
       // const winAmnt = response?.data?.earning?.[0]?.tr_income || 0;
       // const amntAmnt = response?.data?.earning?.[0]?.tr_final_amt || 0;
       // setstatus({

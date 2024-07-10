@@ -6,8 +6,10 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import { useFormik } from "formik";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -23,6 +25,11 @@ import {
   trx_game_image_index_function,
   updateNextCounter,
 } from "../../../redux/slices/counterSlice";
+import {
+  My_All_TRX_HistoryFn,
+  My_All_TRX_HistoryFn_new,
+} from "../../../services/apiCallings";
+import { endpoint } from "../../../services/urls";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
@@ -30,10 +37,7 @@ import GameHistory from "../history/GameHistory";
 import MyHistory from "../history/MyHistory";
 import Howtoplay from "./Howtoplay";
 import ShowImages from "./ShowImages";
-import { endpoint } from "../../../services/urls";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { My_All_TRX_HistoryFn } from "../../../services/apiCallings";
+import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 ////
 function Wingo1Min() {
   const [open, setOpen] = useState(false);
@@ -76,13 +80,16 @@ function Wingo1Min() {
         fk.setFieldValue("openTimerDialog", true);
       }
       if (onemin === 59) {
-        dispatch(dummycounterFun());
+        // dispatch(dummycounterFun());
         fk.setFieldValue("openTimerDialog", false);
       }
 
       if (onemin === 58) {
         client.refetchQueries("wallet_amount");
-        client.refetchQueries("myAll_trx_history");
+        client.refetchQueries("myAll_trx_history_new");
+      }
+      if(onemin === 56){
+        client.refetchQueries("myAll_trx_history_new");
       }
       if (onemin === 0) {
         // client.refetchQueries("trx_gamehistory_chart");
@@ -178,10 +185,36 @@ function Wingo1Min() {
       refetchOnWindowFocus: false,
     }
   );
+  const { isLoading: myhistory_loding_all_new, data: my_history_all_new } =
+    useQuery(["myAll_trx_history_new"], () => My_All_TRX_HistoryFn_new("1"), {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      // retry: false,
+      // retryOnMount: false,
+      refetchOnWindowFocus: false,
+    });
 
   React.useEffect(() => {
-    dispatch(myHistory_trx_one_minFn(my_history_all?.data?.earning));
-  }, [my_history_all?.data?.earning]);
+    const allEarnings = my_history_all?.data?.earning;
+    const newEarnings = my_history_all_new?.data?.earning;
+
+    // console.log("allEarnings:", allEarnings);
+    // console.log("newEarnings:", newEarnings);
+
+    if (Array.isArray(newEarnings) && newEarnings.length > 0) {
+      if (Array.isArray(allEarnings)) {
+        dispatch(myHistory_trx_one_minFn([...newEarnings, ...allEarnings]));
+      } else {
+        dispatch(myHistory_trx_one_minFn(newEarnings));
+      }
+    } else if (Array.isArray(allEarnings)) {
+      dispatch(myHistory_trx_one_minFn(allEarnings));
+    }
+
+    if (newEarnings?.[0]?.tr_status !== "Pending") {
+      dispatch(dummycounterFun());
+    }
+  }, [my_history_all?.data?.earning, my_history_all_new?.data?.earning]);
 
   const handlePlaySound = async () => {
     try {
@@ -221,6 +254,7 @@ function Wingo1Min() {
             backgroundImage: `url(${trxbg})`,
           }}
         >
+          <CustomCircularProgress isLoading={myhistory_loding_all} />
           <Box
             sx={{
               display: "flex",

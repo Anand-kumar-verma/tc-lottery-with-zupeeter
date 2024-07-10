@@ -35,7 +35,11 @@ import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
 import winerbanner1 from "../../assets/images/winerbanner1.png";
 import Layout from "../../component/layout/Layout";
-import { LastTrade, ProfileDataFunction, checkTokenValidity } from "../../services/apiCallings";
+import {
+  LastTrade,
+  ProfileDataFunction,
+  checkTokenValidity,
+} from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Casino from "./component/Casino";
@@ -51,9 +55,7 @@ import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
 import ava from "../../assets/images/aviator.jpg";
 
-
 function Dashboard() {
-
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
   const onAutoplayTimeLeft = (s, time, progress) => {
@@ -65,26 +67,25 @@ function Dashboard() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  const { isLoading, data } = useQuery(["top_winner"], () => TopWinner(),  {
+  const { isLoading, data } = useQuery(["top_winner"], () => TopWinner(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
-    retry:false,
-    retryOnMount:false,
-    refetchOnWindowFocus:false
+    retry: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   const res = data?.data?.earning || [];
 
-  const { data: Trade } = useQuery(["last_trade"], () => LastTrade(),  {
+  const { data: Trade } = useQuery(["last_trade"], () => LastTrade(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
-    retry:false,
-    retryOnMount:false,
-    refetchOnWindowFocus:false
+    retry: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
   });
   const trade = Trade?.data?.earning || [];
-  console.log(trade)
-
+  console.log(trade);
 
   const TopWinner = async () => {
     try {
@@ -110,22 +111,34 @@ function Dashboard() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   const profile = user?.data?.earning || [];
-  const imageSources = [ 
+  const imageSources = [
     "https://mui.com/static/images/avatar/2.jpg",
     "https://mui.com/static/images/avatar/3.jpg",
     profile3,
     "https://mui.com/static/images/avatar/4.jpg",
     profile1,
     "https://mui.com/static/images/avatar/1.jpg",
-    profile2
-    , "https://mui.com/static/images/avatar/5.jpg"
-  ]
+    profile2,
+    "https://mui.com/static/images/avatar/5.jpg",
+  ];
+
+  useEffect(() => {
+    testingFuncion();
+  }, []);
+  async function testingFuncion() {
+    try {
+      const response = await axios.get(endpoint.trx_testing);
+      console.log(response,"THis is testing data");
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <Layout>
@@ -197,10 +210,9 @@ function Dashboard() {
         >
           1.All recharge methods only available in RECHARGE menu on OFFICIAL
         </Typography>
-        <Typography
-          className="!bg-orange-400 !text-white !text-xs  !font-bold rounded-2xl px-2 !flex justify-center"
-        >
-          <WhatshotIcon fontSize="small" /> <span className="my-1">Details</span>
+        <Typography className="!bg-orange-400 !text-white !text-xs  !font-bold rounded-2xl px-2 !flex justify-center">
+          <WhatshotIcon fontSize="small" />{" "}
+          <span className="my-1">Details</span>
         </Typography>
       </Stack>
       <Stack
@@ -378,8 +390,12 @@ function Dashboard() {
         <Box className="">
           {res?.slice(2)?.map((i, index) => {
             return (
-              <Stack key={index} direction="row" sx={style.winnerslider} className="">
-              
+              <Stack
+                key={index}
+                direction="row"
+                sx={style.winnerslider}
+                className=""
+              >
                 <div className="-mt-5">
                   <Box
                     width={20}
@@ -390,7 +406,8 @@ function Dashboard() {
                   ></Box>
                   <Box
                     component={"img"}
-                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    src={imageSources[index]}
+                    alt={`Profile ${index + 1}`}
                     width={30}
                     height={30}
                     sx={style.winnerprofile}
@@ -426,15 +443,13 @@ function Dashboard() {
                   >
                     Winning amount
                   </Typography>
-
-
                 </Box>
               </Stack>
             );
           })}
         </Box>
       </Box>
-      <Box sx={{ px: 2, py: 3 }} >
+      <Box sx={{ px: 2, py: 3 }}>
         <Stack direction={"row"} sx={{ alignItems: "center" }}>
           <Box
             sx={{
@@ -473,18 +488,13 @@ function Dashboard() {
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
                     {res?.[1]?.i?.or_m_email
-                      ? res
-                        ?.[1]
-                        ?.i?.or_m_email?.split("@")[0]
-                        .substring(0, 2) +
-                      "**" +
-                      (res?.[1]?.i?.or_m_email?.split("@")[0]
-                        .length > 2
-                        ? res
-                          ?.[1]
-                          ?.i?.or_m_email?.split("@")[0]
-                          .substring(2, 4)
-                        : "")
+                      ? res?.[1]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
+                        "**" +
+                        (res?.[1]?.i?.or_m_email?.split("@")[0].length > 2
+                          ? res?.[1]?.i?.or_m_email
+                              ?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -524,18 +534,13 @@ function Dashboard() {
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
                     {res?.[0]?.i?.or_m_email
-                      ? res
-                        ?.[0]
-                        ?.i?.or_m_email?.split("@")[0]
-                        .substring(0, 2) +
-                      "**" +
-                      (res?.[0]?.i?.or_m_email?.split("@")[0]
-                        .length > 2
-                        ? res
-                          ?.[0]
-                          ?.i?.or_m_email?.split("@")[0]
-                          .substring(2, 4)
-                        : "")
+                      ? res?.[0]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
+                        "**" +
+                        (res?.[0]?.i?.or_m_email?.split("@")[0].length > 2
+                          ? res?.[0]?.i?.or_m_email
+                              ?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -577,12 +582,12 @@ function Dashboard() {
                   <Typography variant="body1" color="initial">
                     {res?.[2]?.i?.or_m_email
                       ? res?.[2]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
-                      "**" +
-                      (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
-                        ? res?.[2]?.i?.or_m_email
-                          ?.split("@")[0]
-                          .substring(2, 4)
-                        : "")
+                        "**" +
+                        (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
+                          ? res?.[2]?.i?.or_m_email
+                              ?.split("@")[0]
+                              .substring(2, 4)
+                          : "")
                       : "**"}
                   </Typography>
                   <Typography
@@ -609,7 +614,8 @@ function Dashboard() {
                   ></Box>
                   <Box
                     component={"img"}
-                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    src={imageSources[index]}
+                    alt={`Profile ${index + 1}`}
                     width={30}
                     height={30}
                     sx={style.winnerprofile}
@@ -661,7 +667,6 @@ function Dashboard() {
           {trade?.slice(0, 5)?.map((i, index) => {
             return (
               <Stack key={index} direction="row" sx={style.winnerslider}>
-
                 <div className="-mt-5">
                   <Box
                     width={20}
@@ -672,7 +677,8 @@ function Dashboard() {
                   ></Box>
                   <Box
                     component={"img"}
-                    src={imageSources[index]} alt={`Profile ${index + 1}`}
+                    src={imageSources[index]}
+                    alt={`Profile ${index + 1}`}
                     width={30}
                     height={30}
                     sx={style.winnerprofile}
@@ -745,7 +751,7 @@ const style = {
     borderRadius: "10px",
     my: 1.5,
     boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
-    animation: "infinite moves"
+    animation: "infinite moves",
   },
   winnerprofile: {
     borderRadius: "50%",

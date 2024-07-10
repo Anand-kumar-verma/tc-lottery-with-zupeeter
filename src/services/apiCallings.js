@@ -106,6 +106,19 @@ export const My_All_TRX_HistoryFn = async (gid) => {
     console.log(e);
   }
 };
+export const My_All_TRX_HistoryFn_new = async (gid) => {
+  try {
+    const reqBody = {
+      userid: localStorage.getItem("user_id"),
+      gameid: gid,
+    };
+    const response = await axios.post(`${endpoint.trx_my_history_new}`, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 
 // /; INCOME
 export const MyTeamLevel = async () => {

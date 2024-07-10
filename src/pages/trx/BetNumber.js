@@ -214,7 +214,6 @@ const BetNumber = ({ timing, gid }) => {
                 ]
           )
         );
-
         fk.setFieldValue("isSuccessPlaceBet", true);
         localStorage.setItem(
           "betApplied",
@@ -247,7 +246,8 @@ const BetNumber = ({ timing, gid }) => {
     }
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
-    client.refetchQueries("myAll_trx_history");
+    client.refetchQueries("myAll_trx_history_new");
+    // client.refetchQueries("myAll_trx_history");
     fk.setFieldValue("balance", "1");
     setRandomNumber(null);
     fk.setFieldValue("qnt", "1");

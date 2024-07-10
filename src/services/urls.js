@@ -1,6 +1,7 @@
 export const domain = "https://trx-timer-zupeeter-7o9k.onrender.com/";
 
-export const domain_plesk_node = "https://api.zupeeter.com/"
+export const domain_plesk_node = "https://api.zupeeter.com"
+export const domain_ovi_node = "https://zupeegame.info"
 
 export const rupees = "₹";
 export const zubgback = "#F48901";
@@ -49,11 +50,12 @@ export const endpoint = {
   
   indian_insert_deposite: `${baseUrl}/api/indian_insert_deposite`,
   // trx apis
-  trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js
+  // trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js
   
   trx_bet_placed: `${baseUrl}/api/Trx_bet`, //////////// done in node js
   trx_my_history: `${baseUrl}/api/trx_one_min_myhistory`, /// done  in node js
-  // trx_my_history: `http://192.168.18.183:9000/trx-my-history-node`, /// done  in node js
+  // trx_my_history_new: `${baseUrl}/api/trx_one_min_myhistory_new`, /// done  in node js
+
   registration_bonus: `${baseUrl}/api/view_direct_referral_income`,  
   view_bank_details: `${baseUrl}/api/view_bank_details_new`,
   view_upi_details: `${baseUrl}/api/view_upi_details`,
@@ -69,9 +71,13 @@ export const endpoint = {
 
   payin_status:`${baseUrl}/api/payin_api`,
   swnl_pay_in_api:`${baseUrl}/api/insert_fund_request_vapayout`,
-  trx_bet_placed_node:`${domain_plesk_node}bid-placed-node`,
-  // trx_bet_placed_node:`https://zupeegame.info/bid-placed-node`,
-  // trx_game_history: `${domain_plesk_node}trx_result-node`, //////// done in node js
-  // trx_game_history: `https://zupeegame.info/trx_result-node`, //////// done in node js
 
+
+
+
+  // ovi panel api's
+  trx_bet_placed_node:`${domain_ovi_node}/bid-placed-node`,
+  trx_game_history: `${domain_ovi_node}/trx_result-node`, //////// done in node js
+  trx_my_history_new: `${domain_ovi_node}/trx-my-history-node`, /// done  in node js
+  trx_testing:`${domain_ovi_node}/trx_result-node-test`
 };
