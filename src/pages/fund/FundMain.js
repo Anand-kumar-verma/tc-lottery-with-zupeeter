@@ -4,6 +4,7 @@ import { Box, Container } from "@mui/material";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
+import { CurrencyBitcoinOutlined, CurrencyFrancSharp } from "@mui/icons-material";
 const zubgback = "#F48901";
 const zubgmid = "#F48901";
 
@@ -26,6 +27,16 @@ function FundMain() {
       name: "Fund Transfer",
       logo: (
         <CurrencyExchangeIcon
+          className="!w-[40px] !h-[40px] !text-[#F48901]"
+          color="#8f5206"
+        />
+      ),
+    },
+    {
+      to: "/fund-recieve",
+      name: "Fund Recieve",
+      logo: (
+        <CurrencyFrancSharp
           className="!w-[40px] !h-[40px] !text-[#F48901]"
           color="#8f5206"
         />

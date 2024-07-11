@@ -26,6 +26,7 @@ import ICOToken from "../pages/ioctoken/ICOToken";
 import FundMain from "../pages/fund/FundMain";
 import FundReport from "../pages/fund/FundReport";
 import FundTransfer from "../pages/fund/FundTransfer";
+import FundRecieve from "../pages/fund/FundRecive";
 import ViewSalaryIncome from "../pages/salaryIncome/ViewSalaryIncome";
 import UPIDepositToken from "../pages/upiDepositToken/UPIDepositToken";
 import ZupeeterTokenReport from "../pages/zupeeterToken/ZupeeterTokenReport";
@@ -164,6 +165,10 @@ export const routes = [
     {
         path:"/fund-transfer",
         element:<FundTransfer />
+    },
+    {
+        path:"/fund-recieve",
+        element:<FundRecieve />
     },
     {
         path:"/view-salary-income",

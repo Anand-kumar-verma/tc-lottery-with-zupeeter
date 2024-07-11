@@ -10,7 +10,7 @@ import Dashboard from "./pages/home/Dashboard";
 import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
-import Home from "./website/Home";
+
 
 function App() {
   const isAuthenticated = localStorage.getItem("user_id");
@@ -39,8 +39,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/login" element={<Login />}></Route>
+   
+      <Route path="/" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/before-login" element={<BeforeLogin />}></Route>
@@ -53,7 +53,7 @@ function App() {
           );
         })
       ) : (
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/" element={<Login />}></Route>
       )}
 
       <Route path="/splash" element={<SplashScreen />}></Route>

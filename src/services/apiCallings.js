@@ -171,6 +171,18 @@ export const FundTransferHistoryFn = async () => {
     console.log(e);
   }
 };
+export const FundReciveHistoryFn = async () => {
+  try {
+    const reqBody = {
+      userid: localStorage.getItem("user_id"),
+    };
+    const response = await axios.post(endpoint.fund_recieve, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const zupeeterTOkenHistory = async () => {
   try {
     const reqBody = {

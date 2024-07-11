@@ -28,6 +28,7 @@ export const endpoint = {
   update_bank_details: `${baseUrl}/api/update_bank_details_new`,
   update_upi_details: `${baseUrl}/api/update_upi_details`,
   fund_transfer_history: `${baseUrl}/api/view_fund_transfer`,
+  fund_recieve: `${baseUrl}/api/view_fund_receive`,
   get_user_intro_name: `${baseUrl}/api/get_intro_name`,
   insert_fund_transfer: `${baseUrl}/api/insert_fund_transfer`,
   view_salary_income: `${baseUrl}/api/view_salary_income`,
