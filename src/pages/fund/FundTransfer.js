@@ -16,15 +16,15 @@ const FundTransfer = () => {
   const [balance, setsetBalance] = useState("");
   const client = useQueryClient();
 
-  const {  data } = useQuery(
+  const { data } = useQuery(
     ["profile"],
     () => ProfileDataFunction(),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false
     }
   );
   const profile = data?.data?.earning || [];
@@ -47,7 +47,10 @@ const FundTransfer = () => {
         txtamount: fk.values.transfer_amount,
         txtuserid: fk.values.userid,
         txtwallet: fk.values.wallet,
-      };
+      }; 
+      if (reqBody.userid === reqBody.txtuserid) {
+        return toast("Can not send fund to yourself");
+      }
       if (
         !reqBody.userid ||
         !reqBody.txtpassword ||
@@ -69,6 +72,7 @@ const FundTransfer = () => {
       toast(res?.data?.message);
       fk.handleReset();
       client.refetchQueries("fund_transfer_history_details");
+      client.refetchQueries("fund_recive_details");
     } catch (e) {
       console.log(e);
     }
@@ -126,13 +130,21 @@ const FundTransfer = () => {
               id="userid"
               name="userid"
               value={fk.values.userid}
-              onChange={fk.handleChange}
+              onChange={(e) => {
+                fk.handleChange(e);
+                if (e.target.value === profile?.rec?.Login_Id) {
+                  toast("Can not send fund to yourself ");
+                } else {
+                  return "";
+                }
+              }}
               className="!w-[100%]"
             />
-            {username && username != "false" && (
+            {username && username !== "false" && (
               <p className="!text-[10px] !text-red-500 pl-2">{username}</p>
             )}
           </div>
+
           <span>Tranfer Amount*</span>
           <TextField
             id="transfer_amount"
