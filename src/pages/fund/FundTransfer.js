@@ -133,10 +133,8 @@ const FundTransfer = () => {
               onChange={(e) => {
                 fk.handleChange(e);
                 if (e.target.value === profile?.rec?.Login_Id) {
-                  toast("Can not send fund to yourself ");
-                } else {
-                  return "";
-                }
+                 return toast("Can not send fund to yourself ");
+                } 
               }}
               className="!w-[100%]"
             />
