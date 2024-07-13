@@ -1,4 +1,5 @@
-export const domain = "https://trx-timer-zupeeter-7o9k.onrender.com/";
+// export const domain = "https://trx-timer-zupeeter-7o9k.onrender.com/";
+export const domain = "https://zupeeter-timer.onrender.com/";
 
 export const domain_plesk_node = "https://api.zupeeter.com"
 export const domain_ovi_node = "https://zupeegame.info"

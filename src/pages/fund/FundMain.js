@@ -1,15 +1,15 @@
+import { CurrencyFrancSharp } from "@mui/icons-material";
 import CurrencyExchangeIcon from "@mui/icons-material/CurrencyExchange";
 import RedeemIcon from "@mui/icons-material/Redeem";
 import { Box, Container } from "@mui/material";
 import * as React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Layout from "../../component/layout/Layout";
-import { CurrencyBitcoinOutlined, CurrencyFrancSharp } from "@mui/icons-material";
 const zubgback = "#F48901";
 const zubgmid = "#F48901";
 
 function FundMain() {
-  const navigate = useNavigate();
+
 
   const data_array = [
     {

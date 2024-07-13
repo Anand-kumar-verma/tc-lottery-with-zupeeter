@@ -215,7 +215,7 @@ function TRX() {
             justifyContent="space-between"
             mt={2}
           >
-            <Button
+            {/* <Button
               onClick={() => navigate("/withdraw")}
               sx={style.withdrawalbtn}
             >
@@ -223,7 +223,7 @@ function TRX() {
             </Button>
             <Button onClick={() => navigate("/deposit")} sx={style.depositebtn}>
               Deposit
-            </Button>
+            </Button> */}
           </Stack>
         </Box>
         <Stack
