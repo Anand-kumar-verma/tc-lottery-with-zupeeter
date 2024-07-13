@@ -36,7 +36,7 @@ function ServiceCollections() {
           <Stack direction='row' sx={{ background: '#f4f4f4', padding: 2, textAlign: 'center', alignItems: 'center', justifyContent: 'space-between', }}>
             <Stack direction='row' alignItems={'center'}>
               <Box component='img' src={CStype} width={30}></Box>
-              <Typography variant="body1" color="initial" ml={2}>TC Self-service Center (स्व-सेवा केंद्र)</Typography>
+              <Typography variant="body1" color="initial" ml={2}>Zupeeter Self-service Center (स्व-सेवा केंद्र)</Typography>
             </Stack>
 
             <KeyboardArrowRightIcon sx={{ color: 'gray' }} />

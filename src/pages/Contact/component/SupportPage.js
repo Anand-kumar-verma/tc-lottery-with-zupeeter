@@ -38,7 +38,7 @@ const SupportPage = () => {
   return (
     <Box sx={{ background: 'white', padding: 1 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Box component='img' src={logo} width={70}></Box>
+        {/* <Box component='img' src={logo} width={70}></Box> */}
       </Box>
       <Typography variant="body1" color="initial" sx={{ color: 'black', textAlign: 'center', fontWeight: '400', fontSize: '20px' }}>Customer Service</Typography>
       <FormControl fullWidth>
@@ -64,7 +64,7 @@ const SupportPage = () => {
       <Button variant="contained" sx={{ width: '100%', mt: 2 }}>Submit Issue</Button>
       <Button variant="outlined" sx={{ width: '100%', mt: 2 }}>Check Issue Progress</Button>
       <Button variant="outlined" sx={{ width: '100%', mt: 2 }}>Other Problem</Button>
-      <Button variant="outlined" sx={{ width: '100%', mt: 2, mb: 5 }} component={NavLink} to='/'>Back to TC</Button>
+      <Button variant="outlined" sx={{ width: '100%', mt: 2, mb: 5 }} component={NavLink} to='/'>Back </Button>
       <Swiper
 
         rewind={true}
@@ -100,7 +100,7 @@ const SupportPage = () => {
               <CloseOutlinedIcon />
             </Button>
           </Box>
-          <Typography variant="body1" color="initial">Hello dear TC Member</Typography>
+          <Typography variant="body1" color="initial">Hello dear Zupeeter Member</Typography>
           <Typography variant="body1" color="initial">Once you've submitted your concern, rest assured our support team is on it. To get started, follow these steps:</Typography>
           <Typography variant="body1" color="initial">Identify the issue from the options provided.</Typography>
           <Typography variant="body1" color="initial">Fill out the required fields with your information.</Typography>
