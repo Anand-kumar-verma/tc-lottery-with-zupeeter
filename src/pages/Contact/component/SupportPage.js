@@ -9,11 +9,11 @@ import { NavLink } from 'react-router-dom';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import banner10 from '../../../assets/images/banner10.png';
-import banner11 from '../../../assets/images/banner11.png';
+import banner11 from '../../../assets/images/banner1.png';
 import banner5 from '../../../assets/images/banner5.jpg';
-import banner6 from '../../../assets/images/banner6.jpg';
+import banner6 from '../../../assets/images/banner2.jpg';
 import banner7 from '../../../assets/images/banner7.jpg';
-import banner8 from '../../../assets/images/banner8.jpg';
+import banner8 from '../../../assets/images/banner4.jpg';
 import banner9 from '../../../assets/images/banner9.png';
 import logo from '../../../assets/images/logo2.png';
 
