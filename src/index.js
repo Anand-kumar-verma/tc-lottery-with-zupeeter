@@ -24,6 +24,7 @@ root.render(
           <App />
           <Toaster
               toastOptions={{
+               
                 className: "",
                 style: {
                   border: `1px solid red`,
@@ -34,6 +35,7 @@ root.render(
                   // background: "#F48901",
                 },
               }}
+              autoClose={1000}
               limit={1}
             />
         </BrowserRouter>
