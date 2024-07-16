@@ -188,11 +188,15 @@ const BetNumber = ({ timing, gid }) => {
         reqBody
       );
       if (response?.data?.msg === "Bid placed Successfully") {
-        toast(
+     const toastID =   toast(
           <SuccessCheck
             message={<span className="!text-sm">{response?.data?.msg}</span>}
-          />
+          />, 
+          
         );
+        setTimeout(()=>{
+          toast.dismiss(toastID);
+        },1000)
         localStorage.setItem(
           "total_bet",
           JSON.stringify(
@@ -232,11 +236,16 @@ const BetNumber = ({ timing, gid }) => {
         setOpen(false);
         setLoding(false);
         // toast(response?.data?.msg);
-        return toast(
+        // return  
+        const toastID =   toast(
           <FalseCheck
+          
             message={<span className="!text-sm">{response?.data?.msg}</span>}
-          />
+          />, 
         );
+        setTimeout(()=>{
+          toast.dismiss(toastID);
+        },1000)
       }
       setLoding(false);
       // }

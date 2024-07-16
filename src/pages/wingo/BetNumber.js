@@ -118,18 +118,24 @@ const BetNumber = ({ timing, gid }) => {
       const response = await axios.post(`${endpoint.bet_placed}`, reqBody);
       if (response?.data?.error === "200") {
         if (response?.data?.msg === "Bid Placed Successfully.") {
-          toast(
+          const toastID =   toast(
             <SuccessCheck
               message={<span className="!text-sm">{response?.data?.msg}</span>}
-            />
+            /> ,
+            setTimeout(()=>{
+              toast.dismiss(toastID);
+            },1000)
           );
           fk.setFieldValue("isSuccessPlaceBet", true);
           localStorage.setItem("betApplied", `${gid}_true`);
         } else {
-          toast(
+          const toastID =   toast( 
             <FalseCheck
               message={<span className="!text-sm">{response?.data?.msg}</span>}
-            />
+            />,
+            setTimeout(()=>{
+              toast.dismiss(toastID);
+            },1000)
           );
         }
 
