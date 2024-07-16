@@ -84,8 +84,12 @@ const BetNumber = ({ timing, gid }) => {
 
   async function betFunctionStart() {
     setLoding(true);
+    if(Number(user_id)<=0){
+      setLoding(false);
+      return toast("Please Refresh your page.");
+    }
     const reqBody = {
-      user_id: user_id?.toString(),
+      user_id: String(user_id),
       amount: (
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
       )?.toString(),
@@ -109,7 +113,7 @@ const BetNumber = ({ timing, gid }) => {
             }`
       }`,
     };
-    
+
     try {
       const total_bet = localStorage.getItem("total_bet");
       const arrayLength =

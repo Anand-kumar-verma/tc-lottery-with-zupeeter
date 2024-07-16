@@ -85,7 +85,6 @@ function Dashboard() {
     refetchOnWindowFocus: false,
   });
   const trade = Trade?.data?.earning || [];
-  console.log(trade);
 
   const TopWinner = async () => {
     try {
@@ -128,17 +127,6 @@ function Dashboard() {
     "https://mui.com/static/images/avatar/5.jpg",
   ];
 
-  useEffect(() => {
-    testingFuncion();
-  }, []);
-  async function testingFuncion() {
-    try {
-      const response = await axios.get(endpoint.trx_testing);
-      console.log(response,"THis is testing data");
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   return (
     <Layout>

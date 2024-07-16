@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import splash_screen from "./assets/images/splash_screen.PNG";
-import { useNavigate } from "react-router-dom";
 import { Box, Container } from "@mui/material";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import splash_screen from "./assets/images/splash_screen.PNG";
 const BeforeLogin = () => {
   const navigate = useNavigate();
   useEffect(() => {

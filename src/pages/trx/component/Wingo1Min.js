@@ -84,14 +84,14 @@ function Wingo1Min() {
         fk.setFieldValue("openTimerDialog", false);
       }
 
-      if (onemin === 58) {
+      if (onemin === 57) {
         client.refetchQueries("wallet_amount");
         client.refetchQueries("myAll_trx_history_new");
       }
-      if(onemin === 56){
-        client.refetchQueries("myAll_trx_history_new");
-      }
-      if (onemin === 0) {
+      // if(onemin === 56){
+      //   client.refetchQueries("myAll_trx_history_new");
+      // }
+      if (onemin === 58){
         // client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("trx_gamehistory");
       }
