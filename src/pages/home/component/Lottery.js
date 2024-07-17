@@ -77,8 +77,8 @@ function Lottery() {
             </Box>
           </Box>
         </NavLink>
-      {/* <NavLink to='/k3'> */}
-      <NavLink to="/comingsoon">
+      <NavLink to='/k3'>
+      {/* <NavLink to="/comingsoon"> */}
         <Box sx={style.winbox}>
           <Box
             component="img"
@@ -87,7 +87,7 @@ function Lottery() {
           ></Box>
           <Box sx={style.positiongame}>
             <Typography variant="body1" color="initial" sx={style.gameheading}>
-              K3 Lotre{" "}
+              K3 Lotre
             </Typography>
             <Box sx={{ mt: "15px" }}>
               <Typography variant="body1" color="initial">

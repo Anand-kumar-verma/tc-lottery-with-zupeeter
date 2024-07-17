@@ -25,6 +25,7 @@ import Same2 from "./Same2";
 import Same3 from "./Same3";
 import Different from "./Different";
 import Howtoplay from "./Howtoplay";
+import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 ////
 function K31Min() {
   const [open, setOpen] = useState(false);
@@ -42,6 +43,7 @@ function K31Min() {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
 
   const handleClose = () => {
     setOpen(false);
@@ -64,24 +66,85 @@ function K31Min() {
         handlePlaySound();
       }
 
-      if (onemin <= 5) {
+      if (onemin <= 10) {
         fk.setFieldValue("openTimerDialog", true);
       }
       if (onemin === 59) {
         fk.setFieldValue("openTimerDialog", false);
       }
-      if (onemin === 56) {
-        client.refetchQueries("myAll_trx_history");
+      if (onemin === 57) {
         client.refetchQueries("wallet_amount");
-        client.refetchQueries("trx_gamehistory");
-        dispatch(dummycounterFun());
+        // client.refetchQueries("myAll_trx_history_new");
+      }
+      if (onemin === 58){
+        // client.refetchQueries("trx_gamehistory");
       }
     };
+    const handleOneMinResult = (result) => {
+      localStorage.setItem("anand_re", result);
+      // dispatch(dummycounterFun());
+    };
     socket.on("onemintrx", handleOneMin);
+    socket.on("result", handleOneMinResult);
     return () => {
       socket.off("onemintrx", handleOneMin);
+      socket.off("result", handleOneMinResult);
     };
   }, []);
+
+  // const { isLoading, data: game_history } = useQuery(
+  //   ["trx_gamehistory"],
+  //   () => GameHistoryFn("1"),
+  //   {
+  //     refetchOnMount: false,
+  //     refetchOnReconnect: false,
+  //     retry: false,
+  //     retryOnMount: false,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
+
+  // const GameHistoryFn = async (gid) => {
+  //   try {
+  //     const reqBody = {
+  //       gameid: gid,
+  //       limit: 100,
+  //     };
+  //     const response = await axios.post(
+  //       `${endpoint.trx_game_history}`,
+  //       reqBody
+  //     );
+  //     return response;
+  //   } catch (e) {
+  //     toast(e?.message);
+  //     console.log(e);
+  //   }
+  // };
+
+  // // const game_history = []
+
+  // React.useEffect(() => {
+  //   dispatch(
+  //     updateNextCounter(
+  //       game_history?.data?.data
+  //         ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+  //         : 1
+  //     )
+  //   );
+  //   const tr_digit =
+  //     game_history?.data?.data && game_history?.data?.data?.[0]?.tr_digits;
+  //   let array = [];
+  //   for (let i = 0; i < tr_digit?.length; i++) {
+  //     if (/[a-zA-Z]/.test(tr_digit[i])) {
+  //       array.push(tr_digit[i].toUpperCase());
+  //     } else {
+  //       array.push(tr_digit[i]);
+  //     }
+  //   }
+  //   dispatch(trx_game_image_index_function(array));
+  //   dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
+  // }, [game_history?.data?.data]);
+
 
   const handlePlaySoundLast = async () => {
     try {
@@ -111,8 +174,6 @@ function K31Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-
-
   const handleChangebet = (newValue) => {
     setbettype(newValue);
   };
@@ -138,6 +199,10 @@ function K31Min() {
           className="countdownbgtrx !shadow-2xl !bg-white"
 
         >
+             <CustomCircularProgress
+              // isLoading={myhistory_loding_all}
+               />
+        
           <Box
             sx={{
               display: "flex",

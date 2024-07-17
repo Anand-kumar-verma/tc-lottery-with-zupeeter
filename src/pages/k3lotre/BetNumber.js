@@ -62,6 +62,7 @@ const BetNumber = ({ timing, gid }) => {
     handleClickOpen();
   };
 
+  
   useEffect(() => {
     if (selectedNumbers.length === 0) {
       setOpen(false);

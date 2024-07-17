@@ -1,9 +1,9 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { Box, Button, Container, Dialog, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
+import React, { useState ,useEffect } from "react";
+import { useQuery, useQueryClient } from "react-query";
+import { useSelector ,useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import asistant from "../../assets/images/asistant.png";
 import backbtn from "../../assets/images/backBtn.png";
@@ -19,6 +19,7 @@ import Wingo10Min from "./component/Wingo10Min";
 import K31Min from "./component/K31Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
+import { wallet_real_balanceFn } from "../../redux/slices/counterSlice";
 
 function K3() {
   const [musicicon, setmusicicon] = useState(true)
@@ -27,36 +28,82 @@ function K3() {
   const [opendialogbox, setOpenDialogBox] = useState(false);
   const isAppliedbet = localStorage.getItem("betApplied");
   const dummycounter = useSelector((state) => state.aviator.dummycounter);
- 
-
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const client = useQueryClient();
+  const wallet_amount_data = useSelector(
+    (state) => state.aviator.wallet_real_balance
+  );
+  const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  React.useEffect(() => {
-    setTimeout(() => {
-      if (isAppliedbet?.split("_")?.[1] === String(true)) {
-        setOpenDialogBox(true);
-        setTimeout(() => {
-          setOpenDialogBox(false);
-          localStorage.setItem("betApplied", false);
-        }, 5000);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        console.log("hidden");
+      } else {
+        setOpenDialogBox(false);
+        localStorage.setItem("betApplied", false);
+        localStorage.removeItem("total_bet");
+        localStorage.removeItem("anand_re");
       }
-    }, 1000);
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    setOpenDialogBox(false);
+    localStorage.setItem("betApplied", false);
+    localStorage.removeItem("total_bet");
+    localStorage.removeItem("anand_re");
+  }, []);
+
+  React.useEffect(() => {
+    if (isAppliedbet?.split("_")?.[1] === String(true)) {
+      setOpenDialogBox(true);
+    }
   }, [dummycounter]);
-
-
-
   const { isLoading, data: wallet_amount } = useQuery(
     ["wallet_amount"],
     () => getBalanceFunction(setBalance),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
-  const wallet_amount_data = wallet_amount?.data?.earning || 0;
+  React.useEffect(() => {
+    dispatch(wallet_real_balanceFn(wallet_amount?.data?.earning || 0));
+  }, [wallet_amount?.data?.earning]);
+
+  function refreshFunctionForRotation() {
+    client.refetchQueries("wallet_amount");
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
+
+    const element = document.getElementById("refresh_button");
+    if (!item) {
+      element.classList.add("rotate_refresh_image");
+    }
+    setTimeout(() => {
+      element.classList.remove("rotate_refresh_image");
+    }, 2000);
+  }
+  useEffect(() => {
+    const element = document.getElementById("refresh_button");
+    const item = document.getElementsByClassName("rotate_refresh_image")?.[0];
+    if (item) {
+      element.classList.remove("rotate_refresh_image");
+    }
+  }, []);
 
   return (
     <Container>
@@ -119,7 +166,16 @@ function K3() {
             >
               ₹ {wallet_amount_data}{" "}
             </Typography>
-            <Box component="img" src={refresh} width={25} ml={2}></Box>
+            <div className="mx-1 rotate_refresh_image" id="refresh_button">
+              <img
+                src={refresh}
+                width={25}
+                ml={2}
+                onClick={() => {
+                  refreshFunctionForRotation();
+                }}
+              />
+            </div>
           </Stack>
           <Stack direction="row" alignItems="center" justifyContent="center">
             <Box component="img" src={balance} width={25} mr={2}></Box>
@@ -237,7 +293,7 @@ function K3() {
             </Typography>
           </NavLink>
         </Box>
-        <Box sx={{ width: "30%" }}>
+        {/* <Box sx={{ width: "30%" }}>
           <NavLink
             className={value === 4 ? " wingonavactive wingonav" : " wingonav"}
             onClick={() => handleChange(4)}
@@ -250,12 +306,12 @@ function K3() {
               10 Min
             </Typography>
           </NavLink>
-        </Box>
+        </Box> */}
       </Box>
       {value === 1 && <K31Min />}
       {value === 2 && <Wingo3Min />}
       {value === 3 && <Wingo5Min />}
-      {value === 4 && <Wingo10Min />}
+      {/* {value === 4 && <Wingo10Min />} */}
       {/* opendialogbox */}
       {opendialogbox && (
         <Dialog
