@@ -40,74 +40,31 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
 import Howtoplay from "./component/Howtoplay";
-// import Howtoplay from "../5DLotre/component/Howtoplay";
+import { useSelector } from "react-redux";
+import FalseCheck from "../../shared/check/FalseCheck";
+
+
 const BetNumber = ({ timing, gid }) => {
+  const next_step = useSelector((state) => state.aviator.next_step);
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
-  const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
   const [opend, setOpend] = useState(false);
   const client = useQueryClient();
-  const [selectedNumbers, setSelectedNumbers] = useState([]);
-
-  const handleNumberClick = (number) => {
-    setSelectedNumbers((prevSelectedNumbers) => {
-      if (prevSelectedNumbers.includes(number)) {
-        return prevSelectedNumbers.filter((n) => n !== number);
-      } else {
-        return [...prevSelectedNumbers, number];
-      }
-    });
-    handleClickOpen();
-  };
-
-  
-  useEffect(() => {
-    if (selectedNumbers.length === 0) {
-      setOpen(false);
-    }
-  }, [selectedNumbers]);
-
-
-  useEffect(() => {
-    if (gid === "1") {
-      if (Number(timing) <= 5) {
-        setOpen(false)
-        fk.handleReset()
-      };
-    } else if (gid === "2") {
-      if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
-          setOpen(false)
-          fk.handleReset()
-        };
-      }
-    } else {
-      if (Number(String(timing)?.split("_")?.[0]) === 0) {
-        if (Number(String(timing)?.split("_")?.[1]) <= 5) {
-          setOpen(false)
-          fk.handleReset()
-        };
-      }
-    }
-  }, [timing]);
+  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
 
   const initialValue = {
     balance: "1",
     qnt: "1",
   };
-
-  useEffect(() => {
-    getBalanceFunction(setBalance);
-  }, []);
-
   const fk = useFormik({
     initialValues: initialValue,
+    enableReinitialize: true,
     isSuccessPlaceBet: true,
     onSubmit: () => {
       if (
-        Number(getBalance || 0) <
+        Number(wallet_amount_data || 0) <
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)
       )
         return toast("Your bid amount is more than wallet amount");
@@ -115,68 +72,132 @@ const BetNumber = ({ timing, gid }) => {
     },
   });
 
+  useEffect(() => {
+    if (gid === "1") {
+      if (Number(timing) <= 10) {
+        setOpen(false);
+        fk.handleReset();
+      }
+    } else if (gid === "2") {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false);
+          fk.handleReset();
+        }
+      }
+    } else {
+      if (Number(String(timing)?.split("_")?.[0]) === 0) {
+        if (Number(String(timing)?.split("_")?.[1]) <= 10) {
+          setOpen(false);
+          fk.handleReset();
+        }
+      }
+    }
+  }, [timing]);
+
   async function betFunctionStart() {
     setLoding(true);
+    if (Number(user_id) <= 0) {
+      setLoding(false);
+      return toast("Please Refresh your page.");
+    }
     const reqBody = {
-      userid: user_id?.toString(),
-      amount: (
+      userid: `${Number(user_id)}`,
+      amount: String(
         Number(fk.values.balance || 1) * Number(fk.values.qnt || 1) || 0
-      )?.toString(),
-      number: `${(selectNumber === "green" && 11) ||
-        (selectNumber === "voilet" && 12) ||
-        (selectNumber === "red" && 13) ||
-        (selectNumber === "two" && 15) || // this is big
-        (selectNumber === "one" && 14) || // this is small
-        (selectNumber === "even" && 16) || // this is small
-        (selectNumber === "odd" && 17) || // this is small
+      ),
+      number: `${(selectNumber === "Even" && 22) ||
+        (selectNumber === "Odd" && 21) ||
+        (selectNumber === "Big" && 19) || // this is big
+        (selectNumber === "Small" && 20) || // this is small
         Number(selectNumber) + 1
         }`,
-      gameid: `${Number(gid)}`,
+        gameid: `${Number(gid)}`,
+
     };
 
     try {
-      const response = await axios.post(`${endpoint.trx_bet_placed}`, reqBody);
-      if (response?.data?.error === "200") {
-        toast(
+      const total_bet = localStorage.getItem("total_bet");
+      const arrayLength =
+        total_bet !== "undefined" && total_bet && JSON.parse(total_bet);
+      const response = await axios.post(
+        `${endpoint.k3_bet_placed_node}`,
+        reqBody
+      );
+      if (response?.data?.msg === "Bid placed Successfully") {
+        const toastID = toast(
           <SuccessCheck
-            message={
-              <span className="!text-sm">Bid Placed Successfully !</span>
-            }
-          />
+            message={<span className="!text-sm">{response?.data?.msg}</span>}
+          />,
+
+        );
+        setTimeout(() => {
+          toast.dismiss(toastID);
+        }, 1000)
+        localStorage.setItem(
+          "total_bet",
+          JSON.stringify(
+            total_bet !== "undefined" && total_bet
+              ? [
+                ...arrayLength,
+                {
+                  data: `${gid}_true_${Number(reqBody?.bet_number) <= 10
+                    ? Number(reqBody?.bet_number) - 1
+                    : reqBody?.bet_number
+                    }_${reqBody?.amount}`,
+                },
+              ]
+              : [
+                {
+                  data: `${gid}_true_${Number(reqBody?.bet_number) <= 10
+                    ? Number(reqBody?.bet_number) - 1
+                    : reqBody?.bet_number
+                    }_${reqBody?.amount}`,
+                },
+              ]
+          )
         );
         fk.setFieldValue("isSuccessPlaceBet", true);
+        localStorage.setItem(
+          "betApplied",
+          `${gid}_true_${Number(reqBody.bet_number) <= 10
+            ? Number(reqBody.bet_number) - 1
+            : reqBody.bet_number
+          }_${reqBody.amount}_${reqBody.round_no}`
+        );
         setOpen(false);
-        localStorage.setItem("betApplied", `${gid}_true`);
-        console.log(response, "This is response");
       } else {
-        toast(response?.data?.msg);
+        setOpen(false);
+        setLoding(false);
+        const toastID = toast(
+          <FalseCheck
+
+            message={<span className="!text-sm">{response?.data?.msg}</span>}
+          />,
+        );
+        setTimeout(() => {
+          toast.dismiss(toastID);
+        }, 1000)
       }
+      setLoding(false);
+      // }
     } catch (e) {
-      toast(e?.message);
-      console.log(e);
+      setOpen(false);
+      setLoding(false);
+      <FalseCheck
+        message={<span className="!text-sm">{e?.message}</span>}
+      />
     }
-    // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
-    client.refetchQueries("myAll_trx_history");
+    // client.refetchQueries("myAll_trx_history_new");
+
+    fk.setFieldValue("balance", "1");
+    fk.setFieldValue("qnt", "1");
     setLoding(false);
   }
   if (loding) return <CustomCircularProgress isLoading={loding} />;
 
-  const handleClickOpend = () => {
-    setOpend(true);
-  };
 
-  const handleClosed = () => {
-    setOpend(false);
-  };
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setSelectedNumbers([]); 
-    setOpen(false);
-    
-  };
   return (
     <Box
       sx={{
@@ -189,7 +210,7 @@ const BetNumber = ({ timing, gid }) => {
     >
 
       <div>
-         <Box
+        <Box
           sx={{
             background: "#",
             padding: "0px 0px 0px 0px",
@@ -203,7 +224,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={three}
-              onClick={() => handleNumberClick("3")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("3");
+              }}
               className="!items-center !w-14 "
             >
             </Box>
@@ -213,7 +237,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={four}
-              onClick={() => handleNumberClick("4")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("4")
+              }}
               className="!items-center !w-12"
             >
             </Box>
@@ -223,7 +250,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={five}
-              onClick={() => handleNumberClick("5")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("5")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -233,7 +263,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={six}
-              onClick={() => handleNumberClick("6")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("6")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -243,7 +276,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={seven}
-              onClick={() => handleNumberClick("7")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("7")
+              }}
               className="!items-center !w-12 ml-1"
             >
             </Box>
@@ -253,7 +289,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={eight}
-              onClick={() => handleNumberClick("8")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("8")
+              }}
               className="!items-center !w-16"
             >
             </Box>
@@ -263,7 +302,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={nine}
-              onClick={() => handleNumberClick("9")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("9")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -273,7 +315,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={ten}
-              onClick={() => handleNumberClick("10")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("10")
+              }}
               className="!items-center !w-16"
             >
             </Box>
@@ -283,7 +328,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={eleven}
-              onClick={() => handleNumberClick("11")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("11")
+              }}
               className="!items-center !w-16"
             >
             </Box>
@@ -293,7 +341,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={twelve}
-              onClick={() => handleNumberClick("12")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("12")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -303,7 +354,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={thirteen}
-              onClick={() => handleNumberClick("13")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("13")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -313,7 +367,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={fourteen}
-              onClick={() => handleNumberClick("14")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("14")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -323,7 +380,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={fifteen}
-              onClick={() => handleNumberClick("15")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("15")
+              }}
               className="!items-center !w-16"
             >
             </Box>
@@ -333,7 +393,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={sixteen}
-              onClick={() => handleNumberClick("16")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("16")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -343,7 +406,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={seventeen}
-              onClick={() => handleNumberClick("17")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("17")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -353,7 +419,10 @@ const BetNumber = ({ timing, gid }) => {
             <Box
               component="img"
               src={eighteen}
-              onClick={() => handleNumberClick("18")}
+              onClick={() => {
+                setOpen(true);
+                setSelectNumber("18")
+              }}
               className="!items-center !w-14"
             >
             </Box>
@@ -368,25 +437,37 @@ const BetNumber = ({ timing, gid }) => {
         >
           <Button
             className="!bg-[#F48901] !text-white !rounded !h-10  !text-sm !mx-1"
-            onClick={() => handleNumberClick("Big")}
+           onClick={() => {
+              setOpen(true);
+              setSelectNumber("Big")
+            }}
           >
             Big 1.92x
           </Button>
           <Button
             className="!bg-[#6da7f4] !text-white !rounded !h-10 !text-sm !mx-1"
-            onClick={() => handleNumberClick("Small")}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("Small")
+            }}
           >
             Small 1.92X
           </Button>
           <Button
             className="!bg-[#fa574a] !text-white !rounded !h-10 !text-sm !mx-1"
-            onClick={() => handleNumberClick("Odd")}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("Odd")
+            }}
           >
             Odd 1.92X
           </Button>
           <Button
             className="!bg-[#40ad72] !text-white !rounded !text-sm !h-10 !mx-1"
-            onClick={() => handleNumberClick("Even")}
+            onClick={() => {
+              setOpen(true);
+              setSelectNumber("Even")
+            }}
           >
             Even 1.92X
           </Button>
@@ -394,219 +475,435 @@ const BetNumber = ({ timing, gid }) => {
 
       </div>
 
-      {open && (
-        <div className={`drawer`} >
-          <Box>
-            <Box
+      <Drawer
 
+        open={open}
+        anchor={"bottom"}
+        sx={{
+          maxWidth: "400px !important",
+          width: "100%",
+          margin: "auto",
+          padding: "10px 0px 0px 0px",
+        }}
+
+      >
+        <Box sx={{ position: "relative" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              clipPath: "polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%)",
+              width: "120%",
+              height: "110px",
+              top: "-16px",
+              left: "-11%",
+              zIndex: "-1",
+            }}
+            className={` !cursor-pointer
+              ${selectNumber === "green" ||
+                selectNumber === "4" ||
+                selectNumber === "8" ||
+                selectNumber === "12" ||
+                selectNumber === "6" ||
+                selectNumber === "10" ||
+                selectNumber === "14" ||
+                selectNumber === "18" ||
+                selectNumber === "16"
+                ? "!bg-[#40AD72]"
+                : selectNumber === "voilet"
+                  ? "!bg-[#B659FE]"
+                  : selectNumber === "red" ||
+                    selectNumber === "3" ||
+                    selectNumber === "7" ||
+                    selectNumber === "11" ||
+                    selectNumber === "15" ||
+                    selectNumber === "5" ||
+                    selectNumber === "9" ||
+                    selectNumber === "13" ||
+                    selectNumber === "17" ||
+                    selectNumber === "8"
+                    ? "!bg-[#FD565C]"
+                    : selectNumber === "Big"
+                      ? "!bg-[#F48901]"
+                      : selectNumber === "Small"
+                        ? "!bg-[#6DA7F4]"
+                        : selectNumber === "Odd"
+                          ? "!bg-[#fa574a]"
+                          : selectNumber === "Even"
+                            ? "!bg-[#40ad72]"
+                            : selectNumber === "0"
+                              ? "!bg-[#BF6DFE]"
+                              : selectNumber === "55" && "!bg-[#BF6DFE]"
+              }
+             `}
+          >
+            {" "}
+          </Box>
+          <Box px={1}>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{ textAlign: "center", color: "white", fontWeight: "700 " }}
             >
-              {" "}
-            </Box>
-            <Box px={1}
-              className="!flex justify-start gap-2">
-              <Typography className="!mt-4">Total</Typography>
-              {selectedNumbers.map((number) => (
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={{
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "400 ",
-                  background: "#ffffff",
-                  mt: 2,
-
-                }}
-                className={` !cursor-pointer !px-2 !w-fit !rounded-full
-                 ${number === "green" ||
-                    number === "4" ||
-                    number === "8" ||
-                    number === "12" ||
-                    number === "6" ||
-                    number === "10" ||
-                    number === "14" ||
-                    number === "18" ||
-                    number === "16"
-                    ? "!bg-[#40AD72]"
-                    : number === "voilet"
-                      ? "!bg-[#B659FE]"
-                      : number === "red" ||
-                        number === "3" ||
-                        number === "7" ||
-                        number === "11" ||
-                        number === "15" ||
-                        number === "5" ||
-                        number === "9" ||
-                        number === "13" ||
-                        number === "17" ||
-                        number === "8"
-                        ? "!bg-[#FD565C]"
-                        : number === "Big"
-                          ? "!bg-[#F48901]"
-                          : number === "Small"
-                            ? "!bg-[#6da7f4]"
-                            : number === "Odd"
-                              ? "!bg-[#fa574a]"
-                              : number === "Even"
-                                ? "!bg-[#40ad72]"
-                                : number === "0"
-                                  ? "!bg-[#BF6DFE]"
-                                  : number === "5" && "!bg-[#BF6DFE]"
-                  }
-    `}
-              >
-                {isNaN(Number(number)) ? number?.toString()?.toLocaleUpperCase() : number}
-              </Typography>
-              ))}
-            </Box>
-            <Box mt={3} px={2}>
-              <Grid container >
-                <Grid item xs={4}>
-                  <Typography variant="body1" color="initial">
-                    Balance{" "}
-                  </Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Stack
-                    direction="row"
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                  >
-                    {[1, 10, 100, 1000]?.map((i) => {
-                      return (
-                        <Box
-                          onClick={() => fk.setFieldValue("balance", i)}
-                          sx={style.bacancebtn}
-                          className={`${fk.values.balance === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
-
-                        >
-                          {i}
-                        </Box>
-                      );
-                    })}
-                  </Stack>
-                </Grid>
+              K3 {gid == 3 ? 5 : gid == 2 ? 3 : gid} Min
+            </Typography>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{
+                textAlign: "center",
+                color: "black",
+                fontWeight: "400 ",
+                background: "#ffffff",
+                mt: 1,
+                borderRadius: "5px",
+              }}
+            >
+              Select{" "}
+               { isNaN(Number(selectNumber))
+                  ? selectNumber?.toString()?.toLocaleUpperCase()
+                  : Number(selectNumber) <= 10
+                    ? `: ${selectNumber} Small`
+                    : ` : ${selectNumber} Big`} 
+            </Typography>
+          </Box>
+          <Box mt={5} px={2}>
+            <Grid container mt={10}>
+              <Grid item xs={4}>
+                <Typography variant="body1" color="initial">
+                  Balance{" "}
+                </Typography>
               </Grid>
-              <Grid container mt={2}>
-                <Grid item xs={4}>
-                  <Typography variant="body1" color="initial">
-                    Quantity{" "}
-                  </Typography>
-                </Grid>
-                <Grid item xs={8}>
-                  <Stack
-                    direction="row"
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                  >
-                    <Box
-                      sx={style.addsumbtn}
-                      onClick={() =>
-                        fk.setFieldValue(
-                          "qnt",
-                          Number(fk.values.qnt) - 1 < 1
-                            ? 1
-                            : Number(fk.values.qnt) - 1
-                        )
-                      }
-                      className={`!bg-[#F48901]  cursor-pointer `}
-
-                    >
-                      -
-                    </Box>
-                    <TextField value={fk.values.qnt} className="inputamt" />
-                    <Box
-                      sx={style.addsumbtn}
-                      onClick={() =>
-                        fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
-                      }
-                      className={`!bg-[#F48901]  cursor-pointer px-2 text-white`}
-
-                    >
-                      +
-                    </Box>
-                  </Stack>
-                </Grid>
-              </Grid>
-              <Grid container mt={2} mx={1.5}>
-                <Grid item xs={1}></Grid>
-                <Grid item xs={12}>
-                  <Stack
-                    direction="row"
-                    alignItems={"center"}
-                    justifyContent={"end"}
-                  >
-                    {[1, 5, 10, 20, 50, 100]?.map((i) => {
-                      return (
-                        <Box
-                          onClick={() => fk.setFieldValue("qnt", i)}
-                          sx={style.bacancebtn2}
-                          className={`${fk.values.qnt === i ? "!bg-[#F48901]" : "!bg-gray-400"}  cursor-pointer`}
-                        >
-                          X{i}
-                        </Box>
-                      );
-                    })}
-                  </Stack>
-                </Grid>
-              </Grid>
-            </Box>
-            <Grid container mt={2}>
-              <Grid item xs={12}>
-                <Stack direction="row" alignItems="center">
-                  <Checkbox checked />{" "}
-                  <Typography
-                    variant="body1"
-                    color="initial"
-                    sx={{ color: "gray", fontSize: "14px" }}
-                  >
-                    I agree
-                  </Typography>
-                  <NavLink onClick={handleClickOpend}>
-                    <Typography
-                      component="a"
-                      sx={{
-                        color: `${theme.palette.primary.main} !important`,
-                        cursor: "pointer",
-                        fontSize: "14px",
-                      }}
-                    >
-                      《Pre-sale rules》
-                    </Typography>
-                  </NavLink>
+              <Grid item xs={8}>
+                <Stack
+                  direction="row"
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
+                >
+                  {[1, 10, 100, 1000]?.map((i) => {
+                    return (
+                      <Box
+                        onClick={() => fk.setFieldValue("balance", i)}
+                        sx={style.bacancebtn}
+                        className={` !cursor-pointer !text-black bg-gray-200 
+                          ${(selectNumber === "green" ||
+                            selectNumber === "4" ||
+                            selectNumber === "8" ||
+                            selectNumber === "12" ||
+                            selectNumber === "6" ||
+                            selectNumber === "10" ||
+                            selectNumber === "14" ||
+                            selectNumber === "18" ||
+                            selectNumber === "16") &&
+                            String(fk?.values?.balance) === String(i)
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "voilet" &&
+                              String(fk?.values?.balance) === String(i)
+                              ? "!bg-[#B659FE]"
+                              : (selectNumber === "red" ||
+                                selectNumber === "3" ||
+                                selectNumber === "7" ||
+                                selectNumber === "11" ||
+                                selectNumber === "15" ||
+                                selectNumber === "5" ||
+                                selectNumber === "9" ||
+                                selectNumber === "13" ||
+                                selectNumber === "17" ||
+                                selectNumber === "8") &&
+                                String(fk?.values?.balance) === String(i)
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "Small" &&
+                                  String(fk?.values?.balance) === String(i)
+                                  ? "!bg-[#6DA7F4]"
+                                  : selectNumber === "Big" &&
+                                    String(fk?.values?.balance) === String(i)
+                                    ? "!bg-[#F48901]"
+                                    : selectNumber === "0" &&
+                                      String(fk?.values?.balance) === String(i)
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "Odd" &&
+                                        String(fk?.values?.balance) === String(i)
+                                        ? "!bg-[#fa574a]"
+                                        : selectNumber === "Even" &&
+                                          String(fk?.values?.balance) === String(i)
+                                          ? "!bg-[#40ad72]"
+                                          : selectNumber === "5" &&
+                                          String(fk?.values?.balance) === String(i) &&
+                                          "!bg-[#BF6DFE]"
+                          }
+                       `}
+                      >
+                        {i}
+                      </Box>
+                    );
+                  })}
                 </Stack>
               </Grid>
             </Grid>
             <Grid container mt={2}>
               <Grid item xs={4}>
-                <Button
-                  variant="contained"
-                  sx={style.cancelbtn}
-                  onClick={handleClose}
-                >
-                  Cancel
-                </Button>
+                <Typography variant="body1" color="initial">
+                  Quantity{" "}
+                </Typography>
               </Grid>
               <Grid item xs={8}>
-                <Button
-                  className={`!bg-[#F48901]
-           !cursor-pointer`}
-                  variant="contained"
-                  sx={style.submitbtn}
-                  onClick={() => {
-                    fk.handleSubmit();
-                  }}
+                <Stack
+                  direction="row"
+                  alignItems={"center"}
+                  justifyContent={"space-between"}
                 >
-                  Total amount ₹{" "}
-                  {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
-                </Button>
+                  <Box
+                    className={` !cursor-pointer
+                      ${selectNumber === "green" ||
+                        selectNumber === "4" ||
+                        selectNumber === "8" ||
+                        selectNumber === "12" ||
+                        selectNumber === "6" ||
+                        selectNumber === "10" ||
+                        selectNumber === "14" ||
+                        selectNumber === "18" ||
+                        selectNumber === "16"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
+                          ? "!bg-[#B659FE]"
+                          : selectNumber === "red" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "11" ||
+                            selectNumber === "15" ||
+                            selectNumber === "5" ||
+                            selectNumber === "9" ||
+                            selectNumber === "13" ||
+                            selectNumber === "17" ||
+                            selectNumber === "8"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "Big"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "Small"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "Odd"
+                                  ? "!bg-[#fa574a]"
+                                  : selectNumber === "Even"
+                                    ? "!bg-[#40ad72]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "55" && "!bg-[#BF6DFE]"
+                      }
+                     `}
+                    sx={style.addsumbtn}
+                    onClick={() =>
+                      fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
+                    }
+                  >
+                    -
+                  </Box>
+                  <TextField
+                    id="qnt"
+                    name="qnt"
+                    value={fk.values.qnt}
+                    onChange={fk.handleChange}
+                    className="inputamt"
+                  />
+                  <Box
+                    className={` !cursor-pointer
+                     ${selectNumber === "green" ||
+                        selectNumber === "4" ||
+                        selectNumber === "8" ||
+                        selectNumber === "12" ||
+                        selectNumber === "6" ||
+                        selectNumber === "10" ||
+                        selectNumber === "14" ||
+                        selectNumber === "18" ||
+                        selectNumber === "16"
+                        ? "!bg-[#40AD72]"
+                        : selectNumber === "voilet"
+                          ? "!bg-[#B659FE]"
+                          : selectNumber === "red" ||
+                            selectNumber === "3" ||
+                            selectNumber === "7" ||
+                            selectNumber === "11" ||
+                            selectNumber === "15" ||
+                            selectNumber === "5" ||
+                            selectNumber === "9" ||
+                            selectNumber === "13" ||
+                            selectNumber === "17" ||
+                            selectNumber === "8"
+                            ? "!bg-[#FD565C]"
+                            : selectNumber === "Big"
+                              ? "!bg-[#F48901]"
+                              : selectNumber === "Small"
+                                ? "!bg-[#6DA7F4]"
+                                : selectNumber === "Odd"
+                                  ? "!bg-[#fa574a]"
+                                  : selectNumber === "Even"
+                                    ? "!bg-[#40ad72]"
+                                    : selectNumber === "0"
+                                      ? "!bg-[#BF6DFE]"
+                                      : selectNumber === "55" && "!bg-[#BF6DFE]"
+                      }
+                    `}
+                    sx={style.addsumbtn}
+                    onClick={() =>
+                      fk.setFieldValue("qnt", Number(fk.values.qnt) + 1)
+                    }
+                  >
+                    +
+                  </Box>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Grid container mt={2}>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={12}>
+                <Stack
+                  direction="row"
+                  alignItems={"center"}
+                  justifyContent={"end"}
+                >
+                  {[1, 5, 10, 20, 50, 100]?.map((i) => {
+                    return (
+                      <Box
+                        onClick={() => fk.setFieldValue("qnt", i)}
+                        sx={style.bacancebtn2}
+
+                        className={` !cursor-pointer bg-gray-500
+                          ${(selectNumber === "green" ||
+                            selectNumber === "4" ||
+                            selectNumber === "8" ||
+                            selectNumber === "12" ||
+                            selectNumber === "6" ||
+                            selectNumber === "10" ||
+                            selectNumber === "14" ||
+                            selectNumber === "18" ||
+                            selectNumber === "16") &&
+                            String(fk.values.qnt) === String(i)
+                            ? "!bg-[#40AD72]"
+                            : selectNumber === "0" &&
+                              String(fk.values.qnt) === String(i)
+                              ? "!bg-[#BF6DFE]"
+                              : (selectNumber === "red" ||
+                                selectNumber === "3" ||
+                                selectNumber === "7" ||
+                                selectNumber === "11" ||
+                                selectNumber === "15" ||
+                                selectNumber === "5" ||
+                                selectNumber === "9" ||
+                                selectNumber === "13" ||
+                                selectNumber === "17" ||
+                                selectNumber === "8") &&
+                                String(fk.values.qnt) === String(i)
+                                ? "!bg-[#FD565C]"
+                                : selectNumber === "Big" &&
+                                  String(fk.values.qnt) === String(i)
+                                  ? "!bg-[#F48901]"
+                                  : selectNumber === "Small" &&
+                                    String(fk.values.qnt) === String(i)
+                                    ? "!bg-[#6DA7F4]"
+                                    : selectNumber === "Odd"
+                                      ? "!bg-[#fa574a]"
+                                      : selectNumber === "Even"
+                                        ? "!bg-[#40ad72]"
+                                        : selectNumber === "55" &&
+                                        String(fk.values.qnt) === String(i) &&
+                                        "!bg-[#BF6DFE]"
+                          }`}
+                      >
+                        X{i}
+                      </Box>
+                    );
+                  })}
+                </Stack>
               </Grid>
             </Grid>
           </Box>
-        </div>
-
-      )}
-
+          <Grid container mt={2}>
+            <Grid item xs={12}>
+              <Stack direction="row" alignItems="center">
+                <Checkbox checked />{" "}
+                <Typography
+                  variant="body1"
+                  color="initial"
+                  sx={{ color: "gray", fontSize: "14px" }}
+                >
+                  I agree
+                </Typography>
+                <Typography
+                  component="a"
+                  sx={{
+                    color: `${theme.palette.primary.main} !important`,
+                    cursor: "pointer",
+                    fontSize: "14px",
+                  }}
+                >
+                  《Pre-sale rules》
+                </Typography>
+              </Stack>
+            </Grid>
+          </Grid>
+          <Grid container mt={2}>
+            <Grid item xs={4}>
+              <Button
+                variant="contained"
+                sx={style.cancelbtn}
+                onClick={() => {
+                  fk.setFieldValue("balance", "1");
+                  setOpen(false);
+                }}
+              >
+                Cancel
+              </Button>
+            </Grid>
+            <Grid item xs={8}>
+              <Button
+                className={` !cursor-pointer
+                  ${selectNumber === "green" ||
+                   selectNumber === "4" ||
+                   selectNumber === "8" ||
+                   selectNumber === "12" ||
+                   selectNumber === "6" ||
+                   selectNumber === "10" ||
+                   selectNumber === "14" ||
+                   selectNumber === "18" ||
+                   selectNumber === "16"
+                     ? "!bg-[#40AD72]"
+                     : selectNumber === "voilet"
+                       ? "!bg-[#B659FE]"
+                       : selectNumber === "red" ||
+                       selectNumber === "3" ||
+                       selectNumber === "7" ||
+                       selectNumber === "11" ||
+                       selectNumber === "15" ||
+                       selectNumber === "5" ||
+                       selectNumber === "9" ||
+                       selectNumber === "13" ||
+                       selectNumber === "17" ||
+                       selectNumber === "8"
+                         ? "!bg-[#FD565C]"
+                         : selectNumber === "Big"
+                           ? "!bg-[#F48901]"
+                           : selectNumber === "Small"
+                             ? "!bg-[#6DA7F4]"
+                             : selectNumber === "Odd"
+                             ? "!bg-[#fa574a]"
+                             : selectNumber === "Even"
+                               ? "!bg-[#40ad72]"
+                             : selectNumber === "0"
+                               ? "!bg-[#BF6DFE]"
+                               : selectNumber === "55" && "!bg-[#BF6DFE]"
+                   }
+                 `}
+                variant="contained"
+                sx={style.submitbtn}
+                onClick={() => {
+                  fk.handleSubmit();
+                }}
+              >
+                Total amount ₹{" "}
+                {Number(fk.values.balance || 1) * Number(fk.values.qnt || 1)}
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+      </Drawer>
       <Dialog
         sx={{
           maxWidth: "400px !important",
@@ -617,7 +914,7 @@ const BetNumber = ({ timing, gid }) => {
         }}
         open={opend}
       >
-        <Howtoplay />
+        {/* <Howtoplay />
         <DialogActions sx={{ margin: "auto", width: "100%" }}>
           <Button
             disableElevation
@@ -633,7 +930,7 @@ const BetNumber = ({ timing, gid }) => {
           >
             I Know
           </Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </Box>
   );

@@ -8,13 +8,12 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import countdownfirst from "../../../assets/images/countdownfirst.mp3";
 import countdownlast from "../../../assets/images/countdownlast.mp3";
 import timerbg1 from "../../../assets/images/timerbg.png";
 import timerbg2 from "../../../assets/images/timerbg2.png";
-import { dummycounterFun } from "../../../redux/slices/counterSlice";
 import { useSocket } from "../../../shared/socket/SocketContext";
 import BetNumber from "../BetNumber";
 import Chart from "../history/Chart";
@@ -25,26 +24,38 @@ import Same2 from "./Same2";
 import Same3 from "./Same3";
 import Different from "./Different";
 import Howtoplay from "./Howtoplay";
+import {
+  k3_HistoryFn,
+} from "../../../services/apiCallings";
+import {
+  dummycounterFun,
+  gameHistory_trx_one_minFn,
+  myHistory_trx_one_minFn,
+  trx_game_image_index_function,
+  updateNextCounter,
+} from "../../../redux/slices/counterSlice";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
-////
+import { endpoint } from "../../../services/urls";
+
 function K31Min() {
   const [open, setOpen] = useState(false);
   const socket = useSocket();
   const dispatch = useDispatch();
   const [value, setValue] = useState(1);
-  const [bettype, setbettype] = useState(1);
   const [one_min_time, setOne_min_time] = useState(0);
   const show_this_one_min_time = String(one_min_time).padStart(2, "0");
   const audioRefMusic = React.useRef(null);
   const audioRefMusiclast = React.useRef(null);
   const client = useQueryClient();
   const next_step = useSelector((state) => state.aviator.next_step);
-
+  const [bettype, setbettype] = useState(1);
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-
+  const handleChangebet = (newValue) => {
+    setbettype(newValue);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -84,10 +95,10 @@ function K31Min() {
       localStorage.setItem("anand_re", result);
       // dispatch(dummycounterFun());
     };
-    socket.on("onemintrx", handleOneMin);
+    socket.on("onemink3lottery", handleOneMin);
     socket.on("result", handleOneMinResult);
     return () => {
-      socket.off("onemintrx", handleOneMin);
+      socket.off("onemink3lottery", handleOneMin);
       socket.off("result", handleOneMinResult);
     };
   }, []);
@@ -146,6 +157,8 @@ function K31Min() {
   // }, [game_history?.data?.data]);
 
 
+
+
   const handlePlaySoundLast = async () => {
     try {
       if (audioRefMusiclast?.current?.pause) {
@@ -158,6 +171,42 @@ function K31Min() {
       console.error("Error during play:", error);
     }
   };
+  
+  const { isLoading: myhistory_loding_all, data: my_history_all } = useQuery(
+    ["k3_history"],
+    () => k3_HistoryFn("1"),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      // retry: false,
+      // retryOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+ 
+
+  React.useEffect(() => {
+    const allEarnings = my_history_all?.data?.data;
+   
+
+    console.log("my_history_all:", allEarnings);
+    
+
+    if (Array.isArray(allEarnings) && allEarnings.length > 0) {
+      if (Array.isArray(allEarnings)) {
+        dispatch(myHistory_trx_one_minFn([...allEarnings]));
+      } else {
+        dispatch(myHistory_trx_one_minFn(allEarnings));
+      }
+    } else if (Array.isArray()) {
+      dispatch(myHistory_trx_one_minFn());
+    }
+
+    if (allEarnings?.[0]?.tr_status !== "Pending") {
+      dispatch(dummycounterFun());
+    }
+  }, []);
+
   const handlePlaySound = async () => {
     try {
       if (audioRefMusic?.current?.pause) {
@@ -174,9 +223,7 @@ function K31Min() {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  const handleChangebet = (newValue) => {
-    setbettype(newValue);
-  };
+
 
   return (
     <Box

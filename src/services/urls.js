@@ -1,5 +1,5 @@
 // export const domain = "https://trx-timer-zupeeter-7o9k.onrender.com/";
-export const domain = "https://zupeeter-timer.onrender.com/";
+// export const domain = "https://zupeeter-timer.onrender.com/"; working
 
 export const domain_ovi_node = "https://api.zupeeter.com";
 // export const domain_ovi_node = "https://zupeegame.info"
@@ -8,7 +8,9 @@ export const domain_ovi_node = "https://api.zupeeter.com";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
-// export const baseUrl = "min.righttime.fun";
+export const domain = "http://192.168.18.183:9000";
+// export const baseUrl = "http://192.168.18.183:9000";
+
 // export const baseUrl = "https://webs.ferryinfotech.in";
 export const baseUrl = "https://admin.zupeeter.com/public";
 export const front_end_domain = "https://zupeeter.com";
@@ -74,6 +76,9 @@ export const endpoint = {
   payin_status: `${baseUrl}/api/payin_api`,
   swnl_pay_in_api: `${baseUrl}/api/insert_fund_request_vapayout`,
 
+//k3api
+   k3_bet_placed_node:`${domain}/api/v1/bid-placed-node`,
+   k3_my_history: `${domain}/api/v1/k3-my-history`,
   /////////////// laravel
 
   // trx_bet_placed_node: `${baseUrl}/api/Trx_bet`,

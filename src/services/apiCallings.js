@@ -429,3 +429,17 @@ export const showRank =  (num) => {
    else if(Number(num)===5)
     return "Director Club"
 }
+
+export const k3_HistoryFn = async (gid) => {
+  try {
+    const reqBody = {
+      userid: localStorage.getItem("user_id"),
+      gameid: gid,
+    };
+    const response = await axios.post(`${endpoint.k3_my_history}`, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
