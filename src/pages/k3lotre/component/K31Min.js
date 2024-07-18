@@ -85,7 +85,7 @@ function K31Min() {
       }
       if (onemin === 57) {
         client.refetchQueries("wallet_amount");
-        // client.refetchQueries("myAll_trx_history_new");
+         client.refetchQueries("k3_history");
       }
       if (onemin === 58){
         // client.refetchQueries("trx_gamehistory");
@@ -247,7 +247,7 @@ function K31Min() {
 
         >
              <CustomCircularProgress
-              // isLoading={myhistory_loding_all}
+              isLoading={myhistory_loding_all}
                />
         
           <Box

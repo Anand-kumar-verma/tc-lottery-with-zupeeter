@@ -189,7 +189,7 @@ const BetNumber = ({ timing, gid }) => {
       />
     }
     client.refetchQueries("wallet_amount");
-    // client.refetchQueries("myAll_trx_history_new");
+     client.refetchQueries("k3_history");
 
     fk.setFieldValue("balance", "1");
     fk.setFieldValue("qnt", "1");
