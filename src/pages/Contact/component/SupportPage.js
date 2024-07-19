@@ -15,8 +15,6 @@ import banner6 from '../../../assets/images/banner2.jpg';
 import banner7 from '../../../assets/images/banner7.jpg';
 import banner8 from '../../../assets/images/banner4.jpg';
 import banner9 from '../../../assets/images/banner9.png';
-import logo from '../../../assets/images/logo2.png';
-
 
 const SupportPage = () => {
   const [open, setOpen] = useState(false);

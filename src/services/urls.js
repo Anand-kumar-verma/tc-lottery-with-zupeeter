@@ -81,11 +81,9 @@ export const endpoint = {
   // trx_my_history_new: `${baseUrl}/api/trx_one_min_myhistory_new`, /// done  in node js
 
   // ovi panel api's
-  trx_bet_placed_node:`${domain_ovi_node}/bid-placed-node`,
+  trx_bet_placed_node: `${domain_ovi_node}/bid-placed-node`,
   trx_game_history: `${domain_ovi_node}/trx_result-node`, //////// done in node js
   trx_my_history_new: `${domain_ovi_node}/trx-my-history-node`, /// done  in node js
-
-
 
   //////// testing only
   // trx_testing: `${domain_ovi_node}/trx_result-node-test`,
