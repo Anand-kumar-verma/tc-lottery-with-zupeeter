@@ -31,9 +31,9 @@ export default function Tables() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   const TeamLevelData = async (member_id) => {
@@ -181,9 +181,16 @@ export default function Tables() {
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Total Bet
                   </TableCell>
-                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    Total Deposit
-                  </TableCell>
+
+                  {Number(member_id) === 1 ? (
+                    <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                      Total Active Team
+                    </TableCell>
+                  ) : (
+                    <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                      Total Deposit
+                    </TableCell>
+                  )}
                 </TableRow>
               </TableHead>
               <TableBody
@@ -216,7 +223,9 @@ export default function Tables() {
                         {i?.today_bet}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.today_dep}
+                        {Number(member_id) === 1
+                          ? i?.active_team
+                          : i?.today_dep}
                       </TableCell>
                     </TableRow>
                   );

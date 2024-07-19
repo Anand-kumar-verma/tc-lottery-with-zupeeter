@@ -127,7 +127,6 @@ function Dashboard() {
     "https://mui.com/static/images/avatar/5.jpg",
   ];
 
-
   return (
     <Layout>
       <CustomCircularProgress isLoading={isLoading} />
@@ -406,7 +405,10 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {i?.or_m_user_id}
+                  <p className="!flex !flex-col">
+                    <span>{i?.or_m_user_id}</span>
+                    <span>{i?.or_m_name}</span>
+                  </p>
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -475,15 +477,7 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    {res?.[1]?.i?.or_m_email
-                      ? res?.[1]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
-                        "**" +
-                        (res?.[1]?.i?.or_m_email?.split("@")[0].length > 2
-                          ? res?.[1]?.i?.or_m_email
-                              ?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
-                      : "**"}
+                    {"**"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -521,15 +515,7 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    {res?.[0]?.i?.or_m_email
-                      ? res?.[0]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
-                        "**" +
-                        (res?.[0]?.i?.or_m_email?.split("@")[0].length > 2
-                          ? res?.[0]?.i?.or_m_email
-                              ?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
-                      : "**"}
+                    {"**"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -568,15 +554,7 @@ function Dashboard() {
                 ></Box>
                 <Box sx={style.winner2amt}>
                   <Typography variant="body1" color="initial">
-                    {res?.[2]?.i?.or_m_email
-                      ? res?.[2]?.i?.or_m_email?.split("@")[0].substring(0, 2) +
-                        "**" +
-                        (res?.[2]?.i?.or_m_email?.split("@")[0].length > 2
-                          ? res?.[2]?.i?.or_m_email
-                              ?.split("@")[0]
-                              .substring(2, 4)
-                          : "")
-                      : "**"}
+                    {"**"}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -614,7 +592,10 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {i?.or_m_user_id}
+                   <p className="!flex !flex-col">
+                    <span>{i?.or_m_user_id}</span>
+                    <span>{i?.or_m_name}</span>
+                  </p>
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
@@ -677,7 +658,10 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                  {i?.or_m_user_id}
+                  <p className="!flex !flex-col">
+                    <span>{i?.or_m_user_id}</span>
+                    <span>{i?.or_m_name}</span>
+                  </p>
                 </Typography>
                 <Box sx={style.winnerbannerouter}>
                   <Box
