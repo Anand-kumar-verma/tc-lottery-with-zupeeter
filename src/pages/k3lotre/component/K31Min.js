@@ -36,6 +36,8 @@ import {
 } from "../../../redux/slices/counterSlice";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import { endpoint } from "../../../services/urls";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 function K31Min() {
   const [open, setOpen] = useState(false);
@@ -85,7 +87,7 @@ function K31Min() {
       }
       if (onemin === 57) {
         client.refetchQueries("wallet_amount");
-         client.refetchQueries("k3_history");
+        //  client.refetchQueries("k3_history");
       }
       if (onemin === 58){
         // client.refetchQueries("trx_gamehistory");
@@ -103,58 +105,57 @@ function K31Min() {
     };
   }, []);
 
-  // const { isLoading, data: game_history } = useQuery(
-  //   ["trx_gamehistory"],
-  //   () => GameHistoryFn("1"),
-  //   {
-  //     refetchOnMount: false,
-  //     refetchOnReconnect: false,
-  //     retry: false,
-  //     retryOnMount: false,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const { isLoading, data:game_history } = useQuery(
+    ["k3_gamehistory"],
+    () => GameHistoryFn("1"),
+    {
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  // const GameHistoryFn = async (gid) => {
-  //   try {
-  //     const reqBody = {
-  //       gameid: gid,
-  //       limit: 100,
-  //     };
-  //     const response = await axios.post(
-  //       `${endpoint.trx_game_history}`,
-  //       reqBody
-  //     );
-  //     return response;
-  //   } catch (e) {
-  //     toast(e?.message);
-  //     console.log(e);
-  //   }
-  // };
+  const GameHistoryFn = async (gid) => {
+    try {
+      const reqBody = {
+        gameid: gid,
+        limit: 100,
+      };
+      const response = await axios.post(
+        `${endpoint.k3_game_history}`,
+        reqBody
+      );
+      return response;
+    } catch (e) {
+      toast(e?.message);
+      console.log(e);
+    }
+  };
 
-  // // const game_history = []
 
-  // React.useEffect(() => {
-  //   dispatch(
-  //     updateNextCounter(
-  //       game_history?.data?.data
-  //         ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
-  //         : 1
-  //     )
-  //   );
-  //   const tr_digit =
-  //     game_history?.data?.data && game_history?.data?.data?.[0]?.tr_digits;
-  //   let array = [];
-  //   for (let i = 0; i < tr_digit?.length; i++) {
-  //     if (/[a-zA-Z]/.test(tr_digit[i])) {
-  //       array.push(tr_digit[i].toUpperCase());
-  //     } else {
-  //       array.push(tr_digit[i]);
-  //     }
-  //   }
-  //   dispatch(trx_game_image_index_function(array));
-  //   dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
-  // }, [game_history?.data?.data]);
+  React.useEffect(() => {
+    dispatch(
+      updateNextCounter(
+        game_history?.data?.data
+          ? Number(game_history?.data?.data?.[0]?.k3_gamesno) + 1
+          : 1
+      )
+    );
+    const tr_digit =
+      game_history?.data?.data && game_history?.data?.data?.[0]?.tr_digits;
+    let array = [];
+    for (let i = 0; i < tr_digit?.length; i++) {
+      if (/[a-zA-Z]/.test(tr_digit[i])) {
+        array.push(tr_digit[i].toUpperCase());
+      } else {
+        array.push(tr_digit[i]);
+      }
+    }
+    dispatch(trx_game_image_index_function(array));
+    dispatch(gameHistory_trx_one_minFn(game_history?.data?.data));
+  }, [game_history?.data?.data]);
 
 
 
@@ -202,7 +203,7 @@ function K31Min() {
       dispatch(myHistory_trx_one_minFn());
     }
 
-    if (allEarnings?.[0]?.tr_status !== "Pending") {
+    if (allEarnings?.[0]?.status !== "Pending") {
       dispatch(dummycounterFun());
     }
   }, []);

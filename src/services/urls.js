@@ -79,7 +79,10 @@ export const endpoint = {
 //k3api
    k3_bet_placed_node:`${domain}/api/v1/bid-placed-node`,
    k3_my_history: `${domain}/api/v1/k3-my-history`,
-  /////////////// laravel
+   k3_game_history: `${domain}/api/v1/trx_result-node`,
+   k3_top_one: `${domain}/api/v1//trx_result-node-top-one`,
+  
+   /////////////// laravel
 
   // trx_bet_placed_node: `${baseUrl}/api/Trx_bet`,
   // trx_game_history: `${baseUrl}/api/trx_result`, //////// done in node js

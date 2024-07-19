@@ -23,17 +23,24 @@ import {
 } from "../../../redux/slices/counterSlice";
 import { endpoint } from "../../../services/urls";
 import theme from "../../../utils/theme";
-import d1 from "../../../assets/images/r1.png"
-import d2 from "../../../assets/images/r6.png"
+import d1 from "../../../assets/images/r6.png"
+import d2 from "../../../assets/images/r2.png"
 import d3 from "../../../assets/images/r5.png"
+import d4 from "../../../assets/images/r4.png"
+import d5 from "../../../assets/images/r3.png"
+import d6 from "../../../assets/images/r1.png"
 
 const Chart = ({ gid }) => {
   const dispatch = useDispatch();
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const navigate = useNavigate();
+
+  const imgageArray = [
+    d1, d2, d3, d4, d5, d6
+  ]
   const { isLoading, data: game_history } = useQuery(
-    ["trx_gamehistory", gid],
+    ["k3_gamehistory", gid],
     () => GameHistoryFn(gid),
     {
       refetchOnMount: false,
@@ -48,7 +55,7 @@ const Chart = ({ gid }) => {
         limit: 100,
       };
       const response = await axios.post(
-        `${endpoint.trx_game_history}`,
+        `${endpoint.k3_game_history}`,
         reqBody
       );
       return response;
@@ -67,13 +74,13 @@ const Chart = ({ gid }) => {
   React.useEffect(() => {
     console.log(
       game_history?.data?.data
-        ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+        ? Number(game_history?.data?.data?.[0]?.k3_gamesno) + 1
         : 1
     );
     dispatch(
       updateNextCounter(
         game_history?.data?.data
-          ? Number(game_history?.data?.data?.[0]?.tr_transaction_id) + 1
+          ? Number(game_history?.data?.data?.[0]?.k3_gamesno) + 1
           : 1
       )
     );
@@ -148,7 +155,7 @@ const Chart = ({ gid }) => {
                 }}
                 className="!text-sm  !pr-0 !pl-1"
               >
-               Result
+                Result
               </TableCell>
               <TableCell
                 sx={{
@@ -163,7 +170,7 @@ const Chart = ({ gid }) => {
             </TableRow>
           </TableHead>
           <TableBody
-        
+
             sx={{
               "&>tr>td": { padding: "10px 5px", border: "none" },
               "&>tr": { borderBottom: "1px solid #ced4d7" },
@@ -175,24 +182,32 @@ const Chart = ({ gid }) => {
                   <TableCell
                     sx={{ verticalAlign: "bottom", textAlign: "center" }}
                   >
-                    <p className="text-black my-4">{i?.tr_transaction_id}</p>
+                    <p className="text-black my-4">{i?.k3_gamesno}</p>
                   </TableCell>
-                <TableCell
+                  <TableCell
                     sx={{ verticalAlign: "bottom", textAlign: "center" }}
                   >
                     <div className="flex justify-center gap-4 my-4">
-                      <img src={d1} alt="" className="w-5"/>
-                      <img src={d2} alt=""  className="w-5"/>
-                      <img src={d3} alt="" className="w-5"/>
+                      <img src={imgageArray[Number(String(i?.k3_dies_result)?.[0]) - 1]} alt="" className="w-5" />
+                      <img src={imgageArray[Number(String(i?.k3_dies_result)?.[1]) - 1]} alt="" className="w-5" />
+                      <img src={imgageArray[Number(String(i?.k3_dies_result)?.[2]) - 1]} alt="" className="w-5" />
                     </div>
 
                   </TableCell>
                   <TableCell sx={{ verticalAlign: "top", textAlign: "center" }}>
                     <div className="flex justify-center gap-2">
                       <span className="text-black my-4">
-                       2 same number
+                        {
+                          i?.k3_dies_result.toString().length === new Set(i?.k3_dies_result.toString()).size
+                            ? "No Same Numbers"
+                            : new Set(i?.k3_dies_result.toString()).size === 2
+                              ? "2 Same Numbers "
+                              : new Set(i?.k3_dies_result.toString()).size === 1
+                                ? "3 Same Numbers  "
+                                : ""
+                        }
                       </span>
-                     
+
                     </div>
                   </TableCell>
                 </TableRow>

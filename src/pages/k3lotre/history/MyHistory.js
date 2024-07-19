@@ -9,6 +9,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import { rupees, zubgback } from "../../../services/urls";
 import { k3_HistoryFn } from "../../../services/apiCallings";
+import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 
 const MyHistory = ({ gid }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -113,7 +114,7 @@ const MyHistory = ({ gid }) => {
                       Contract Money
                     </span>
                     <span className="bg-white !bg-opacity-10 py-1 px-2 ">
-                      {Number(i?.commission || 0).toFixed(2)}
+                      {Number(i?.amount || 0).toFixed(2)}
                     </span>
                     <span className="bg-white !bg-opacity-10 py-1 px-2 ">
                       Contract Count
@@ -132,22 +133,22 @@ const MyHistory = ({ gid }) => {
                     </span>
                     <span className="bg-white !bg-opacity-10 py-1 px-2 ">
                       {(
-                        Number(i?.amount || 0) - Number(i?.tr_pv || 0)
+                        Number(i?.commission || 0) 
                       ).toFixed(2)}
                     </span>
-                    <span className="bg-white !bg-opacity-10 py-1 px-2 ">
+                    {/* <span className="bg-white !bg-opacity-10 py-1 px-2 ">
                       Open Price
                     </span>
                     <span className="bg-white !bg-opacity-10 py-1 px-2 ">
                       {i?.gamesno}
-                    </span>
+                    </span> */}
                     <span className="bg-white !bg-opacity-10 py-1 px-2 ">
                       Result
                     </span>
 
                     {i?.status !== "0" ? (
                       <div className="flex gap-2 items-center bg-white !bg-opacity-10 py-1 px-2">
-                        <span  className={` !cursor-pointer
+                        <span className={` !cursor-pointer
                        ${i?.color === "green" ||
                             i?.color === "4" ||
                             i?.color === "8" ||
@@ -183,9 +184,46 @@ const MyHistory = ({ gid }) => {
                                           ? "!bg-[#40ad72]"
                                           : i?.color === "" && "!bg-[#BF6DFE]"
                           }
-             transparentColor font-bold `}>{`${i?.result}`}</span>
+                         transparentColor font-bold  text-xl `}>{`${i?.result}`}</span>
 
-                        <span >{i?.result - 1 <= 10 ? "Small" : "Big"}</span>
+                        <span className={` !cursor-pointer
+                       ${i?.color === "green" ||
+                            i?.color === "4" ||
+                            i?.color === "8" ||
+                            i?.color === "12" ||
+                            i?.color === "6" ||
+                            i?.color === "10" ||
+                            i?.color === "14" ||
+                            i?.color === "18" ||
+                            i?.color === "16"
+                            ? "!bg-[#40AD72]"
+                            : i?.color === "voilet"
+                              ? "!bg-[#B659FE]"
+                              : i?.color === "red" ||
+                                i?.color === "3" ||
+                                i?.color === "7" ||
+                                i?.color === "11" ||
+                                i?.color === "15" ||
+                                i?.color === "5" ||
+                                i?.color === "9" ||
+                                i?.color === "13" ||
+                                i?.color === "17" ||
+                                i?.color === "8"
+                                ? "!bg-[#FD565C]"
+                                : i?.color === "Big"
+                                  ? "!bg-[#F48901]"
+                                  : i?.color === "Small"
+                                    ? "!bg-[#6DA7F4]"
+                                    : i?.color === "Odd"
+                                      ? "!bg-[#fa574a]"
+                                      : i?.color === "Even"
+                                        ? "!bg-[#40ad72]"
+                                        : i?.color === "22"
+                                          ? "!bg-[#40ad72]"
+                                          : i?.color === "" && "!bg-[#BF6DFE]"
+                          }
+                         transparentColor font-bold  text-xl `}>
+                          {i?.color && i.color.charAt(0).toUpperCase() + i.color.slice(1)}</span>
                       </div>
                     ) : (
                       <div></div>
@@ -231,10 +269,10 @@ const MyHistory = ({ gid }) => {
                                           ? "!bg-[#40ad72]"
                                           : i?.color === "" && "!bg-[#BF6DFE]"
                           }
-             transparentColor font-bold text-xl`}>
-                   {i?.number} {" "}
-                  {i?.color && i.color.charAt(0).toUpperCase() + i.color.slice(1)}</span>
-                 
+                        transparentColor font-bold text-xl`}>
+                         {i?.number} {" "}
+                        {i?.color && i.color.charAt(0).toUpperCase() + i.color.slice(1)}</span>
+
                     </div>
                     <span className="bg-white !bg-opacity-10 py-1 px-2">
                       Status
@@ -245,7 +283,7 @@ const MyHistory = ({ gid }) => {
                         : i?.status === "1"
                           ? "!text-green-600"
                           : "!text-red-600"
-                        }`}
+                        } m-2`}
                     >
                       {i?.status === "0"
                         ? "Pending"
@@ -257,10 +295,10 @@ const MyHistory = ({ gid }) => {
                       Amount
                     </span>
                     <span
-                      className={`!text-green-400 bg-white !bg-opacity-10 py-1 px-2`}
+                      className={`!text-green-500 bg-white !bg-opacity-10 py-1 px-2`}
                     >
                       {" "}
-                      {rupees} {i?.amount || 0}
+                      {rupees} {i?.win || 0}
                     </span>
                     <span className="bg-white !bg-opacity-10 py-1 px-2">
                       Create Time
@@ -294,7 +332,7 @@ const MyHistory = ({ gid }) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Box>
-      {/* <CustomCircularProgress isLoading={myhistory_loding_all} /> */}
+      <CustomCircularProgress isLoading={myhistory_loding_all} />
     </Box>
   );
 };
