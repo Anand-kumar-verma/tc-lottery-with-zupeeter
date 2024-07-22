@@ -52,6 +52,8 @@ import PromotionRule from "../pages/promotion/PromotionRule";
 import ChangePassword from "../pages/password/ChangePassword";
 import AccountPassword from "../pages/password/AccountPassword";
 import TransactionPassword from "../pages/password/TransactionPassword";
+import Soon from "../pages/comingsoon/Soon";
+
 
 export const routes = [
     {
@@ -125,6 +127,10 @@ export const routes = [
     {
         path:"/comingsoon",
         element:<ComingSoon />
+    },
+    {
+        path:"/comingsoonavaitor",
+        element:<Soon />
     },
     {
         path:"/withdraw",

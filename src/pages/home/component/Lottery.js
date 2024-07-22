@@ -9,6 +9,7 @@ import lotterycategory1 from "../../../assets/images/lotterycategory1.png";
 import lotterycategory2 from "../../../assets/images/lotterycategory2.png";
 import lotterycategory3 from "../../../assets/images/lotterycategory3.png";
 import lotterycategory4 from "../../../assets/images/lotterycategory4.png";
+import avaitorcategory3 from "../../../assets/images/avv.png";
 import win from "../../../assets/images/win.png";
 import win2 from "../../../assets/images/win2.png";
 import win3 from "../../../assets/images/win3.png";
@@ -77,6 +78,37 @@ function Lottery() {
             </Box>
           </Box>
         </NavLink>
+        <NavLink to="/comingsoonavaitor">
+        <Box sx={style.winbox}>
+          <Box
+            component="img"
+            src={win3}
+            sx={{ width: "100%", height: "70%" }}
+          ></Box>
+          <Box sx={style.positiongame}>
+            <Typography variant="body1" color="initial" sx={style.gameheading}>
+             Avaitor{" "}
+            </Typography>
+            <Box sx={{ mt: "15px" }}>
+              <Typography variant="body1" color="initial">
+                {/* Guess Number */}
+                Coming Soon
+              </Typography>
+              <Typography variant="body1" color="initial ">
+                {/* Big/Small/Odd/Even */}
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
+            <Box
+              component="img"
+              className =" !rounded-full"
+              src={avaitorcategory3}
+              sx={{ width: "100px" }}
+            ></Box>
+          </Box>
+        </Box>
+      </NavLink>
       {/* <NavLink to='/k3'> */}
       <NavLink to="/comingsoon">
         <Box sx={style.winbox}>
