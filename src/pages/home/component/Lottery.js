@@ -87,7 +87,7 @@ function Lottery() {
           ></Box>
           <Box sx={style.positiongame}>
             <Typography variant="body1" color="initial" sx={style.gameheading}>
-             Avaitor{" "}
+             Aviator{" "}
             </Typography>
             <Box sx={{ mt: "15px" }}>
               <Typography variant="body1" color="initial">
