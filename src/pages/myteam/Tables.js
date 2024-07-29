@@ -17,6 +17,7 @@ import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import moment from "moment";
 export default function Tables() {
   const userid = localStorage.getItem("user_id");
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -191,6 +192,9 @@ export default function Tables() {
                       Total Deposit
                     </TableCell>
                   )}
+                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                    Act. Date
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody
@@ -226,6 +230,9 @@ export default function Tables() {
                         {Number(member_id) === 1
                           ? i?.active_team
                           : i?.today_dep}
+                      </TableCell>
+                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                        {i?.activation_date ? moment(i?.activation_date)?.format("DD-MM-YYYY"):"---"}
                       </TableCell>
                     </TableRow>
                   );

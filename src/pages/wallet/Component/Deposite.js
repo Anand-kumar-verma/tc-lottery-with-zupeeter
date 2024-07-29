@@ -52,9 +52,9 @@ function Deposite() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -69,9 +69,9 @@ function Deposite() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;

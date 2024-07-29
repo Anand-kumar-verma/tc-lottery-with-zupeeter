@@ -20,7 +20,9 @@ const GameHistory = ({ gid }) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const navigate = useNavigate();
-  const game_history = useSelector((state) => state.aviator.gameHistory_trx_one_min);
+  const game_history = useSelector(
+    (state) => state.aviator.gameHistory_trx_one_min
+  );
 
   // const { isLoading, data: game_history } = useQuery(
   //   ["trx_gamehistory", gid],
@@ -55,8 +57,6 @@ const GameHistory = ({ gid }) => {
   //   [game_history]
   // );
 
-
-  
   // React.useEffect(() => {
   //   dispatch(
   //     updateNextCounter(
@@ -89,10 +89,7 @@ const GameHistory = ({ gid }) => {
 
   const visibleRows = React.useMemo(
     () =>
-      game_history?.slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
+      game_history?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
     [page, rowsPerPage, game_history]
   );
   if (isLoading)

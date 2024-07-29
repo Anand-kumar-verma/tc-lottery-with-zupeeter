@@ -78,20 +78,22 @@ function Wingo1Min() {
 
       if (onemin <= 10) {
         fk.setFieldValue("openTimerDialog", true);
+      } else {
+        fk.setFieldValue("openTimerDialog", false);
       }
       if (onemin === 59) {
         // dispatch(dummycounterFun());
         fk.setFieldValue("openTimerDialog", false);
       }
 
-      if (onemin === 57) {
+      if (onemin === 59) {
         client.refetchQueries("wallet_amount");
         client.refetchQueries("myAll_trx_history_new");
       }
       // if(onemin === 56){
       //   client.refetchQueries("myAll_trx_history_new");
       // }
-      if (onemin === 58){
+      if (onemin === 0) {
         // client.refetchQueries("trx_gamehistory_chart");
         client.refetchQueries("trx_gamehistory");
       }
@@ -114,9 +116,9 @@ function Wingo1Min() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry: false,
-      retryOnMount: false,
-      refetchOnWindowFocus: false,
+      // retry: false,
+      // retryOnMount: false,
+      // refetchOnWindowFocus: false,
     }
   );
 
@@ -191,7 +193,7 @@ function Wingo1Min() {
       refetchOnReconnect: false,
       // retry: false,
       // retryOnMount: false,
-      refetchOnWindowFocus: false,
+      // refetchOnWindowFocus: false,
     });
 
   React.useEffect(() => {

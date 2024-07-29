@@ -49,7 +49,7 @@ export const MyHistoryFn = async (gid) => {
     console.log(e);
   }
 };
-export const getBalanceFunction = async (setBalance ) => {
+export const getBalanceFunction = async (setBalance) => {
   try {
     const reqBody = {
       userid: localStorage.getItem("user_id"),
@@ -112,7 +112,10 @@ export const My_All_TRX_HistoryFn_new = async (gid) => {
       userid: localStorage.getItem("user_id"),
       gameid: gid,
     };
-    const response = await axios.post(`${endpoint.trx_my_history_new}`, reqBody);
+    const response = await axios.post(
+      `${endpoint.trx_my_history_new}`,
+      reqBody
+    );
     return response;
   } catch (e) {
     toast(e?.message);
@@ -417,15 +420,10 @@ export const Update_ProfileFn = async (selectedImages, client) => {
   }
 };
 
-export const showRank =  (num) => {
-  if(Number(num) === 1) 
-    return "Gold Club";
-  else if(Number(num)===2)
-    return "Diamond Club"
-   else if(Number(num)===3)
-    return "Crown Club"
-   else if(Number(num)===4)
-    return "Ambassador Club"
-   else if(Number(num)===5)
-    return "Director Club"
-}
+export const showRank = (num) => {
+  if (Number(num) === 1) return "Gold Club";
+  else if (Number(num) === 2) return "Diamond Club";
+  else if (Number(num) === 3) return "Crown Club";
+  else if (Number(num) === 4) return "Ambassador Club";
+  else if (Number(num) === 5) return "Director Club";
+};

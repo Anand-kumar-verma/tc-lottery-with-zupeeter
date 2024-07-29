@@ -249,9 +249,14 @@ const WinLossPopup = ({ gid, setOpenDialogBox }) => {
         userid: user_id,
         gameid: gid,
       };
-      const response =  await axios.post(`${endpoint.trx_my_history_new}`, reqBody);
-      const firstId = localStorage.getItem("betApplied")?.split("_")?.[4];
+      const response = await axios.post(
+        `${endpoint.trx_my_history_new}`,
+        reqBody
+      );
+      // const firstId = localStorage.getItem("betApplied")?.split("_")?.[4];
+      const firstId = response?.data?.earning?.[0]?.tr_transid;
       const total_data = response?.data?.earning;
+      console.log(total_data, "hii anand");
       const winAmnt =
         total_data
           ?.filter((i) => i?.tr_transid === firstId)

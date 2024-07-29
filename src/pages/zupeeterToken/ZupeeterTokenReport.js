@@ -64,9 +64,9 @@ export default function ZupeeterTokenReport() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -78,9 +78,9 @@ export default function ZupeeterTokenReport() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   ); //wallet
   const { data: wallet_amount } = useQuery(
@@ -89,9 +89,9 @@ export default function ZupeeterTokenReport() {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
@@ -173,7 +173,7 @@ export default function ZupeeterTokenReport() {
           return;
         }
       }
-      if (fk.values.payment_method === 'Wallet') {
+      if (fk.values.payment_method === "Wallet") {
         if (Number(wallet_amount_data || 0) < Number(amount || 0)) {
           toast("Insufficient balance");
           return;
@@ -370,7 +370,7 @@ export default function ZupeeterTokenReport() {
               <>
                 <span className="!text-white !text-sm">Transaction Id*</span>
                 <TextField
-                type="password"
+                  type="password"
                   id="transaction_id"
                   name="transaction_id"
                   placeholder="Enter Transaction Id"

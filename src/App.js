@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { Route, Routes } from "react-router-dom";
 import BeforeLogin from "./BeforeLogin";
@@ -10,8 +9,6 @@ import Dashboard from "./pages/home/Dashboard";
 import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
-
-
 function App() {
   const isAuthenticated = localStorage.getItem("user_id");
   useQuery(["team_count"], () => TeamsubFunction(), {
@@ -19,9 +16,9 @@ function App() {
     refetchOnReconnect: false,
     refetchOnMount: false,
     refetchOnReconnect: false,
-    retry:false,
-    retryOnMount:false,
-    refetchOnWindowFocus:false
+    retry: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
   });
 
   // useEffect(() => {
@@ -39,7 +36,6 @@ function App() {
 
   return (
     <Routes>
-   
       <Route path="/" element={<Login />}></Route>
       <Route path="/test" element={<Test />}></Route>
       <Route path="/register" element={<Register />}></Route>

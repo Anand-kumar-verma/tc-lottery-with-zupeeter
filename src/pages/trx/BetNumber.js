@@ -32,14 +32,16 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 
 const BetNumber = ({ timing, gid }) => {
-  const next_step = useSelector((state) => state.aviator.next_step);
+  // const next_step = useSelector((state) => state.aviator.next_step);
   const user_id = localStorage.getItem("user_id");
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [random, setRandomNumber] = useState(null);
   const [loding, setLoding] = useState(false);
   const client = useQueryClient();
-  const wallet_amount_data = useSelector((state) => state.aviator.wallet_real_balance);
+  const wallet_amount_data = useSelector(
+    (state) => state.aviator.wallet_real_balance
+  );
 
   const initialValue = {
     balance: "1",
@@ -84,7 +86,7 @@ const BetNumber = ({ timing, gid }) => {
 
   async function betFunctionStart() {
     setLoding(true);
-    if(Number(user_id)<=0){
+    if (Number(user_id) <= 0) {
       setLoding(false);
       return toast("Please Refresh your page.");
     }
@@ -102,7 +104,7 @@ const BetNumber = ({ timing, gid }) => {
         Number(selectNumber) + 1
       }`,
       type: `${Number(gid)}`,
-      round_no: next_step,
+      round_no: 123456,
       description: `${
         selectNumber === "Small"
           ? "Small"
@@ -188,15 +190,14 @@ const BetNumber = ({ timing, gid }) => {
         reqBody
       );
       if (response?.data?.msg === "Bid placed Successfully") {
-     const toastID =   toast(
+        const toastID = toast(
           <SuccessCheck
             message={<span className="!text-sm">{response?.data?.msg}</span>}
-          />, 
-          
+          />
         );
-        setTimeout(()=>{
+        setTimeout(() => {
           toast.dismiss(toastID);
-        },1000)
+        }, 1000);
         localStorage.setItem(
           "total_bet",
           JSON.stringify(
@@ -236,16 +237,15 @@ const BetNumber = ({ timing, gid }) => {
         setOpen(false);
         setLoding(false);
         // toast(response?.data?.msg);
-        // return  
-        const toastID =   toast(
+        // return
+        const toastID = toast(
           <FalseCheck
-          
             message={<span className="!text-sm">{response?.data?.msg}</span>}
-          />, 
+          />
         );
-        setTimeout(()=>{
+        setTimeout(() => {
           toast.dismiss(toastID);
-        },1000)
+        }, 1000);
       }
       setLoding(false);
       // }
@@ -253,9 +253,7 @@ const BetNumber = ({ timing, gid }) => {
       setOpen(false);
       setLoding(false);
       // toast(e?.message);
-      <FalseCheck
-      message={<span className="!text-sm">{e?.message}</span>}
-    />
+      <FalseCheck message={<span className="!text-sm">{e?.message}</span>} />;
     }
     // client.refetchQueries("walletamount");
     client.refetchQueries("wallet_amount");
@@ -339,100 +337,100 @@ const BetNumber = ({ timing, gid }) => {
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={zero}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("0");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("0");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={one}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("1");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("1");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={two}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("2");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("2");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={three}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("3");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("3");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={four}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("4");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("4");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={five}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("5");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("5");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={six}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("6");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("6");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={seven}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("7");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("7");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={eight}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("8");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("8");
+            // }}
             className="!cursor-pointer"
           ></Box>
           <Box
             sx={{ width: "17%", mb: 1 }}
             component="img"
             src={nine}
-            onClick={() => {
-              setOpen(true);
-              setSelectNumber("9");
-            }}
+            // onClick={() => {
+            //   setOpen(true);
+            //   setSelectNumber("9");
+            // }}
             className="!cursor-pointer"
           ></Box>
         </Box>
@@ -442,13 +440,16 @@ const BetNumber = ({ timing, gid }) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <Button variant="outlined" onClick={generatenumber}>
+          <Button
+            variant="outlined"
+            // onClick={generatenumber}
+          >
             Random
           </Button>
           {[1, 5, 10, 20, 50, 100]?.map((i) => {
             return (
               <Box
-                onClick={() => fk.setFieldValue("qnt", i)}
+                // onClick={() => fk.setFieldValue("qnt", i)}
                 sx={style.bacancebtn3}
                 className={`${
                   fk.values.qnt === i ? "!bg-green-600" : "!bg-gray-400"
