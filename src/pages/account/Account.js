@@ -25,7 +25,6 @@ import { ProfileDataFunction, Update_ProfileFn, getBalanceFunction, logOutFuncti
 import { endpoint, front_end_domain } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import ImageSelectorModal from "./ImageSelectorModal";
-import Date from "../../shared/CustomiztionDate/CustomDate";
 import CustomDate from "../../shared/CustomiztionDate/CustomDate";
 
 function Account() {
