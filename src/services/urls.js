@@ -1,6 +1,6 @@
 // export const domain = "https://zupeeter-timer.onrender.com/";
-export const domain = "https://zupeeter-game-timer.onrender.com/";
-
+// export const domain = "https://zupeeter-game-timer.onrender.com/";
+export const domain = "https://zupeeter-timer-27jp.onrender.com/"
 export const domain_ovi_node = "https://api.zupeeter.com";
 // export const domain_ovi_node = "https://zupeegame.info"
 // export const domain_ovi_node = "http://192.168.85.149:8000"
