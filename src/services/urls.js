@@ -4,7 +4,7 @@ export const domain = "https://zupeeter-timer-27jp.onrender.com/"
 export const domain_ovi_node = "https://api.zupeeter.com";
 // export const domain_ovi_node = "https://zupeegame.info"
 // export const domain_ovi_node = "http://192.168.85.149:8000"
-export const newdomain1 = "http://192.168.18.183:9002";
+// export const newdomain1 = "http://192.168.18.183:9002";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
