@@ -416,6 +416,18 @@ export const Update_ProfileFn = async (selectedImages, client) => {
     console.log(e);
   }
 };
+export const TimerFn = async (gid) => {
+  const id = localStorage.getItem("user_id");
+  try {
+    const response = await axios.get(
+      `${endpoint.get_royality_date}?user_id=${id}`
+    );
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 
 export const showRank =  (num) => {
   if(Number(num) === 1) 

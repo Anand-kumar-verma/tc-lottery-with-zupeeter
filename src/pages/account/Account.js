@@ -142,12 +142,13 @@ return (
               <Typography className="text-white !text-xs">| </Typography>
               <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
             </Box>
+          
             {profile?.rec?.Club !== 0 &&
               <Box className="  realtive !left-36 flex gap-3 justify-center">
                 <Typography className="text-white !text-sm">Rank: </Typography>
                 <Typography className="text-white !text-sm">{showRank(profile?.rec?.Club)}</Typography>
               </Box>}
-              {/* <CustomDate/> */}
+              <CustomDate/>
           </Box>
         </Box>
         <Box className="bg-white shadow-xl rounded-lg py-5 relative top-8">
