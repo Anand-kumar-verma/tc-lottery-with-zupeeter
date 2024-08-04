@@ -25,6 +25,7 @@ import { ProfileDataFunction, Update_ProfileFn, getBalanceFunction, logOutFuncti
 import { endpoint, front_end_domain } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import ImageSelectorModal from "./ImageSelectorModal";
+import CustomDate from "../../shared/CustomiztionDate/CustomDate";
 
 function Account() {
   const or_m_user_type = localStorage.getItem("or_m_user_type");
@@ -141,11 +142,13 @@ return (
               <Typography className="text-white !text-xs">| </Typography>
               <Typography className="text-white !text-xs">{profile?.rec?.Login_Id} <CopyAll fontSize="small" /> </Typography>
             </Box>
+          
             {profile?.rec?.Club !== 0 &&
               <Box className="  realtive !left-36 flex gap-3 justify-center">
                 <Typography className="text-white !text-sm">Rank: </Typography>
                 <Typography className="text-white !text-sm">{showRank(profile?.rec?.Club)}</Typography>
               </Box>}
+              <CustomDate/>
           </Box>
         </Box>
         <Box className="bg-white shadow-xl rounded-lg py-5 relative top-8">

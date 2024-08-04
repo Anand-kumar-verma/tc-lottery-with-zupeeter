@@ -1,11 +1,10 @@
-// export const domain = "http://13.232.109.195:9002/";
-// export const domain = "https://zupeeter-game-timer.onrender.com";
-export const domain = "https://zupeeter-timer-27jp.onrender.com";
-
+// export const domain = "https://zupeeter-timer.onrender.com/";
+// export const domain = "https://zupeeter-game-timer.onrender.com/";
+export const domain = "https://zupeeter-timer-27jp.onrender.com/"
 export const domain_ovi_node = "https://api.zupeeter.com";
 // export const domain_ovi_node = "https://zupeegame.info"
 // export const domain_ovi_node = "http://192.168.85.149:8000"
-
+// export const newdomain1 = "http://192.168.18.183:9002";
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
@@ -17,6 +16,7 @@ export const usdt_base_url = "https://zupeegame.info";
 export const download_app_url = "https://zupeeter.com/ZUPEETER.pdf";
 
 export const endpoint = {
+  get_royality_date: `${domain_ovi_node}/get-royality-date`,
   newlogin: `${baseUrl}/api/newlogin`,
   register_candidate_mobile: `${baseUrl}/api/register_candidate`,
   register_candidate_email: `${baseUrl}/api/register_candidate_new`,

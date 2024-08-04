@@ -8,13 +8,13 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import banner10 from '../../../assets/images/banner10.png';
-import banner11 from '../../../assets/images/banner1.jpg';
+// import banner10 from '../../../assets/images/banner10.png';
+// import banner11 from '../../../assets/images/banner1.jpg';
 import banner5 from '../../../assets/images/banner5.jpg';
 import banner6 from '../../../assets/images/banner2.jpg';
-import banner7 from '../../../assets/images/banner7.jpg';
+// import banner7 from '../../../assets/images/banner7.jpg';
 import banner8 from '../../../assets/images/banner4.jpg';
-import banner9 from '../../../assets/images/banner9.png';
+// import banner9 from '../../../assets/images/banner9.png';
 
 const SupportPage = () => {
   const [open, setOpen] = useState(false);
@@ -76,11 +76,11 @@ const SupportPage = () => {
       >
         <SwiperSlide> <Box component='img' src={banner5}></Box></SwiperSlide>
         <SwiperSlide> <Box component='img' src={banner6}></Box></SwiperSlide>
-        <SwiperSlide> <Box component='img' src={banner7}></Box></SwiperSlide>
+        {/* <SwiperSlide> <Box component='img' src={banner7}></Box></SwiperSlide> */}
         <SwiperSlide> <Box component='img' src={banner8}></Box></SwiperSlide>
-        <SwiperSlide> <Box component='img' src={banner9}></Box></SwiperSlide>
-        <SwiperSlide> <Box component='img' src={banner10}></Box></SwiperSlide>
-        <SwiperSlide> <Box component='img' src={banner11}></Box></SwiperSlide>
+        {/* <SwiperSlide> <Box component='img' src={banner9}></Box></SwiperSlide> */}
+        {/* <SwiperSlide> <Box component='img' src={banner10}></Box></SwiperSlide> */}
+        {/* <SwiperSlide> <Box component='img' src={banner11}></Box></SwiperSlide> */}
       </Swiper>
 
 
