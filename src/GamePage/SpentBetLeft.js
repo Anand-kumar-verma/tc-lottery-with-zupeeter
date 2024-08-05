@@ -13,6 +13,7 @@ import { walletamountAviator } from "../services/apiCallings";
 
 
 const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
+  const client = useQueryClient()
   const user_id = localStorage.getItem("user_id");
   const spent_amount1 = localStorage.getItem("spent_amount1");
   const amount_total =

@@ -1,11 +1,7 @@
-import React from "react";
-import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import { CgCross } from "react-icons/cg";
+import React from "react";
 import { RxCross2 } from "react-icons/rx";
 import { gray } from "./color";
 
