@@ -1,6 +1,6 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { endpoint } from "./urls";
+import { dummy_aviator, endpoint } from "./urls";
 
 export const storeCookies = () => {
   let expirationDate = new Date();
@@ -359,6 +359,34 @@ export const ProfileDataFunction = async () => {
       user_id: localStorage.getItem("user_id"),
     };
     const response = await axios.post(endpoint.profile_function, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const GetTopFn = async () => {
+  try {
+    const response = await axios.get(endpoint.node_api.get_top_users);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const walletamountAviator = async () => {
+  // try {
+  //   const response = await axios.get(
+  //     `${endpoint.userwallet}?userid=${user_id}`
+  //   );
+  //   return response;
+  try {
+    const user =localStorage.getItem("user_id")
+
+    const response = await axios.post(
+      `${dummy_aviator}/api/v1/get-wallet-amount-by-id`,
+      { id: user }
+    );
     return response;
   } catch (e) {
     toast(e?.message);

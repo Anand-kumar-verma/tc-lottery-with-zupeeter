@@ -78,7 +78,7 @@ function Lottery() {
             </Box>
           </Box>
         </NavLink>
-        <NavLink to="/comingsoonavaitor">
+        <NavLink to="/playgame">
         <Box sx={style.winbox}>
           <Box
             component="img"
