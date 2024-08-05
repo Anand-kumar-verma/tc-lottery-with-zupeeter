@@ -39,9 +39,7 @@ const AllBets = ({ formik, fk }) => {
       // const response = await axios.get(
       //   `${endpoint.total_bet_history}`
       // );
-      console.log("Hiiiiiiiiiiiiii");
       const response = await axios.get(endpoint.node_api.get_leder_data);
-      console.log(response, "ahsdaffffffffffffff");
       setAllBetsData(response?.data?.data || []);
     } catch (e) {
       toast(e?.message);

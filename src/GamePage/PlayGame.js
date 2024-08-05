@@ -73,7 +73,8 @@ const PlayGame = () => {
     () => walletamountAviator(),
     {
       refetchOnMount: false,
-      refetchOnReconnect: true,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus:false
     }
   );
 

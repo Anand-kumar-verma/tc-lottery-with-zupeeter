@@ -46,39 +46,35 @@ function Lottery() {
         </Typography>
       </Stack>
       <NavLink to={status?.trx_status !== "0" && "/wingo"}>
-          <Box sx={style.winbox}>
-            <Box
-              component="img"
-              src={win}
-              sx={{ width: "100%", height: "70%" }}
-            ></Box>
-            <Box sx={style.positiongame}>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.gameheading}
-              >
-                Win Go{" "}
+        <Box sx={style.winbox}>
+          <Box
+            component="img"
+            src={win}
+            sx={{ width: "100%", height: "70%" }}
+          ></Box>
+          <Box sx={style.positiongame}>
+            <Typography variant="body1" color="initial" sx={style.gameheading}>
+              Win Go{" "}
+            </Typography>
+            <Box sx={{ mt: "15px" }}>
+              <Typography variant="body1" color="initial">
+                Guess Number
               </Typography>
-              <Box sx={{ mt: "15px" }}>
-                <Typography variant="body1" color="initial">
-                  Guess Number
-                </Typography>
-                <Typography variant="body1" color="initial ">
-                  Green/Red/Purple to win
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
-              <Box
-                component="img"
-                src={lotterycategory1}
-                sx={{ width: "100px" }}
-              ></Box>
+              <Typography variant="body1" color="initial ">
+                Green/Red/Purple to win
+              </Typography>
             </Box>
           </Box>
-        </NavLink>
-        <NavLink to="/playgame">
+          <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
+            <Box
+              component="img"
+              src={lotterycategory1}
+              sx={{ width: "100px" }}
+            ></Box>
+          </Box>
+        </Box>
+      </NavLink>
+      <NavLink to={String(status?.aviator_status) !== "0" && "/playgame"}>
         <Box sx={style.winbox}>
           <Box
             component="img"
@@ -87,7 +83,7 @@ function Lottery() {
           ></Box>
           <Box sx={style.positiongame}>
             <Typography variant="body1" color="initial" sx={style.gameheading}>
-             Aviator{" "}
+              Aviator{" "}
             </Typography>
             <Box sx={{ mt: "15px" }}>
               <Typography variant="body1" color="initial">
@@ -102,7 +98,7 @@ function Lottery() {
           <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
             <Box
               component="img"
-              className =" !rounded-full"
+              className=" !rounded-full"
               src={avaitorcategory3}
               sx={{ width: "100px" }}
             ></Box>
@@ -170,38 +166,34 @@ function Lottery() {
         </Box>
       </NavLink>
       <NavLink to={status?.trx_status !== "0" && "/trx"}>
-          <Box sx={style.winbox}>
-            <Box
-              component="img"
-              src={win4}
-              sx={{ width: "100%", height: "70%" }}
-            ></Box>
-            <Box sx={style.positiongame}>
-              <Typography
-                variant="body1"
-                color="initial"
-                sx={style.gameheading}
-              >
-                Trx Win{" "}
+        <Box sx={style.winbox}>
+          <Box
+            component="img"
+            src={win4}
+            sx={{ width: "100%", height: "70%" }}
+          ></Box>
+          <Box sx={style.positiongame}>
+            <Typography variant="body1" color="initial" sx={style.gameheading}>
+              Trx Win{" "}
+            </Typography>
+            <Box sx={{ mt: "15px" }}>
+              <Typography variant="body1" color="initial">
+                Guess Number
               </Typography>
-              <Box sx={{ mt: "15px" }}>
-                <Typography variant="body1" color="initial">
-                  Guess Number
-                </Typography>
-                <Typography variant="body1" color="initial ">
-                  Green/Red/Purple to win
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
-              <Box
-                component="img"
-                src={lotterycategory4}
-                sx={{ width: "100px" }}
-              ></Box>
+              <Typography variant="body1" color="initial ">
+                Green/Red/Purple to win
+              </Typography>
             </Box>
           </Box>
-        </NavLink>
+          <Box sx={{ position: "absolute", top: "-20px", right: "5px" }}>
+            <Box
+              component="img"
+              src={lotterycategory4}
+              sx={{ width: "100px" }}
+            ></Box>
+          </Box>
+        </Box>
+      </NavLink>
     </Box>
   );
 }

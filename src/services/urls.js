@@ -1,11 +1,11 @@
 // export const domain = "https://zupeeter-timer.onrender.com/";
 // export const domain = "https://zupeeter-game-timer.onrender.com/";
-export const dummy_aviator = "https://aviator-with-sql-backend.onrender.com"
-export const domain = "https://aviator-with-sql-backend.onrender.com"
+// export const dummy_aviator = "https://aviator-with-sql-backend.onrender.com"
+// export const domain = "https://aviator-with-sql-backend.onrender.com"
+export const dummy_aviator = "http://localhost:9002"
+export const domain = "http://localhost:9002"
 export const domain_ovi_node = "https://api.zupeeter.com";
-// export const domain_ovi_node = "https://zupeegame.info"
-// export const domain_ovi_node = "http://192.168.85.149:8000"
-// export const newdomain1 = "http://192.168.18.183:9002";
+
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
