@@ -115,7 +115,7 @@ const AutoPlayBtn1 = () => {
                   : text_gray_light
               } text-[12px]`}
             >
-              USD
+              INR
             </p>
           </div>
         </div>
@@ -197,7 +197,7 @@ const AutoPlayBtn1 = () => {
                   : text_gray_light
               } text-[12px]`}
             >
-              USD
+              INR
             </p>
           </div>
         </div>
@@ -279,7 +279,7 @@ const AutoPlayBtn1 = () => {
                   : text_gray_light
               } text-[12px]`}
             >
-              USD
+              INR
             </p>
           </div>
         </div>

@@ -159,7 +159,7 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
               <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
             </Box>
             <Stack>
-              <Box>Win, USD</Box>{" "}
+              <Box>Win, INR</Box>{" "}
               <Box>
                 <span className="">
                   {`${

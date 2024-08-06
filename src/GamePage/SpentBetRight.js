@@ -136,7 +136,7 @@ const SpentBetRight = ({ milliseconds, seconds, fk, formik }) => {
             <span className="">{`${sec || 0}.${mili || 0} x`}</span>
           </p>
           <p className="flex flex-col bg-white bg-opacity-50 items-center rounded-full px-4 py-1">
-            <span className="text-[12px]">Win, USD</span>
+            <span className="text-[12px]">Win, INR</span>
             <span className="">
               {`${
                 betValue * seconds +

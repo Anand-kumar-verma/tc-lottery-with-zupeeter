@@ -378,7 +378,7 @@ function Deposite() {
                 mt: 1,
               }}
             >
-              USDT
+              INR
             </Typography>
           </Stack>
         </Stack>
