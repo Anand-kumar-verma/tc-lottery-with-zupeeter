@@ -45,7 +45,7 @@ function Lottery() {
           Lottery
         </Typography>
       </Stack>
-      <NavLink to={status?.trx_status !== "0" && "/wingo"}>
+      <NavLink to={String(status?.wingo_status) !== "0" && "/wingo"}>
         <Box sx={style.winbox}>
           <Box
             component="img"
@@ -88,7 +88,7 @@ function Lottery() {
             <Box sx={{ mt: "15px" }}>
               <Typography variant="body1" color="initial">
                 {/* Guess Number */}
-                Coming Soon
+                Pley & Earn
               </Typography>
               <Typography variant="body1" color="initial ">
                 {/* Big/Small/Odd/Even */}
