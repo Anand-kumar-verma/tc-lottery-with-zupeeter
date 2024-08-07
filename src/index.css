@@ -797,7 +797,7 @@
   width: 0;
   background-color: #3c3b3b; /* Set the background color you want */
   border-radius: inherit; /* Make sure the child div has the same border-radius as the parent */
-  animation: widthAnimation 15s ease-in-out infinite; /* Adjust the animation duration as needed */
+  animation: widthAnimation 20s ease-in-out infinite; /* Adjust the animation duration as needed */
 }
 
 @keyframes widthAnimation {
