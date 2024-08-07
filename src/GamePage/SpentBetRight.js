@@ -5,11 +5,10 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useQuery, useQueryClient } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
 
-import { gray } from "./color";
-import { dummy_aviator, rupees } from "../services/urls";
 import { walletamountAviator } from "../services/apiCallings";
+import { dummy_aviator, rupees } from "../services/urls";
+import { gray } from "./color";
 
 const SpentBetRight = ({ milliseconds, seconds, fk, formik }) => {
   const user_id = localStorage.getItem("user_id");

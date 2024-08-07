@@ -88,7 +88,7 @@ function Lottery() {
             <Box sx={{ mt: "15px" }}>
               <Typography variant="body1" color="initial">
                 {/* Guess Number */}
-                Pley & Earn
+                Play & Earn
               </Typography>
               <Typography variant="body1" color="initial ">
                 {/* Big/Small/Odd/Even */}
