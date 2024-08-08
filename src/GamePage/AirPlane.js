@@ -49,9 +49,16 @@ const AirPlane = ({ formik, fk }) => {
   const client = useQueryClient();
   let bool = true;
   const audioRefMusic = useRef(null);
+
+  useEffect(()=>{
+    startFly(900)
+    // fk.setFieldValue("closeButtomDot", true);
+  },[])
+
   useEffect(() => {
     const handleNewMessage = (newMessage) => {
       startFly(newMessage);
+      fk.setFieldValue("closeButtomDot", true);
     };
 
     const handleSeconds = (seconds) => {
@@ -171,6 +178,7 @@ const AirPlane = ({ formik, fk }) => {
     return () => clearInterval(timerInterval);
   }
 
+
   useEffect(() => {
     Number(milliseconds) >= 3 && fk.setFieldValue("isShadowPath", true);
   }, [milliseconds]);
@@ -179,9 +187,9 @@ const AirPlane = ({ formik, fk }) => {
     fk.values.setloder === true && set_waiting_for_next_round(false);
   }, [fk.values.setloder]);
 
-  setTimeout(() => {
-    fk.setFieldValue("closeButtomDot", false);
-  }, 10000);
+  // setTimeout(() => {
+  //   fk.setFieldValue("closeButtomDot", false);
+  // }, 10000);
 
   const handlePlayMusic = async () => {
     try {
@@ -354,10 +362,10 @@ const AirPlane = ({ formik, fk }) => {
           {/* fk.values.isFlying */}
           {useMemo(() => {
             return (
-              fk.values.isFlying && (
+             true && (
                 <>
                   {/* !fk.values.closeButtomDot */}
-                  {!fk.values.closeButtomDot ? (
+                  {true ? (
                     <>
                       <LeftDottedPointMoveable />
                       <ButtomDottedPointMoveable />
@@ -375,7 +383,8 @@ const AirPlane = ({ formik, fk }) => {
                 </>
               )
             );
-          }, [fk.values.isFlying, fk.values.closeButtomDot])}
+          }, [])}
+          {/* fk.values.isFlying, fk.values.closeButtomDot */}
           <div className="absolute w-[100%] bottom-0 left-0"></div>
           {/* fk.values.setloder */}
           {fk.values.setloder ? (
@@ -408,7 +417,7 @@ const AirPlane = ({ formik, fk }) => {
             <p
               className={`
         absolute text-6xl lg:text-7xl   left-[30%] top-[35%] lg:left-[42%] lg:top-[38%]   text-white
-        ${fk.values.setcolorofdigit && "!text-[#BC0319]"}
+        ${fk.values.setcolorofdigit  && "!text-[#BC0319]"}
         flex flex-col
         `}
             >
@@ -417,16 +426,15 @@ const AirPlane = ({ formik, fk }) => {
                   FLEW AWAY!
                 </p>
               )}
+              {/*
               {waiting_for_next_round ? (
                 <Dialog open={true} className=" lg:!ml-80 ">
                   <div>
-                    {/* <div className="flex justify-end !mx-2" onClick={false}>x</div> */}
                     <div className="lg:pt-1 text-center p-2  lg:text-lg  font-bold">
                       Let's complete previous round
                     </div>
                     <div className="!font-semibold grid grid-cols-3  justify-center lg:w-80 !ml-2 w-[190px] h-16 lg:h-40">
                       <div className="flex justify-center text-center lg:text-9xl text-5xl lg:px-36  px-28">{`${seconds}.${String(
-                        // phle yha par seconds+1 thA
                         milliseconds
                       ).padStart(2, "0")}`}</div>
                     </div>
@@ -435,12 +443,18 @@ const AirPlane = ({ formik, fk }) => {
               ) : (
                 <div className="!font-semibold grid grid-cols-3 lg:w-[225px] w-[190px]">
                   <span className="col-span-2">{`${seconds}.${String(
-                    // phle yha par seconds+1 thA
                     milliseconds
                   ).padStart(2, "0")}`}</span>
                   <span style={{ marginLeft: "4px" }}>x</span>
                 </div>
-              )}
+              )} 
+               */}
+               <div className="!font-semibold grid grid-cols-3 lg:w-[225px] w-[190px]">
+                  <span className="col-span-2">{`${seconds}.${String(
+                    milliseconds
+                  ).padStart(2, "0")}`}</span>
+                  <span style={{ marginLeft: "4px" }}>x</span>
+                </div>
             </p>
           )}
         </>
