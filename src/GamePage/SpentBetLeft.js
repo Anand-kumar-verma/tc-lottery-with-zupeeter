@@ -404,8 +404,8 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
                     const customBetValue = Number(
                       leftbitfk?.values?.custombetValue_auto_cash_out || 0
                     );
-                    if (customBetValue < 1.1) {
-                      toast("Value should be greater than 1.1");
+                    if (customBetValue < 1.5) {
+                      toast("Value should be greater than 1.5");
                     } else {
                       fk.setFieldValue("autocashout1", !fk.values.autocashout1);
                     }
