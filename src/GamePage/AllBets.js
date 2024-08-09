@@ -6,34 +6,33 @@ import toast from "react-hot-toast";
 import { endpoint } from "../services/urls";
 
 const AllBets = ({ formik, fk }) => {
-  const [displayedData, setDisplayedData] = useState([]);
   const [isAvailable, setIsAvailable] = useState([]);
   const [allbetsdata, setAllBetsData] = useState([]);
   const [isLoading, setisLoding] = useState(false);
-  useEffect(() => {
-    setDisplayedData([]);
-    setIsAvailable([]);
-    if (allbetsdata) {
-      fetchData();
-    }
-  }, [allbetsdata, formik.values.refetch]);
+  // useEffect(() => {
+  //   setDisplayedData([]);
+  //   setIsAvailable([]);
+  //   if (allbetsdata) {
+  //     fetchData();
+  //   }
+  // }, [allbetsdata, formik.values.refetch]);
 
-  const fetchData = async () => {
-    const newData = allbetsdata;
-    for (let i = 0; i < newData.length; i++) {
-      !fk?.values?.isFlying ||
-        (displayedData?.length < 20 &&
-          setDisplayedData((prevData) => [...prevData, newData[i]]));
-      setIsAvailable((prevData) =>
-        isAvailable.length < 6
-          ? [...prevData, Math.floor(Math.random() * 100) + 1]
-          : [...prevData]
-      );
-      await new Promise((resolve) =>
-        setTimeout(resolve, Math.floor(Math.random() * 1000) + 300)
-      );
-    }
-  };
+  // const fetchData = async () => {
+  //   const newData = allbetsdata;
+  //   for (let i = 0; i < newData.length; i++) {
+  //     !fk?.values?.isFlying ||
+  //       (displayedData?.length < 20 &&
+  //         setDisplayedData((prevData) => [...prevData, newData[i]]));
+  //     setIsAvailable((prevData) =>
+  //       isAvailable.length < 6
+  //         ? [...prevData, Math.floor(Math.random() * 100) + 1]
+  //         : [...prevData]
+  //     );
+  //     await new Promise((resolve) =>
+  //       setTimeout(resolve, Math.floor(Math.random() * 1000) + 300)
+  //     );
+  //   }
+  // };
   const getAllBets = async () => {
     try {
       // const response = await axios.get(
@@ -49,7 +48,7 @@ const AllBets = ({ formik, fk }) => {
 
   useEffect(() => {
     getAllBets();
-  }, [formik.values.refetch]);
+  }, []);
 
   if (isLoading)
     return (
@@ -62,7 +61,7 @@ const AllBets = ({ formik, fk }) => {
       <div className=" w-full !bg-black ">
         <p className="text-white text-[12px] ">
           <span>All Bets: </span>
-          <span>{displayedData?.length || 0}</span>
+          <span>{allbetsdata?.[0]?.local_length || 0}</span>
         </p>
         <div className="grid grid-cols-3 place-items-start !bg-black px-1 ">
           <p className="text-[10px] text-gray-500">User</p>
@@ -70,13 +69,12 @@ const AllBets = ({ formik, fk }) => {
           <p className="text-[10px] text-gray-500">Cash out, INR</p>
         </div>
       </div>
-      {displayedData?.map((i, index) => (
+      {allbetsdata?.map((i, index) => (
         <>
           <div
             key={index}
             className={`${
-              isAvailable.includes(index) &&
-              fk?.values?.isFlying &&
+             
               i?.multiplier
                 ? "bg-[#213519] bg-opacity-30 border-[2px] border-[#1e430ff6]"
                 : "bg-black bg-opacity-30"
@@ -90,42 +88,30 @@ const AllBets = ({ formik, fk }) => {
                   sx={{ width: 24, height: 24, fontSize: 10 }}
                 />
                 <span className="text-[10px] text-gray-500">
-                  {i?.email?.substring(0, 1) +
+                  {(i?.email?.substring(0, 1)||"*") +
                     "**" +
-                    i?.email?.substring(1, 2)}
+                    (i?.email?.substring(1, 2)||"*")}
                 </span>
               </p>
             </div>
             <div className="flex gap-2 items-center">
               <span
-                className={`text-[10px] text-gray-500 ${
-                  isAvailable.includes(index) && "text-white"
-                }`}
+                className={`text-[10px] text-gray-500`}
               >
                 {Number(i?.amount || 0)?.toFixed(2)}
               </span>
-              {isAvailable.includes(index) &&
-                i?.multiplier &&
-                fk?.values?.isFlying && (
-                  <span
+              <span
                     className={`bg-black rounded-full px-3 py-1 text-[10px] 
-               ${index % 2 === 0 ? "text-[#4e92ea]" : "text-red-500"} ${
-                      isAvailable.includes(index) && "text-white"
-                    }`}
+               `}
                   >
                     {Number(i?.multiplier || 0)?.toFixed(2)}x
                   </span>
-                )}
             </div>
             <div className="flex w-full justify-end">
               <div className="flex gap-2 items-center">
-                {isAvailable.includes(index) &&
-                  fk?.values?.isFlying &&
-                  i?.multiplier && (
-                    <span className={`text-[10px]  text-white`}>
+              <span className={`text-[10px]  text-white`}>
                       {Number(i?.amountcashed || 0)?.toFixed(2)}
                     </span>
-                  )}
               </div>
             </div>
           </div>
