@@ -52,7 +52,7 @@ const PlayGame = () => {
   const { isLoading, data } = useQuery(["allresult"], () => resultFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
-    refetchOnWindowFocus:false
+    refetchOnWindowFocus: false
   });
 
   const resultFunction = async () => {
@@ -74,7 +74,7 @@ const PlayGame = () => {
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      refetchOnWindowFocus:false
+      refetchOnWindowFocus: false
     }
   );
 
@@ -284,18 +284,17 @@ const PlayGame = () => {
             return (
               <p
                 key={index}
-                className={`${
-                  index === result.length - 1
-                    ? "text-[#e66a81] bg-black"
-                    : index % 2 === 0
-                    ? "text-purple-500 bg-black"
-                    : index % 3 === 0
-                    ? "text-[#01F7F7] bg-black"
-                    : "text-amber-600 bg-black"
-                } rounded-full px-2 text-[10px] overscroll-auto scroll-smooth`}
-              >
+                className={`
+                  ${Number(i?.multiplier) <= 2
+                    ? 'text-blue-500'
+                    : Number(i?.multiplier) > 2 && Number(i?.multiplier) <= 10
+                      ? 'text-purple-500'
+                      : 'text-red-500'}
+                      rounded-full px-2 text-[10px] overscroll-auto scroll-smooth `}
+                    >
                 {Number(i?.multiplier)?.toFixed(2)} X
               </p>
+
             );
           })}
       </div>
@@ -358,7 +357,7 @@ const PlayGame = () => {
                   <span className="!font-bold">
                     {Number(
                       Number(walletAmount?.wallet || 0) +
-                        Number(walletAmount?.winning || 0)
+                      Number(walletAmount?.winning || 0)
                     ).toFixed(2) || "0000"}
                   </span>{" "}
                   <span className="!text-white">{rupees}</span>

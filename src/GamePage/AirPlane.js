@@ -129,6 +129,7 @@ const AirPlane = ({ formik, fk }) => {
   useEffect(() => {
     const mainDiv = document.getElementsByClassName("maindiv")[0];
     if (crash === true) {
+      fk.setFieldValue("isShadowPath", false);
       clearInterval(timerInterval);
       dispatch(byTimeIsEnableSound(true));
       // Remove any current animation and apply thirdAnimation
@@ -145,6 +146,10 @@ const AirPlane = ({ formik, fk }) => {
       fk.setFieldValue("waitingForNextTime1", false);
       fk.setFieldValue("waitingForNextTime2", false);
       formik.setFieldValue("refetch", Number(formik.values.refetch) + 1);
+      fk.setFieldValue("isShadowPath", false);
+      setTimeout(()=>{
+        fk.setFieldValue("isShadowPath", false);
+      },1000)
     }
   }, [crash]);
 
