@@ -53,9 +53,9 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
     setloding(true);
 
     const reqbody = {
-      id: user_id,
-      userid: user_id,
-      amount: betValue || 0,
+      id_id: user_id,
+      u_id: user_id,
+      spnt_amount: betValue || 0,
       button_type: "b1",
     };
     const dataToSend = {
@@ -118,13 +118,15 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
     //     `${endpoint.cash_out}?userid=${reqbody.userid}&amount=${reqbody.amount}&multiplier=${reqbody.multiplier}&gamesno=${reqbody?.gameno}`
     //   );
     const reqbody = {
-      id: user_id,
-      userid: user_id,
-      amount: betValue * Number(`${seconds}.${milliseconds}`),
-      multiplier: Number(`${sec}.${mili}`),
+      id_id: user_id,
+      u_id: user_id,
+      cr_amount: betValue * Number(`${seconds}.${milliseconds}`),
+      multi: Number(`${sec}.${mili}`),
       button_type: "b1",
     };
-
+    const dataToSend = {
+      payload: enCryptData(reqbody),
+    };
     try {
       const response = await axios.post(
         `${dummy_aviator}/api/v1/cash-out`,
