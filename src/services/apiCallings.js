@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { dummy_aviator, endpoint } from "./urls";
+import { deCryptData } from "../shared/secret";
 
 export const storeCookies = () => {
   let expirationDate = new Date();
@@ -356,7 +357,7 @@ export const TeamDatafunction = async () => {
 export const ProfileDataFunction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.profile_function, reqBody);
     return response;
