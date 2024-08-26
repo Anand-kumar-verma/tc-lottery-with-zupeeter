@@ -23,8 +23,9 @@ import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import { NavLink } from "react-router-dom";
 import Howtoplay from "./component/Howtoplay";
+import { deCryptData } from "../../shared/secret";
 const BetNumber = ({ gid }) => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [open, setOpen] = useState(false);
   const [opend, setOpend] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");

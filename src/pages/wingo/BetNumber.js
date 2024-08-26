@@ -34,9 +34,10 @@ import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import Howtoplay from "./component/Howtoplay";
+import { deCryptData } from "../../shared/secret";
 
 const BetNumber = ({ timing, gid }) => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [opend, setOpend] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");

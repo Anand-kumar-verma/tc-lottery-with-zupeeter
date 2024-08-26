@@ -9,9 +9,10 @@ import { useQuery, useQueryClient } from "react-query";
 import { walletamountAviator } from "../services/apiCallings";
 import { dummy_aviator, rupees } from "../services/urls";
 import { gray } from "./color";
+import { deCryptData } from "../shared/secret";
 
 const SpentBetRight = ({ milliseconds, seconds, fk, formik }) => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const client = useQueryClient();
   const spent_amount2 = localStorage.getItem("spent_amount2");
   const amount_total =

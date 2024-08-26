@@ -10,9 +10,10 @@ import { upiTOkenHistory } from "../../services/apiCallings";
 import { useQuery } from "react-query";
 import theme from "../../utils/theme";
 import moment from "moment/moment";
+import { deCryptData } from "../../shared/secret";
 
 const UPIDepositToken = () => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [amount, setAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);

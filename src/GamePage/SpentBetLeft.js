@@ -9,11 +9,11 @@ import { useQuery, useQueryClient } from "react-query";
 import { walletamountAviator } from "../services/apiCallings";
 import { dummy_aviator, rupees } from "../services/urls";
 import { gray } from "./color";
-import { enCryptData } from "../shared/secret";
+import { deCryptData, enCryptData } from "../shared/secret";
 
 const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
   const client = useQueryClient();
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const spent_amount1 = localStorage.getItem("spent_amount1");
   const amount_total =
     client.getQueriesData("walletamount_aviator")?.[0]?.[1]?.data?.data || 0;

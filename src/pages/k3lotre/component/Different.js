@@ -22,8 +22,9 @@ import SuccessCheck from "../../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from "../../../utils/theme";
 import Howtoplay from "./Howtoplay";
+import { deCryptData } from "../../../shared/secret";
 const Different = ({ timing, gid }) => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [open, setOpen] = useState(false);
   const [getBalance, setBalance] = useState(0);
   const [loding, setLoding] = useState(false);
