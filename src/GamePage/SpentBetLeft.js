@@ -9,6 +9,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { walletamountAviator } from "../services/apiCallings";
 import { dummy_aviator, rupees } from "../services/urls";
 import { gray } from "./color";
+import { enCryptData } from "../shared/secret";
 
 const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
   const client = useQueryClient();
@@ -50,11 +51,15 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
 
   const spentBit = async () => {
     setloding(true);
+
     const reqbody = {
       id: user_id,
       userid: user_id,
       amount: betValue || 0,
       button_type: "b1",
+    };
+    const dataToSend = {
+      payload: enCryptData(reqbody),
     };
     if (Number(wallet_amount?.wallet) < Number(reqbody?.amount))
       toast("Your wallet amount is low");
@@ -62,7 +67,7 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
       try {
         const response = await axios.post(
           `${dummy_aviator}/api/v1/apply-bet`,
-          reqbody
+          dataToSend
         );
 
         if (response?.data?.msg === "Data save successfully") {
