@@ -1,7 +1,7 @@
-// export const dummy_aviator = "https://zupeeter-timer-27jp.onrender.com"
-// export const domain = "https://zupeeter-timer-27jp.onrender.com"
-export const dummy_aviator = "http://localhost:9002"
-export const domain = "http://localhost:9002"
+export const dummy_aviator = "https://zupeeter-timer-27jp.onrender.com"
+export const domain = "https://zupeeter-timer-27jp.onrender.com"
+// export const dummy_aviator = "http://localhost:9002"
+// export const domain = "http://localhost:9002"
 export const domain_ovi_node = "https://api.zupeeter.com";
 // export const domain_ovi_node = "http://localhost:9002";
 
