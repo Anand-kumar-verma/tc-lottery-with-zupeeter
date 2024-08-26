@@ -22,10 +22,8 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
   ).toFixed(2);
 
   const [loding, setloding] = useState(false);
-  // const logindata = localStorage.getItem("aviator_data");
   const [selectedValue, setSelectedValue] = useState("Bet");
   const [betValue, setBetValue] = useState(10);
-  // const [openCustomDialogBox, setOpenCustomDialogBox] = useState(false);
   const initialValues = {
     custombetValue_auto_cash_out: (0).toFixed(2) || 0,
     isbetActive: false,
@@ -66,7 +64,7 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
     else {
       try {
         const response = await axios.post(
-          `${dummy_aviator}/api/v1/apply-bet`,
+          `${dummy_aviator}/api/v1/apply-bet-aviator-first`,
           dataToSend
         );
 
@@ -75,12 +73,7 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
           setTimeout(() => {
             client.refetchQueries("walletamount_aviator");
           }, 1000);
-
-          // client.refetchQueries("historydata");
-          // client.refetchQueries("walletamount_aviator");
-
           fk.setFieldValue("isStart1", true);
-          // getHistory();
         }
         toast.success(response?.data?.msg, {
           position: "top-center",
@@ -107,16 +100,6 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
   }, [fk.values.isFlying]);
 
   const cashOut = async (sec, mili) => {
-    // const reqbody = {
-    //   userid: (aviator_login_data && JSON.parse(aviator_login_data)?.id) || 2,
-    //   amount: betValue || 0,
-    //   gameno: gameno,
-    //   multiplier: Number(`${sec}.${mili}`),
-    // };
-    // try {
-    //   const response = await axios.get(
-    //     `${endpoint.cash_out}?userid=${reqbody.userid}&amount=${reqbody.amount}&multiplier=${reqbody.multiplier}&gamesno=${reqbody?.gameno}`
-    //   );
     const reqbody = {
       id_id: user_id,
       u_id: user_id,
@@ -129,69 +112,65 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
     };
     try {
       const response = await axios.post(
-        `${dummy_aviator}/api/v1/cash-out`,
-        reqbody
+        `${dummy_aviator}/api/v1/cash-out-aviator-last`,
+        dataToSend
       );
 
       setTimeout(() => {
         client.refetchQueries("walletamount_aviator");
       }, 2000);
 
-      // toast(response?.data?.message);
-      toast.success(
-        <div class="flex lg:gap-10 gap-5 !bg-[rgb(60, 179, 113,.5)]">
-          <p className="flex flex-col items-center">
-            <span className="text-[10px] text-gray-400">
-              You have cashed out
-            </span>
-            <span className="">{`${sec || 0}.${mili || 0} x`}</span>
-          </p>
-          <Button
-            sx={{
-              padding: 0,
-              overflow: "hidden",
-              position: "relative",
-              width: "130px",
-              background: "#4EAF11",
-              borderRadius: "40px",
-              color: "white",
-              textTransform: "capitalize",
-            }}
-          >
-            <Box sx={{ position: "absolute", left: 0, top: "3px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "30px" }} />
-            </Box>
-            <Box sx={{ position: "absolute", left: "20px", top: "25px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
-            </Box>
-            <Box sx={{ position: "absolute", left: "-9px", top: "25px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
-            </Box>
-            <Stack>
-              <Box>Win, INR</Box>{" "}
-              <Box>
-                <span className="">
-                  {`${
-                    betValue * seconds +
-                      Number(milliseconds?.toString()?.substring(0, 1)) || 0
-                  }.${
-                    Number(milliseconds?.toString()?.substring(1, 2) || 1) * 10
-                  } x`}
-                </span>
+      if (response?.data?.msg === "Data save successfully")
+        toast.success(
+          <div class="flex lg:gap-10 gap-5 !bg-[rgb(60, 179, 113,.5)]">
+            <p className="flex flex-col items-center">
+              <span className="text-[10px] text-gray-400">
+                You have cashed out
+              </span>
+              <span className="">{`${Number(response?.data?.time)} x`}</span>
+            </p>
+            <Button
+              sx={{
+                padding: 0,
+                overflow: "hidden",
+                position: "relative",
+                width: "130px",
+                background: "#4EAF11",
+                borderRadius: "40px",
+                color: "white",
+                textTransform: "capitalize",
+              }}
+            >
+              <Box sx={{ position: "absolute", left: 0, top: "3px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "30px" }} />
               </Box>
-            </Stack>
-            <Box sx={{ position: "absolute", right: 0, top: "3px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "30px" }} />
-            </Box>
-            <Box sx={{ position: "absolute", right: "20px", top: "25px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
-            </Box>
-            <Box sx={{ position: "absolute", right: "-9px", top: "25px" }}>
-              <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
-            </Box>
-          </Button>
-        </div>
-      );
+              <Box sx={{ position: "absolute", left: "20px", top: "25px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
+              </Box>
+              <Box sx={{ position: "absolute", left: "-9px", top: "25px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
+              </Box>
+              <Stack>
+                <Box>Win, INR</Box>{" "}
+                <Box>
+                  <span className="">
+                    {`${betValue * Number(response?.data?.time || 0)} x`}
+                  </span>
+                </Box>
+              </Stack>
+              <Box sx={{ position: "absolute", right: 0, top: "3px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "30px" }} />
+              </Box>
+              <Box sx={{ position: "absolute", right: "20px", top: "25px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
+              </Box>
+              <Box sx={{ position: "absolute", right: "-9px", top: "25px" }}>
+                <StarBorderIcon sx={{ color: "#469D0F", fontSize: "18px" }} />
+              </Box>
+            </Button>
+          </div>
+        );
+      else toast(response?.data?.msg);
     } catch (e) {
       toast(e?.response?.data?.message);
       console.log(e);

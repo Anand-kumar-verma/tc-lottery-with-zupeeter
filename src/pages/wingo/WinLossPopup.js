@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
 import Loss from "../../assets/images/loss.png";
 import win from "../../assets/images/winnner.png";
 import { endpoint } from "../../services/urls";
