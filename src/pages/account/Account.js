@@ -26,6 +26,7 @@ import { endpoint, front_end_domain } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import ImageSelectorModal from "./ImageSelectorModal";
 import CustomDate from "../../shared/CustomiztionDate/CustomDate";
+import { deCryptData } from "../../shared/secret";
 
 function Account() {
   const or_m_user_type = localStorage.getItem("or_m_user_type");
@@ -33,7 +34,7 @@ function Account() {
   const searchParams = new URLSearchParams(location.search);
   const transactionId = searchParams?.get("orderid");
   const client = useQueryClient();
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const navigate = useNavigate();
   const [opend, setOpend] = useState(false);
   const [selectedImages, setselectedImages] = useState("");

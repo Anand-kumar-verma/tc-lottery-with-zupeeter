@@ -30,10 +30,11 @@ import FalseCheck from "../../shared/check/FalseCheck";
 import SuccessCheck from "../../shared/check/SuccessCheck";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import { deCryptData } from "../../shared/secret";
 
 const BetNumber = ({ timing, gid }) => {
   // const next_step = useSelector((state) => state.aviator.next_step);
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [open, setOpen] = useState(false);
   const [selectNumber, setSelectNumber] = useState("");
   const [random, setRandomNumber] = useState(null);

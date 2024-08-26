@@ -7,9 +7,10 @@ import { BiMessageRounded } from "react-icons/bi";
 import { BsSignTurnRight } from "react-icons/bs";
 import { useQuery } from "react-query";
 import { endpoint } from "../../services/urls";
+import { deCryptData } from "../../shared/secret";
 
 const MybetHistory = () => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
 
 
 
