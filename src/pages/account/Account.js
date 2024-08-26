@@ -224,7 +224,7 @@ return (
               </Box>
             
       </Box>
-      <p className="flex justify-center gap-2 border-b-2 p-2 m-3 py-5  shadow"
+      <p className="flex justify-center gap-2 border-b-2 p-2 m-3 py-5"
         onClick={() => navigate("/account/Teamincome")}
       >
         <Typography> <GroupAddRounded className="text-[#F48901] !mt-1" /></Typography>
