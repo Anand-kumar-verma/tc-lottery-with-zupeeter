@@ -1,39 +1,57 @@
 import Avatar from "@mui/material/Avatar";
 import CircularProgress from "@mui/material/CircularProgress";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { endpoint } from "../services/urls";
 import { useSocket } from "../shared/socket/SocketContext";
 
 const AllBets = ({ formik, fk }) => {
   const [allbetsdata, setAllBetsData] = useState([]);
   const [isLoading, setisLoding] = useState(false);
   const socket = useSocket();
+  // const getAllBets = async () => {
+  //   try {
+  //     const response = await axios.get(endpoint.node_api.get_leder_data);
+  //     setAllBetsData(response?.data?.data || []);
+  //   } catch (e) {
+  //     toast(e?.message);
+  //     console.log(e);
+  //   }
+  // };
 
-  const getAllBets = async () => {
-    try {
-      const response = await axios.get(endpoint.node_api.get_leder_data);
-      setAllBetsData(response?.data?.data || []);
-    } catch (e) {
-      toast(e?.message);
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    getAllBets();
-  }, []);
+  // useEffect(() => {
+  //   getAllBets();
+  // }, []);
 
   useEffect(() => {
     const handleBet = (data) => {
-      // setcrashed(data);
-      console.log(data);
+      setAllBetsData((prevAllBetsData) => [...prevAllBetsData, data]);
+    };
+    const user_bet_cashoutFn = (data) => {
+      setAllBetsData((prevAllBetsData) =>
+        prevAllBetsData.map((i) => {
+          if (i.id == data?.id) {
+            return {
+              ...i, // Spread operator to copy existing properties
+              amountcashed: data?.amountcashed, // Update the amountcashed property
+              multiplier: data?.multiplier, // Update the multiplier property
+            };
+          } else {
+            return i;
+          }
+        })
+      );
     };
 
+    const handleSetLoader = (setloder) => {
+      setAllBetsData([]);
+    };
+
+    socket.on("setloder", handleSetLoader);
     socket.on("user_bet", handleBet);
+    socket.on("user_bet_cashout", handleBet);
     return () => {
       socket.off("user_bet", handleBet);
+      socket.off("setloder", handleSetLoader);
+      socket.off("user_bet_cashout", user_bet_cashoutFn);
     };
   }, []);
 

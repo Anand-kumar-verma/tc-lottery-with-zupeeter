@@ -67,7 +67,7 @@ const SpentBetLeft = ({ milliseconds, seconds, fk, formik }) => {
           `${dummy_aviator}/api/v1/apply-bet-aviator-first`,
           dataToSend
         );
-
+        console.log(response)
         if (response?.data?.msg === "Data save successfully") {
           localStorage.setItem("spent_amount1", reqbody?.amount);
           setTimeout(() => {
