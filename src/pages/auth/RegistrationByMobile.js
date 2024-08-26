@@ -28,6 +28,7 @@ import { endpoint } from "../../services/urls";
 import { signupSchemaValidataon } from "../../services/validation";
 import theme from "../../utils/theme";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
+import { enCryptData } from "../../shared/secret";
 const RegistrationByMobile = () => {
   const [username, setusername] = useState("");
   const [showPassword, setShowPassword] = React.useState(false);
@@ -82,7 +83,7 @@ const RegistrationByMobile = () => {
       if (res?.data?.status === true) {
         storeCookies();
         toast(res?.data?.msg);
-        localStorage.setItem("user_id", res?.data?.userid);
+        localStorage.setItem("user_id", enCryptData(res?.data?.userid));
         navigate("/dashboard");
       } else {
         toast(res?.data?.msg);

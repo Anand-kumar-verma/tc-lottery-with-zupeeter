@@ -56,7 +56,7 @@ const SupportPage = () => {
           <MenuItem value={30}>Bank Name Change</MenuItem>
           <MenuItem value={30}>Finding Upline Teacher </MenuItem>
           <MenuItem value={30}>Change Login Password</MenuItem>
-          <MenuItem value={30}>Change USDT Wallet Address</MenuItem>
+          <MenuItem value={30}>Change INR Wallet Address</MenuItem>
         </Select>
       </FormControl>
       <Button variant="contained" sx={{ width: '100%', mt: 2 }}>Submit Issue</Button>

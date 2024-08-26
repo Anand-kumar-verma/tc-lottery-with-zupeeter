@@ -33,9 +33,10 @@ import password from "../../assets/images/password.png";
 import phoneaa from "../../assets/images/phoneaa.png";
 import { storeCookies } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
+import { deCryptData, enCryptData } from "../../shared/secret";
 function Login() {
   const [value, setValue] = useState("one");
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const navigate = useNavigate();
   const [country, setCountry] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
@@ -78,8 +79,8 @@ function Login() {
       if (res?.data?.success === "200") {
         storeCookies();
         toast(res?.data?.message);
-        localStorage.setItem("user_id", res?.data?.data?.or_user_id);
-        localStorage.setItem("or_m_user_type", res?.data?.data?.or_m_user_type);
+        localStorage.setItem("user_id", enCryptData(res?.data?.data?.or_user_id));
+        localStorage.setItem("or_m_user_type", enCryptData(res?.data?.data?.or_m_user_type));
         // navigate("/dashboard");
         window.location.reload();
         navigate("/before-login");

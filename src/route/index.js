@@ -53,9 +53,12 @@ import ChangePassword from "../pages/password/ChangePassword";
 import AccountPassword from "../pages/password/AccountPassword";
 import TransactionPassword from "../pages/password/TransactionPassword";
 import Soon from "../pages/comingsoon/Soon";
+import LayoutAviator from "../GamePage/Layout";
+import PlayGame from "../GamePage/PlayGame";
 
 
 export const routes = [
+   
     {
         path:"/RiskDisclosureAgreement",
         element:<RiskDisclosureAgreement />

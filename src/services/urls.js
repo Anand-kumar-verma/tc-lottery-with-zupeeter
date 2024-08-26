@@ -1,10 +1,10 @@
-// export const domain = "https://zupeeter-timer.onrender.com/";
-// export const domain = "https://zupeeter-game-timer.onrender.com/";
-export const domain = "https://zupeeter-timer-27jp.onrender.com/"
-export const domain_ovi_node = "https://api.zupeeter.com";
-// export const domain_ovi_node = "https://zupeegame.info"
-// export const domain_ovi_node = "http://192.168.85.149:8000"
-// export const newdomain1 = "http://192.168.18.183:9002";
+// export const dummy_aviator = "https://zupeeter-timer-27jp.onrender.com"
+// export const domain = "https://zupeeter-timer-27jp.onrender.com"
+export const dummy_aviator = "http://localhost:9002"
+export const domain = "http://localhost:9002"
+// export const domain_ovi_node = "https://api.zupeeter.com";
+export const domain_ovi_node = "http://localhost:9002";
+
 export const rupees = "₹";
 export const zubgback = "#F48901";
 
@@ -86,6 +86,15 @@ export const endpoint = {
   trx_game_history: `${domain_ovi_node}/trx_result-node`, //////// done in node js
   trx_my_history_new: `${domain_ovi_node}/trx-my-history-node`, /// done  in node js
 
+
+  node_api:{
+    get_leder_data:`${domain}/api/v1/get-ledger-data`,
+    my_history: `${domain}/api/v1/my-history-by-user-id`,
+    login_with_node:`${domain}/api/v1/createuser`,
+    main_wallet:`${domain}/main-wallet-to-aviator`,
+    aviator_main:`${domain}/aviator-to-main-wallet`,
+    get_top_users: `${domain}/api/v1/get-top-users`,
+  }
   //////// testing only
   // trx_testing: `${domain_ovi_node}/trx_result-node-test`,
 };

@@ -33,6 +33,7 @@ import { endpoint, rupees } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
 import moment from "moment/moment";
+import { deCryptData } from "../../shared/secret";
 export default function ZupeeterTokenReport() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
@@ -40,7 +41,7 @@ export default function ZupeeterTokenReport() {
   const tableRef = React.useRef(null);
   const [receipt, setReceipt] = React.useState();
   const [amount, setAmount] = React.useState("");
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [loading, setIsLoading] = React.useState(false);
   const [status, setStatus] = React.useState(false);
 

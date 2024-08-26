@@ -54,6 +54,7 @@ import axios from "axios";
 import { endpoint } from "../../services/urls";
 import toast from "react-hot-toast";
 import ava from "../../assets/images/aviator.jpg";
+import { deCryptData, enCryptData } from "../../shared/secret";
 
 function Dashboard() {
   const progressCircle = useRef(null);
@@ -102,6 +103,12 @@ function Dashboard() {
       sessionStorage.clear();
       window.location.href = "/"; // Redirect to login page
     }
+  }, []);
+
+  useEffect(() => {
+    const data = enCryptData(1);
+    console.log(data);
+    console.log(deCryptData(data));
   }, []);
 
   const { isLoading: profileLoding, data: user } = useQuery(
@@ -592,7 +599,7 @@ function Dashboard() {
                   color="initial"
                   sx={style.winnername}
                 >
-                   <p className="!flex !flex-col">
+                  <p className="!flex !flex-col">
                     <span>{i?.or_m_user_id}</span>
                     <span>{i?.or_m_name}</span>
                   </p>

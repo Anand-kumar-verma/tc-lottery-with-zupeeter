@@ -37,8 +37,9 @@ import moment from "moment";
 
 import { endpoint, usdt_base_url } from "../../../services/urls";
 import QRScreen from "./QRScreen";
+import { deCryptData } from "../../../shared/secret";
 function Deposite() {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const [isAllValue, setIsAllValue] = useState(false);
   const [visibleData, setvisibleData] = useState([]);
   const [balance, setBalance] = useState("");
@@ -378,7 +379,7 @@ function Deposite() {
                 mt: 1,
               }}
             >
-              USDT
+              INR
             </Typography>
           </Stack>
         </Stack>

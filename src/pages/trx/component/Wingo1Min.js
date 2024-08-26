@@ -123,8 +123,8 @@ function Wingo1Min() {
       refetchOnMount: false,
       refetchOnReconnect: false,
       // retry: false,
-      // retryOnMount: false,
-      // refetchOnWindowFocus: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -189,7 +189,7 @@ function Wingo1Min() {
       refetchOnMount: false,
       refetchOnReconnect: false,
       // retry: false,
-      // retryOnMount: false,
+      retryOnMount: false,
       refetchOnWindowFocus: false,
     }
   );
@@ -198,8 +198,8 @@ function Wingo1Min() {
       refetchOnMount: false,
       refetchOnReconnect: false,
       // retry: false,
-      // retryOnMount: false,
-      // refetchOnWindowFocus: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     });
 
   React.useEffect(() => {

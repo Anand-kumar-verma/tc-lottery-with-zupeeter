@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { endpoint } from "./urls";
+import { dummy_aviator, endpoint } from "./urls";
+import { deCryptData } from "../shared/secret";
 
 export const storeCookies = () => {
   let expirationDate = new Date();
@@ -38,7 +39,7 @@ export const logOutFunction = async () => {
 };
 
 export const MyHistoryFn = async (gid) => {
-  const id = localStorage.getItem("user_id");
+  const id = deCryptData(localStorage.getItem("user_id"));
   try {
     const response = await axios.get(
       `${endpoint.my_history}?userid=${id}&limit=0&gameid=${gid}`
@@ -52,7 +53,7 @@ export const MyHistoryFn = async (gid) => {
 export const getBalanceFunction = async (setBalance) => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(`${endpoint.get_balance}`, reqBody);
     setBalance(response?.data?.earning);
@@ -66,7 +67,7 @@ export const getBalanceFunction = async (setBalance) => {
 export const getBetFunction = async (setBet) => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(
       `${endpoint.total_withdrawal_bet}`,
@@ -83,7 +84,7 @@ export const getBetFunction = async (setBet) => {
 export const My_All_HistoryFn = async (gid) => {
   try {
     const reqBody = {
-      id: localStorage.getItem("user_id"),
+      id: deCryptData(localStorage.getItem("user_id")),
       gameid: gid,
     };
     const response = await axios.post(`${endpoint.my_history}`, reqBody);
@@ -96,7 +97,7 @@ export const My_All_HistoryFn = async (gid) => {
 export const My_All_TRX_HistoryFn = async (gid) => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
       gameid: gid,
     };
     const response = await axios.post(`${endpoint.trx_my_history}`, reqBody);
@@ -109,7 +110,7 @@ export const My_All_TRX_HistoryFn = async (gid) => {
 export const My_All_TRX_HistoryFn_new = async (gid) => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
       gameid: gid,
     };
     const response = await axios.post(
@@ -127,7 +128,7 @@ export const My_All_TRX_HistoryFn_new = async (gid) => {
 export const MyTeamLevel = async () => {
   try {
     const reqBody = {
-      profile_id: localStorage.getItem("user_id"),
+      profile_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.my_team_level, reqBody);
     return response;
@@ -140,7 +141,7 @@ export const MyTeamLevel = async () => {
 export const registrationBonusFn = async (type) => {
   try {
     const reqBody = {
-      profile_id: localStorage.getItem("user_id"),
+      profile_id: deCryptData(localStorage.getItem("user_id")),
       type: type,
     };
     const response = await axios.post(endpoint.registration_bonus, reqBody);
@@ -153,7 +154,7 @@ export const registrationBonusFn = async (type) => {
 export const BankDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_bank_details, reqBody);
     return response;
@@ -165,7 +166,7 @@ export const BankDetailsFUnction = async () => {
 export const FundTransferHistoryFn = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.fund_transfer_history, reqBody);
     return response;
@@ -177,7 +178,7 @@ export const FundTransferHistoryFn = async () => {
 export const FundReciveHistoryFn = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.fund_recieve, reqBody);
     return response;
@@ -189,7 +190,7 @@ export const FundReciveHistoryFn = async () => {
 export const zupeeterTOkenHistory = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_ico_purchaseing, reqBody);
     return response;
@@ -202,7 +203,7 @@ export const zupeeterTOkenHistory = async () => {
 export const upiTOkenHistory = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_paying_api, reqBody);
     return response;
@@ -214,7 +215,7 @@ export const upiTOkenHistory = async () => {
 export const ViewSalaryIncomeFunction = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_salary_income, reqBody);
     return response;
@@ -226,7 +227,7 @@ export const ViewSalaryIncomeFunction = async () => {
 export const TokenLaunch = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.token_launch, reqBody);
     return response;
@@ -257,7 +258,7 @@ export const LastTrade = async () => {
 export const withdrawlHistoryFunction = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_withdrwal_new_inr, reqBody);
     return response;
@@ -269,7 +270,7 @@ export const withdrawlHistoryFunction = async () => {
 export const depositHistoryFunction = async () => {
   try {
     const reqBody = {
-      userid: localStorage.getItem("user_id"),
+      userid: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.wallet_deposit_history, reqBody);
     return response;
@@ -290,7 +291,7 @@ export const bankListFuncton = async () => {
 export const UPIDetailsFUnction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.view_upi_details, reqBody);
     return response;
@@ -310,7 +311,7 @@ export const upiListFuncton = async () => {
 };
 export const Promotionfunction = async () => {
   const reqBody = {
-    userid: localStorage.getItem("user_id"),
+    userid: deCryptData(localStorage.getItem("user_id")),
   };
   try {
     const response = await axios.post(endpoint.info_promotion, reqBody);
@@ -322,7 +323,7 @@ export const Promotionfunction = async () => {
 };
 export const TeamsubFunction = async () => {
   const reqBody = {
-    userid: localStorage.getItem("user_id"),
+    userid: deCryptData(localStorage.getItem("user_id")),
   };
   try {
     const response = await axios.post(endpoint.team_info, reqBody);
@@ -335,7 +336,7 @@ export const TeamsubFunction = async () => {
 export const TeamFunction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.team_report, reqBody);
     return response;
@@ -356,9 +357,37 @@ export const TeamDatafunction = async () => {
 export const ProfileDataFunction = async () => {
   try {
     const reqBody = {
-      user_id: localStorage.getItem("user_id"),
+      user_id: deCryptData(localStorage.getItem("user_id")),
     };
     const response = await axios.post(endpoint.profile_function, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const GetTopFn = async () => {
+  try {
+    const response = await axios.get(endpoint.node_api.get_top_users);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
+export const walletamountAviator = async () => {
+  // try {
+  //   const response = await axios.get(
+  //     `${endpoint.userwallet}?userid=${user_id}`
+  //   );
+  //   return response;
+  try {
+    const user =deCryptData(localStorage.getItem("user_id"))
+
+    const response = await axios.post(
+      `${dummy_aviator}/api/v1/get-wallet-amount-by-id`,
+      { id: user }
+    );
     return response;
   } catch (e) {
     toast(e?.message);
@@ -404,7 +433,7 @@ export const Update_ProfileFn = async (selectedImages, client) => {
   try {
     if (selectedImages) {
       const reqBody = {
-        user_id: localStorage.getItem("user_id"),
+        user_id: deCryptData(localStorage.getItem("user_id")),
         txtprofile_pic: selectedImages?.[0],
       };
       const response = await axios.post(
@@ -420,7 +449,7 @@ export const Update_ProfileFn = async (selectedImages, client) => {
   }
 };
 export const TimerFn = async (gid) => {
-  const id = localStorage.getItem("user_id");
+  const id = deCryptData(localStorage.getItem("user_id"));
   try {
     const response = await axios.get(
       `${endpoint.get_royality_date}?user_id=${id}`

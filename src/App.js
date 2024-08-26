@@ -9,8 +9,11 @@ import Dashboard from "./pages/home/Dashboard";
 import Test from "./pages/test";
 import { routes } from "./route";
 import { TeamsubFunction } from "./services/apiCallings";
+import LayoutAviator from "./GamePage/Layout";
+import PlayGame from "./GamePage/PlayGame";
+import { deCryptData } from "./shared/secret";
 function App() {
-  const isAuthenticated = localStorage.getItem("user_id");
+  const isAuthenticated = deCryptData(localStorage.getItem("user_id"));
   useQuery(["team_count"], () => TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
@@ -41,7 +44,12 @@ function App() {
       <Route path="/register" element={<Register />}></Route>
       <Route path="/before-login" element={<BeforeLogin />}></Route>
       {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
-      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route
+        path="/playgame"
+        element={<LayoutAviator component={<PlayGame />} />}
+      />
+
       {isAuthenticated ? (
         routes?.map((route, index) => {
           return (

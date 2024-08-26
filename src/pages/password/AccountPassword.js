@@ -5,9 +5,10 @@ import React from "react";
 import toast from "react-hot-toast";
 import Layout from "../../component/layout/Layout";
 import { endpoint } from "../../services/urls";
+import { deCryptData } from "../../shared/secret";
 
 const AccountPassword = () => {
-  const user_id = localStorage.getItem("user_id");
+  const user_id = deCryptData(localStorage.getItem("user_id"));
   const initialValue = {
     old_pass: "",
     new_pass: "",
