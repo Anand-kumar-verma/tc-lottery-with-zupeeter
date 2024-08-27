@@ -19,7 +19,6 @@ import music from "../../assets/images/music.png";
 import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
-import { wallet_real_balanceFn } from "../../redux/slices/counterSlice";
 import { getBalanceFunction } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
