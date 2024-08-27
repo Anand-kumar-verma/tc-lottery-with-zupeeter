@@ -55,6 +55,7 @@ import TransactionPassword from "../pages/password/TransactionPassword";
 import Soon from "../pages/comingsoon/Soon";
 import LayoutAviator from "../GamePage/Layout";
 import PlayGame from "../GamePage/PlayGame";
+import Ticket from "../pages/Ticket/Ticket";
 
 
 export const routes = [
@@ -66,6 +67,10 @@ export const routes = [
     {
         path:"/supportPage",
         element:<SupportPage />
+    },
+    {
+        path:"/ticket",
+        element:< Ticket/>
     },
     {
         path:"/dashboard",
