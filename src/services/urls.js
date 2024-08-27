@@ -86,6 +86,8 @@ export const endpoint = {
   trx_bet_placed_node: `${domain_ovi_node}/bid-placed-node`,
   trx_game_history: `${domain_ovi_node}/trx_result-node`, //////// done in node js
   trx_my_history_new: `${domain_ovi_node}/trx-my-history-node`, /// done  in node js
+  ticket_raised: `${domain_ovi_node}/ticket-raised`,
+  ticket_raised_history: `${domain_ovi_node}/ticket-raised-history`,
 
 
   node_api:{

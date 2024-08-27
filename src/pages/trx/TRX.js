@@ -2,11 +2,10 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import {
   Box,
-  Button,
   Container,
   Dialog,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -20,6 +19,7 @@ import music from "../../assets/images/music.png";
 import musicoff from "../../assets/images/musicoff.png";
 import refresh from "../../assets/images/refresh.png";
 import time from "../../assets/images/time.png";
+import { wallet_real_balanceFn } from "../../redux/slices/counterSlice";
 import { getBalanceFunction } from "../../services/apiCallings";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -28,7 +28,6 @@ import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
-import { wallet_real_balanceFn } from "../../redux/slices/counterSlice";
 
 function TRX() {
   const [musicicon, setmusicicon] = useState(true);

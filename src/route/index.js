@@ -70,7 +70,7 @@ export const routes = [
     },
     {
         path:"/ticket",
-        element:< Ticket/>
+        element:<Ticket/>
     },
     {
         path:"/dashboard",
