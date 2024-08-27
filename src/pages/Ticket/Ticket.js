@@ -21,6 +21,7 @@ import { getTicketRaisedHistory } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
+import { deCryptData } from "../../shared/secret";
 
 export default function Ticket() {
   const [image, setImage] = React.useState(null);
@@ -41,7 +42,7 @@ export default function Ticket() {
       if(fk.values.type === "Select Type")
         return "Select Type of issues."
       const reqBody = {
-        user_id: localStorage.getItem("user_id"),
+        user_id: deCryptData(localStorage.getItem("user_id")),
         files: image,
         type: Number(fk.values.type),
         description: fk.values.description,

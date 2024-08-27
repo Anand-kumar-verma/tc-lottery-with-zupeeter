@@ -461,7 +461,7 @@ export const TimerFn = async (gid) => {
   }
 };
 export const getTicketRaisedHistory = async () => {
-  const id = localStorage.getItem("user_id");
+  const id = deCryptData(localStorage.getItem("user_id"))
   try {
     const response = await axios.get(
       `${endpoint.ticket_raised_history}?user_id=${id}`
