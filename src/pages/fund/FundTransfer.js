@@ -59,7 +59,7 @@ const FundTransfer = () => {
         !reqBody.txtwallet
       )
         return toast("Plese enter all data");
-        return toast("Softeware is under maintainence.")
+        // return toast("Softeware is under maintainence.")
       insertFundFn(reqBody);
     },
   });
