@@ -42,6 +42,7 @@ const MyBets = () => {
   };
 
   const result = data?.data?.data || [];
+  console.log(result);
   if (isLoading) return <div className="flex justify-center items-center">
     <CircularProgress />
   </div>;
@@ -64,7 +65,7 @@ const MyBets = () => {
               <div className=" grid grid-cols-3 place-items-start">
                 <div>
                 <span className="text-[10px]">
-                      {moment(i?.createdAt || Date.now()).format("HH:mm")}
+                      { i?.createdAt  && i?.createdAt?.substring(11,16)}
                     </span>
                 </div>
                 <div className="flex gap-2 items-center">

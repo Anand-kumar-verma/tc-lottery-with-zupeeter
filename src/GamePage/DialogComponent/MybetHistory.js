@@ -68,7 +68,7 @@ const MybetHistory = () => {
               <div>
                 <p className="flex flex-col">
                   <span className="text-[10px]">
-                    {moment(i?.createdAt || Date.now()).format("HH:mm")}
+                  { i?.createdAt  && i?.createdAt?.substring(11,16)}
                   </span>
                   <span className="text-[10px]">
                     {moment(i?.createdAt || Date.now()).format("DD-MM-YYYY")}

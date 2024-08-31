@@ -275,7 +275,7 @@ const PlayGame = () => {
     return (
       <div
         className={`no-scrollbar px-1 py-1 flex gap-1 flex-wrap h-[24px] overflow-x-scroll overflow-y-hidden rounded-full`}
-        style={{ flexDirection: "row-reverse" }} // Scroll from right to left
+        style={{ flexDirection: "row" }} // Scroll from right to left
       >
         {result
           ?.slice()
