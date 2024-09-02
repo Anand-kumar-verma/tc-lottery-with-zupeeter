@@ -76,14 +76,14 @@ const TeamIncome = () => {
             Bank
           </span>
         </Box>
-        <Box sx={style.fx}>
+        {/* <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
             onClick={() => navigate("/ico-token")}
           >
             ICO Token
           </span>
-        </Box>
+        </Box> */}
         <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
@@ -100,14 +100,14 @@ const TeamIncome = () => {
          Ticket Generate
         </span>
         </Box>
-        <Box sx={style.fx}>
+        {/* <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
             onClick={() => navigate("/upi-deposit-token")}
           >
             UPI Deposit Token
           </span>
-        </Box>
+        </Box> */}
         <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
@@ -116,14 +116,14 @@ const TeamIncome = () => {
             Password
           </span>
         </Box>
-        <Box sx={style.fx}>
+        {/* <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
             onClick={() => navigate("/zupeeter-token")}
           >
             Zupeeter Token
           </span>
-        </Box>
+        </Box> */}
         <Box sx={style.fx}>
           <span
             className="!text-blue-500 cursor-pointer"
