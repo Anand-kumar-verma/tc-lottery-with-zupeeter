@@ -188,8 +188,13 @@ return (
                 <Typography>Withdraw</Typography>
               </Box> 
               <Box className="flex flex-col justify-center cursor-pointer items-center"
-              onClick={() => document.location.href = `https://zupeegame.info/?user_id=${user_id}`}
-            >
+             onClick={() => {
+                if (or_m_user_type === "Dummy User") {
+                  toast("Dummy User");
+                } else {
+                  navigate('/usdt-deposit');
+                }
+              }}>
               <Typography><img src={trx} alt="" className="w-8" /></Typography>
               <Typography className="">USDT</Typography>
             </Box>

@@ -91,9 +91,6 @@ export default function Banks() {
     [page, rowsPerPage, game_history_data]
   );
 
-  console.log(visibleRows);
-
-
   
   const initialValue = {
     bank_name: openDialogBox,

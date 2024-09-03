@@ -35,7 +35,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import moment from "moment";
 
-import { endpoint, usdt_base_url } from "../../../services/urls";
+import { endpoint } from "../../../services/urls";
 import QRScreen from "./QRScreen";
 import { deCryptData } from "../../../shared/secret";
 function Deposite() {
@@ -319,7 +319,7 @@ function Deposite() {
               UPI x QR
             </Typography>
           </Stack>
-          <Stack
+          {/* <Stack
             sx={{
               width: "32%",
 
@@ -348,10 +348,10 @@ function Deposite() {
             >
               UPI x PAYTM
             </Typography>
-          </Stack>
+          </Stack> */}
           <Stack
             onClick={() =>
-              (document.location.href = `${usdt_base_url}/?user_id=${user_id}`)
+              navigate("/usdt-deposit")
             }
             sx={{
               width: "32%",

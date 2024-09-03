@@ -17,6 +17,7 @@ export const download_app_url = "https://zupeeter.com/ZUPEETER.pdf";
 
 export const endpoint = {
   get_royality_date: `${domain_ovi_node}/get-royality-date`,
+  usdt_deposit_request: `${baseUrl}/api/insert_coin_payment_gateway`,
   newlogin: `${baseUrl}/api/newlogin`,
   register_candidate_mobile: `${baseUrl}/api/register_candidate`,
   register_candidate_email: `${baseUrl}/api/register_candidate_new`,

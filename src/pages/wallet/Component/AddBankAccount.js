@@ -52,7 +52,7 @@ function AddBankAccount() {
           <Select options={options} placeholder='Please select a bank ' sx={{ background: 'red !important' }} />
         </Box>
       </Box>
-    </Container >);
+    </Container>);
 }
 export default AddBankAccount;
 

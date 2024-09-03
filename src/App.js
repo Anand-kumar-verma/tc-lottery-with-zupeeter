@@ -14,7 +14,7 @@ import PlayGame from "./GamePage/PlayGame";
 import { deCryptData } from "./shared/secret";
 function App() {
   const isAuthenticated = deCryptData(localStorage.getItem("user_id"));
-  useQuery(["team_count"], () => TeamsubFunction(), {
+  useQuery(["team_count"], () => isAuthenticated && TeamsubFunction(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
@@ -23,19 +23,6 @@ function App() {
     retryOnMount: false,
     refetchOnWindowFocus: false,
   });
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsOpenSplash(false);
-  //   }, 1000);
-  // }, []);
-
-  // if (isOpenSplash)
-  //   return (
-  //     <Layout header={false} footer={false}>
-  //       <SplashScreen />
-  //     </Layout>
-  //   );
 
   return (
     <Routes>
