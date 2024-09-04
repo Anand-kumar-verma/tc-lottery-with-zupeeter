@@ -300,6 +300,18 @@ export const UPIDetailsFUnction = async () => {
     console.log(e);
   }
 };
+export const USDTAddress = async () => {
+  try {
+    const reqBody = {
+      userid: deCryptData(localStorage.getItem("user_id")),
+    };
+    const response = await axios.post(endpoint.view_usdt_address, reqBody);
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const upiListFuncton = async () => {
   try {
     const response = await axios.get(endpoint.bank);
@@ -382,7 +394,7 @@ export const walletamountAviator = async () => {
   //   );
   //   return response;
   try {
-    const user =deCryptData(localStorage.getItem("user_id"))
+    const user = deCryptData(localStorage.getItem("user_id"));
 
     const response = await axios.post(
       `${dummy_aviator}/api/v1/get-wallet-amount-by-id`,
@@ -461,7 +473,7 @@ export const TimerFn = async (gid) => {
   }
 };
 export const getTicketRaisedHistory = async () => {
-  const id = deCryptData(localStorage.getItem("user_id"))
+  const id = deCryptData(localStorage.getItem("user_id"));
   try {
     const response = await axios.get(
       `${endpoint.ticket_raised_history}?user_id=${id}`

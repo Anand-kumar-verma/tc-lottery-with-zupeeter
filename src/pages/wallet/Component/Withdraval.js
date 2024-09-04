@@ -312,6 +312,8 @@ function Withdraval() {
             </Typography>
           </Stack>
           <Stack
+          onClick={()=>navigate("/usdt-withdrawl-request")}
+          className={"!cursor-pointer"}
             sx={{
               width: "120px",
               background: "#FFFFFF",

@@ -56,6 +56,8 @@ import Soon from "../pages/comingsoon/Soon";
 import Ticket from "../pages/Ticket/Ticket";
 import USDTDeposit from "../pages/wallet/Component/USDTDeposit";
 import QRSCREENUSDT from "../pages/wallet/Component/QRSCREENUSDT";
+import UsdtDetails from "../pages/bank/UsdtDetails";
+import USDTWithdrawlRequest from "../pages/wallet/Component/USDTWithdrawlRequest";
 
 
 export const routes = [
@@ -63,6 +65,14 @@ export const routes = [
     {
         path:"/RiskDisclosureAgreement",
         element:<RiskDisclosureAgreement />
+    },
+    {
+        path:"/usdt-address",
+        element:<UsdtDetails />
+    },
+    {
+        path:"/usdt-withdrawl-request",
+        element:<USDTWithdrawlRequest />
     },
     {
         path:"/qr-screen-usdt",

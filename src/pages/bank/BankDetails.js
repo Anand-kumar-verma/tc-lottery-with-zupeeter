@@ -24,16 +24,26 @@ function BankDetails() {
         />
       ),
     },
-    // {
-    //   to: "/banks-upi",
-    //   name: "UPI Details",
-    //   logo: (
-    //     <RedeemIcon
-    //       className="!w-[40px] !h-[40px] !text-[#F48901]"
-    //       color="#8f5206"
-    //     />
-    //   ),
-    // },
+    {
+      to: "/banks-upi",
+      name: "UPI Details",
+      logo: (
+        <RedeemIcon
+          className="!w-[40px] !h-[40px] !text-[#F48901]"
+          color="#8f5206"
+        />
+      ),
+    },
+    {
+      to: "/usdt-address",
+      name: "USDT Address",
+      logo: (
+        <RedeemIcon
+          className="!w-[40px] !h-[40px] !text-[#F48901]"
+          color="#8f5206"
+        />
+      ),
+    },
   ];
   return (
     <Layout>

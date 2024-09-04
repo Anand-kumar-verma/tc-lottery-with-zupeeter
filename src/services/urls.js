@@ -47,6 +47,7 @@ export const endpoint = {
   wallet_deposit_history: `${baseUrl}/api/wallet_deposit`,
   wallet_deposit: `${baseUrl}/api/wallet_deposit_insert`,
   wallet_withdrawl: `${baseUrl}/api/insert_withdrawal_request_inr_new`,
+  usdt_withdrawl: `${baseUrl}/api/insert_withdrawal_request_usdt`,
   withdrawl_status: `${baseUrl}/api/status`,
   // payment
   payin_response: `${baseUrl}/api/payin_response`,
@@ -63,6 +64,8 @@ export const endpoint = {
   registration_bonus: `${baseUrl}/api/view_direct_referral_income`,
   view_bank_details: `${baseUrl}/api/view_bank_details_new`,
   view_upi_details: `${baseUrl}/api/view_upi_details`,
+  view_usdt_address: `${baseUrl}/api/view_wallet_address`,
+  update_usdt_address: `${baseUrl}/api/update_usdt_address`,
   token_launch: `${baseUrl}/api/token_launch`,
   info_promotion: `${baseUrl}/api/get_info`,
   team_info: `${baseUrl}/api/team_count`,

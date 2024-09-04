@@ -142,11 +142,12 @@ function Activity() {
           </Typography>
         </Box>
         <Box sx={style.actimg2}>
-        <Box
+          <Box
             component="img"
             sx={{ width: "100%", borderRadius: "10px 10px 0px 0px" }}
             src={ava}
-          ></Box></Box>
+          ></Box>
+        </Box>
         {/* <Box sx={style.actimg2}>
           <Box
             component="img"

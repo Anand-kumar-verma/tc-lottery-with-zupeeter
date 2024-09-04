@@ -7,7 +7,7 @@ import {
   Divider,
   Stack,
   TablePagination,
-  TextField
+  TextField,
 } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,9 +24,7 @@ import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
-import {
-  UPIDetailsFUnction
-} from "../../services/apiCallings";
+import { UPIDetailsFUnction, USDTAddress } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -40,21 +38,21 @@ export default function UsdtDetails() {
   const client = useQueryClient();
   const [openDialogBox, setOpenDialogBox] = React.useState(false);
   const { isLoading, data: game_history } = useQuery(
-    ["upi_details"],
-    () => UPIDetailsFUnction(),
+    ["usdt_address_details"],
+    () => USDTAddress(),
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry:false,
-      retryOnMount:false,
-      refetchOnWindowFocus:false
+      retry: false,
+      retryOnMount: false,
+      refetchOnWindowFocus: false,
     }
   );
 
   // const game_history_data = game_history?.data?.data;
   const game_history_data = React.useMemo(
-    () => game_history?.data?.earning?.bank_details,
-    [game_history?.data?.earning?.bank_details]
+    () => game_history?.data,
+    [game_history?.data]
   );
 
   const handleChangePage = (event, newPage) => {
@@ -68,7 +66,7 @@ export default function UsdtDetails() {
 
   const visibleRows = React.useMemo(
     () =>
-      game_history_data?.slice(
+      game_history_data?.data?.slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
@@ -76,31 +74,19 @@ export default function UsdtDetails() {
   );
 
   const initialValue = {
-    name:
-      visibleRows?.find((i) => i?.regid === openDialogBox)?.or_m_name ||
-      "",
-    upi_type: visibleRows?.find((i) => i?.regid === openDialogBox)?.Ifsc || "",
-    upi_no: visibleRows?.find((i) => i?.regid === openDialogBox)?.AcNo || "",
-    upi_id: visibleRows?.find((i) => i?.regid === openDialogBox)?.Branch || "",
+    address:
+      visibleRows?.find((i) => i?.regid === openDialogBox)
+        ?.or_m_wallet_address || "",
   };
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
       const reqBody = {
-        user_id: user_id,
-        txtname: fk.values.name,
-        txtupitype: fk.values.upi_type,
-        textupinumber: fk.values.upi_no,
-        txtupiid: fk.values.upi_id,
+        userid: user_id,
+        txtaddress: fk.values.address,
       };
-      if (
-        !reqBody.user_id ||
-        !reqBody.txtname ||
-        !reqBody.txtupitype ||
-        !reqBody.textupinumber ||
-        !reqBody.txtupiid
-      )
+      if (!reqBody.userid || !reqBody.txtaddress)
         return toast("Plese enter all data");
       updateBankDetails(reqBody);
     },
@@ -108,7 +94,7 @@ export default function UsdtDetails() {
 
   async function updateBankDetails(reqBody) {
     try {
-      const res = await axios.post(endpoint?.update_upi_details, reqBody);
+      const res = await axios.post(endpoint?.update_usdt_address, reqBody);
       toast(res?.data?.earning?.msg);
       console.log(res);
       if (res?.data?.status) {
@@ -117,7 +103,7 @@ export default function UsdtDetails() {
     } catch (e) {
       console.log(e);
     }
-    client.refetchQueries("upi_details");
+    client.refetchQueries("usdt_address_details");
   }
 
   const downloadExcel = () => {
@@ -212,16 +198,13 @@ export default function UsdtDetails() {
                     Action
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    UPI Holder Name
+                    User Id
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    UPI ID
+                    Name
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    UPI Type
-                  </TableCell>
-                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
-                    UPI No
+                    Wallet Address
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -246,16 +229,13 @@ export default function UsdtDetails() {
                         </Button>
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.or_m_name}
+                        {i?.Login_Id}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.Branch}
+                        {i?.name}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.Ifsc}
-                      </TableCell>
-                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
-                        {i?.AcNo}
+                        {i?.or_m_wallet_address}
                       </TableCell>
                     </TableRow>
                   );
@@ -269,7 +249,7 @@ export default function UsdtDetails() {
                 sx={{ background: "#FBA343", color: "white" }}
                 rowsPerPageOptions={[10, 15, 20]}
                 component="div"
-                count={game_history_data?.length}
+                count={game_history_data?.data?.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -283,7 +263,7 @@ export default function UsdtDetails() {
           <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
             <span className="col-span-2 justify-end">
               <div className="flex justify-between">
-                <span className="font-bold">Update UPI Details</span>
+                <span className="font-bold">Update USDT Address</span>
                 <CloseIcon
                   className="cursor-pointer"
                   onClick={() => setOpenDialogBox(false)}
@@ -291,39 +271,16 @@ export default function UsdtDetails() {
               </div>
               <Divider />
             </span>
-            <span>Name*</span>
+            <span className="!col-span-2">USDT Address*</span>
             <TextField
-              id="name"
-              name="name"
-              value={fk.values.name}
+              id="address"
+              name="address"
+              value={fk.values.address}
               onChange={fk.handleChange}
-              placeholder="Select Bank"
-              className="!w-[100%] !py-0"
+              placeholder="USDT Address"
+              className="!w-[100%] !py-0 !col-span-2"
             />
-            <span>UPI Type*</span>
-            <TextField
-              id="upi_type"
-              name="upi_type"
-              value={fk.values.upi_type}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
-            <span>UPI No*</span>
-            <TextField
-              id="upi_no"
-              name="upi_no"
-              value={fk.values.upi_no}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
-            <span>UPI Id*</span>
-            <TextField
-              id="upi_id"
-              name="upi_id"
-              value={fk.values.upi_id}
-              onChange={fk.handleChange}
-              className="!w-[100%]"
-            />
+
             <div className="col-span-2 flex gap-2 mt-4">
               <Button
                 className="!bg-[#FD565C] !text-white"
