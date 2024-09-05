@@ -29,16 +29,14 @@ import CustomDate from "../../shared/CustomiztionDate/CustomDate";
 import { deCryptData } from "../../shared/secret";
 
 function Account() {
-  const or_m_user_type = localStorage.getItem("or_m_user_type");
+  const or_m_user_type = deCryptData(localStorage.getItem("or_m_user_type"))
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const transactionId = searchParams?.get("orderid");
   const client = useQueryClient();
-  const user_id = deCryptData(localStorage.getItem("user_id"));
   const navigate = useNavigate();
   const [opend, setOpend] = useState(false);
   const [selectedImages, setselectedImages] = useState("");
-  console.log(selectedImages)
   const images = [
     "https://mui.com/static/images/avatar/2.jpg",
     "https://mui.com/static/images/avatar/3.jpg",
