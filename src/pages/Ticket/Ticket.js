@@ -39,8 +39,7 @@ export default function Ticket() {
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if(fk.values.type === "Select Type")
-        return "Select Type of issues."
+      if (fk.values.type === "Select Type") return "Select Type of issues.";
       const reqBody = {
         user_id: deCryptData(localStorage.getItem("user_id")),
         files: image,
@@ -133,16 +132,18 @@ export default function Ticket() {
 
             <span className="!text-white !my-3 !text-sm">Attachment*</span>
             <div>
-            <input
-              type="file"
-              id="myfile"
-              name="myfile"
-              className="!text-sm !my-3"
-              // onChange={(e) => setImage(e.target.files[0])}
-              onChange={handleFileChange}
-              required
-            />
-            <p className="!text-red-700 !text-[10px]">File size should be less than 10MB</p>
+              <input
+                type="file"
+                id="myfile"
+                name="myfile"
+                className="!text-sm !my-3"
+                // onChange={(e) => setImage(e.target.files[0])}
+                onChange={handleFileChange}
+                required
+              />
+              <p className="!text-red-700 !text-[10px]">
+                File size should be less than 10MB
+              </p>
             </div>
             <span className="!text-white !my-3 !text-sm">Description*</span>
             <textarea
@@ -158,7 +159,7 @@ export default function Ticket() {
             <div className="col-span-2 flex  justify-end gap-2 mt-4">
               <Button
                 className="!bg-[#FD565C] !text-white"
-                  onClick={() => fk.handleReset()}
+                onClick={() => fk.handleReset()}
               >
                 Cancel
               </Button>
@@ -333,12 +334,18 @@ export default function Ticket() {
               </div>
 
               {i?.status === 1 && (
-                <div> 
+                <div>
                   <p className="!text-green-500 !font-bold !w-full flex justify-between items-center">
-                  <span>Resolution:</span>
-                    <span className="!text-[10px]">{moment(i?.resolution_date)?.format("YYYY-MM-DD HH:mm:ss")}</span>
+                    <span>Resolution:</span>
+                    <span className="!text-[10px]">
+                      {moment(i?.resolution_date)?.format(
+                        "YYYY-MM-DD HH:mm:ss"
+                      )}
+                    </span>
                   </p>
-                  <p className="!px-5 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-black">{i?.resolution}</p>
+                  <p className="!px-5 !w-full !overflow-auto border-2 !border-gray-400 !min-h-[100px] !text-black">
+                    {i?.resolution}
+                  </p>
                 </div>
               )}
               <p
