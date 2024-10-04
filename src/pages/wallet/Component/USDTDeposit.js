@@ -4,8 +4,11 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
   IconButton,
+  MenuItem,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
@@ -31,6 +34,7 @@ import withdravalhistory from "../../../assets/images/withdrawalhistory.png";
 import {
   depositHistoryFunction,
   getBalanceFunction,
+  getQraddress,
 } from "../../../services/apiCallings";
 import { endpoint } from "../../../services/urls";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
@@ -43,6 +47,16 @@ function USDTDeposit() {
   const [balance, setBalance] = useState("");
   const audioRefMusic = React.useRef(null);
   const [loding, setloding] = useState(false);
+
+  const { data:qr } = useQuery(["qr"], () => getQraddress(), {
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+  const resqr = qr?.data?.data || [];
+  const selectedUPIDetails = Array.isArray(res)
+  ? res.find((item) => item?.id === fk.values.deposit_type)
+  : null;
   const { isLoading: history, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -433,6 +447,59 @@ function USDTDeposit() {
             $ 1000
           </Button>
         </Stack>
+        <FormControl fullWidth sx={{ my: "10px" }}>
+              <Stack direction="row" className="loginlabel">
+                <Typography variant="h3" sx={{ color: "white" }}>
+                  Select Network
+                </Typography>
+              </Stack>
+              <TextField
+                id="deposit_type"
+                name="deposit_type"
+                // value={fk.values.deposit_type}
+                onChange={fk.handleChange}
+                placeholder="Select UPI"
+                className="!w-[100%] !bg-[#D9AC4F] !text-[#8f5206] !mt-5"
+                select
+                size="small"
+              >
+                {Array.isArray(res) &&
+                  resqr?.map((i) => (
+                    <MenuItem
+                      className="!text-[#8f5206] "
+                      key={i.id}
+                      value={i.id}
+                    >
+                      {i.usdt_type === "USDT.BEP20" ?
+                       "USDT Bep20" :
+                       "USDT Trc20" }
+                    </MenuItem>
+                  ))}
+              </TextField>
+              {selectedUPIDetails && (
+                <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
+                  <div className="w-72">
+                    <img src={selectedUPIDetails?.qr_code} alt="" />
+                  </div>
+                  <div className="pt-4 gap-2">
+                    <p className="!bg-white !text-xs font-bold px-1 !text-[#8f5206]">
+                      {selectedUPIDetails?.usdt_address}
+                    </p>
+                    <div className="w-full flex justify-center mt-5">
+                      <Button
+                        size="small !py-1"
+                        className="!bg-[#8f5206]  !text-white place-items-center"
+                        // onClick={() =>
+                        //   functionTOCopy(selectedUPIDetails?.usdt_address)
+                        // }
+                      >
+                        Copy
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+               )} 
+            </FormControl>
         <Paper
           component="form"
           sx={{

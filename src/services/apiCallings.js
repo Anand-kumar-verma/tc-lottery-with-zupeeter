@@ -387,12 +387,20 @@ export const GetTopFn = async () => {
     console.log(e);
   }
 };
+export const getQraddress = async () => {
+  const user_id = deCryptData(localStorage.getItem("user_id"));
+  try {
+    const response = await axios.get(
+      `${endpoint.admin_qr_address}?user_id=${user_id}`
+    );
+    return response;
+  } catch (e) {
+    toast(e?.message);
+    console.log(e);
+  }
+};
 export const walletamountAviator = async () => {
-  // try {
-  //   const response = await axios.get(
-  //     `${endpoint.userwallet}?userid=${user_id}`
-  //   );
-  //   return response;
+
   try {
     const user = deCryptData(localStorage.getItem("user_id"));
 
