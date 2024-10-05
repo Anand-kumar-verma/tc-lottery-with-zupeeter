@@ -1,5 +1,5 @@
-export const dummy_aviator = "https://zupeeter-timer-27jp.onrender.com"
-export const domain = "https://zupeeter-timer-27jp.onrender.com"
+export const dummy_aviator = "https://zupeeter-timer-27jp.onrender.com";
+export const domain = "https://zupeeter-timer-27jp.onrender.com";
 // export const dummy_aviator = "http://localhost:9002"
 // export const domain = "http://localhost:9002"
 export const domain_ovi_node = "https://api.zupeeter.com";
@@ -76,7 +76,7 @@ export const endpoint = {
   view_paying_api: `${baseUrl}/api/view_paying_api`,
   update_profile_pic: `${baseUrl}/api/update_profile_pic`,
   win_list_last: `${baseUrl}/api/win_list_last`,
- 
+
   payin_status: `${baseUrl}/api/payin_api`,
   swnl_pay_in_api: `${baseUrl}/api/insert_fund_request_vapayout`,
 
@@ -95,14 +95,14 @@ export const endpoint = {
   admin_qr_address: `${local}/admin-qr-address`,
   deposite_usdt_payin: `${domain_ovi_node}/payin-request`,
 
-  node_api:{
-    get_leder_data:`${domain}/api/v1/get-ledger-data`,
+  node_api: {
+    get_leder_data: `${domain}/api/v1/get-ledger-data`,
     my_history: `${domain}/api/v1/my-history-by-user-id`,
-    login_with_node:`${domain}/api/v1/createuser`,
-    main_wallet:`${domain}/main-wallet-to-aviator`,
-    aviator_main:`${domain}/aviator-to-main-wallet`,
+    login_with_node: `${domain}/api/v1/createuser`,
+    main_wallet: `${domain}/main-wallet-to-aviator`,
+    aviator_main: `${domain}/aviator-to-main-wallet`,
     get_top_users: `${domain}/api/v1/get-top-users`,
-  }
+  },
   //////// testing only
   // trx_testing: `${domain_ovi_node}/trx_result-node-test`,
 };

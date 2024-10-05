@@ -1,4 +1,4 @@
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
   Box,
@@ -48,15 +48,15 @@ function USDTDeposit() {
   const audioRefMusic = React.useRef(null);
   const [loding, setloding] = useState(false);
 
-  const { data:qr } = useQuery(["qr"], () => getQraddress(), {
+  const { data: qr } = useQuery(["qr"], () => getQraddress(), {
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
   const resqr = qr?.data?.data || [];
   const selectedUPIDetails = Array.isArray(res)
-  ? res.find((item) => item?.id === fk.values.deposit_type)
-  : null;
+    ? res.find((item) => item?.id === fk.values.deposit_type)
+    : null;
   const { isLoading: history, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -104,23 +104,23 @@ function USDTDeposit() {
       if (!reqBody.txtamount) return toast("Plese enter all data");
 
       WalletDipositFun(reqBody);
-    //   getStatusOfApi(reqBody);
+      //   getStatusOfApi(reqBody);
     },
   });
 
-//   async function getStatusOfApi(reqBody) {
-//     try {
-//       const res = await axios.get(endpoint?.payin_status);
-//       console.log(res);
+  //   async function getStatusOfApi(reqBody) {
+  //     try {
+  //       const res = await axios.get(endpoint?.payin_status);
+  //       console.log(res);
 
-//       const result = res?.data?.earning?.api_type;
+  //       const result = res?.data?.earning?.api_type;
 
-//       if (result === "SWNL") WalletDipositFunSWNL(reqBody);
-//       else if (result === "Indian Pay") WalletDipositFun(reqBody);
-//     } catch (e) {
-//       console.log(e);
-//     }
-//   }
+  //       if (result === "SWNL") WalletDipositFunSWNL(reqBody);
+  //       else if (result === "Indian Pay") WalletDipositFun(reqBody);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
 
   async function WalletDipositFun(reqBody) {
     setloding(true);
@@ -129,37 +129,36 @@ function USDTDeposit() {
       toast(res?.data?.message);
       console.log(res);
       if (res?.data?.status === true) {
-        console.log(res?.data?.url)
+        console.log(res?.data?.url);
         // setUsdt_url(res?.data?.earning?.url)
         // window.location.href = res?.data?.earning?.url;
         navigate("/qr-screen-usdt", {
-            state: {
-              url: {
-                key: res?.data?.url,
-                address:res?.data?.address
-              }
-            }
-          });
-          
+          state: {
+            url: {
+              key: res?.data?.url,
+              address: res?.data?.address,
+            },
+          },
+        });
       }
     } catch (e) {
       console.log(e);
     }
     setloding(false);
   }
-//   async function WalletDipositFunSWNL(reqBody) {
-//     setloding(true);
-//     try {
-//       const res = await axios.post(endpoint?.swnl_pay_in_api, reqBody);
-//       console.log(res);
-//       const qr = res?.data?.earning?.msg;
-//       qr && setDeposit_req_data(qr);
-//     } catch (e) {
-//       console.log(e);
-//     }
-//     setloding(false);
-//     // client.refetchQueries("bank_details");
-//   }
+  //   async function WalletDipositFunSWNL(reqBody) {
+  //     setloding(true);
+  //     try {
+  //       const res = await axios.post(endpoint?.swnl_pay_in_api, reqBody);
+  //       console.log(res);
+  //       const qr = res?.data?.earning?.msg;
+  //       qr && setDeposit_req_data(qr);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //     setloding(false);
+  //     // client.refetchQueries("bank_details");
+  //   }
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -170,31 +169,31 @@ function USDTDeposit() {
     handlePlaySound();
   }, []);
 
-//   React.useEffect(() => {
-//     if (deposit_req_data) {
-//       let min = 0;
-//       let sec = 59;
-//       const interval = setInterval(() => {
-//         set_show_time(`${min}_${sec}`);
+  //   React.useEffect(() => {
+  //     if (deposit_req_data) {
+  //       let min = 0;
+  //       let sec = 59;
+  //       const interval = setInterval(() => {
+  //         set_show_time(`${min}_${sec}`);
 
-//         sec--;
+  //         sec--;
 
-//         if (sec < 0) {
-//           sec = 59;
-//           min--;
+  //         if (sec < 0) {
+  //           sec = 59;
+  //           min--;
 
-//           if (min < 0) {
-//             sec = 59;
-//             min = 0;
-//             clearInterval(interval);
-//             setDeposit_req_data();
-//             set_show_time("0_0");
-//             setloding(false);
-//           }
-//         }
-//       }, 1000);
-//     }
-//   }, [deposit_req_data]);
+  //           if (min < 0) {
+  //             sec = 59;
+  //             min = 0;
+  //             clearInterval(interval);
+  //             setDeposit_req_data();
+  //             set_show_time("0_0");
+  //             setloding(false);
+  //           }
+  //         }
+  //       }, 1000);
+  //     }
+  //   }, [deposit_req_data]);
 
   const handlePlaySound = async () => {
     try {
@@ -217,11 +216,11 @@ function USDTDeposit() {
     );
   }, []);
 
-//   if (deposit_req_data) {
-//     return (
-//       <QRScreen deposit_req_data={deposit_req_data} show_time={show_time} />
-//     );
-//   }
+  //   if (deposit_req_data) {
+  //     return (
+  //       <QRScreen deposit_req_data={deposit_req_data} show_time={show_time} />
+  //     );
+  //   }
 
   return (
     <Container sx={{ background: "#F7F8FF" }}>
@@ -311,7 +310,7 @@ function USDTDeposit() {
           flexWrap="wrap"
         >
           <Stack
-          onClick={()=>navigate("/deposit")}
+            onClick={() => navigate("/deposit")}
             sx={{
               background:
                 "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
@@ -341,7 +340,6 @@ function USDTDeposit() {
             </Typography>
           </Stack>
           <Stack
-           
             sx={{
               width: "32%",
               background: "#FFFFFF",
@@ -438,7 +436,7 @@ function USDTDeposit() {
             sx={style.paytmbtn}
             onClick={() => fk.setFieldValue("amount", 500)}
           >
-           $ 500
+            $ 500
           </Button>
           <Button
             sx={style.paytmbtn}
@@ -448,58 +446,52 @@ function USDTDeposit() {
           </Button>
         </Stack>
         <FormControl fullWidth sx={{ my: "10px" }}>
-              <Stack direction="row" className="loginlabel">
-                <Typography variant="h3" sx={{ color: "white" }}>
-                  Select Network
-                </Typography>
-              </Stack>
-              <TextField
-                id="deposit_type"
-                name="deposit_type"
-                // value={fk.values.deposit_type}
-                onChange={fk.handleChange}
-                placeholder="Select UPI"
-                className="!w-[100%] !bg-[#D9AC4F] !text-[#8f5206] !mt-5"
-                select
-                size="small"
-              >
-                {Array.isArray(res) &&
-                  resqr?.map((i) => (
-                    <MenuItem
-                      className="!text-[#8f5206] "
-                      key={i.id}
-                      value={i.id}
-                    >
-                      {i.usdt_type === "USDT.BEP20" ?
-                       "USDT Bep20" :
-                       "USDT Trc20" }
-                    </MenuItem>
-                  ))}
-              </TextField>
-              {selectedUPIDetails && (
-                <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
-                  <div className="w-72">
-                    <img src={selectedUPIDetails?.qr_code} alt="" />
-                  </div>
-                  <div className="pt-4 gap-2">
-                    <p className="!bg-white !text-xs font-bold px-1 !text-[#8f5206]">
-                      {selectedUPIDetails?.usdt_address}
-                    </p>
-                    <div className="w-full flex justify-center mt-5">
-                      <Button
-                        size="small !py-1"
-                        className="!bg-[#8f5206]  !text-white place-items-center"
-                        // onClick={() =>
-                        //   functionTOCopy(selectedUPIDetails?.usdt_address)
-                        // }
-                      >
-                        Copy
-                      </Button>
-                    </div>
-                  </div>
+          <Stack direction="row" className="loginlabel">
+            <Typography variant="h3" sx={{ color: "white" }}>
+              Select Network
+            </Typography>
+          </Stack>
+          <TextField
+            id="deposit_type"
+            name="deposit_type"
+            // value={fk.values.deposit_type}
+            onChange={fk.handleChange}
+            placeholder="Select UPI"
+            className="!w-[100%] !bg-[#D9AC4F] !text-[#8f5206] !mt-5"
+            select
+            size="small"
+          >
+            {Array.isArray(res) &&
+              resqr?.map((i) => (
+                <MenuItem className="!text-[#8f5206] " key={i.id} value={i.id}>
+                  {i.usdt_type === "ZP" ? "USDT Bep20" : "ZP Token"}
+                </MenuItem>
+              ))}
+          </TextField>
+          {selectedUPIDetails && (
+            <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
+              <div className="w-72">
+                <img src={selectedUPIDetails?.qr_code} alt="" />
+              </div>
+              <div className="pt-4 gap-2">
+                <p className="!bg-white !text-xs font-bold px-1 !text-[#8f5206]">
+                  {selectedUPIDetails?.zp_address}
+                </p>
+                <div className="w-full flex justify-center mt-5">
+                  <Button
+                    size="small !py-1"
+                    className="!bg-[#8f5206]  !text-white place-items-center"
+                    // onClick={() =>
+                    //   functionTOCopy(selectedUPIDetails?.usdt_address)
+                    // }
+                  >
+                    Copy
+                  </Button>
                 </div>
-               )} 
-            </FormControl>
+              </div>
+            </div>
+          )}
+        </FormControl>
         <Paper
           component="form"
           sx={{
