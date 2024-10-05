@@ -1,4 +1,3 @@
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import {
   Box,
@@ -9,18 +8,20 @@ import {
   MenuItem,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import copy from "clipboard-copy";
 import { useFormik } from "formik";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import atm from "../../../assets/images/atm.png";
+import atmchip from "../../../assets/images/atmchip.png";
 import wallet from "../../../assets/images/atmw.png";
 import backbtn from "../../../assets/images/backBtn.png";
 import audiovoice from "../../../assets/images/bankvoice.mp3";
@@ -29,7 +30,6 @@ import user from "../../../assets/images/instruction.png";
 import payment from "../../../assets/images/payment.png";
 import refresh from "../../../assets/images/refwhite.png";
 import trx from "../../../assets/images/trx.png";
-import upiimg from "../../../assets/images/upiimg.png";
 import withdravalhistory from "../../../assets/images/withdrawalhistory.png";
 import {
   depositHistoryFunction,
@@ -40,6 +40,8 @@ import { endpoint } from "../../../services/urls";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import { deCryptData } from "../../../shared/secret";
 import theme from "../../../utils/theme";
+import { History } from "@mui/icons-material";
+
 function USDTDeposit() {
   const user_id = deCryptData(localStorage.getItem("user_id"));
   const [isAllValue, setIsAllValue] = useState(false);
@@ -47,16 +49,8 @@ function USDTDeposit() {
   const [balance, setBalance] = useState("");
   const audioRefMusic = React.useRef(null);
   const [loding, setloding] = useState(false);
-
-  const { data: qr } = useQuery(["qr"], () => getQraddress(), {
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
-  });
-  const resqr = qr?.data?.data || [];
-  const selectedUPIDetails = Array.isArray(res)
-    ? res.find((item) => item?.id === fk.values.deposit_type)
-    : null;
+  const [receipt, setReceipt] = React.useState();
+ const client = useQueryClient()
   const { isLoading: history, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -87,78 +81,74 @@ function USDTDeposit() {
   );
   const wallet_amount_data = wallet_amount?.data?.earning || 0;
 
+ 
   const initialValue = {
-    amount: "",
+    deposit_type: 1,
+    req_amount: "101",
+    bank_upi_table_id: "",
+    receipt_image: "",
+    utr_no: "",
   };
 
   const fk = useFormik({
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
-      if (Number(fk.values.amount) < 2)
-        return toast("Amount must be grater than 2$");
+      if (fk.values.req_amount < 101) {
+        return toast("Minimum amount is 101");
+    }
       const reqBody = {
         userid: user_id,
-        txtamount: fk.values.amount,
+        deposit_type: fk.values.deposit_type,
+        req_amount: fk.values.req_amount,
+        bank_upi_table_id: fk.values.deposit_type,
+        receipt_image: receipt,
+        utr_no: fk.values.utr_no,
       };
-      if (!reqBody.txtamount) return toast("Plese enter all data");
-
-      WalletDipositFun(reqBody);
-      //   getStatusOfApi(reqBody);
+      insertFundFn(reqBody);
     },
   });
-
-  //   async function getStatusOfApi(reqBody) {
-  //     try {
-  //       const res = await axios.get(endpoint?.payin_status);
-  //       console.log(res);
-
-  //       const result = res?.data?.earning?.api_type;
-
-  //       if (result === "SWNL") WalletDipositFunSWNL(reqBody);
-  //       else if (result === "Indian Pay") WalletDipositFun(reqBody);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
-
-  async function WalletDipositFun(reqBody) {
+  async function insertFundFn(reqBody) {
     setloding(true);
     try {
-      const res = await axios.post(endpoint?.usdt_deposit_request, reqBody);
-      toast(res?.data?.message);
-      console.log(res);
-      if (res?.data?.status === true) {
-        console.log(res?.data?.url);
-        // setUsdt_url(res?.data?.earning?.url)
-        // window.location.href = res?.data?.earning?.url;
-        navigate("/qr-screen-usdt", {
-          state: {
-            url: {
-              key: res?.data?.url,
-              address: res?.data?.address,
-            },
-          },
-        });
+      const res = await axios.post(endpoint?.deposite_usdt_payin, reqBody);
+      toast(res?.data?.msg);
+      setloding(false);
+      if ("Request Successfully Accepted." === res?.data?.msg) {
+        fk.handleReset();
+        setReceipt(null);
+        client.refetchQueries("wallet_amount");
+        client.refetchQueries("deposit_history");
+
       }
     } catch (e) {
       console.log(e);
     }
-    setloding(false);
   }
-  //   async function WalletDipositFunSWNL(reqBody) {
-  //     setloding(true);
-  //     try {
-  //       const res = await axios.post(endpoint?.swnl_pay_in_api, reqBody);
-  //       console.log(res);
-  //       const qr = res?.data?.earning?.msg;
-  //       qr && setDeposit_req_data(qr);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //     setloding(false);
-  //     // client.refetchQueries("bank_details");
-  //   }
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setReceipt(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const functionTOCopy = (value) => {
+    copy(value);
+    toast.success("Copied to clipboard!");
+  };
+
+  const { data:qr } = useQuery(["qr"], () => getQraddress(), {
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+  const resqr = qr?.data?.data || 0;
+  const selectedUPIDetails = Array.isArray(resqr)
+  ? resqr?.find((item) => item?.id === fk.values?.deposit_type)
+  : null;
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -169,31 +159,6 @@ function USDTDeposit() {
     handlePlaySound();
   }, []);
 
-  //   React.useEffect(() => {
-  //     if (deposit_req_data) {
-  //       let min = 0;
-  //       let sec = 59;
-  //       const interval = setInterval(() => {
-  //         set_show_time(`${min}_${sec}`);
-
-  //         sec--;
-
-  //         if (sec < 0) {
-  //           sec = 59;
-  //           min--;
-
-  //           if (min < 0) {
-  //             sec = 59;
-  //             min = 0;
-  //             clearInterval(interval);
-  //             setDeposit_req_data();
-  //             set_show_time("0_0");
-  //             setloding(false);
-  //           }
-  //         }
-  //       }, 1000);
-  //     }
-  //   }, [deposit_req_data]);
 
   const handlePlaySound = async () => {
     try {
@@ -216,11 +181,6 @@ function USDTDeposit() {
     );
   }, []);
 
-  //   if (deposit_req_data) {
-  //     return (
-  //       <QRScreen deposit_req_data={deposit_req_data} show_time={show_time} />
-  //     );
-  //   }
 
   return (
     <Container sx={{ background: "#F7F8FF" }}>
@@ -249,7 +209,7 @@ function USDTDeposit() {
               variant="body1"
               sx={{ color: "white", fontSize: "16px", fontWeight: "600" }}
             >
-              Deposite
+              Deposit
             </Typography>
           </Box>
           <NavLink to="/depositehistory">
@@ -258,7 +218,7 @@ function USDTDeposit() {
               color="initial"
               sx={{ fontSize: "11px", color: "white" }}
             >
-              Deposite history
+              <History/>
             </Typography>
           </NavLink>
         </Stack>
@@ -302,27 +262,24 @@ function USDTDeposit() {
         </Box>
       </Box>
 
+     
       <Box sx={{ mt: 2, px: 2 }}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          flexWrap="wrap"
-        >
+        <Stack direction="row">
           <Stack
-            onClick={() => navigate("/deposit")}
-            sx={{
-              background:
-                "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
-              padding: "16px 0px",
-              borderRadius: 2,
-              width: "32%",
-            }}
-            className="!cursor-pointer"
+          onClick={()=>navigate("/deposit")}
+          sx={{
+            width: "120px",
+            background: "#FFFFFF",
+            padding: 2,
+            borderRadius: 2,
+            mr: 2,
+            boxShadow:
+              " rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
+          }}
           >
             <Box
               component="img"
-              src={upiimg}
+              src={atmchip}
               width={40}
               sx={{ margin: "0px auto" }}
             ></Box>
@@ -330,25 +287,26 @@ function USDTDeposit() {
               variant="body1"
               sx={{
                 color: "gray",
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: "500",
                 textAlign: "center",
                 mt: 1,
               }}
             >
-              UPI x QR
+              BANK CARD
             </Typography>
           </Stack>
           <Stack
+          
+          className={"!cursor-pointer"}
             sx={{
-              width: "32%",
-              background: "#FFFFFF",
-              padding: "16px 0px",
-              borderRadius: 2,
               background:
                 "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
+              padding: 2,
+              borderRadius: 2,
+              mr: 2,
+              width: "120px",
             }}
-            className="!cursor-pointer"
           >
             <Box
               component="img"
@@ -360,13 +318,13 @@ function USDTDeposit() {
               variant="body1"
               sx={{
                 color: "gray",
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: "500",
                 textAlign: "center",
                 mt: 1,
               }}
             >
-              INR
+              ZP
             </Typography>
           </Stack>
         </Stack>
@@ -399,6 +357,76 @@ function USDTDeposit() {
             Deposit amount
           </Typography>
         </Stack>
+        <FormControl   fullWidth sx={{ mt: "1px"  }}>
+              <Stack direction="row" className="loginlabel">
+                <Typography className="!text-lg !font-bold" variant="" sx={{ color: "black" }}>
+                  Select Network
+                </Typography>
+              </Stack>
+              <TextField
+                id="deposit_type"
+                name="deposit_type"
+                value={fk.values.deposit_type}
+                onChange={fk.handleChange}
+                placeholder="Select UPI"
+                className="!w-[100%] !mb-2"
+                select
+                size="small"
+              >
+                {Array.isArray(resqr) &&
+                  resqr?.map((i) => (
+                    <MenuItem
+                      className=" "
+                      key={i?.id}
+                      value={i?.id}
+                    >
+                      {i?.zp_type}
+                    </MenuItem>
+                  ))}
+              </TextField>
+              {selectedUPIDetails && (
+                <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
+                  <div className="w-52">
+                    <img src={selectedUPIDetails?.qr_code} alt="" />
+                  </div>
+                  <div className="pt-4 gap-2">
+                    <p className="!text-xs font-bold px-1 !text-[#e97e0f]">
+                      {selectedUPIDetails?.zp_address}
+                    </p>
+                    <div className="w-full flex justify-center mt-5">
+                      <Button
+                        size="small !py-1"
+                        className="!bg-[#fcbc42] !text-white  place-items-center"
+                        onClick={() =>
+                          functionTOCopy(selectedUPIDetails?.zp_address)
+                        }
+                      >
+                        Copy
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+               )} 
+            </FormControl>
+            <span className=" !text-lg !mt-5 !font-bold">Receipt*</span>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              className="!text-xl !my-2 !text-[#fcbc42]"
+              onChange={handleFileChange}
+              required
+            />
+            <p className="!mt-2 !font-bold ">Transaction hash </p>
+            <TextField
+              id="utr_no"
+              name="utr_no"
+              value={fk.values.utr_no}
+              onChange={fk.handleChange}
+              placeholder="Enter Transaction hash"
+              className=" !w-full !text-[#fcbc42]"
+            
+            ></TextField>
         <Stack
           direction="row"
           sx={{
@@ -410,88 +438,41 @@ function USDTDeposit() {
         >
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 10)}
+            onClick={() => fk.setFieldValue("req_amount", 500)}
           >
-            $ 10
+            ₹ 500
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 50)}
+            onClick={() => fk.setFieldValue("req_amount", 1000)}
           >
-            $ 50
+            ₹ 1K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 100)}
+            onClick={() => fk.setFieldValue("req_amount", 5000)}
           >
-            $ 100
+            ₹ 5K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 250)}
+            onClick={() => fk.setFieldValue("req_amount", 10000)}
           >
-            $ 250
+            ₹ 10K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 500)}
+            onClick={() => fk.setFieldValue("req_amount", 15000)}
           >
-            $ 500
+            ₹ 15K
           </Button>
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("amount", 1000)}
+            onClick={() => fk.setFieldValue("req_amount", 20000)}
           >
-            $ 1000
+            ₹ 20K
           </Button>
         </Stack>
-        <FormControl fullWidth sx={{ my: "10px" }}>
-          <Stack direction="row" className="loginlabel">
-            <Typography variant="h3" sx={{ color: "white" }}>
-              Select Network
-            </Typography>
-          </Stack>
-          <TextField
-            id="deposit_type"
-            name="deposit_type"
-            // value={fk.values.deposit_type}
-            onChange={fk.handleChange}
-            placeholder="Select UPI"
-            className="!w-[100%] !bg-[#D9AC4F] !text-[#8f5206] !mt-5"
-            select
-            size="small"
-          >
-            {Array.isArray(res) &&
-              resqr?.map((i) => (
-                <MenuItem className="!text-[#8f5206] " key={i.id} value={i.id}>
-                  {i.usdt_type === "ZP" ? "USDT Bep20" : "ZP Token"}
-                </MenuItem>
-              ))}
-          </TextField>
-          {selectedUPIDetails && (
-            <div className="col-span-2 !h-full !w-full flex items-center mt-10 flex-col">
-              <div className="w-72">
-                <img src={selectedUPIDetails?.qr_code} alt="" />
-              </div>
-              <div className="pt-4 gap-2">
-                <p className="!bg-white !text-xs font-bold px-1 !text-[#8f5206]">
-                  {selectedUPIDetails?.zp_address}
-                </p>
-                <div className="w-full flex justify-center mt-5">
-                  <Button
-                    size="small !py-1"
-                    className="!bg-[#8f5206]  !text-white place-items-center"
-                    // onClick={() =>
-                    //   functionTOCopy(selectedUPIDetails?.usdt_address)
-                    // }
-                  >
-                    Copy
-                  </Button>
-                </div>
-              </div>
-            </div>
-          )}
-        </FormControl>
         <Paper
           component="form"
           sx={{
@@ -505,24 +486,52 @@ function USDTDeposit() {
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="menu">
-            <AttachMoneyIcon sx={{ color: theme.palette.primary.main }} />
+            <p className='text-[#F48901] !text-sm !font-bold'> INR </p>
           </IconButton>
           <InputBase
-            name="amount"
-            id="amount"
+            name="req_amount"
+            id="req_amount"
             onChange={fk.handleChange}
-            value={fk.values.amount}
+            value={fk.values.req_amount}
             sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
             placeholder="Please enter the amount"
             inputProps={{ "aria-label": "search google maps" }}
           />
         </Paper>
+        
+     <div className='!mt-4'>
+     <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            background: "#F2F2F2",
+            borderRadius: "20px",
+            border: "none",
+            boxShadow: "none",
+          }}
+        >
+          <IconButton sx={{ p: "10px" }} aria-label="menu">
+            <p className='text-[#F48901] !text-sm !font-bold'> ZP </p>
+          </IconButton>
+          <InputBase
+            name="req_amount"
+            id="req_amount"
+            value={Number(Number(fk.values.req_amount || 0) / 5.2)?.toFixed(4)}
+            sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
+            placeholder="Please enter the amount"
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+        </Paper>
+      </div>
+     
         <Button
           sx={style.wdbtn}
           onClick={fk.handleSubmit}
-          className={`${fk.values.amount ? "!bg-[#F48901]" : "!bg-gray-400"}`}
+          className={`${fk.values.req_amount ? "!bg-[#F48901]" : "!bg-gray-400"}`}
         >
-          Deposite
+          Deposit
         </Button>
       </Box>
 

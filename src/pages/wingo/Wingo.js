@@ -183,7 +183,7 @@ function Wingo() {
             mt={2}
           >
             <Button
-              onClick={() => navigate("/withdraw")}
+              onClick={() => navigate("/usdt-withdrawl-request")}
               sx={style.withdrawalbtn}
             >
               Withdraw

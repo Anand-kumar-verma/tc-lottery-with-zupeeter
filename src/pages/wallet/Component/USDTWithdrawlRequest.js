@@ -74,7 +74,7 @@ function USDTWithdrawlRequest() {
       if (status?.withdrawal_status === "0")
         return toast(
           <span className=" !text-red-600 rounded-lg p-2">
-            We are currently working on USDT token integration, leading to the
+            We are currently working on ZP token integration, leading to the
             temporary suspension of our payment gateway services. We apologize
             for any inconvenience caused. Please bear with us until the next
             update. Thank you for your understanding.
@@ -93,7 +93,6 @@ function USDTWithdrawlRequest() {
       client.refetchQueries("withdrawl_history");
       client.refetchQueries("wallet_amount_amount");
       client.refetchQueries("profile");
-      // navigate("/account");
     } catch (e) {
       console.log(e);
     }
@@ -279,7 +278,7 @@ function USDTWithdrawlRequest() {
 
       <Box sx={{ mt: 2, px: 2 }}>
         <Stack direction="row">
-          <Stack
+          {/* <Stack
             className={"!cursor-pointer"}
             onClick={() => navigate("/withdraw")}
             sx={{
@@ -310,7 +309,7 @@ function USDTWithdrawlRequest() {
             >
               BANK CARD
             </Typography>
-          </Stack>
+          </Stack> */}
           <Stack
             sx={{
               background:
@@ -337,7 +336,7 @@ function USDTWithdrawlRequest() {
                 mt: 1,
               }}
             >
-              USDT
+              ZP
             </Typography>
           </Stack>
         </Stack>
@@ -394,7 +393,7 @@ function USDTWithdrawlRequest() {
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="menu">
-            <MonetizationOnIcon sx={{ color: theme.palette.primary.main }} />
+            <p className="!text-[#F48901] !text-sm !font-bold">INR</p>
           </IconButton>
           <InputBase
             id="amount"
@@ -406,6 +405,32 @@ function USDTWithdrawlRequest() {
             inputProps={{ "aria-label": "search google maps" }}
           />
         </Paper>
+        <div className="!mt-2">
+          <Paper
+            component="form"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              background: "#F2F2F2",
+              borderRadius: "20px",
+              border: "none",
+              boxShadow: "none",
+            }}
+          >
+            <IconButton sx={{ p: "10px" }} aria-label="menu">
+              <p className="!text-[#F48901] !text-sm !font-bold">ZP</p>
+            </IconButton>
+            <InputBase
+              id="amount"
+              name="amount"
+              value={Number(Number(fk.values.amount || 0) / 5.2)?.toFixed(4)}
+              sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
+              placeholder="Please enter the amount"
+              inputProps={{ "aria-label": "search google maps" }}
+            />
+          </Paper>
+        </div>
         <Paper
           component="form"
           sx={{

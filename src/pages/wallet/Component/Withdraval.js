@@ -72,7 +72,7 @@ function Withdraval() {
       if (status?.withdrawal_status === "0")
         return toast(
           <span className=" !text-red-600 rounded-lg p-2">
-            We are currently working on USDT token integration, leading to the
+            We are currently working on ZP token integration, leading to the
             temporary suspension of our payment gateway services. We apologize
             for any inconvenience caused. Please bear with us until the next
             update. Thank you for your understanding.
@@ -340,7 +340,7 @@ function Withdraval() {
                 mt: 1,
               }}
             >
-              USDT
+              ZP
             </Typography>
           </Stack>
         </Stack>

@@ -179,7 +179,7 @@ return (
                 if (or_m_user_type === "Dummy User") {
                   toast("Dummy User");
                 } else {
-                  navigate('/withdraw');
+                  navigate('/usdt-withdrawl-request');
                 }
               }}>
                 <Typography><img src={wih} alt="" className="w-8" /></Typography>

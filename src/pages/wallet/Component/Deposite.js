@@ -8,6 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import atmchip from "../../../assets/images/atmchip.png";
 import InputBase from "@mui/material/InputBase";
 import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
@@ -38,6 +39,7 @@ import moment from "moment";
 import { endpoint } from "../../../services/urls";
 import QRScreen from "./QRScreen";
 import { deCryptData } from "../../../shared/secret";
+import { History } from "@mui/icons-material";
 function Deposite() {
   const user_id = deCryptData(localStorage.getItem("user_id"));
   const [isAllValue, setIsAllValue] = useState(false);
@@ -230,7 +232,7 @@ function Deposite() {
               variant="body1"
               sx={{ color: "white", fontSize: "16px", fontWeight: "600" }}
             >
-              Deposite
+              Deposit
             </Typography>
           </Box>
           <NavLink to="/depositehistory">
@@ -239,7 +241,7 @@ function Deposite() {
               color="initial"
               sx={{ fontSize: "11px", color: "white" }}
             >
-              Deposite history
+              <History/>
             </Typography>
           </NavLink>
         </Stack>
@@ -282,27 +284,21 @@ function Deposite() {
           </Stack>
         </Box>
       </Box>
-
       <Box sx={{ mt: 2, px: 2 }}>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          flexWrap="wrap"
-        >
+        <Stack direction="row">
           <Stack
-            sx={{
-              background:
-                "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
-              padding: "16px 0px",
-              borderRadius: 2,
-              width: "32%",
-            }}
-            className="!cursor-pointer"
+        sx={{
+          background:
+            "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
+          padding: 2,
+          borderRadius: 2,
+          mr: 2,
+          width: "120px",
+        }}
           >
             <Box
               component="img"
-              src={upiimg}
+              src={atmchip}
               width={40}
               sx={{ margin: "0px auto" }}
             ></Box>
@@ -310,59 +306,27 @@ function Deposite() {
               variant="body1"
               sx={{
                 color: "gray",
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: "500",
                 textAlign: "center",
                 mt: 1,
               }}
             >
-              UPI x QR
+              BANK CARD
             </Typography>
           </Stack>
-          {/* <Stack
-            sx={{
-              width: "32%",
-
-              padding: "16px 0px",
-              borderRadius: 2,
-              background:
-                "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
-            }}
-            className="!cursor-pointer"
-          >
-            <Box
-              component="img"
-              src={upiimg}
-              width={40}
-              sx={{ margin: "0px auto" }}
-            ></Box>
-            <Typography
-              variant="body1"
-              sx={{
-                color: "gray",
-                fontSize: "11px",
-                fontWeight: "500",
-                textAlign: "center",
-                mt: 1,
-              }}
-            >
-              UPI x PAYTM
-            </Typography>
-          </Stack> */}
           <Stack
-            onClick={() =>
-              navigate("/usdt-deposit")
-            }
+            onClick={()=>navigate("/usdt-deposit")}
             sx={{
-              width: "32%",
+              width: "120px",
               background: "#FFFFFF",
-              padding: "16px 0px",
+              padding: 2,
               borderRadius: 2,
-              background:
-                "-webkit-linear-gradient(top, #e97e0f 0%, #fcbc42 100%)",
+              mr: 2,
+              boxShadow:
+                " rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
             }}
-            className="!cursor-pointer"
-          >
+          className={"!cursor-pointer"}>
             <Box
               component="img"
               src={trx}
@@ -373,13 +337,13 @@ function Deposite() {
               variant="body1"
               sx={{
                 color: "gray",
-                fontSize: "11px",
+                fontSize: "14px",
                 fontWeight: "500",
                 textAlign: "center",
                 mt: 1,
               }}
             >
-              INR
+              ZP
             </Typography>
           </Stack>
         </Stack>
@@ -488,7 +452,7 @@ function Deposite() {
           onClick={fk.handleSubmit}
           className={`${fk.values.amount ? "!bg-[#F48901]" : "!bg-gray-400"}`}
         >
-          Deposite
+          Deposit
         </Button>
       </Box>
 
@@ -599,7 +563,7 @@ function Deposite() {
             fontWeight: "600",
           }}
         >
-          Deposite history
+          Deposit history
         </Typography>
       </Stack>
 
