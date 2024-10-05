@@ -18,7 +18,7 @@ import { useFormik } from "formik";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { NavLink, useNavigate } from "react-router-dom";
 import atm from "../../../assets/images/atm.png";
 import atmchip from "../../../assets/images/atmchip.png";
@@ -50,7 +50,7 @@ function USDTDeposit() {
   const audioRefMusic = React.useRef(null);
   const [loding, setloding] = useState(false);
   const [receipt, setReceipt] = React.useState();
-
+ const client = useQueryClient()
   const { isLoading: history, data } = useQuery(
     ["deposit_history"],
     () => depositHistoryFunction(),
@@ -84,7 +84,7 @@ function USDTDeposit() {
  
   const initialValue = {
     deposit_type: 1,
-    req_amount: "",
+    req_amount: "101",
     bank_upi_table_id: "",
     receipt_image: "",
     utr_no: "",
@@ -94,6 +94,9 @@ function USDTDeposit() {
     initialValues: initialValue,
     enableReinitialize: true,
     onSubmit: () => {
+      if (fk.values.req_amount < 101) {
+        return toast("Minimum amount is 101");
+    }
       const reqBody = {
         userid: user_id,
         deposit_type: fk.values.deposit_type,
@@ -114,6 +117,9 @@ function USDTDeposit() {
       if ("Request Successfully Accepted." === res?.data?.msg) {
         fk.handleReset();
         setReceipt(null);
+        client.refetchQueries("wallet_amount");
+        client.refetchQueries("deposit_history");
+
       }
     } catch (e) {
       console.log(e);
@@ -432,42 +438,41 @@ function USDTDeposit() {
         >
           <Button
             sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 10)}
-          >
-           ZP 10
-          </Button>
-          <Button
-            sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 50)}
-          >
-           ZP 50
-          </Button>
-          <Button
-            sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 100)}
-          >
-           ZP 100
-          </Button>
-          <Button
-            sx={style.paytmbtn}
-            onClick={() => fk.setFieldValue("req_amount", 250)}
-          >
-           ZP 250
-          </Button>
-          <Button
-            sx={style.paytmbtn}
             onClick={() => fk.setFieldValue("req_amount", 500)}
           >
-          ZP 500
+            ₹ 500
           </Button>
           <Button
             sx={style.paytmbtn}
             onClick={() => fk.setFieldValue("req_amount", 1000)}
           >
-           ZP 1000
+            ₹ 1K
+          </Button>
+          <Button
+            sx={style.paytmbtn}
+            onClick={() => fk.setFieldValue("req_amount", 5000)}
+          >
+            ₹ 5K
+          </Button>
+          <Button
+            sx={style.paytmbtn}
+            onClick={() => fk.setFieldValue("req_amount", 10000)}
+          >
+            ₹ 10K
+          </Button>
+          <Button
+            sx={style.paytmbtn}
+            onClick={() => fk.setFieldValue("req_amount", 15000)}
+          >
+            ₹ 15K
+          </Button>
+          <Button
+            sx={style.paytmbtn}
+            onClick={() => fk.setFieldValue("req_amount", 20000)}
+          >
+            ₹ 20K
           </Button>
         </Stack>
- 
         <Paper
           component="form"
           sx={{
@@ -481,7 +486,7 @@ function USDTDeposit() {
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="menu">
-            <p className='text-[#F48901]'> ZP </p>
+            <p className='text-[#F48901] !text-sm !font-bold'> INR </p>
           </IconButton>
           <InputBase
             name="req_amount"
@@ -493,6 +498,7 @@ function USDTDeposit() {
             inputProps={{ "aria-label": "search google maps" }}
           />
         </Paper>
+        
      <div className='!mt-4'>
      <Paper
           component="form"
@@ -507,12 +513,12 @@ function USDTDeposit() {
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="menu">
-            <p className='text-[#F48901]'> INR </p>
+            <p className='text-[#F48901] !text-sm !font-bold'> ZP </p>
           </IconButton>
           <InputBase
             name="req_amount"
             id="req_amount"
-            value={Number(fk.values.req_amount || 0) * 5.4}
+            value={Number(Number(fk.values.req_amount || 0) % 5.4)?.toFixed(2)}
             sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
             placeholder="Please enter the amount"
             inputProps={{ "aria-label": "search google maps" }}
