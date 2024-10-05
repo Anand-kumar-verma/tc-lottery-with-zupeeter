@@ -518,7 +518,7 @@ function USDTDeposit() {
           <InputBase
             name="req_amount"
             id="req_amount"
-            value={Number(Number(fk.values.req_amount || 0) % 5.4)?.toFixed(2)}
+            value={Number(Number(fk.values.req_amount || 0) / 5.4)?.toFixed(4)}
             sx={{ px: 1, flex: 1, borderLeft: "1px solid #888" }}
             placeholder="Please enter the amount"
             inputProps={{ "aria-label": "search google maps" }}
