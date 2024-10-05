@@ -93,7 +93,7 @@ export const endpoint = {
   ticket_raised: `${domain_ovi_node}/ticket-raised`,
   ticket_raised_history: `${domain_ovi_node}/ticket-raised-history`,
   admin_qr_address: `${local}/admin-qr-address`,
-  deposite_usdt_payin: `${domain_ovi_node}/payin-request`,
+  deposite_usdt_payin: `${local}/payin-request`,
 
   node_api:{
     get_leder_data:`${domain}/api/v1/get-ledger-data`,
