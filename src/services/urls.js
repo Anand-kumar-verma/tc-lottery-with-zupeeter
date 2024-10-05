@@ -14,7 +14,7 @@ export const baseUrl = "https://admin.zupeeter.com/public";
 export const front_end_domain = "https://zupeeter.com";
 export const usdt_base_url = "https://zupeegame.info";
 export const download_app_url = "https://zupeeter.com/ZUPEETER.pdf";
-export const local = "http://192.168.18.183:9002";
+// export const local = "http://192.168.18.183:9002";
 
 export const endpoint = {
   get_royality_date: `${domain_ovi_node}/get-royality-date`,
@@ -92,8 +92,8 @@ export const endpoint = {
   trx_my_history_new: `${domain_ovi_node}/trx-my-history-node`, /// done  in node js
   ticket_raised: `${domain_ovi_node}/ticket-raised`,
   ticket_raised_history: `${domain_ovi_node}/ticket-raised-history`,
-  admin_qr_address: `${local}/admin-qr-address`,
-  deposite_usdt_payin: `${local}/payin-request`,
+  admin_qr_address: `${domain_ovi_node}/admin-qr-address`,
+  deposite_usdt_payin: `${domain_ovi_node}/payin-request`,
 
   node_api:{
     get_leder_data:`${domain}/api/v1/get-ledger-data`,
