@@ -15,7 +15,7 @@ import f1 from "../../assets/images/f1.png";
 import l1 from "../../assets/images/l1.png";
 import n1 from "../../assets/images/n1.png";
 import s1 from "../../assets/images/s1.png";
-import trx from "../../assets/images/trx.png";
+import zp from "../../assets/zptoken.png";
 import vip from "../../assets/images/vip.png";
 import wal from "../../assets/images/wal.png";
 import wih from "../../assets/images/with.png";
@@ -193,8 +193,8 @@ return (
                   navigate('/usdt-deposit');
                 }
               }}>
-              <Typography><img src={trx} alt="" className="w-8" /></Typography>
-              <Typography className="">USDT</Typography>
+              <Typography><img src={zp} alt="" className="w-8" /></Typography>
+              <Typography className="">ZP</Typography>
             </Box>
           </Box>
         </Box>

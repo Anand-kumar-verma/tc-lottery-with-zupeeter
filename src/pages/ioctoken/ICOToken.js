@@ -82,7 +82,7 @@ const ICOToken = () => {
               />
             </div>
           </div>
-          <div className="bg-[#F48901] px-2 py-1 rounded-lg">
+          {/* <div className="bg-[#F48901] px-2 py-1 rounded-lg">
             <p className="!text-center !font-bold !text-white">Launching</p>
             <div className="flex justify-between items-center">
               <div className="!text-sm">
@@ -109,7 +109,7 @@ const ICOToken = () => {
                 src="https://zupeeter.com/application/libraries/token.png"
               />
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </Layout>

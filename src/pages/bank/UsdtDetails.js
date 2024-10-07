@@ -24,7 +24,7 @@ import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
 import * as XLSX from "xlsx";
 import Layout from "../../component/layout/Layout";
-import { UPIDetailsFUnction, USDTAddress } from "../../services/apiCallings";
+import {  getQraddress, USDTAddress } from "../../services/apiCallings";
 import { endpoint } from "../../services/urls";
 import CustomCircularProgress from "../../shared/loder/CustomCircularProgress";
 import theme from "../../utils/theme";
@@ -135,6 +135,14 @@ export default function UsdtDetails() {
     doc.autoTable({ html: "#my-table" });
     doc.save("table.pdf");
   };
+
+  const { data:qr } = useQuery(["qr"], () => getQraddress(), {
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+  });
+  const resqr = qr?.data?.data?.[0] || 0;
+
   return (
     <Layout>
       <Container
@@ -263,7 +271,7 @@ export default function UsdtDetails() {
           <div className="grid grid-cols-2 gap-1 items-center w-[400px] p-5">
             <span className="col-span-2 justify-end">
               <div className="flex justify-between">
-                <span className="font-bold">Update USDT Address</span>
+                <span className="font-bold">Update ZP Address</span>
                 <CloseIcon
                   className="cursor-pointer"
                   onClick={() => setOpenDialogBox(false)}
@@ -271,17 +279,22 @@ export default function UsdtDetails() {
               </div>
               <Divider />
             </span>
-            <span className="!col-span-2">USDT Address*</span>
+            <span className="!col-span-2 !mt-2">ZP ADDRESS*</span>
             <TextField
               id="address"
               name="address"
               value={fk.values.address}
               onChange={fk.handleChange}
-              placeholder="USDT Address"
+              placeholder="ZP Address"
               className="!w-[100%] !py-0 !col-span-2"
             />
-
-            <div className="col-span-2 flex gap-2 mt-4">
+      
+         <span className="!col-span-2 !mt-2"> ZP TOKEN CONTACT ADDRESS</span>
+            <TextField
+              className="!w-[100%] !py-0 !col-span-2 border "
+              value={resqr?.contact_address}
+            />
+           <div className="col-span-2 flex gap-2 mt-4">
               <Button
                 className="!bg-[#FD565C] !text-white"
                 onClick={() => setOpenDialogBox(false)}
