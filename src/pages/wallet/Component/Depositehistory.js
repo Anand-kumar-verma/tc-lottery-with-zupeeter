@@ -9,7 +9,7 @@ import allactive from '../../../assets/images/allinactive.png';
 import backbtn from '../../../assets/images/backBtn.png';
 import bankcardactive from '../../../assets/images/bankcardactive.png';
 import bankcardinactive from '../../../assets/images/bankcardinactive.png';
-import trx from '../../../assets/images/trx.png';
+import zp from '../../../assets/images/zptoken.png';
 import { depositHistoryFunction } from "../../../services/apiCallings";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 import theme from '../../../utils/theme';
@@ -99,8 +99,8 @@ function Depositehistory() {
             }
             onClick={() => handleChange(3)}
           >
-            <Box component='img' src={trx} width={20} mr={1}></Box>
-            USDT 0
+            <Box component='img' src={zp} width={20} mr={1}></Box>
+               ZP  
           </Button>
         </Stack>
       </Box>

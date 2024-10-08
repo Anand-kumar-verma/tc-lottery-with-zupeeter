@@ -20,7 +20,7 @@ import backbtn from "../../../assets/images/backBtn.png";
 import bankicon from "../../../assets/images/bankicon.png";
 import cip from "../../../assets/images/cip.png";
 import refresh from "../../../assets/images/refwhite.png";
-import trx from "../../../assets/images/trx.png";
+import zp from "../../../assets/images/zptoken.png";
 import withdravalhistory from "../../../assets/images/withdrawalhistory.png";
 import theme from "../../../utils/theme";
 import {
@@ -41,6 +41,7 @@ import { endpoint } from "../../../services/urls";
 import LockIcon from "@mui/icons-material/Lock";
 import { deCryptData } from "../../../shared/secret";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import { History } from "@mui/icons-material";
 function USDTWithdrawlRequest() {
   const client = useQueryClient();
   const user_id = deCryptData(localStorage.getItem("user_id"));
@@ -232,7 +233,7 @@ function USDTWithdrawlRequest() {
               color="initial"
               sx={{ fontSize: "11px", color: "white" }}
             >
-              Withdrawal history
+             <History/>
             </Typography>
           </NavLink>
         </Stack>
@@ -322,7 +323,7 @@ function USDTWithdrawlRequest() {
           >
             <Box
               component="img"
-              src={trx}
+              src={zp}
               width={40}
               sx={{ margin: "0px auto" }}
             ></Box>
@@ -743,7 +744,7 @@ function USDTWithdrawlRequest() {
                 Type
               </Typography>
               <Typography variant="body1" color="initial">
-                {i?.withdrawal_type}
+                {i?.withdrawal_type === "USDT" ? "ZP Token" : i?.withdrawal_type}
               </Typography>
             </Stack>
             <Stack

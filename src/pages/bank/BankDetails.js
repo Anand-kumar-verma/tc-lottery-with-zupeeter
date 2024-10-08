@@ -14,29 +14,29 @@ function BankDetails() {
   };
 
   const data_array = [
-    {
-      to: "/banks-details",
-      name: "Bank Details",
-      logo: (
-        <CurrencyExchangeIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
-    {
-      to: "/banks-upi",
-      name: "UPI Details",
-      logo: (
-        <RedeemIcon
-          className="!w-[40px] !h-[40px] !text-[#F48901]"
-          color="#8f5206"
-        />
-      ),
-    },
+    // {
+    //   to: "/banks-details",
+    //   name: "Bank Details",
+    //   logo: (
+    //     <CurrencyExchangeIcon
+    //       className="!w-[40px] !h-[40px] !text-[#F48901]"
+    //       color="#8f5206"
+    //     />
+    //   ),
+    // },
+    // {
+    //   to: "/banks-upi",
+    //   name: "UPI Details",
+    //   logo: (
+    //     <RedeemIcon
+    //       className="!w-[40px] !h-[40px] !text-[#F48901]"
+    //       color="#8f5206"
+    //     />
+    //   ),
+    // },
     {
       to: "/usdt-address",
-      name: "USDT Address",
+      name: "ZP Token  Address",
       logo: (
         <RedeemIcon
           className="!w-[40px] !h-[40px] !text-[#F48901]"

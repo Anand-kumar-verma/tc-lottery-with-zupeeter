@@ -29,7 +29,7 @@ import cip from "../../../assets/images/cip.png";
 import user from "../../../assets/images/instruction.png";
 import payment from "../../../assets/images/payment.png";
 import refresh from "../../../assets/images/refwhite.png";
-import trx from "../../../assets/images/trx.png";
+import zp from "../../../assets/images/zptoken.png";
 import withdravalhistory from "../../../assets/images/withdrawalhistory.png";
 import {
   depositHistoryFunction,
@@ -310,7 +310,7 @@ function USDTDeposit() {
           >
             <Box
               component="img"
-              src={trx}
+              src={zp}
               width={40}
               sx={{ margin: "0px auto" }}
             ></Box>
