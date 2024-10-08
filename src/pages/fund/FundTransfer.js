@@ -16,17 +16,13 @@ const FundTransfer = () => {
   const [balance, setsetBalance] = useState("");
   const client = useQueryClient();
 
-  const { data } = useQuery(
-    ["profile"],
-    () => ProfileDataFunction(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      retry: false,
-      retryOnMount: false,
-      refetchOnWindowFocus: false
-    }
-  );
+  const { data } = useQuery(["profile"], () => ProfileDataFunction(), {
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: false,
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+  });
   const profile = data?.data?.earning || [];
 
   const initialValue = {
@@ -47,7 +43,7 @@ const FundTransfer = () => {
         txtamount: fk.values.transfer_amount,
         txtuserid: fk.values.userid,
         txtwallet: fk.values.wallet,
-      }; 
+      };
       if (reqBody.userid === reqBody.txtuserid) {
         return toast("Can not send fund to yourself");
       }
@@ -59,7 +55,7 @@ const FundTransfer = () => {
         !reqBody.txtwallet
       )
         return toast("Plese enter all data");
-        // return toast("Softeware is under maintainence.")
+      // return toast("Softeware is under maintainence.")
       insertFundFn(reqBody);
     },
   });
@@ -134,8 +130,8 @@ const FundTransfer = () => {
               onChange={(e) => {
                 fk.handleChange(e);
                 if (e.target.value === profile?.rec?.Login_Id) {
-                 return toast("Can not send fund to yourself ");
-                } 
+                  return toast("Can not send fund to yourself ");
+                }
               }}
               className="!w-[100%]"
             />
@@ -163,7 +159,7 @@ const FundTransfer = () => {
             onChange={fk.handleChange}
             className="!w-[100%]"
           />
-          <span>Fees*</span>
+          {/* <span>Fees*</span>
           <TextField
             id="transaction_password"
             name="transaction_password"
@@ -178,7 +174,7 @@ const FundTransfer = () => {
             value={payableAmount}
             // onChange={fk.handleChange}
             className="!w-[100%]"
-          />
+          /> */}
           <div className="col-span-2 flex gap-2 mt-4">
             <Button
               className="!bg-[#FD565C] !text-white"

@@ -164,12 +164,12 @@ export default function FundReport() {
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Transfer Amount
                   </TableCell>
-                  <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
+                  {/* <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Receive Amount
                   </TableCell>
                   <TableCell className="!text-sm !text-center !pr-0 !pl-1 border-2 border-r border-white">
                     Fees
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody
@@ -195,16 +195,15 @@ export default function FundReport() {
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {Number(
-                          Number(i?.tr11_fund_amt || 0) +
-                          (Number(i?.tr11_fund_amt || 0)*3/100)
+                          Number(i?.tr11_fund_amt || 0) 
                         )?.toFixed(2)}
                       </TableCell>
-                      <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
+                      {/* <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {Number(i?.tr11_fund_amt || 0)?.toFixed()}
                       </TableCell>
                       <TableCell className="!text-black !pr-2 !pl-1 !text-center border-2 !border-r !border-[#F48901]">
                         {(Number(i?.tr11_fund_amt || 0)*3/100)?.toFixed(2)}
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}
