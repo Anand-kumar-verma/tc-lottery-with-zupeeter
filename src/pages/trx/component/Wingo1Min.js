@@ -42,7 +42,6 @@ import ShowImages from "./ShowImages";
 import CustomCircularProgress from "../../../shared/loder/CustomCircularProgress";
 ////
 function Wingo1Min() {
-
   const [open, setOpen] = useState(false);
   const socket = useSocket();
   const dispatch = useDispatch();
@@ -53,8 +52,10 @@ function Wingo1Min() {
   const audioRefMusiclast = React.useRef(null);
   const client = useQueryClient();
   const next_step = useSelector((state) => state.aviator.next_step);
-  const byTimeEnablingSound = useSelector((state) => state.aviator.byTimeEnablingSound);
-//  console.log(typeof(byTimeEnablingSound))
+  const byTimeEnablingSound = useSelector(
+    (state) => state.aviator.byTimeEnablingSound
+  );
+  //  console.log(typeof(byTimeEnablingSound))
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -69,16 +70,15 @@ function Wingo1Min() {
   };
   const fk = useFormik({
     initialValues: initialValue,
-    onSubmit: () => { },
+    onSubmit: () => {},
   });
 
   React.useEffect(() => {
-
     const handleOneMin = (onemin) => {
       setOne_min_time(onemin);
       // fk.setFieldValue("show_this_one_min_time", onemin);
       if (onemin === 1) handlePlaySoundLast();
-      if ([ 5, 4, 3, 2].includes(onemin)) {
+      if ([5, 4, 3, 2].includes(onemin)) {
         handlePlaySound();
       }
 
@@ -87,20 +87,12 @@ function Wingo1Min() {
       } else {
         fk.setFieldValue("openTimerDialog", false);
       }
-      if (onemin === 59) {
-        // dispatch(dummycounterFun());
-        fk.setFieldValue("openTimerDialog", false);
-      }
-
-      if (onemin === 59) {
+      if (onemin === 59 || onemin === 50) {
         client.refetchQueries("wallet_amount");
         client.refetchQueries("myAll_trx_history_new");
       }
-      // if(onemin === 56){
-      //   client.refetchQueries("myAll_trx_history_new");
-      // }
-      if (onemin === 0) {
-        // client.refetchQueries("trx_gamehistory_chart");
+
+      if (onemin === 0 || onemin === 57 || onemin === 50) {
         client.refetchQueries("trx_gamehistory");
       }
     };
@@ -109,10 +101,10 @@ function Wingo1Min() {
       // dispatch(dummycounterFun());
     };
     socket.on("onemintrx", handleOneMin);
-    socket.on("result", handleOneMinResult);
+    // socket.on("result", handleOneMinResult);
     return () => {
       socket.off("onemintrx", handleOneMin);
-      socket.off("result", handleOneMinResult);
+      // socket.off("result", handleOneMinResult);
     };
   }, []);
 
@@ -124,7 +116,7 @@ function Wingo1Min() {
       refetchOnReconnect: false,
       // retry: false,
       retryOnMount: false,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
     }
   );
 
@@ -181,7 +173,7 @@ function Wingo1Min() {
       console.error("Error during play:", error);
     }
   };
- 
+
   const { isLoading: myhistory_loding_all, data: my_history_all } = useQuery(
     ["myAll_trx_history"],
     () => My_All_TRX_HistoryFn("1"),
@@ -199,7 +191,7 @@ function Wingo1Min() {
       refetchOnReconnect: false,
       // retry: false,
       retryOnMount: false,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
     });
 
   React.useEffect(() => {
@@ -224,13 +216,9 @@ function Wingo1Min() {
     }
   }, [my_history_all?.data?.earning, my_history_all_new?.data?.earning]);
 
-
-
-
-
   const handlePlaySound = async () => {
     try {
-      if (audioRefMusic?.current?.pause && true ) {
+      if (audioRefMusic?.current?.pause && true) {
         await audioRefMusic?.current?.play();
       } else {
         await audioRefMusic?.current?.pause();

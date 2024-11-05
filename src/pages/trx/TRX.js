@@ -1,12 +1,6 @@
 import VolumeUpIcon from "@mui/icons-material/VolumeUpOutlined";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import {
-  Box,
-  Container,
-  Dialog,
-  Stack,
-  Typography
-} from "@mui/material";
+import { Box, Container, Dialog, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery, useQueryClient } from "react-query";
@@ -27,10 +21,12 @@ import Wingo10Min from "./component/Wingo10Min";
 import Wingo1Min from "./component/Wingo1Min";
 import Wingo3Min from "./component/Wingo3Min";
 import Wingo5Min from "./component/Wingo5Min";
-import { byTimeIsEnableSound, wallet_real_balanceFn } from "../../redux/slices/counterSlice";
+import {
+  byTimeIsEnableSound,
+  wallet_real_balanceFn,
+} from "../../redux/slices/counterSlice";
 
-function TRX () {
-
+function TRX() {
   const [musicicon, setmusicicon] = useState(true);
   const [value, setValue] = useState(1);
   const [getBalance, setBalance] = useState(0);
@@ -42,7 +38,9 @@ function TRX () {
   const wallet_amount_data = useSelector(
     (state) => state.aviator.wallet_real_balance
   );
-  const byTimeEnablingSound = useSelector((state) => state.aviator.byTimeEnablingSound);
+  const byTimeEnablingSound = useSelector(
+    (state) => state.aviator.byTimeEnablingSound
+  );
   const navigate = useNavigate();
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -155,9 +153,23 @@ function TRX () {
             </NavLink>
             <NavLink onClick={() => setmusicicon(!musicicon)}>
               {musicicon === true ? (
-                <Box component="img" src={music} width={25} onClick={()=>{dispatch(byTimeIsEnableSound(true))}}></Box>
+                <Box
+                  component="img"
+                  src={music}
+                  width={25}
+                  onClick={() => {
+                    dispatch(byTimeIsEnableSound(true));
+                  }}
+                ></Box>
               ) : (
-                <Box component="img" src={musicoff} width={25} onClick={()=>{dispatch(byTimeIsEnableSound(false))}}></Box>
+                <Box
+                  component="img"
+                  src={musicoff}
+                  width={25}
+                  onClick={() => {
+                    dispatch(byTimeIsEnableSound(false));
+                  }}
+                ></Box>
               )}
             </NavLink>
           </Stack>

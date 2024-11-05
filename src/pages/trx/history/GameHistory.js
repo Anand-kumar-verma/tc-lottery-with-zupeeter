@@ -24,59 +24,7 @@ const GameHistory = ({ gid }) => {
     (state) => state.aviator.gameHistory_trx_one_min
   );
 
-  // const { isLoading, data: game_history } = useQuery(
-  //   ["trx_gamehistory", gid],
-  //   () => GameHistoryFn(gid),
-  //   {
-  //     refetchOnMount: false,
-  //     refetchOnReconnect: true,
-  //   }
-  // );
-
-  // const GameHistoryFn = async (gid) => {
-  //   try {
-  //     const reqBody = {
-  //       gameid: gid,
-  //       limit: 100,
-  //     };
-  //     const response = await axios.post(
-  //       `${endpoint.trx_game_history}`,
-  //       reqBody
-  //     );
-  //     return response;
-  //   } catch (e) {
-  //     toast(e?.message);
-  //     console.log(e);
-  //   }
-  // };
-  // const game_histor y = []
   const isLoading = false;
-  // const game_history_data = game_history;
-  // const game_history_data = React.useMemo(
-  //   () => game_history,
-  //   [game_history]
-  // );
-
-  // React.useEffect(() => {
-  //   dispatch(
-  //     updateNextCounter(
-  //       game_history
-  //         ? Number(game_history?.[0]?.tr_transaction_id) + 1
-  //         : 1
-  //     )
-  //   );
-  //   const tr_digit =
-  //     game_history && game_history?.[0]?.tr_digits;
-  //   let array = [];
-  //   for (let i = 0; i < tr_digit?.length; i++) {
-  //     if (/[a-zA-Z]/.test(tr_digit[i])) {
-  //       array.push(tr_digit[i].toUpperCase());
-  //     } else {
-  //       array.push(tr_digit[i]);
-  //     }
-  //   }
-  //   dispatch(trx_game_image_index_function(array));
-  // }, [game_history]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
